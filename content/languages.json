@@ -1,0 +1,11 @@
+[
+  {"code": "en", "name": "English", "html_lang": "en", "dir": "ltr", "label_guides": "Freight Knowledge", "label_home": "Home", "label_sources": "Official sources", "label_contact": "Talk to Flash Cargo Global", "cta": "Use this checklist before you book freight."},
+  {"code": "es", "name": "Espanol", "html_lang": "es", "dir": "ltr", "label_guides": "Conocimiento de carga", "label_home": "Inicio", "label_sources": "Fuentes oficiales", "label_contact": "Hablar con Flash Cargo Global", "cta": "Use esta lista antes de reservar transporte."},
+  {"code": "zh", "name": "Chinese", "html_lang": "zh", "dir": "ltr", "label_guides": "货运知识", "label_home": "首页", "label_sources": "官方来源", "label_contact": "联系 Flash Cargo Global", "cta": "订舱前请使用这份清单。"},
+  {"code": "fr", "name": "Francais", "html_lang": "fr", "dir": "ltr", "label_guides": "Connaissance du fret", "label_home": "Accueil", "label_sources": "Sources officielles", "label_contact": "Parler a Flash Cargo Global", "cta": "Utilisez cette liste avant de reserver le transport."},
+  {"code": "ar", "name": "Arabic", "html_lang": "ar", "dir": "rtl", "label_guides": "معرفة الشحن", "label_home": "الرئيسية", "label_sources": "مصادر رسمية", "label_contact": "تواصل مع Flash Cargo Global", "cta": "استخدم هذه القائمة قبل حجز الشحن."},
+  {"code": "pt", "name": "Portugues", "html_lang": "pt", "dir": "ltr", "label_guides": "Conhecimento de frete", "label_home": "Inicio", "label_sources": "Fontes oficiais", "label_contact": "Falar com a Flash Cargo Global", "cta": "Use esta lista antes de reservar o frete."},
+  {"code": "ja", "name": "Japanese", "html_lang": "ja", "dir": "ltr", "label_guides": "貨物輸送ナレッジ", "label_home": "ホーム", "label_sources": "公式情報源", "label_contact": "Flash Cargo Global に相談", "cta": "輸送を予約する前にこのチェックリストを使ってください。"},
+  {"code": "de", "name": "Deutsch", "html_lang": "de", "dir": "ltr", "label_guides": "Frachtwissen", "label_home": "Startseite", "label_sources": "Offizielle Quellen", "label_contact": "Mit Flash Cargo Global sprechen", "cta": "Nutzen Sie diese Liste vor der Frachtbuchung."},
+  {"code": "it", "name": "Italiano", "html_lang": "it", "dir": "ltr", "label_guides": "Conoscenza trasporto", "label_home": "Home", "label_sources": "Fonti ufficiali", "label_contact": "Parla con Flash Cargo Global", "cta": "Usa questa lista prima di prenotare il trasporto."}
+]

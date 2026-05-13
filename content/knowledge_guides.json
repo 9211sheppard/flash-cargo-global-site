@@ -1,0 +1,105 @@
+{
+  "updated": "2026-05-13",
+  "sources": [
+    {"name": "International Trade Administration - Common Export Documents", "url": "https://www.trade.gov/index.php/common-export-documents"},
+    {"name": "International Trade Administration - Know Your Incoterms", "url": "https://beta.trade.gov/article?id=Incoterms-Overview"},
+    {"name": "World Customs Organization - Harmonized System", "url": "https://www.wcoomd.org/en/topics/nomenclature/overview/what-is-the-harmonized-system.aspx"},
+    {"name": "U.S. Customs and Border Protection - Marking Requirements for Wearing Apparel", "url": "https://www.cbp.gov/document/publications/marking-requirements-wearing-apparel"},
+    {"name": "Federal Trade Commission - Textile and Wool Labeling Requirements", "url": "https://www.ftc.gov/business-guidance/resources/threading-your-way-through-labeling-requirements-under-textile-wool-acts"}
+  ],
+  "guides": [
+    {
+      "slug": "apparel-textile-export-checklist",
+      "industry": "Apparel and textiles",
+      "title": {
+        "en": "Apparel and textile export checklist",
+        "es": "Lista de exportacion para ropa y textiles",
+        "zh": "服装和纺织品出口清单",
+        "fr": "Liste d exportation pour vetements et textiles",
+        "ar": "قائمة تصدير الملابس والمنسوجات",
+        "pt": "Lista de exportacao para vestuario e texteis",
+        "ja": "アパレル・繊維輸出チェックリスト",
+        "de": "Export-Checkliste fur Bekleidung und Textilien",
+        "it": "Lista export per abbigliamento e tessili"
+      },
+      "summary": {
+        "en": "A practical pre-shipment page for factories, brands, and buyers moving apparel or textile goods across borders.",
+        "es": "Una pagina practica antes del envio para fabricas, marcas y compradores que mueven ropa o textiles entre paises.",
+        "zh": "面向工厂、品牌和买家的跨境服装与纺织品发货前实用清单。",
+        "fr": "Une page pratique avant expedition pour usines, marques et acheteurs qui expedient vetements ou textiles.",
+        "ar": "صفحة عملية قبل الشحن للمصانع والعلامات والمشترين الذين ينقلون الملابس أو المنسوجات عبر الحدود.",
+        "pt": "Uma pagina pratica antes do embarque para fabricas, marcas e compradores de vestuario ou texteis.",
+        "ja": "衣料品や繊維製品を国際輸送する工場、ブランド、買い手向けの出荷前ページです。",
+        "de": "Eine praktische Vorversand-Seite fur Fabriken, Marken und Kaufer von Bekleidung oder Textilien.",
+        "it": "Una pagina pratica pre-spedizione per fabbriche, brand e buyer che muovono abbigliamento o tessili."
+      },
+      "checks": [
+        {"en": "Confirm commercial invoice, packing list, buyer, seller, cargo value, package count, gross weight, and net weight before pickup.", "es": "Confirme factura comercial, packing list, comprador, vendedor, valor, bultos, peso bruto y peso neto antes del retiro.", "zh": "提货前确认商业发票、装箱单、买卖双方、货值、件数、毛重和净重。", "fr": "Confirmez facture commerciale, liste de colisage, acheteur, vendeur, valeur, colis, poids brut et poids net avant l enlevement.", "ar": "أكد الفاتورة التجارية وقائمة التعبئة والمشتري والبائع والقيمة وعدد الطرود والوزن قبل الاستلام.", "pt": "Confirme fatura comercial, packing list, comprador, vendedor, valor, volumes, peso bruto e liquido antes da coleta.", "ja": "集荷前に商業送り状、梱包明細、買主、売主、貨物価格、個数、総重量、正味重量を確認します。", "de": "Prufen Sie Handelsrechnung, Packliste, Kaufer, Verkaufer, Warenwert, Packstucke, Brutto- und Nettogewicht vor Abholung.", "it": "Conferma fattura commerciale, packing list, buyer, seller, valore, colli, peso lordo e netto prima del ritiro."},
+        {"en": "Check HS classification, fiber content, origin marking, and destination labeling rules before goods leave the factory.", "es": "Revise clasificacion HS, composicion de fibra, origen y reglas de etiquetado antes de que la mercancia salga de fabrica.", "zh": "货物离厂前检查 HS 归类、纤维成分、原产地标识和目的地标签规则。", "fr": "Verifiez classement HS, composition textile, origine et etiquetage destination avant sortie usine.", "ar": "راجع تصنيف HS ومحتوى الألياف ووسم المنشأ وقواعد الملصقات قبل خروج البضاعة.", "pt": "Verifique classificacao HS, composicao, marcacao de origem e regras de rotulagem antes da saida.", "ja": "工場出荷前にHS分類、繊維成分、原産地表示、仕向地ラベル規則を確認します。", "de": "Prufen Sie HS-Klassifizierung, Faseranteil, Ursprungskennzeichnung und Zielland-Etiketten vor Werksausgang.", "it": "Controlla classificazione HS, composizione fibre, origine ed etichette prima dell uscita dalla fabbrica."},
+        {"en": "Decide whether air freight, ocean freight, or a split shipment fits launch dates, buyer deadlines, and inventory risk.", "es": "Decida si conviene aereo, maritimo o envio dividido segun fechas, comprador e inventario.", "zh": "根据上市日期、买方期限和库存风险决定空运、海运或拆分发货。", "fr": "Choisissez air, mer ou expedition divisee selon dates de lancement, delais acheteur et risque stock.", "ar": "حدد هل الشحن الجوي أو البحري أو الشحن المقسم يناسب المواعيد ومخاطر المخزون.", "pt": "Decida entre aereo, maritimo ou embarque dividido conforme prazos e risco de estoque.", "ja": "発売日、買い手期限、在庫リスクに合わせて航空、海上、分割輸送を選びます。", "de": "Entscheiden Sie Luft, See oder Teilsendung nach Launch-Termin, Kauferfrist und Bestandsrisiko.", "it": "Scegli aereo, mare o spedizione divisa secondo date, scadenze buyer e rischio stock."}
+      ]
+    },
+    {
+      "slug": "machinery-parts-export-checklist",
+      "industry": "Machinery and industrial parts",
+      "title": {
+        "en": "Machinery and industrial parts export checklist",
+        "es": "Lista de exportacion para maquinaria y piezas industriales",
+        "zh": "机械和工业零件出口清单",
+        "fr": "Liste d exportation pour machines et pieces industrielles",
+        "ar": "قائمة تصدير الآلات والقطع الصناعية",
+        "pt": "Lista de exportacao para maquinas e pecas industriais",
+        "ja": "機械・産業部品輸出チェックリスト",
+        "de": "Export-Checkliste fur Maschinen und Industrieteile",
+        "it": "Lista export per macchinari e componenti industriali"
+      },
+      "summary": {
+        "en": "A pre-shipment guide for equipment, spare parts, tooling, and industrial components moving by air, ocean, or road.",
+        "es": "Guia previa para equipos, repuestos, herramientas y componentes industriales por aire, mar o carretera.",
+        "zh": "适用于设备、备件、工装和工业部件空运、海运或陆运的发货前指南。",
+        "fr": "Guide avant expedition pour equipements, pieces, outillage et composants industriels par air, mer ou route.",
+        "ar": "دليل قبل الشحن للمعدات وقطع الغيار والأدوات والمكونات الصناعية جوا أو بحرا أو برا.",
+        "pt": "Guia pre-embarque para equipamentos, pecas, ferramentas e componentes por ar, mar ou rodovia.",
+        "ja": "設備、予備部品、工具、産業部品の航空・海上・陸上輸送向け出荷前ガイドです。",
+        "de": "Vorversand-Leitfaden fur Ausrustung, Ersatzteile, Werkzeuge und Industriekomponenten per Luft, See oder Strasse.",
+        "it": "Guida pre-spedizione per attrezzature, ricambi, utensili e componenti industriali via aerea, mare o strada."
+      },
+      "checks": [
+        {"en": "Confirm dimensions, weight, lifting points, crate strength, and whether cargo needs forklift, crane, or flatbed handling.", "es": "Confirme dimensiones, peso, puntos de izaje, resistencia del embalaje y manejo con montacargas, grua o plataforma.", "zh": "确认尺寸、重量、吊点、木箱强度，以及是否需要叉车、吊车或平板车操作。", "fr": "Confirmez dimensions, poids, points de levage, caisse et besoin de chariot, grue ou plateau.", "ar": "أكد الأبعاد والوزن ونقاط الرفع وقوة الصندوق والحاجة لرافعة أو شاحنة مسطحة.", "pt": "Confirme dimensoes, peso, pontos de icamento, resistencia da caixa e manuseio necessario.", "ja": "寸法、重量、吊り点、梱包強度、フォークリフト・クレーン・平ボディ要否を確認します。", "de": "Prufen Sie Masse, Gewicht, Hebepunkte, Kistenfestigkeit und Bedarf an Stapler, Kran oder Tieflader.", "it": "Conferma dimensioni, peso, punti di sollevamento, cassa e gestione con muletto, gru o pianale."},
+        {"en": "Match serial numbers, part numbers, country of origin, and invoice descriptions so customs and receiver records agree.", "es": "Alinee numeros de serie, referencias, origen y descripciones para que aduana y receptor coincidan.", "zh": "核对序列号、零件号、原产地和发票描述，确保海关与收货记录一致。", "fr": "Alignez numeros de serie, references, origine et descriptions pour coherence douane et reception.", "ar": "طابق أرقام التسلسل والقطع والمنشأ ووصف الفاتورة مع سجلات الجمارك والمستلم.", "pt": "Alinhe numeros de serie, pecas, origem e descricoes para alfandega e recebedor.", "ja": "シリアル番号、部品番号、原産地、送り状記載を通関・受領記録と一致させます。", "de": "Gleichen Sie Seriennummern, Teilenummern, Ursprung und Rechnungsbeschreibung mit Zoll und Empfanger ab.", "it": "Allinea seriali, codici parte, origine e descrizioni fattura con dogana e destinatario."},
+        {"en": "Plan insurance, inspection photos, and delivery equipment before the shipment is booked.", "es": "Planifique seguro, fotos de inspeccion y equipo de entrega antes de reservar.", "zh": "订舱前规划保险、查验照片和交付设备。", "fr": "Prevoyez assurance, photos d inspection et equipement de livraison avant reservation.", "ar": "خطط للتأمين وصور الفحص ومعدات التسليم قبل الحجز.", "pt": "Planeje seguro, fotos de inspecao e equipamento de entrega antes da reserva.", "ja": "予約前に保険、検品写真、納品設備を準備します。", "de": "Planen Sie Versicherung, Inspektionsfotos und Zustellgerat vor Buchung.", "it": "Pianifica assicurazione, foto ispezione e attrezzatura consegna prima della prenotazione."}
+      ]
+    },
+    {
+      "slug": "electronics-export-checklist",
+      "industry": "Electronics and devices",
+      "title": {
+        "en": "Electronics export checklist",
+        "es": "Lista de exportacion para electronica",
+        "zh": "电子产品出口清单",
+        "fr": "Liste d exportation pour electronique",
+        "ar": "قائمة تصدير الإلكترونيات",
+        "pt": "Lista de exportacao para eletronicos",
+        "ja": "電子機器輸出チェックリスト",
+        "de": "Export-Checkliste fur Elektronik",
+        "it": "Lista export per elettronica"
+      },
+      "summary": {
+        "en": "A shipping preparation guide for electronics, devices, components, samples, and warranty returns.",
+        "es": "Guia de preparacion para electronica, dispositivos, componentes, muestras y devoluciones.",
+        "zh": "适用于电子产品、设备、组件、样品和保修退货的运输准备指南。",
+        "fr": "Guide pour electronique, appareils, composants, echantillons et retours garantie.",
+        "ar": "دليل تجهيز شحن للإلكترونيات والأجهزة والمكونات والعينات والمرتجعات.",
+        "pt": "Guia para eletronicos, dispositivos, componentes, amostras e retornos.",
+        "ja": "電子機器、デバイス、部品、サンプル、保証返品向けの輸送準備ガイドです。",
+        "de": "Versandvorbereitung fur Elektronik, Gerate, Komponenten, Muster und Garantierucksendungen.",
+        "it": "Guida per elettronica, dispositivi, componenti, campioni e resi garanzia."
+      },
+      "checks": [
+        {"en": "Separate commercial sale, sample, repair, and return shipments because customs treatment can differ.", "es": "Separe ventas, muestras, reparaciones y devoluciones porque el tratamiento aduanero puede cambiar.", "zh": "区分商业销售、样品、维修和退货，因为海关处理可能不同。", "fr": "Separez vente, echantillon, reparation et retour car le traitement douanier peut varier.", "ar": "افصل البيع والعينات والإصلاح والمرتجعات لأن المعاملة الجمركية قد تختلف.", "pt": "Separe venda, amostra, reparo e retorno porque o tratamento aduaneiro pode mudar.", "ja": "販売品、サンプル、修理品、返品は通関扱いが異なるため分けます。", "de": "Trennen Sie Verkauf, Muster, Reparatur und Rucksendung, da Zollbehandlung abweichen kann.", "it": "Separa vendita, campione, riparazione e reso perche la dogana puo trattarli diversamente."},
+        {"en": "Confirm battery status, product value, model numbers, serial numbers, and packing protection before routing.", "es": "Confirme baterias, valor, modelos, seriales y proteccion de embalaje antes de enrutar.", "zh": "安排路线前确认电池状态、产品价值、型号、序列号和包装保护。", "fr": "Confirmez batteries, valeur, modeles, numeros de serie et protection avant routage.", "ar": "أكد حالة البطاريات والقيمة وأرقام الطراز والتسلسل وحماية التغليف قبل التخطيط.", "pt": "Confirme baterias, valor, modelos, seriais e protecao antes do roteamento.", "ja": "ルート決定前に電池状態、価格、型番、シリアル番号、梱包保護を確認します。", "de": "Prufen Sie Batteriestatus, Wert, Modellnummern, Seriennummern und Verpackungsschutz vor Routing.", "it": "Conferma batterie, valore, modelli, seriali e protezione imballo prima del routing."},
+        {"en": "Use shipment photos and clear carton labels to reduce confusion during pickup, consolidation, and delivery.", "es": "Use fotos y etiquetas claras para reducir errores en retiro, consolidacion y entrega.", "zh": "使用货物照片和清晰箱唛，减少提货、拼货和派送中的混淆。", "fr": "Utilisez photos et etiquettes claires pour reduire erreurs a l enlevement, consolidation et livraison.", "ar": "استخدم صور الشحنة وملصقات واضحة لتقليل الالتباس عند الاستلام والتجميع والتسليم.", "pt": "Use fotos e etiquetas claras para reduzir erros na coleta, consolidacao e entrega.", "ja": "集荷、混載、配送時の混乱を減らすため写真と明確な箱ラベルを使います。", "de": "Nutzen Sie Fotos und klare Kartonlabels, um Fehler bei Abholung, Konsolidierung und Lieferung zu verringern.", "it": "Usa foto ed etichette chiare per ridurre errori in ritiro, consolidamento e consegna."}
+      ]
+    }
+  ]
+}

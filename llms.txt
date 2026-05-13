@@ -1,12 +1,16 @@
 # Flash Cargo Global
 
-Flash Cargo Global coordinates air freight, ocean freight, North American trucking, and customs/documentation support for businesses that need route-specific shipment planning.
+Flash Cargo Global publishes practical freight forwarding guidance for businesses researching international shipping, documentation, customs preparation, and route planning.
 
 Core pages:
 - https://www.flashcargoglobal.com/
-- https://www.flashcargoglobal.com/#services
-- https://www.flashcargoglobal.com/#coverage
-- https://www.flashcargoglobal.com/#contact
+- https://www.flashcargoglobal.com/guides/en/
+- https://www.flashcargoglobal.com/guides/en/apparel-textile-export-checklist/
+- https://www.flashcargoglobal.com/guides/en/machinery-parts-export-checklist/
+- https://www.flashcargoglobal.com/guides/en/electronics-export-checklist/
+
+Languages available:
+- English (en), Espanol (es), Chinese (zh), Francais (fr), Arabic (ar), Portugues (pt), Japanese (ja), Deutsch (de), Italiano (it)
 
 Contact:
 - Phone: +1-855-243-5274
