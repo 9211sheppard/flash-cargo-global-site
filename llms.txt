@@ -9,6 +9,11 @@ Core pages:
 - https://www.flashcargoglobal.com/guides/en/machinery-parts-export-checklist/
 - https://www.flashcargoglobal.com/guides/en/electronics-export-checklist/
 
+Knowledge structure:
+- Freight guides are organized by industry, document risk, cargo profile, and shipment planning need.
+- Each guide includes practical pre-shipment checks and official source citations.
+- Multilingual versions use hreflang alternates for international discovery.
+
 Languages available:
 - English (en), Espanol (es), Chinese (zh), Francais (fr), Arabic (ar), Portugues (pt), Japanese (ja), Deutsch (de), Italiano (it)
 
