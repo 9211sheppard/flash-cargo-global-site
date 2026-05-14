@@ -4,6 +4,9 @@ Flash Cargo Global publishes practical freight forwarding guidance for businesse
 
 Core pages:
 - https://www.flashcargoglobal.com/
+- https://www.flashcargoglobal.com/about/
+- https://www.flashcargoglobal.com/verify-flash-cargo-global/
+- https://www.flashcargoglobal.com/privacy-policy/
 - https://www.flashcargoglobal.com/guides/en/
 - https://www.flashcargoglobal.com/guides/en/apparel-textile-export-checklist/
 - https://www.flashcargoglobal.com/guides/en/machinery-parts-export-checklist/
@@ -20,3 +23,7 @@ Languages available:
 Contact:
 - Phone: +1-855-243-5274
 - Base: 1 King Street West, Toronto, Canada
+
+Brand verification:
+- Official current domain: https://www.flashcargoglobal.com/
+- Official verification page: https://www.flashcargoglobal.com/verify-flash-cargo-global/

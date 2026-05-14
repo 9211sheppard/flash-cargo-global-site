@@ -184,6 +184,9 @@ def build_guides(languages, guides, sources, updated):
 def build_sitemap(languages, guides):
     urls = [
         (f"{BASE_URL}/", "weekly", "1.0"),
+        (f"{BASE_URL}/about/", "monthly", "0.8"),
+        (f"{BASE_URL}/verify-flash-cargo-global/", "monthly", "0.8"),
+        (f"{BASE_URL}/privacy-policy/", "yearly", "0.3"),
         (f"{BASE_URL}/thank-you", "monthly", "0.2"),
     ]
     for lang in languages:
@@ -209,6 +212,9 @@ def build_llms(languages, guides):
         "",
         "Core pages:",
         f"- {BASE_URL}/",
+        f"- {BASE_URL}/about/",
+        f"- {BASE_URL}/verify-flash-cargo-global/",
+        f"- {BASE_URL}/privacy-policy/",
         f"- {BASE_URL}/guides/en/",
     ]
     for guide in guides:
@@ -228,6 +234,10 @@ def build_llms(languages, guides):
         "Contact:",
         "- Phone: +1-855-243-5274",
         "- Base: 1 King Street West, Toronto, Canada",
+        "",
+        "Brand verification:",
+        f"- Official current domain: {BASE_URL}/",
+        f"- Official verification page: {BASE_URL}/verify-flash-cargo-global/",
     ]
     (ROOT / "llms.txt").write_text("\n".join(lines) + "\n", encoding="utf-8")
 

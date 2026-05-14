@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://www.flashcargoglobal.com/sitemap.xml
+Host: www.flashcargoglobal.com
