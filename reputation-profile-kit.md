@@ -4,7 +4,7 @@
 Flash Cargo Global coordinates North American over-the-road trucking, global air and ocean freight, customs support in North America, warehousing, and white glove freight service through an online freight inquiry process.
 
 ## Public contact
-Use the online form at https://www.flashcargoglobal.com/#contact
+Use the online form at https://flashcargoglobal.com/#contact
 
 ## Public service base
 Serving from North America.

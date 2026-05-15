@@ -15,6 +15,14 @@ Core pages:
 - https://flashcargoglobal.com/guides/en/apparel-textile-export-checklist/
 - https://flashcargoglobal.com/guides/en/machinery-parts-export-checklist/
 - https://flashcargoglobal.com/guides/en/electronics-export-checklist/
+- https://flashcargoglobal.com/resources/commercial-invoice-freight-checklist/
+- https://flashcargoglobal.com/resources/packing-list-freight-checklist/
+- https://flashcargoglobal.com/resources/incoterms-freight-planning-guide/
+- https://flashcargoglobal.com/resources/hs-code-freight-planning-guide/
+- https://flashcargoglobal.com/resources/air-vs-ocean-freight-decision-guide/
+- https://flashcargoglobal.com/resources/cross-border-trucking-preparation-guide/
+- https://flashcargoglobal.com/resources/warehouse-staging-freight-guide/
+- https://flashcargoglobal.com/resources/white-glove-freight-planning-guide/
 
 Knowledge structure:
 - Freight guides are organized by industry, document risk, cargo profile, and shipment planning need.

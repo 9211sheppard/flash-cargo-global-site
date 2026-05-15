@@ -1,0 +1,108 @@
+{
+  "updated": "2026-05-15",
+  "sources": [
+    {"name": "International Trade Administration - Common Export Documents", "url": "https://www.trade.gov/index.php/common-export-documents"},
+    {"name": "International Trade Administration - Incoterms Overview", "url": "https://beta.trade.gov/article?id=Incoterms-Overview"},
+    {"name": "World Customs Organization - Harmonized System", "url": "https://www.wcoomd.org/en/topics/nomenclature/overview/what-is-the-harmonized-system.aspx"},
+    {"name": "U.S. Customs and Border Protection - Basic Importing and Exporting", "url": "https://www.cbp.gov/trade/basic-import-export"},
+    {"name": "Canada Border Services Agency - Importing Commercial Goods", "url": "https://www.cbsa-asfc.gc.ca/import/guide-eng.html"}
+  ],
+  "pages": [
+    {
+      "slug": "commercial-invoice-freight-checklist",
+      "title": "Commercial invoice freight checklist",
+      "description": "What shippers should confirm on a commercial invoice before booking international freight.",
+      "kicker": "Documents",
+      "summary": "The commercial invoice is one of the first documents a forwarder, broker, carrier, and receiver will review. A cleaner invoice can reduce confusion before cargo leaves the origin.",
+      "sections": [
+        {"heading": "What to confirm", "items": ["Buyer and seller names should match the transaction records.", "Goods descriptions should be specific enough for customs review.", "Currency, value, Incoterms, origin, and quantities should align with the purchase record."]},
+        {"heading": "Why it matters", "items": ["Weak descriptions can slow clearance and create extra questions.", "Mismatch between invoice and packing list can delay handoff.", "Incorrect value or origin data can create compliance and receiver issues."]},
+        {"heading": "Before pickup", "items": ["Confirm the invoice matches the cargo being picked up.", "Check whether the destination requires any certificate, permit, or product label detail.", "Share the invoice early enough for the route and customs plan to be reviewed."]}
+      ]
+    },
+    {
+      "slug": "packing-list-freight-checklist",
+      "title": "Packing list freight checklist",
+      "description": "How a packing list supports smoother pickup, handling, consolidation, customs review, and delivery.",
+      "kicker": "Documents",
+      "summary": "The packing list turns cargo into something a warehouse, driver, airline, ocean carrier, broker, and receiver can physically verify.",
+      "sections": [
+        {"heading": "Core details", "items": ["Package count, dimensions, gross weight, and net weight should be clear.", "Marks, carton numbers, pallet count, and crate identifiers should match the cargo.", "Any fragile, temperature-sensitive, oversized, or stackability limits should be visible before handling."]},
+        {"heading": "Common risk points", "items": ["The invoice says one quantity but the packing list says another.", "Weights are estimated but the carrier needs verified values.", "Cartons are relabeled without updating the document trail."]},
+        {"heading": "Better handoff", "items": ["Use shipment photos when cargo condition matters.", "Confirm if pallets can be stacked or must stay floor-loaded.", "Share final packing details before the truck or carrier is dispatched."]}
+      ]
+    },
+    {
+      "slug": "incoterms-freight-planning-guide",
+      "title": "Incoterms freight planning guide",
+      "description": "A freight planning guide for using Incoterms to clarify cost, risk, pickup, delivery, and documentation responsibility.",
+      "kicker": "Trade terms",
+      "summary": "Incoterms help define who is responsible for cost and risk at different points in the shipment. They do not replace the freight plan, but they shape it.",
+      "sections": [
+        {"heading": "What Incoterms clarify", "items": ["Who arranges pickup, main carriage, destination handling, and delivery.", "Where risk transfers between buyer and seller.", "Which side may need to coordinate customs, insurance, or local delivery."]},
+        {"heading": "What they do not solve", "items": ["They do not classify the goods.", "They do not replace broker instructions or destination regulations.", "They do not guarantee the cargo is packed or labeled correctly."]},
+        {"heading": "Planning step", "items": ["Confirm Incoterms before quoting freight.", "Make sure buyer and seller understand the named place.", "Align the invoice, purchase order, and freight instructions before cargo moves."]}
+      ]
+    },
+    {
+      "slug": "hs-code-freight-planning-guide",
+      "title": "HS code freight planning guide",
+      "description": "How HS code context affects customs review, documents, duties, and shipment planning.",
+      "kicker": "Classification",
+      "summary": "The Harmonized System creates a common structure for classifying traded goods. Freight planning should account for HS code context before cargo is routed.",
+      "sections": [
+        {"heading": "Why classification matters", "items": ["It affects customs review, duty context, and admissibility questions.", "It can connect to product-specific labels, certificates, or permits.", "It gives brokers and buyers a clearer starting point before clearance."]},
+        {"heading": "Freight impact", "items": ["A shipment may be physically ready but commercially blocked by unclear classification.", "Incorrect descriptions can create a mismatch between cargo and customs record.", "Some products need extra destination review before pickup."]},
+        {"heading": "Before booking", "items": ["Ask the shipper or importer to confirm classification context.", "Make sure invoice language supports the product identity.", "Flag regulated, textile, electronic, food, medical, or chemical goods early."]}
+      ]
+    },
+    {
+      "slug": "air-vs-ocean-freight-decision-guide",
+      "title": "Air vs ocean freight decision guide",
+      "description": "How importers and exporters can compare air freight and ocean freight before booking.",
+      "kicker": "Mode choice",
+      "summary": "Air and ocean freight solve different problems. The right choice depends on timing, cargo value, inventory pressure, buyer expectations, and handling risk.",
+      "sections": [
+        {"heading": "When air makes sense", "items": ["The shipment is urgent or protects a launch, production line, or key customer.", "Inventory risk is more expensive than freight cost.", "Cargo size and weight are manageable for air routing."]},
+        {"heading": "When ocean makes sense", "items": ["The shipment is larger or less urgent.", "Cost control matters more than speed.", "The buyer can plan around port, terminal, and inland delivery timing."]},
+        {"heading": "Mixed strategy", "items": ["Split critical cargo by air and the balance by ocean.", "Use air for samples, replacements, or shortage coverage.", "Use ocean for replenishment once demand is predictable."]}
+      ]
+    },
+    {
+      "slug": "cross-border-trucking-preparation-guide",
+      "title": "Cross-border trucking preparation guide",
+      "description": "A practical preparation guide for freight moving by truck between the United States, Canada, and Mexico.",
+      "kicker": "North America",
+      "summary": "Cross-border trucking is not only a driving plan. It depends on documents, broker coordination, pickup accuracy, and receiver readiness.",
+      "sections": [
+        {"heading": "Before dispatch", "items": ["Confirm pickup and delivery appointment details.", "Confirm package count, dimensions, weight, and cargo description.", "Confirm buyer, seller, broker, and importer details before the driver arrives."]},
+        {"heading": "Border risk", "items": ["Missing invoice or packing details can hold a truck.", "Incorrect importer or broker information can slow release.", "Cargo that does not match documents can trigger extra review."]},
+        {"heading": "Better planning", "items": ["Share paperwork early.", "Confirm who can answer broker questions.", "Avoid dispatching urgent freight before the document set is ready."]}
+      ]
+    },
+    {
+      "slug": "warehouse-staging-freight-guide",
+      "title": "Warehouse staging freight guide",
+      "description": "How warehousing and staging can support better freight timing, consolidation, inspection, and receiver delivery.",
+      "kicker": "Warehousing",
+      "summary": "Warehousing can be useful when freight is not ready for direct delivery or when cargo needs consolidation, inspection, relabeling, or staged release.",
+      "sections": [
+        {"heading": "When staging helps", "items": ["Multiple shipments need to be consolidated before delivery.", "The receiver needs scheduled release instead of immediate delivery.", "Cargo needs inspection, relabeling, or condition photos before final movement."]},
+        {"heading": "Planning details", "items": ["Confirm storage duration and release conditions.", "Confirm pallet, carton, or crate handling requirements.", "Confirm whether cargo can be stacked, opened, relabeled, or repacked."]},
+        {"heading": "Receiver experience", "items": ["Staging can protect customer-facing commitments.", "It can reduce failed delivery attempts.", "It can support white glove or appointment-driven deliveries."]}
+      ]
+    },
+    {
+      "slug": "white-glove-freight-planning-guide",
+      "title": "White glove freight planning guide",
+      "description": "When white glove freight service is useful and what details should be planned before pickup.",
+      "kicker": "White glove",
+      "summary": "White glove service is about more than transport. It is used when cargo, delivery environment, receiver expectations, or handling risk require extra control.",
+      "sections": [
+        {"heading": "When it matters", "items": ["Cargo is high value, fragile, oversized, presentation-sensitive, or customer-facing.", "The receiver has access restrictions, appointment windows, or special handling needs.", "Delivery failure would damage a customer relationship or business commitment."]},
+        {"heading": "Details to confirm", "items": ["Access, stairs, elevators, dock availability, and appointment windows.", "Packaging condition, unpacking needs, placement expectations, and proof of delivery.", "Whether the shipment needs photos, inspection, or special equipment."]},
+        {"heading": "Freight planning", "items": ["White glove should be planned before pickup, not discovered at delivery.", "Handling instructions should travel with the shipment.", "The quote should reflect the real delivery environment."]}
+      ]
+    }
+  ]
+}

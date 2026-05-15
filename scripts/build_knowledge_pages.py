@@ -180,6 +180,7 @@ def build_guides(languages, guides, sources, updated):
 
 
 def build_sitemap(languages, guides):
+    resources = load_json("content/resource_pages.json")["pages"]
     urls = [
         (f"{BASE_URL}/", "weekly", "1.0"),
         (f"{BASE_URL}/about/", "monthly", "0.8"),
@@ -195,6 +196,8 @@ def build_sitemap(languages, guides):
         urls.append((f"{BASE_URL}/guides/{lang['code']}/", "weekly", "0.8"))
         for guide in guides:
             urls.append((f"{BASE_URL}/guides/{lang['code']}/{guide['slug']}/", "weekly", "0.7"))
+    for page in resources:
+        urls.append((f"{BASE_URL}/resources/{page['slug']}/", "monthly", "0.75"))
     today = date.today().isoformat()
     entries = "\n".join(
         f"  <url>\n    <loc>{escape(loc)}</loc>\n    <lastmod>{today}</lastmod>\n    <changefreq>{freq}</changefreq>\n    <priority>{priority}</priority>\n  </url>"
@@ -207,6 +210,7 @@ def build_sitemap(languages, guides):
 
 
 def build_llms(languages, guides):
+    resources = load_json("content/resource_pages.json")["pages"]
     lines = [
         "# Flash Cargo Global",
         "",
@@ -225,6 +229,8 @@ def build_llms(languages, guides):
     ]
     for guide in guides:
         lines.append(f"- {BASE_URL}/guides/en/{guide['slug']}/")
+    for page in resources:
+        lines.append(f"- {BASE_URL}/resources/{page['slug']}/")
     lines += [
         "",
         "Knowledge structure:",
@@ -248,11 +254,99 @@ def build_llms(languages, guides):
     (ROOT / "llms.txt").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
+def build_resource_pages():
+    data = load_json("content/resource_pages.json")
+    source_links = "\n".join(
+        f'<li><a href="{escape(src["url"])}">{escape(src["name"])}</a></li>' for src in data["sources"]
+    )
+    for page in data["pages"]:
+        canonical = f"{BASE_URL}/resources/{page['slug']}/"
+        sections = []
+        for section in page["sections"]:
+            items = "\n".join(f"<li>{escape(item)}</li>" for item in section["items"])
+            sections.append(f"<section class=\"guide-panel\"><h2>{escape(section['heading'])}</h2><ul>{items}</ul></section>")
+        body = "\n".join(sections)
+        schema = {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": page["title"],
+            "description": page["description"],
+            "url": canonical,
+            "dateModified": data["updated"],
+            "publisher": {
+                "@type": "Organization",
+                "name": "Flash Cargo Global",
+                "url": BASE_URL + "/",
+                "areaServed": ["North America", "Global"],
+                "contactPoint": {
+                    "@type": "ContactPoint",
+                    "contactType": "Freight inquiry",
+                    "url": BASE_URL + "/#contact",
+                },
+            },
+            "citation": [src["url"] for src in data["sources"]],
+        }
+        html = f"""<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{escape(page["title"])} | Flash Cargo Global</title>
+    <meta name="description" content="{escape(page["description"])}">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="{escape(canonical)}">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Flash Cargo Global">
+    <meta property="og:title" content="{escape(page["title"])} | Flash Cargo Global">
+    <meta property="og:description" content="{escape(page["description"])}">
+    <meta property="og:url" content="{escape(canonical)}">
+    <meta property="og:image" content="{escape(OG_IMAGE)}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{escape(page["title"])} | Flash Cargo Global">
+    <meta name="twitter:description" content="{escape(page["description"])}">
+    <meta name="twitter:image" content="{escape(OG_IMAGE)}">
+    <link rel="stylesheet" href="/styles.css?v=10">
+    <script type="application/ld+json">{json_ld(schema)}</script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <header class="site-header">
+      <nav class="site-nav" aria-label="Primary">
+        <a class="wordmark" href="/">FLASH CARGO GLOBAL</a>
+        <div class="nav-menu">
+          <a href="/about/">About</a>
+          <a href="/guides/en/">Guides</a>
+          <a href="/#contact">Contact</a>
+        </div>
+      </nav>
+    </header>
+    <main id="main">
+      <article class="guide-article">
+        <p class="kicker">{escape(page["kicker"])}</p>
+        <h1>{escape(page["title"])}</h1>
+        <p class="lead">{escape(page["summary"])}</p>
+        {body}
+        <section class="source-block">
+          <h2>Official sources</h2>
+          <ul>{source_links}</ul>
+        </section>
+        <a class="button primary" href="/#contact">Start a freight inquiry</a>
+      </article>
+    </main>
+  </body>
+</html>
+"""
+        out = ROOT / "resources" / page["slug"] / "index.html"
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(html, encoding="utf-8")
+
+
 def main():
     languages = load_json("content/languages.json")
     data = load_json("content/knowledge_guides.json")
     build_index(languages, data["guides"])
     build_guides(languages, data["guides"], data["sources"], data["updated"])
+    build_resource_pages()
     build_sitemap(languages, data["guides"])
     build_llms(languages, data["guides"])
 
