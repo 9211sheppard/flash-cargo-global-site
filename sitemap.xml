@@ -25,6 +25,18 @@
     <priority>0.3</priority>
   </url>
   <url>
+    <loc>https://flashcargoglobal.com/.well-known/security.txt</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  <url>
+    <loc>https://flashcargoglobal.com/humans.txt</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  <url>
     <loc>https://flashcargoglobal.com/services/north-american-trucking/</loc>
     <lastmod>2026-05-15</lastmod>
     <changefreq>monthly</changefreq>

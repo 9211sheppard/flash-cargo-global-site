@@ -1,0 +1,4 @@
+Contact: https://flashcargoglobal.com/#contact
+Preferred-Languages: en
+Canonical: https://flashcargoglobal.com/.well-known/security.txt
+Expires: 2027-05-15T00:00:00Z

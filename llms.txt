@@ -7,6 +7,8 @@ Core pages:
 - https://flashcargoglobal.com/about/
 - https://flashcargoglobal.com/verify-flash-cargo-global/
 - https://flashcargoglobal.com/privacy-policy/
+- https://flashcargoglobal.com/.well-known/security.txt
+- https://flashcargoglobal.com/humans.txt
 - https://flashcargoglobal.com/services/north-american-trucking/
 - https://flashcargoglobal.com/services/global-air-ocean-freight/
 - https://flashcargoglobal.com/services/north-american-customs-support/

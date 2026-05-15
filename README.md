@@ -1,6 +1,7 @@
-# Flash Cargo Global static site
-Build guides: `python scripts\build_knowledge_pages.py`
-Run: `python -m http.server 5177`
-Preview: `http://127.0.0.1:5177`
-Deploy folder: `site-production`
-Deploy: commit and push `master`
+# Flash Cargo Global
+
+Official site for Flash Cargo Global: https://flashcargoglobal.com/
+
+Flash Cargo Global coordinates North American over-the-road trucking, global air freight, global ocean freight, North American customs support, warehousing, and white glove freight service through an online freight inquiry process.
+
+Public contact: https://flashcargoglobal.com/#contact
