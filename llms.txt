@@ -3,14 +3,14 @@
 Flash Cargo Global publishes practical freight forwarding guidance for businesses researching international shipping, documentation, customs preparation, and route planning.
 
 Core pages:
-- https://www.flashcargoglobal.com/
-- https://www.flashcargoglobal.com/about/
-- https://www.flashcargoglobal.com/verify-flash-cargo-global/
-- https://www.flashcargoglobal.com/privacy-policy/
-- https://www.flashcargoglobal.com/guides/en/
-- https://www.flashcargoglobal.com/guides/en/apparel-textile-export-checklist/
-- https://www.flashcargoglobal.com/guides/en/machinery-parts-export-checklist/
-- https://www.flashcargoglobal.com/guides/en/electronics-export-checklist/
+- https://flashcargoglobal.com/
+- https://flashcargoglobal.com/about/
+- https://flashcargoglobal.com/verify-flash-cargo-global/
+- https://flashcargoglobal.com/privacy-policy/
+- https://flashcargoglobal.com/guides/en/
+- https://flashcargoglobal.com/guides/en/apparel-textile-export-checklist/
+- https://flashcargoglobal.com/guides/en/machinery-parts-export-checklist/
+- https://flashcargoglobal.com/guides/en/electronics-export-checklist/
 
 Knowledge structure:
 - Freight guides are organized by industry, document risk, cargo profile, and shipment planning need.
@@ -25,5 +25,5 @@ Contact:
 - Public service base: serving from North America
 
 Brand verification:
-- Official current domain: https://www.flashcargoglobal.com/
-- Official verification page: https://www.flashcargoglobal.com/verify-flash-cargo-global/
+- Official current domain: https://flashcargoglobal.com/
+- Official verification page: https://flashcargoglobal.com/verify-flash-cargo-global/

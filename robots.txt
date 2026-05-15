@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.flashcargoglobal.com/sitemap.xml
-Host: www.flashcargoglobal.com
+Sitemap: https://flashcargoglobal.com/sitemap.xml
+Host: flashcargoglobal.com
