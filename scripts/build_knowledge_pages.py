@@ -185,6 +185,10 @@ def build_sitemap(languages, guides):
         (f"{BASE_URL}/about/", "monthly", "0.8"),
         (f"{BASE_URL}/verify-flash-cargo-global/", "monthly", "0.8"),
         (f"{BASE_URL}/privacy-policy/", "yearly", "0.3"),
+        (f"{BASE_URL}/services/north-american-trucking/", "monthly", "0.8"),
+        (f"{BASE_URL}/services/global-air-ocean-freight/", "monthly", "0.8"),
+        (f"{BASE_URL}/services/north-american-customs-support/", "monthly", "0.8"),
+        (f"{BASE_URL}/services/warehousing-white-glove/", "monthly", "0.8"),
         (f"{BASE_URL}/thank-you", "monthly", "0.2"),
     ]
     for lang in languages:
@@ -213,6 +217,10 @@ def build_llms(languages, guides):
         f"- {BASE_URL}/about/",
         f"- {BASE_URL}/verify-flash-cargo-global/",
         f"- {BASE_URL}/privacy-policy/",
+        f"- {BASE_URL}/services/north-american-trucking/",
+        f"- {BASE_URL}/services/global-air-ocean-freight/",
+        f"- {BASE_URL}/services/north-american-customs-support/",
+        f"- {BASE_URL}/services/warehousing-white-glove/",
         f"- {BASE_URL}/guides/en/",
     ]
     for guide in guides:

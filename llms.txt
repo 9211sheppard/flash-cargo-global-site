@@ -7,6 +7,10 @@ Core pages:
 - https://flashcargoglobal.com/about/
 - https://flashcargoglobal.com/verify-flash-cargo-global/
 - https://flashcargoglobal.com/privacy-policy/
+- https://flashcargoglobal.com/services/north-american-trucking/
+- https://flashcargoglobal.com/services/global-air-ocean-freight/
+- https://flashcargoglobal.com/services/north-american-customs-support/
+- https://flashcargoglobal.com/services/warehousing-white-glove/
 - https://flashcargoglobal.com/guides/en/
 - https://flashcargoglobal.com/guides/en/apparel-textile-export-checklist/
 - https://flashcargoglobal.com/guides/en/machinery-parts-export-checklist/

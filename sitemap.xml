@@ -25,6 +25,30 @@
     <priority>0.3</priority>
   </url>
   <url>
+    <loc>https://flashcargoglobal.com/services/north-american-trucking/</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://flashcargoglobal.com/services/global-air-ocean-freight/</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://flashcargoglobal.com/services/north-american-customs-support/</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://flashcargoglobal.com/services/warehousing-white-glove/</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://flashcargoglobal.com/thank-you</loc>
     <lastmod>2026-05-15</lastmod>
     <changefreq>monthly</changefreq>
