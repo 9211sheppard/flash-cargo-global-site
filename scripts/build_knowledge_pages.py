@@ -16,6 +16,68 @@ def json_ld(data):
     return json.dumps(data, ensure_ascii=False, separators=(",", ":"))
 
 
+ZH_DETAIL = {
+    "apparel-textile-export-checklist": [
+        {
+            "heading": "出口前容易被忽略的服装细节",
+            "body": "服装和纺织品看起来简单，但实际操作中经常因为标签、成分、箱唛、尺码明细、采购订单和发票描述不一致而产生延误。发货前应把买方订单、商业发票、装箱单、SKU、箱数、毛重、净重、原产地标识和收货窗口放在同一张检查表里核对。",
+        },
+        {
+            "heading": "什么时候需要提前沟通",
+            "body": "如果货物涉及样品、换季上新、促销交付、退货、混装 SKU、纺织标签或多收货点，最好在订舱前说明。这样可以提前判断是否需要拆分空运和海运、是否需要更严格的装箱照片、以及目的地清关或收货团队需要哪些资料。",
+        },
+        {
+            "heading": "关键英文术语",
+            "body": "apparel shipment, textile export, purchase order, commercial invoice, packing list, fiber content, country of origin, carton count, style number, SKU mix, buyer deadline, launch date, retail delivery window, air freight, ocean freight, split shipment.",
+        },
+    ],
+    "machinery-parts-export-checklist": [
+        {
+            "heading": "机械货物的装卸风险",
+            "body": "机械和工业零件的风险通常不在运输距离，而在重量、重心、吊点、木箱强度、叉车条件和收货现场准备。发货前应确认设备是否能安全装卸，是否需要平板车、吊车、限高路线、预约卸货或到货前照片。",
+        },
+        {
+            "heading": "文件与实物必须一致",
+            "body": "机械类货物常见问题包括序列号漏写、零件号不清、发票描述太笼统、木箱数量与装箱单不一致。把序列号、型号、原产地、货值、包装件数和实物照片提前整理，可以减少海关、仓库、承运人和收货方之间的反复确认。",
+        },
+        {
+            "heading": "关键英文术语",
+            "body": "machinery shipment, industrial parts, crating, lifting points, center of gravity, serial number, part number, model number, equipment access, flatbed, forklift, crane, inspection photos, insurance, delivery appointment, installation timing.",
+        },
+    ],
+    "electronics-export-checklist": [
+        {
+            "heading": "电子产品为什么需要单独规划",
+            "body": "电子产品可能体积小，但对文件、价值、型号、电池状态、序列号和包装保护要求更高。销售货、样品、维修件和保修退货应分开说明，因为它们在发票描述、价值背景、收货目的和目的地处理上可能不同。",
+        },
+        {
+            "heading": "电池和包装要提前确认",
+            "body": "如果设备含电池、随设备包装电池、单独电池、损坏电池或退货电池，运输方式和承运人接受条件可能改变。发货前还应确认防震包装、静电保护、箱唛、型号清单和收货方验收要求，避免货到后才发现资料不足。",
+        },
+        {
+            "heading": "关键英文术语",
+            "body": "electronics export, device shipment, component shipment, sample shipment, warranty return, repair return, battery status, model number, serial number, product certificate, anti-static packaging, cargo value, air freight restriction, receiver inspection.",
+        },
+    ],
+}
+
+ZH_HUB_DETAIL = """
+      <section class="guide-panel">
+        <h2>如何使用这些中文货运指南</h2>
+        <p>这些页面面向正在准备出口、进口、样品、退货、生产补货或买方交付的团队。重点不是让读者马上寻找物流公司，而是帮助他们在询价前整理 shipment facts、commercial invoice、packing list、HS code、Incoterms、origin、destination、cargo value、package count、gross weight、net weight、receiver requirements 和 timing risk。</p>
+        <p>如果服装厂、机械供应商、电子产品卖家、采购团队或进口商在安排国际运输前先看清这些问题，后面的 air freight、ocean freight、trucking、customs support、warehouse staging 和 white glove delivery 讨论会更具体，也更容易避免重复沟通。</p>
+      </section>
+      <section class="guide-panel">
+        <h2>适合提前确认的关键词</h2>
+        <ul>
+          <li>export documents, commercial invoice, packing list, bill of lading, air waybill, buyer, seller, importer, consignee, notify party</li>
+          <li>HS classification, country of origin, origin marking, product label, textile label, serial number, model number, warranty return</li>
+          <li>carton count, pallet count, dimensions, gross weight, net weight, stackability, fragile cargo, battery status, lifting points</li>
+          <li>pickup window, delivery appointment, receiver access, dock hours, customs broker, border crossing, warehouse staging, proof of condition</li>
+        </ul>
+      </section>"""
+
+
 def page_shell(lang, title, description, body, canonical, alternates, schema):
     alt_links = "\n".join(
         f'    <link rel="alternate" hreflang="{escape(code)}" href="{escape(url)}">'
@@ -43,6 +105,7 @@ def page_shell(lang, title, description, body, canonical, alternates, schema):
     <meta name="twitter:title" content="{escape(title)} | Flash Cargo Global">
     <meta name="twitter:description" content="{escape(description)}">
     <meta name="twitter:image" content="{escape(OG_IMAGE)}">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' https://static.wixstatic.com data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; form-action https://flash-cargo-form.old-sun-35f9.workers.dev; base-uri 'self'">
     <link rel="stylesheet" href="/styles.css?v=10">
 {schema_html}
   </head>
@@ -90,6 +153,7 @@ def build_index(languages, guides):
           {"".join(cards)}
         </div>
       </section>
+      {ZH_HUB_DETAIL if lang["code"] == "zh" else ""}
     </main>"""
         canonical = f"{BASE_URL}/guides/{lang['code']}/"
         alternates = [(l["code"], f"{BASE_URL}/guides/{l['code']}/") for l in languages]
@@ -162,6 +226,7 @@ def build_guides(languages, guides, sources, updated):
           <h2>{escape(lang["label_glossary"])}</h2>
           <ul>{glossary}</ul>
         </section>
+        {extra_language_sections(lang["code"], guide["slug"])}
         <section class="source-block">
           <h2>{escape(lang["label_sources"])}</h2>
           <ul>{source_links}</ul>
@@ -222,6 +287,20 @@ def build_guides(languages, guides, sources, updated):
             out = ROOT / "guides" / lang["code"] / guide["slug"] / "index.html"
             out.parent.mkdir(parents=True, exist_ok=True)
             out.write_text(page_shell(lang, title, summary, body, canonical, alternates, [schema, faq_schema, breadcrumb_schema]), encoding="utf-8")
+
+
+def extra_language_sections(code, slug):
+    if code != "zh":
+        return ""
+    sections = []
+    for item in ZH_DETAIL.get(slug, []):
+        sections.append(
+            f"""        <section class="guide-panel">
+          <h2>{escape(item["heading"])}</h2>
+          <p>{escape(item["body"])}</p>
+        </section>"""
+        )
+    return "\n".join(sections)
 
 
 def build_sitemap(languages, guides):
@@ -400,6 +479,7 @@ def build_resource_pages():
     <meta name="twitter:title" content="{escape(page["title"])} | Flash Cargo Global">
     <meta name="twitter:description" content="{escape(page["description"])}">
     <meta name="twitter:image" content="{escape(OG_IMAGE)}">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' https://static.wixstatic.com data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; form-action https://flash-cargo-form.old-sun-35f9.workers.dev; base-uri 'self'">
     <link rel="stylesheet" href="/styles.css?v=10">
     <script type="application/ld+json">{json_ld(schema)}</script>
     <script type="application/ld+json">{json_ld(faq_schema)}</script>

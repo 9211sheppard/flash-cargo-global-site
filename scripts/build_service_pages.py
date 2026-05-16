@@ -81,6 +81,7 @@ def render_page(page):
     <meta name="twitter:title" content="{escape(page['title'])} | Flash Cargo Global">
     <meta name="twitter:description" content="{escape(page['description'])}">
     <meta name="twitter:image" content="{escape(OG_IMAGE)}">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' https://static.wixstatic.com data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; form-action https://flash-cargo-form.old-sun-35f9.workers.dev; base-uri 'self'">
     <link rel="stylesheet" href="/styles.css?v=11">
     <script type="application/ld+json">{json_ld(service_schema)}</script>
     <script type="application/ld+json">{json_ld(faq_schema)}</script>
@@ -108,6 +109,11 @@ def render_page(page):
           <p>{escape(page['overview'])}</p>
         </section>
 {chr(10).join(sections)}
+        <section class="guide-panel">
+          <h2>What to include in the inquiry</h2>
+          <p>A cleaner freight inquiry should include the business reason for the move, origin, destination, cargo description, quantity, dimensions, weight, value range, requested timing, document status, handling requirements, receiver constraints, and whether the shipment supports production, resale, installation, warranty, replenishment, or customer delivery.</p>
+          <p>Those details help separate a simple price request from a shipment that needs route planning, document review, warehouse staging, customs coordination, or receiver-sensitive delivery control. They also help protect the customer promise, sales relationship, production schedule, and receiving plan behind the freight.</p>
+        </section>
         <section class="guide-panel faq-list">
           <h2>Service questions</h2>
 {faqs}
