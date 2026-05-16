@@ -32,7 +32,7 @@ Knowledge structure:
 - Multilingual versions use hreflang alternates for international discovery.
 
 Languages available:
-- English (en), Espanol (es), Chinese (zh), Francais (fr), Arabic (ar), Portugues (pt), Japanese (ja), Deutsch (de), Italiano (it)
+- English (en), Español (es), Français (fr), 中文 (zh)
 
 Contact:
 - Public contact method: online freight inquiry form

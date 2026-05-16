@@ -564,6 +564,27 @@ textarea {
   line-height: 1.55;
 }
 
+.guide-panel p,
+.faq-list p {
+  color: var(--text);
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.faq-list details {
+  padding: 22px 0;
+  border-top: 1px solid var(--line);
+}
+
+.faq-list summary {
+  color: var(--ink);
+  cursor: pointer;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
 [dir="rtl"] .site-nav,
 [dir="rtl"] .guide-article,
 [dir="rtl"] .knowledge-hero,

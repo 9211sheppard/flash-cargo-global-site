@@ -21,6 +21,8 @@ def page_shell(lang, title, description, body, canonical, alternates, schema):
         f'    <link rel="alternate" hreflang="{escape(code)}" href="{escape(url)}">'
         for code, url in alternates
     )
+    schema_blocks = schema if isinstance(schema, list) else [schema]
+    schema_html = "\n".join(f'    <script type="application/ld+json">{json_ld(block)}</script>' for block in schema_blocks)
     return f"""<!doctype html>
 <html lang="{escape(lang["html_lang"])}" dir="{escape(lang["dir"])}">
   <head>
@@ -42,9 +44,10 @@ def page_shell(lang, title, description, body, canonical, alternates, schema):
     <meta name="twitter:description" content="{escape(description)}">
     <meta name="twitter:image" content="{escape(OG_IMAGE)}">
     <link rel="stylesheet" href="/styles.css?v=10">
-    <script type="application/ld+json">{json_ld(schema)}</script>
+{schema_html}
   </head>
   <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
     <header class="site-header">
       <nav class="site-nav" aria-label="Primary">
         <a class="wordmark" href="/">{escape(lang["label_home"])}</a>
@@ -76,7 +79,7 @@ def build_index(languages, guides):
           </article>"""
             )
         body = f"""
-    <main>
+    <main id="main">
       <section class="knowledge-hero section">
         <p class="kicker">{escape(lang["label_guides"])}</p>
         <h1>{escape(lang["label_guides"])}</h1>
@@ -90,6 +93,7 @@ def build_index(languages, guides):
     </main>"""
         canonical = f"{BASE_URL}/guides/{lang['code']}/"
         alternates = [(l["code"], f"{BASE_URL}/guides/{l['code']}/") for l in languages]
+        alternates.append(("x-default", f"{BASE_URL}/guides/en/"))
         schema = {
             "@context": "https://schema.org",
             "@type": "CollectionPage",
@@ -128,19 +132,31 @@ def build_guides(languages, guides, sources, updated):
             title = guide["title"][lang["code"]]
             summary = guide["summary"][lang["code"]]
             checks = "\n".join(f"<li>{escape(item[lang['code']])}</li>" for item in guide["checks"])
+            faqs = "\n".join(
+                f"<details><summary>{escape(item['q'][lang['code']])}</summary><p>{escape(item['a'][lang['code']])}</p></details>"
+                for item in guide["faq"]
+            )
             source_links = "\n".join(
                 f'<li><a href="{escape(src["url"])}">{escape(src["name"])}</a></li>' for src in sources
             )
             body = f"""
-    <main>
+    <main id="main">
       <article class="guide-article">
         <p class="kicker">{escape(guide["industry"])}</p>
         <h1>{escape(title)}</h1>
         <p class="lead">{escape(summary)}</p>
+        <section class="guide-panel">
+          <h2>{escape(lang["label_plan"])}</h2>
+          <p>{escape(guide["plan"][lang["code"]])}</p>
+        </section>
         <div class="guide-panel">
           <h2>{escape(lang["cta"])}</h2>
           <ul>{checks}</ul>
         </div>
+        <section class="guide-panel faq-list">
+          <h2>{escape(lang["label_faq"])}</h2>
+          {faqs}
+        </section>
         <section class="source-block">
           <h2>{escape(lang["label_sources"])}</h2>
           <ul>{source_links}</ul>
@@ -150,6 +166,7 @@ def build_guides(languages, guides, sources, updated):
     </main>"""
             canonical = f"{BASE_URL}/guides/{lang['code']}/{guide['slug']}/"
             alternates = [(l["code"], f"{BASE_URL}/guides/{l['code']}/{guide['slug']}/") for l in languages]
+            alternates.append(("x-default", f"{BASE_URL}/guides/en/{guide['slug']}/"))
             schema = {
                 "@context": "https://schema.org",
                 "@type": "Article",
@@ -174,9 +191,23 @@ def build_guides(languages, guides, sources, updated):
                 "mainEntityOfPage": canonical,
                 "citation": [src["url"] for src in sources],
             }
+            faq_schema = {
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                "url": canonical,
+                "inLanguage": lang["html_lang"],
+                "mainEntity": [
+                    {
+                        "@type": "Question",
+                        "name": item["q"][lang["code"]],
+                        "acceptedAnswer": {"@type": "Answer", "text": item["a"][lang["code"]]},
+                    }
+                    for item in guide["faq"]
+                ],
+            }
             out = ROOT / "guides" / lang["code"] / guide["slug"] / "index.html"
             out.parent.mkdir(parents=True, exist_ok=True)
-            out.write_text(page_shell(lang, title, summary, body, canonical, alternates, schema), encoding="utf-8")
+            out.write_text(page_shell(lang, title, summary, body, canonical, alternates, [schema, faq_schema]), encoding="utf-8")
 
 
 def build_sitemap(languages, guides):
