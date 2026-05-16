@@ -10,6 +10,7 @@
     "label_contact": "Start a freight inquiry",
     "label_faq": "Freight planning questions",
     "label_plan": "Planning notes",
+    "label_glossary": "Useful freight terms",
     "cta": "Use this checklist before you book freight."
   },
   {
@@ -23,6 +24,7 @@
     "label_contact": "Iniciar una consulta de carga",
     "label_faq": "Preguntas de planificación de carga",
     "label_plan": "Notas de planificación",
+    "label_glossary": "Términos útiles de carga",
     "cta": "Use esta lista antes de reservar transporte."
   },
   {
@@ -36,6 +38,7 @@
     "label_contact": "Démarrer une demande de fret",
     "label_faq": "Questions de planification du fret",
     "label_plan": "Notes de planification",
+    "label_glossary": "Termes de fret utiles",
     "cta": "Utilisez cette liste avant de réserver le transport."
   },
   {
@@ -49,6 +52,7 @@
     "label_contact": "提交货运咨询",
     "label_faq": "货运规划问题",
     "label_plan": "规划说明",
+    "label_glossary": "常用货运术语",
     "cta": "订舱前请使用这份清单。"
   }
 ]

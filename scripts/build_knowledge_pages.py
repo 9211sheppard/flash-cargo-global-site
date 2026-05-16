@@ -136,6 +136,7 @@ def build_guides(languages, guides, sources, updated):
                 f"<details><summary>{escape(item['q'][lang['code']])}</summary><p>{escape(item['a'][lang['code']])}</p></details>"
                 for item in guide["faq"]
             )
+            glossary = "\n".join(f"<li>{escape(item[lang['code']])}</li>" for item in guide["glossary"])
             source_links = "\n".join(
                 f'<li><a href="{escape(src["url"])}">{escape(src["name"])}</a></li>' for src in sources
             )
@@ -156,6 +157,10 @@ def build_guides(languages, guides, sources, updated):
         <section class="guide-panel faq-list">
           <h2>{escape(lang["label_faq"])}</h2>
           {faqs}
+        </section>
+        <section class="guide-panel">
+          <h2>{escape(lang["label_glossary"])}</h2>
+          <ul>{glossary}</ul>
         </section>
         <section class="source-block">
           <h2>{escape(lang["label_sources"])}</h2>
@@ -205,9 +210,18 @@ def build_guides(languages, guides, sources, updated):
                     for item in guide["faq"]
                 ],
             }
+            breadcrumb_schema = {
+                "@context": "https://schema.org",
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {"@type": "ListItem", "position": 1, "name": "Home", "item": BASE_URL + "/"},
+                    {"@type": "ListItem", "position": 2, "name": lang["label_guides"], "item": f"{BASE_URL}/guides/{lang['code']}/"},
+                    {"@type": "ListItem", "position": 3, "name": title, "item": canonical},
+                ],
+            }
             out = ROOT / "guides" / lang["code"] / guide["slug"] / "index.html"
             out.parent.mkdir(parents=True, exist_ok=True)
-            out.write_text(page_shell(lang, title, summary, body, canonical, alternates, [schema, faq_schema]), encoding="utf-8")
+            out.write_text(page_shell(lang, title, summary, body, canonical, alternates, [schema, faq_schema, breadcrumb_schema]), encoding="utf-8")
 
 
 def build_sitemap(languages, guides):
@@ -297,9 +311,37 @@ def build_resource_pages():
     for page in data["pages"]:
         canonical = f"{BASE_URL}/resources/{page['slug']}/"
         sections = []
+        planning_items = [
+            "Confirm who is making the freight decision, who owns the commercial documents, and who can answer questions while the shipment is moving.",
+            "Write down the shipment route, cargo type, package count, dimensions, weights, value, timing, and receiver expectations before requesting a quote.",
+            "Separate what is already known from what still needs to be confirmed, because freight delays often come from unclear details rather than the route itself.",
+            "Share document and handling details early so the carrier, warehouse, broker, and receiver are not forced to solve preventable issues at the last minute.",
+        ]
+        planning_html = "\n".join(f"<li>{escape(item)}</li>" for item in planning_items)
+        sections.append(
+            f"<section class=\"guide-panel\"><h2>How to use this resource</h2><p>{escape(page['summary'])} Use this page as a planning checkpoint before cargo is picked up, quoted, routed, or handed to a carrier.</p><ul>{planning_html}</ul></section>"
+        )
         for section in page["sections"]:
             items = "\n".join(f"<li>{escape(item)}</li>" for item in section["items"])
             sections.append(f"<section class=\"guide-panel\"><h2>{escape(section['heading'])}</h2><ul>{items}</ul></section>")
+        faq = [
+            {
+                "q": f"Who should use the {page['title'].lower()}?",
+                "a": f"Shippers, importers, exporters, buyers, and operations teams can use it before booking freight so the route, documents, and cargo details are clearer.",
+            },
+            {
+                "q": "Why does this matter before pickup?",
+                "a": "Once cargo is moving, small document or handling problems become harder to correct. Preparing early reduces avoidable calls, delays, and receiver confusion.",
+            },
+            {
+                "q": "What should be shared in a freight inquiry?",
+                "a": "Share the origin, destination, cargo description, quantity, dimensions, weight, timing, document status, handling needs, and any receiver or customs constraints.",
+            },
+        ]
+        faq_html = "\n".join(
+            f"<details><summary>{escape(item['q'])}</summary><p>{escape(item['a'])}</p></details>" for item in faq
+        )
+        sections.append(f"<section class=\"guide-panel faq-list\"><h2>Resource questions</h2>{faq_html}</section>")
         body = "\n".join(sections)
         schema = {
             "@context": "https://schema.org",
@@ -320,6 +362,24 @@ def build_resource_pages():
                 },
             },
             "citation": [src["url"] for src in data["sources"]],
+        }
+        faq_schema = {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "url": canonical,
+            "mainEntity": [
+                {"@type": "Question", "name": item["q"], "acceptedAnswer": {"@type": "Answer", "text": item["a"]}}
+                for item in faq
+            ],
+        }
+        breadcrumb_schema = {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {"@type": "ListItem", "position": 1, "name": "Home", "item": BASE_URL + "/"},
+                {"@type": "ListItem", "position": 2, "name": "Resources", "item": BASE_URL + "/#resources"},
+                {"@type": "ListItem", "position": 3, "name": page["title"], "item": canonical},
+            ],
         }
         html = f"""<!doctype html>
 <html lang="en">
@@ -342,6 +402,8 @@ def build_resource_pages():
     <meta name="twitter:image" content="{escape(OG_IMAGE)}">
     <link rel="stylesheet" href="/styles.css?v=10">
     <script type="application/ld+json">{json_ld(schema)}</script>
+    <script type="application/ld+json">{json_ld(faq_schema)}</script>
+    <script type="application/ld+json">{json_ld(breadcrumb_schema)}</script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to main content</a>

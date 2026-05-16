@@ -1,0 +1,170 @@
+{
+  "updated": "2026-05-16",
+  "pages": [
+    {
+      "slug": "global-air-ocean-freight",
+      "title": "Global Air and Ocean Freight",
+      "description": "Global air and ocean freight support for importers, exporters, manufacturers, and buyers comparing speed, cost, risk, and documentation needs.",
+      "kicker": "Global lanes",
+      "serviceType": "Freight forwarding",
+      "areaServed": "Global",
+      "lead": "Air and ocean freight planning for cargo that needs the right balance of speed, cost, routing, documentation, and handling control.",
+      "overview": "Global shipments usually become difficult before cargo reaches a port or airport. The key questions are whether the shipment is urgent, whether the buyer can wait, whether the documents are clean, whether the cargo can tolerate normal handling, and whether the destination has requirements that should be known before pickup. Flash Cargo Global treats air and ocean freight as planning decisions, not just rate requests.",
+      "sections": [
+        {
+          "heading": "Air versus ocean decision points",
+          "items": [
+            "Use air freight when time risk, launch dates, production downtime, warranty replacement, or buyer commitments matter more than cost per kilo.",
+            "Use ocean freight when shipment size, cost control, replenishment planning, and predictable inventory windows allow longer transit and port handling.",
+            "Use a split strategy when a small urgent portion should move by air while the balance moves by ocean to control total cost.",
+            "Check documents, HS code context, cargo value, Incoterms, destination clearance requirements, and receiver readiness before booking."
+          ]
+        },
+        {
+          "heading": "What should be ready before quoting",
+          "items": [
+            "Origin, destination, cargo description, package count, dimensions, weight, value, pickup timing, and delivery expectations.",
+            "Commercial invoice, packing list, buyer and seller names, cargo photos where useful, and any destination-specific certificate or labeling concerns.",
+            "Handling notes such as fragile cargo, stackability limits, temperature concerns, oversized pieces, dangerous goods, or appointment requirements."
+          ]
+        },
+        {
+          "heading": "Common planning risks",
+          "items": [
+            "A shipment is quoted as ocean freight, but the buyer later needs part of it urgently by air.",
+            "The cargo is physically ready, but the invoice or packing list does not match what is being picked up.",
+            "The destination receiver needs delivery timing, unloading equipment, or customs answers that were not discussed before booking."
+          ]
+        }
+      ],
+      "faqs": [
+        {"q": "When should a business choose air freight?", "a": "Air freight is usually the better fit when time risk, production impact, product launch timing, sample approval, or customer commitment is more important than the lower cost of ocean freight."},
+        {"q": "When is ocean freight better?", "a": "Ocean freight is usually better when cargo is larger, less urgent, easier to plan, or when cost control matters more than speed."},
+        {"q": "What details help produce a cleaner quote?", "a": "Origin, destination, cargo type, dimensions, weight, value, timing, Incoterms, document status, handling needs, and receiver requirements all help reduce guesswork."}
+      ]
+    },
+    {
+      "slug": "north-american-trucking",
+      "title": "North American Trucking",
+      "description": "North American over-the-road trucking support for freight moving across the United States, Canada, and Mexico with route, timing, and documentation planning.",
+      "kicker": "North America",
+      "serviceType": "Freight trucking",
+      "areaServed": ["United States", "Canada", "Mexico", "North America"],
+      "lead": "Over-the-road trucking support for businesses moving freight across North America with practical route, timing, cargo, and documentation planning.",
+      "overview": "Truck freight across North America depends on more than miles. Pickup windows, dock access, appointment timing, border paperwork, cargo dimensions, receiver rules, and handling constraints can all change the plan. Flash Cargo Global focuses on getting the practical details clear before dispatch, especially when shipments cross borders or support time-sensitive business commitments.",
+      "sections": [
+        {
+          "heading": "Before a truck move is quoted",
+          "items": [
+            "Confirm pickup and delivery constraints, dock access, appointment needs, operating hours, contact names, and whether the site can load or unload the equipment requested.",
+            "Identify cargo dimensions, weight, stackability, temperature sensitivity, packaging condition, value, and whether special handling or photos are needed.",
+            "For cross-border moves, organize commercial invoice, packing list, broker details, importer details, buyer and seller records, and any product-specific requirements before dispatch."
+          ]
+        },
+        {
+          "heading": "Where trucking plans break down",
+          "items": [
+            "The shipment is ready, but the receiver cannot take delivery without an appointment or lift equipment.",
+            "The cargo is described as pallets, but dimensions, stackability, or weight make the equipment choice wrong.",
+            "A border move is dispatched before the broker, importer, or document set is ready to answer customs questions."
+          ]
+        },
+        {
+          "heading": "Useful planning details",
+          "items": [
+            "Share photos when the freight is oversized, fragile, floor-loaded, crated, or difficult to describe.",
+            "Confirm whether the shipment needs dry van, flatbed, box truck, liftgate, team service, expedited movement, or staged delivery.",
+            "Give realistic timing rather than only the ideal date; this helps shape a plan that protects the business promise behind the freight."
+          ]
+        }
+      ],
+      "faqs": [
+        {"q": "What information is needed for a North American truck quote?", "a": "Origin, destination, pickup window, delivery window, package count, dimensions, weight, cargo type, loading method, receiver requirements, and border paperwork if applicable."},
+        {"q": "Why do cross-border truck moves need extra planning?", "a": "Because the driver, carrier, broker, importer, and receiver all depend on documents and instructions being aligned before the truck reaches the border."},
+        {"q": "Can trucking support urgent freight?", "a": "Yes, but urgent freight still needs clear cargo details, realistic timing, and receiver readiness so speed does not create avoidable failure points."}
+      ]
+    },
+    {
+      "slug": "north-american-customs-support",
+      "title": "North American Customs Support",
+      "description": "Customs documentation support in North America for commercial invoices, packing lists, HS code context, origin details, and broker coordination.",
+      "kicker": "Customs support",
+      "serviceType": "Customs documentation support",
+      "areaServed": "North America",
+      "lead": "Customs support starts before cargo moves: cleaner documents reduce confusion at the border, at the terminal, and with the receiver.",
+      "overview": "Customs problems often begin with ordinary details: vague goods descriptions, mismatched package counts, unclear country of origin, missing broker information, or an invoice that does not reflect the physical shipment. Flash Cargo Global helps shippers think through the document set early so freight can be planned with fewer avoidable questions.",
+      "sections": [
+        {
+          "heading": "Documents to prepare early",
+          "items": [
+            "Commercial invoice with buyer, seller, value, currency, Incoterms, origin, and clear goods descriptions that match the cargo.",
+            "Packing list with package count, dimensions, gross weight, net weight, marks, carton or pallet identifiers, and handling details.",
+            "HS code context, country of origin, broker details, importer details, certificates, permits, product labels, or other destination-specific requirements."
+          ]
+        },
+        {
+          "heading": "How customs issues affect freight",
+          "items": [
+            "A truck can be ready and still be delayed if the broker cannot match the shipment to the documents.",
+            "Air or ocean cargo can move into a terminal, but destination release can slow down if invoice, packing, or importer details are incomplete.",
+            "Small mistakes in descriptions, values, or origin can create extra questions that affect receiver timing and customer confidence."
+          ]
+        },
+        {
+          "heading": "Better preparation",
+          "items": [
+            "Review documents before pickup instead of waiting until the shipment is already in motion.",
+            "Ask whether the destination has product-specific rules for textiles, electronics, machinery, regulated goods, samples, returns, or warranty cargo.",
+            "Make sure the person who can answer product and value questions is reachable during the freight movement."
+          ]
+        }
+      ],
+      "faqs": [
+        {"q": "Does customs support replace a licensed customs broker?", "a": "No. It helps organize freight and document context so the broker, importer, and shipper have cleaner information to work with."},
+        {"q": "What causes customs delays?", "a": "Common causes include vague invoice descriptions, missing origin details, mismatched packing lists, unclear importer records, and product requirements discovered too late."},
+        {"q": "When should documents be reviewed?", "a": "Before pickup. Reviewing documents after cargo is already moving makes small errors more expensive and harder to correct."}
+      ]
+    },
+    {
+      "slug": "warehousing-white-glove",
+      "title": "Warehousing and White Glove Freight Service",
+      "description": "Warehousing and white glove freight service support for shipments that need storage, careful handling, staged delivery, or receiver-sensitive execution.",
+      "kicker": "Careful handling",
+      "serviceType": "Warehousing and white glove freight",
+      "areaServed": ["North America", "Global"],
+      "lead": "Warehousing and white glove freight support helps when cargo needs staging, careful handling, timed delivery, or receiver-sensitive execution.",
+      "overview": "Some freight cannot be treated as a simple dock-to-dock move. It may need short-term storage, inspection, relabeling, consolidation, appointment-driven delivery, careful placement, or proof of condition. Flash Cargo Global plans warehousing and white glove needs around the receiver experience as much as the transportation lane.",
+      "sections": [
+        {
+          "heading": "When careful handling matters",
+          "items": [
+            "Use warehousing when freight needs short-term storage, consolidation, inspection, relabeling, condition photos, or staged release.",
+            "Use white glove support when the delivery environment, cargo value, presentation standard, receiver expectations, or handling risk requires extra planning.",
+            "Confirm access limits, stairs, elevators, dock availability, appointment timing, unpacking needs, packaging protection, and proof-of-condition expectations before pickup."
+          ]
+        },
+        {
+          "heading": "Planning questions",
+          "items": [
+            "Can the cargo be stacked, opened, inspected, relabeled, repacked, or split for staged delivery?",
+            "Does the receiver need delivery inside a building, to a room, to a retail space, to a job site, or only to a dock?",
+            "What would make the delivery unacceptable to the customer even if the cargo technically arrived?"
+          ]
+        },
+        {
+          "heading": "Business impact",
+          "items": [
+            "White glove planning protects the customer-facing moment, especially when a failed delivery would damage the relationship behind the shipment.",
+            "Warehouse staging can reduce rushed decisions when freight arrives before the receiver is ready.",
+            "Clear handling notes reduce confusion between shipper, warehouse, carrier, receiver, and final delivery team."
+          ]
+        }
+      ],
+      "faqs": [
+        {"q": "When is warehousing useful?", "a": "Warehousing is useful when cargo arrives before the receiver is ready, needs consolidation, requires inspection, or must be released in stages."},
+        {"q": "What makes freight white glove?", "a": "White glove freight usually involves higher handling expectations, appointment control, careful placement, access planning, condition proof, or receiver-sensitive delivery."},
+        {"q": "What details should be shared before pickup?", "a": "Share access limits, packaging condition, cargo value, handling instructions, appointment needs, placement expectations, and whether photos or inspection are required."}
+      ]
+    }
+  ]
+}
