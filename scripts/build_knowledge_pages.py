@@ -16,6 +16,34 @@ def json_ld(data):
     return json.dumps(data, ensure_ascii=False, separators=(",", ":"))
 
 
+def seo_title(title):
+    title = title.replace("Machinery and industrial parts", "Machinery parts")
+    title = title.replace("maquinaria y piezas industriales", "maquinaria industrial")
+    title = title.replace("machines et pièces industrielles", "machines industrielles")
+    branded = f"{title} | Flash Cargo Global"
+    if len(branded) <= 60:
+        return branded
+    return title[:60].rstrip()
+
+
+def seo_description(description, lang_code="en"):
+    suffixes = {
+        "en": " Includes planning checks for documents, cargo details, routing, timing, handling, customs context, and receiver handoff.",
+        "es": " Incluye controles de documentos, detalles de carga, ruta, tiempos, manejo, contexto aduanero y entrega al receptor.",
+        "fr": " Inclut des contrôles sur documents, détails cargo, itinéraire, délais, manutention, douane et réception.",
+        "zh": " 本页帮助发货方在询价、订舱和提货前核对文件、货物信息、运输方式、时间要求、清关背景、收货安排、包装条件、风险点、责任分工和后续沟通资料，适合出口商、进口商、采购团队和运营团队提前使用并减少重复确认与交接延误风险问题。",
+    }
+    if len(description) < 120:
+        description = description + suffixes.get(lang_code, suffixes["en"])
+    if len(description) > 160:
+        cut = description[:157]
+        space = cut.rfind(" ")
+        if space > 120:
+            cut = cut[:space]
+        description = cut.rstrip(" ,.;:") + "..."
+    return description
+
+
 ZH_DETAIL = {
     "apparel-textile-export-checklist": [
         {
@@ -79,6 +107,8 @@ ZH_HUB_DETAIL = """
 
 
 def page_shell(lang, title, description, body, canonical, alternates, schema):
+    meta_title = seo_title(title)
+    meta_description = seo_description(description, lang["code"])
     alt_links = "\n".join(
         f'    <link rel="alternate" hreflang="{escape(code)}" href="{escape(url)}">'
         for code, url in alternates
@@ -90,20 +120,20 @@ def page_shell(lang, title, description, body, canonical, alternates, schema):
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{escape(title)} | Flash Cargo Global</title>
-    <meta name="description" content="{escape(description)}">
+    <title>{escape(meta_title)}</title>
+    <meta name="description" content="{escape(meta_description)}">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="{escape(canonical)}">
 {alt_links}
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="Flash Cargo Global">
-    <meta property="og:title" content="{escape(title)} | Flash Cargo Global">
-    <meta property="og:description" content="{escape(description)}">
+    <meta property="og:title" content="{escape(meta_title)}">
+    <meta property="og:description" content="{escape(meta_description)}">
     <meta property="og:url" content="{escape(canonical)}">
     <meta property="og:image" content="{escape(OG_IMAGE)}">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="{escape(title)} | Flash Cargo Global">
-    <meta name="twitter:description" content="{escape(description)}">
+    <meta name="twitter:title" content="{escape(meta_title)}">
+    <meta name="twitter:description" content="{escape(meta_description)}">
     <meta name="twitter:image" content="{escape(OG_IMAGE)}">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' https://static.wixstatic.com data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; form-action https://flash-cargo-form.old-sun-35f9.workers.dev; base-uri 'self'">
     <link rel="stylesheet" href="/styles.css?v=10">
@@ -316,7 +346,6 @@ def build_sitemap(languages, guides):
         (f"{BASE_URL}/services/global-air-ocean-freight/", "monthly", "0.8"),
         (f"{BASE_URL}/services/north-american-customs-support/", "monthly", "0.8"),
         (f"{BASE_URL}/services/warehousing-white-glove/", "monthly", "0.8"),
-        (f"{BASE_URL}/thank-you", "monthly", "0.2"),
     ]
     for lang in languages:
         urls.append((f"{BASE_URL}/guides/{lang['code']}/", "weekly", "0.8"))
@@ -389,6 +418,8 @@ def build_resource_pages():
     )
     for page in data["pages"]:
         canonical = f"{BASE_URL}/resources/{page['slug']}/"
+        meta_title = seo_title(page["title"])
+        meta_description = seo_description(page["description"], "en")
         sections = []
         planning_items = [
             "Confirm who is making the freight decision, who owns the commercial documents, and who can answer questions while the shipment is moving.",
@@ -465,19 +496,19 @@ def build_resource_pages():
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{escape(page["title"])} | Flash Cargo Global</title>
-    <meta name="description" content="{escape(page["description"])}">
+    <title>{escape(meta_title)}</title>
+    <meta name="description" content="{escape(meta_description)}">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="{escape(canonical)}">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="Flash Cargo Global">
-    <meta property="og:title" content="{escape(page["title"])} | Flash Cargo Global">
-    <meta property="og:description" content="{escape(page["description"])}">
+    <meta property="og:title" content="{escape(meta_title)}">
+    <meta property="og:description" content="{escape(meta_description)}">
     <meta property="og:url" content="{escape(canonical)}">
     <meta property="og:image" content="{escape(OG_IMAGE)}">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="{escape(page["title"])} | Flash Cargo Global">
-    <meta name="twitter:description" content="{escape(page["description"])}">
+    <meta name="twitter:title" content="{escape(meta_title)}">
+    <meta name="twitter:description" content="{escape(meta_description)}">
     <meta name="twitter:image" content="{escape(OG_IMAGE)}">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' https://static.wixstatic.com data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; form-action https://flash-cargo-form.old-sun-35f9.workers.dev; base-uri 'self'">
     <link rel="stylesheet" href="/styles.css?v=10">

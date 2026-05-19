@@ -16,8 +16,33 @@ def json_ld(data):
     return json.dumps(data, ensure_ascii=False, separators=(",", ":"))
 
 
+def seo_title(title):
+    title = title.replace("Warehousing and White Glove Freight Service", "Warehousing and White Glove Freight")
+    branded = f"{title} | Flash Cargo Global"
+    if len(branded) <= 60:
+        return branded
+    return title[:60].rstrip()
+
+
+def seo_description(description):
+    if len(description) < 120:
+        description = (
+            description
+            + " Includes planning checks for documents, cargo details, timing, handling, routing, and receiver handoff."
+        )
+    if len(description) > 160:
+        cut = description[:157]
+        space = cut.rfind(" ")
+        if space > 120:
+            cut = cut[:space]
+        description = cut.rstrip(" ,.;:") + "..."
+    return description
+
+
 def render_page(page):
     canonical = f"{BASE_URL}/services/{page['slug']}/"
+    meta_title = seo_title(page["title"])
+    meta_description = seo_description(page["description"])
     sections = []
     for section in page["sections"]:
         items = "\n".join(f"              <li>{escape(item)}</li>" for item in section["items"])
@@ -67,19 +92,19 @@ def render_page(page):
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{escape(page['title'])} | Flash Cargo Global</title>
-    <meta name="description" content="{escape(page['description'])}">
+    <title>{escape(meta_title)}</title>
+    <meta name="description" content="{escape(meta_description)}">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="{escape(canonical)}">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="Flash Cargo Global">
-    <meta property="og:title" content="{escape(page['title'])} | Flash Cargo Global">
-    <meta property="og:description" content="{escape(page['description'])}">
+    <meta property="og:title" content="{escape(meta_title)}">
+    <meta property="og:description" content="{escape(meta_description)}">
     <meta property="og:url" content="{escape(canonical)}">
     <meta property="og:image" content="{escape(OG_IMAGE)}">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="{escape(page['title'])} | Flash Cargo Global">
-    <meta name="twitter:description" content="{escape(page['description'])}">
+    <meta name="twitter:title" content="{escape(meta_title)}">
+    <meta name="twitter:description" content="{escape(meta_description)}">
     <meta name="twitter:image" content="{escape(OG_IMAGE)}">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' https://static.wixstatic.com data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; form-action https://flash-cargo-form.old-sun-35f9.workers.dev; base-uri 'self'">
     <link rel="stylesheet" href="/styles.css?v=11">
