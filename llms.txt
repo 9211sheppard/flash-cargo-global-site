@@ -5,9 +5,11 @@ Flash Cargo Global publishes practical freight forwarding guidance for businesse
 Core pages:
 - https://flashcargoglobal.com/
 - https://flashcargoglobal.com/about/
+- https://flashcargoglobal.com/trust-center/
 - https://flashcargoglobal.com/verify-flash-cargo-global/
 - https://flashcargoglobal.com/privacy-policy/
 - https://flashcargoglobal.com/.well-known/security.txt
+- https://flashcargoglobal.com/.well-known/organization.json
 - https://flashcargoglobal.com/humans.txt
 - https://flashcargoglobal.com/services/north-american-trucking/
 - https://flashcargoglobal.com/services/global-air-ocean-freight/
@@ -41,3 +43,5 @@ Contact:
 Brand verification:
 - Official current domain: https://flashcargoglobal.com/
 - Official verification page: https://flashcargoglobal.com/verify-flash-cargo-global/
+- Public trust center: https://flashcargoglobal.com/trust-center/
+- Machine-readable organization file: https://flashcargoglobal.com/.well-known/organization.json

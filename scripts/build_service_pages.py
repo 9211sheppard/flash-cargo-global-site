@@ -63,7 +63,7 @@ def render_page(page):
         "@type": "Service",
         "name": page["title"],
         "description": page["description"],
-        "provider": {"@type": "Organization", "name": "Flash Cargo Global", "url": BASE_URL + "/"},
+        "provider": {"@type": "Organization", "name": "Flash Cargo Global", "url": BASE_URL + "/", "logo": OG_IMAGE},
         "areaServed": page["areaServed"],
         "serviceType": page["serviceType"],
         "url": canonical,
@@ -120,6 +120,7 @@ def render_page(page):
         <div class="nav-menu">
           <a href="/about/">About</a>
           <a href="/guides/en/">Guides</a>
+          <a href="/trust-center/">Trust</a>
           <a href="/#contact">Contact</a>
         </div>
       </nav>
@@ -146,6 +147,12 @@ def render_page(page):
         <a class="button primary" href="/#contact">Start a freight inquiry</a>
       </article>
     </main>
+    <footer class="site-footer">
+      <p>(c) 2026 Flash Cargo Global. All rights reserved.</p>
+      <a href="/trust-center/">Trust Center</a>
+      <a href="/verify-flash-cargo-global/">Verify</a>
+      <a href="/privacy-policy/">Privacy Policy</a>
+    </footer>
   </body>
 </html>
 """

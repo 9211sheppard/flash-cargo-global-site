@@ -484,8 +484,10 @@ textarea {
 
 .site-footer {
   min-height: 143px;
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
   gap: 4px;
   padding: 32px;
   color: var(--text);
@@ -494,12 +496,19 @@ textarea {
 }
 
 .site-footer p {
+  width: 100%;
   margin: 0;
 }
 
 .site-footer a {
   color: var(--ink);
   text-decoration: underline;
+  text-underline-offset: 4px;
+  margin: 0 8px;
+}
+
+.trust-signals .wide-grid article {
+  min-height: 250px;
 }
 
 .knowledge-hero {

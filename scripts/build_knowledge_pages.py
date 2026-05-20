@@ -154,6 +154,9 @@ def page_shell(lang, title, description, body, canonical, alternates, schema):
     <footer class="site-footer">
       <p>(c) 2026 Flash Cargo Global. All rights reserved.</p>
       <a href="/">{escape(lang["label_home"])}</a>
+      <a href="/trust-center/">Trust Center</a>
+      <a href="/verify-flash-cargo-global/">Verify</a>
+      <a href="/privacy-policy/">Privacy Policy</a>
     </footer>
   </body>
 </html>
@@ -200,6 +203,7 @@ def build_index(languages, guides):
                 "name": "Flash Cargo Global",
                 "url": BASE_URL + "/",
                 "areaServed": ["North America", "Global"],
+                "logo": OG_IMAGE,
                 "contactPoint": {
                     "@type": "ContactPoint",
                     "contactType": "Freight inquiry",
@@ -282,6 +286,7 @@ def build_guides(languages, guides, sources, updated):
                     "name": "Flash Cargo Global",
                     "url": BASE_URL + "/",
                     "areaServed": ["North America", "Global"],
+                    "logo": OG_IMAGE,
                     "contactPoint": {
                         "@type": "ContactPoint",
                         "contactType": "Freight inquiry",
@@ -338,6 +343,7 @@ def build_sitemap(languages, guides):
     urls = [
         (f"{BASE_URL}/", "weekly", "1.0"),
         (f"{BASE_URL}/about/", "monthly", "0.8"),
+        (f"{BASE_URL}/trust-center/", "monthly", "0.8"),
         (f"{BASE_URL}/verify-flash-cargo-global/", "monthly", "0.8"),
         (f"{BASE_URL}/privacy-policy/", "yearly", "0.3"),
         (f"{BASE_URL}/.well-known/security.txt", "yearly", "0.2"),
@@ -374,9 +380,11 @@ def build_llms(languages, guides):
         "Core pages:",
         f"- {BASE_URL}/",
         f"- {BASE_URL}/about/",
+        f"- {BASE_URL}/trust-center/",
         f"- {BASE_URL}/verify-flash-cargo-global/",
         f"- {BASE_URL}/privacy-policy/",
         f"- {BASE_URL}/.well-known/security.txt",
+        f"- {BASE_URL}/.well-known/organization.json",
         f"- {BASE_URL}/humans.txt",
         f"- {BASE_URL}/services/north-american-trucking/",
         f"- {BASE_URL}/services/global-air-ocean-freight/",
@@ -407,6 +415,8 @@ def build_llms(languages, guides):
         "Brand verification:",
         f"- Official current domain: {BASE_URL}/",
         f"- Official verification page: {BASE_URL}/verify-flash-cargo-global/",
+        f"- Public trust center: {BASE_URL}/trust-center/",
+        f"- Machine-readable organization file: {BASE_URL}/.well-known/organization.json",
     ]
     (ROOT / "llms.txt").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
@@ -465,6 +475,7 @@ def build_resource_pages():
                 "name": "Flash Cargo Global",
                 "url": BASE_URL + "/",
                 "areaServed": ["North America", "Global"],
+                "logo": OG_IMAGE,
                 "contactPoint": {
                     "@type": "ContactPoint",
                     "contactType": "Freight inquiry",
@@ -524,6 +535,7 @@ def build_resource_pages():
         <div class="nav-menu">
           <a href="/about/">About</a>
           <a href="/guides/en/">Guides</a>
+          <a href="/trust-center/">Trust</a>
           <a href="/#contact">Contact</a>
         </div>
       </nav>
@@ -541,6 +553,12 @@ def build_resource_pages():
         <a class="button primary" href="/#contact">Start a freight inquiry</a>
       </article>
     </main>
+    <footer class="site-footer">
+      <p>(c) 2026 Flash Cargo Global. All rights reserved.</p>
+      <a href="/trust-center/">Trust Center</a>
+      <a href="/verify-flash-cargo-global/">Verify</a>
+      <a href="/privacy-policy/">Privacy Policy</a>
+    </footer>
   </body>
 </html>
 """

@@ -1,0 +1,28 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://flashcargoglobal.com/#organization",
+  "name": "Flash Cargo Global",
+  "url": "https://flashcargoglobal.com/",
+  "description": "Flash Cargo Global coordinates North American over-the-road trucking, global air and ocean freight, North American customs support, warehousing, and white glove freight planning.",
+  "areaServed": ["North America", "Global"],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "Freight inquiry",
+    "url": "https://flashcargoglobal.com/#contact",
+    "availableLanguage": ["English"]
+  },
+  "knowsAbout": [
+    "Air freight",
+    "Ocean freight",
+    "North American trucking",
+    "Customs support",
+    "Warehousing",
+    "White glove freight service",
+    "Commercial invoices",
+    "Packing lists",
+    "HS codes",
+    "Incoterms"
+  ],
+  "mainEntityOfPage": "https://flashcargoglobal.com/trust-center/"
+}
