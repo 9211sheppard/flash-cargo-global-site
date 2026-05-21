@@ -12,6 +12,7 @@
     <link rel="canonical" href="https://flashcargoglobal.com/">
     <link rel="alternate" hreflang="en" href="https://flashcargoglobal.com/">
     <link rel="alternate" hreflang="x-default" href="https://flashcargoglobal.com/">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Flash Cargo Global">
     <meta property="og:title" content="Flash Cargo Global Freight Forwarding">
@@ -36,6 +37,8 @@
             "url": "https://flashcargoglobal.com/",
             "description": "Flash Cargo Global coordinates air freight, ocean freight, North American trucking, and customs documentation support for international shippers.",
             "areaServed": ["North America", "Global"],
+            "foundingDate": "2026",
+            "slogan": "Freight planning from North America for global air, ocean, trucking, customs, warehousing, and white glove moves.",
             "logo": "https://static.wixstatic.com/media/999aa1_84fcfff1f12e4c9299aaa06edbe07a8d~mv2.png/v1/fill/w_1200,h_630,al_c,q_85,enc_auto/999aa1_84fcfff1f12e4c9299aaa06edbe07a8d~mv2.png",
             "knowsAbout": ["Air freight", "Ocean freight", "North American trucking", "Customs documentation", "Warehousing", "White glove freight service", "Commercial invoices", "Packing lists", "HS codes"],
             "hasOfferCatalog": {
@@ -414,15 +417,15 @@
             <strong>Online freight inquiry form</strong>
           </div>
         </div>
-        <form class="contact-form" action="https://flash-cargo-form.old-sun-35f9.workers.dev/contact-request" method="post">
+        <form class="contact-form" action="https://flash-cargo-form.old-sun-35f9.workers.dev/contact-request" method="post" aria-describedby="contact-form-help">
           <h3>Contact Form</h3>
-          <p>Keep it simple. Tell us who you are, how to reach you, and what kind of freight support you need.</p>
+          <p id="contact-form-help">Keep it simple. Tell us who you are, how to reach you, and what kind of freight support you need.</p>
           <label class="hidden-field">Website<input name="website" tabindex="-1" autocomplete="off"></label>
           <input type="hidden" name="form_started_at" value="">
-          <label>Full Name<input name="full_name" placeholder="John Doe" required></label>
-          <label>Company Name<input name="company_name" required></label>
-          <label>Email<input type="email" name="email" required></label>
-          <label>Phone<input type="tel" name="phone" required></label>
+          <label>Full Name<input name="full_name" autocomplete="name" placeholder="John Doe" required></label>
+          <label>Company Name<input name="company_name" autocomplete="organization" required></label>
+          <label>Email<input type="email" name="email" autocomplete="email" required></label>
+          <label>Phone<input type="tel" name="phone" autocomplete="tel" required></label>
           <label class="wide">Freight Needs<textarea name="freight_needs" rows="6" placeholder="Tell us what you need: shipment route, cargo type, timing, and any details that help us understand your business and clients." required></textarea></label>
           <button class="button primary wide" type="submit">Contact Flash Cargo Global</button>
         </form>
