@@ -1,0 +1,167 @@
+{
+  "updated": "2026-05-21",
+  "hub": {
+    "title": "Freight Planning Library",
+    "description": "Agency, product, and decision guides for importers, exporters, manufacturers, and buyers preparing freight before they request a quote."
+  },
+  "sources": [
+    {"name": "CBP - Basic Importing and Exporting", "url": "https://www.cbp.gov/trade/basic-import-export"},
+    {"name": "CBP - CBP Form 5106", "url": "https://www.cbp.gov/trade/programs-administration/entry-summary/cbp-form-5106"},
+    {"name": "USITC - Harmonized Tariff Information", "url": "https://www.usitc.gov/harmonized_tariff_information"},
+    {"name": "FDA - Importing FDA Regulated Products", "url": "https://www.fda.gov/industry/import-program/importing-fda-regulated-products"},
+    {"name": "FDA - Import Basics", "url": "https://www.fda.gov/industry/import-program-food-and-drug-administration-fda/import-basics"},
+    {"name": "FDA - Importing Medical Devices", "url": "https://www.fda.gov/medical-devices/importing-and-exporting-medical-devices/importing-medical-devices-and-radiation-emitting-electronic-products-us"},
+    {"name": "CPSC - Import Resources", "url": "https://www.cpsc.gov/Imports"},
+    {"name": "USDA APHIS - Plant and Plant Product Imports", "url": "https://www.aphis.usda.gov/plant-imports"},
+    {"name": "USDA APHIS - Animal Product Imports", "url": "https://www.aphis.usda.gov/animal-product-import"},
+    {"name": "PHMSA - Transporting Lithium Batteries", "url": "https://www.phmsa.dot.gov/lithiumbatteries"},
+    {"name": "CBP - Foreign-Trade Zones", "url": "https://www.cbp.gov/border-security/ports-entry/cargo-security/cargo-control/foreign-trade-zones/about"},
+    {"name": "International Trade Administration - Foreign-Trade Zones Board", "url": "https://www.trade.gov/index.php/foreign-trade-zones-board"}
+  ],
+  "pages": [
+    {
+      "slug": "cbp-importer-of-record-freight-guide",
+      "category": "Agency guide",
+      "title": "CBP importer of record freight guide",
+      "description": "How importer of record details affect freight planning, customs review, entry records, broker coordination, and shipment timing.",
+      "source_urls": ["https://www.cbp.gov/trade/basic-import-export", "https://www.cbp.gov/trade/programs-administration/entry-summary/cbp-form-5106"],
+      "sections": [
+        {"heading": "What to clarify before freight moves", "items": ["Identify the importer of record before pickup, not after arrival.", "Confirm the importer number, broker instructions, buyer and seller records, and invoice details align.", "If CBP Form 5106 is needed, start that process before the freight plan depends on release timing."]},
+        {"heading": "Why freight teams care", "items": ["A shipment can be physically ready but commercially blocked by incomplete importer identity details.", "Broker questions can delay truck, air, or ocean handoff if the right party is not available.", "Importer data should match the commercial invoice, purchase record, and receiver expectation."]},
+        {"heading": "Useful inquiry notes", "items": ["State whether the importer is already established.", "Share broker contact status if available.", "Flag first-time importer, new product line, or unfamiliar supplier situations early."]}
+      ]
+    },
+    {
+      "slug": "hts-hs-code-import-planning-guide",
+      "category": "Decision guide",
+      "title": "HTS and HS code import planning guide",
+      "description": "How HTS and HS code context helps importers prepare documents, product descriptions, duty context, and broker questions before freight moves.",
+      "source_urls": ["https://www.usitc.gov/harmonized_tariff_information", "https://www.cbp.gov/trade/basic-import-export"],
+      "sections": [
+        {"heading": "What to prepare", "items": ["Use product identity, material, function, composition, and end use to support classification review.", "Keep the commercial invoice description specific enough for the broker and importer to understand the product.", "Do not treat a freight quote as classification advice; use the correct professional or agency resources where needed."]},
+        {"heading": "Freight impact", "items": ["Weak descriptions create extra questions before clearance.", "HTS context can affect documents, duties, admissibility, and product-specific agency review.", "Classification uncertainty should be handled before urgent cargo is dispatched."]},
+        {"heading": "Useful inquiry notes", "items": ["Share known HTS or HS context if available.", "Explain product use and material composition in plain language.", "Flag regulated products, samples, warranty returns, and mixed-product shipments."]}
+      ]
+    },
+    {
+      "slug": "fda-regulated-products-import-checklist",
+      "category": "Agency guide",
+      "title": "FDA regulated products import checklist",
+      "description": "A freight planning checklist for FDA-regulated products, including food, cosmetics, medical devices, drugs, and radiation-emitting electronic products.",
+      "source_urls": ["https://www.fda.gov/industry/import-program/importing-fda-regulated-products", "https://www.fda.gov/industry/import-program-food-and-drug-administration-fda/import-basics"],
+      "sections": [
+        {"heading": "What to identify", "items": ["Confirm whether the product may fall under FDA review before pickup.", "Separate food, cosmetics, medical devices, drugs, tobacco, animal feed, and radiation-emitting electronic products.", "Prepare manufacturer, product, label, intended use, quantity, and importer information."]},
+        {"heading": "Why it matters", "items": ["FDA-regulated goods may need additional review before release.", "A shipment may be delayed if product identity, labels, or importer context are unclear.", "Document readiness affects route timing, warehouse planning, and receiver expectations."]},
+        {"heading": "Useful inquiry notes", "items": ["State the product category and intended use.", "Flag samples, returns, repairs, or low-value shipments.", "Share label status, product codes, or prior import history if available."]}
+      ]
+    },
+    {
+      "slug": "medical-device-import-freight-checklist",
+      "category": "Product guide",
+      "title": "Medical device import freight checklist",
+      "description": "Freight planning notes for medical devices and radiation-emitting electronic products before shipment, routing, and customs review.",
+      "source_urls": ["https://www.fda.gov/medical-devices/importing-and-exporting-medical-devices/importing-medical-devices-and-radiation-emitting-electronic-products-us"],
+      "sections": [
+        {"heading": "What to confirm", "items": ["Identify whether the cargo is a medical device, component, accessory, sample, return, or repair.", "Keep model numbers, serial numbers, manufacturer details, labels, and intended use clear.", "Separate new commercial sale shipments from warranty, repair, exhibition, or evaluation shipments."]},
+        {"heading": "Freight impact", "items": ["Device identity can affect FDA review and entry data.", "Serial and model detail can reduce confusion between invoice, packing list, and receiver records.", "Sensitive devices may also need packaging, staging, condition photos, or white glove handling."]},
+        {"heading": "Useful inquiry notes", "items": ["Share device category and shipment purpose.", "Flag if cargo includes batteries or radiation-emitting electronics.", "Confirm whether the receiver needs appointment, inspection, or special handling."]}
+      ]
+    },
+    {
+      "slug": "fcc-electronics-import-checklist",
+      "category": "Agency guide",
+      "title": "FCC electronics import checklist",
+      "description": "A practical checklist for importers moving electronics, radio-frequency devices, samples, components, and connected equipment.",
+      "source_urls": ["https://www.ecfr.gov/current/title-47/chapter-I/subchapter-A/part-2/subpart-K/section-2.1204"],
+      "sections": [
+        {"heading": "What to clarify", "items": ["Identify whether the product emits radio-frequency energy or includes wireless functionality.", "Separate commercial sale goods from samples, testing units, returns, and product-development shipments.", "Keep model numbers, FCC IDs if available, manufacturer details, and battery status organized."]},
+        {"heading": "Freight impact", "items": ["Electronics shipments often need more precise descriptions than generic 'devices' or 'parts'.", "Samples and commercial shipments may require different supporting context.", "Battery status, packaging, and product identity affect carrier acceptance and routing."]},
+        {"heading": "Useful inquiry notes", "items": ["State product function and whether wireless capability is present.", "Flag batteries, prototypes, samples, or warranty returns.", "Share model, serial, SKU, and receiver inspection needs."]}
+      ]
+    },
+    {
+      "slug": "cpsc-consumer-products-import-checklist",
+      "category": "Agency guide",
+      "title": "CPSC consumer products import checklist",
+      "description": "How consumer product safety context can affect freight documents, importer preparation, certificate questions, and shipment timing.",
+      "source_urls": ["https://www.cpsc.gov/Imports"],
+      "sections": [
+        {"heading": "What to identify", "items": ["Confirm whether the product is a consumer product that may be regulated by CPSC.", "Keep product description, age grading, labels, certificates, manufacturer, importer, and SKU details organized.", "Separate toys, children’s products, electronics, furniture, and mixed consumer goods where requirements may differ."]},
+        {"heading": "Freight impact", "items": ["Safety certificate or product identity questions can slow release.", "Generic invoice descriptions can create avoidable review loops.", "Retail deadlines should not be planned before document readiness is clear."]},
+        {"heading": "Useful inquiry notes", "items": ["Share product type, intended user, and retail channel.", "Flag children’s products and regulated consumer goods early.", "Confirm whether certificates or test documents are already available."]}
+      ]
+    },
+    {
+      "slug": "usda-agriculture-import-checklist",
+      "category": "Agency guide",
+      "title": "USDA agriculture import checklist",
+      "description": "Freight planning notes for plant, plant product, animal product, and agricultural commodity imports before routing and pickup.",
+      "source_urls": ["https://www.aphis.usda.gov/plant-imports", "https://www.aphis.usda.gov/animal-product-import"],
+      "sections": [
+        {"heading": "What to identify", "items": ["Confirm whether the cargo is a plant, plant product, animal product, food ingredient, sample, or agricultural commodity.", "Check whether permits, phytosanitary documents, treatment records, or inspection expectations may apply.", "Keep origin, species or commodity details, packaging, and processing status clear."]},
+        {"heading": "Freight impact", "items": ["Agricultural cargo can be delayed by missing permit or treatment context.", "Temperature, inspection, and receiver timing can matter as much as the freight lane.", "Cargo description should be specific enough for broker and agency review."]},
+        {"heading": "Useful inquiry notes", "items": ["Share commodity name, origin country, processing status, and packaging.", "Flag live plants, seeds, wood products, animal-derived goods, or temperature-sensitive cargo.", "Confirm if permits or certificates have already been issued."]}
+      ]
+    },
+    {
+      "slug": "lithium-battery-freight-checklist",
+      "category": "Product guide",
+      "title": "Lithium battery freight checklist",
+      "description": "A practical freight checklist for lithium batteries, battery-powered devices, samples, returns, repairs, and electronics shipments.",
+      "source_urls": ["https://www.phmsa.dot.gov/lithiumbatteries"],
+      "sections": [
+        {"heading": "What to confirm", "items": ["Identify whether batteries are alone, packed with equipment, installed in equipment, damaged, defective, or returns.", "Confirm battery chemistry, watt-hour or lithium content context, quantity, packaging, labels, and transport mode.", "Separate new sale goods from repair, warranty, sample, and damaged battery shipments."]},
+        {"heading": "Freight impact", "items": ["Battery status can affect carrier acceptance, air eligibility, packaging, labeling, and documentation.", "A shipment can be delayed if the battery configuration is discovered after pickup.", "Electronics freight plans should include battery questions before routing is quoted."]},
+        {"heading": "Useful inquiry notes", "items": ["State battery configuration in plain language.", "Flag damaged, defective, recalled, or return batteries immediately.", "Share product photos, labels, safety documents, and receiver requirements if available."]}
+      ]
+    },
+    {
+      "slug": "ddp-vs-dap-freight-planning-guide",
+      "category": "Decision guide",
+      "title": "DDP vs DAP freight planning guide",
+      "description": "How DDP and DAP trade term choices affect freight planning, responsibility, destination charges, customs expectations, and buyer communication.",
+      "source_urls": ["https://www.trade.gov/index.php/know-your-incoterms"],
+      "sections": [
+        {"heading": "What to clarify", "items": ["Confirm the trade term and named place before freight is quoted.", "Decide who owns import customs, duties, taxes, destination charges, and final delivery risk.", "Align the invoice, purchase order, and buyer expectations before cargo leaves origin."]},
+        {"heading": "Freight impact", "items": ["DDP and DAP can create very different responsibilities at destination.", "Unclear terms can produce disputes over charges, delivery attempts, and customs work.", "The freight plan should match the commercial agreement, not only the route."]},
+        {"heading": "Useful inquiry notes", "items": ["Share the trade term and named place.", "State who is importer of record if known.", "Flag whether the buyer expects delivered cost, delivery only, or customs-inclusive support."]}
+      ]
+    },
+    {
+      "slug": "bonded-warehouse-vs-ftz-guide",
+      "category": "Comparison page",
+      "title": "Bonded warehouse vs FTZ guide",
+      "description": "A planning comparison for bonded warehouse and Foreign-Trade Zone discussions before freight, storage, customs, or distribution decisions.",
+      "source_urls": ["https://www.cbp.gov/border-security/ports-entry/cargo-security/cargo-control/foreign-trade-zones/about", "https://www.trade.gov/index.php/foreign-trade-zones-board"],
+      "sections": [
+        {"heading": "What to compare", "items": ["Clarify whether goods need storage, manipulation, export, distribution, duty deferral, or staged release.", "Confirm who controls the facility, customs status, inventory records, and release process.", "Separate ordinary warehousing from customs-controlled storage or FTZ program questions."]},
+        {"heading": "Freight impact", "items": ["The storage choice can affect inland routing, documentation, release timing, and final delivery planning.", "Cargo may need stricter inventory and status control than a normal warehouse move.", "Freight timing should reflect customs-controlled handling, not only transportation speed."]},
+        {"heading": "Useful inquiry notes", "items": ["State why goods need staged storage.", "Flag re-export, delayed duty, assembly, kitting, inspection, or distribution needs.", "Confirm if a customs broker or FTZ operator is already involved."]}
+      ]
+    },
+    {
+      "slug": "landed-cost-freight-checklist",
+      "category": "Decision guide",
+      "title": "Landed cost freight checklist",
+      "description": "A practical checklist for building landed cost context before comparing freight options, supplier terms, duties, taxes, and destination charges.",
+      "source_urls": ["https://www.cbp.gov/trade/basic-import-export", "https://www.usitc.gov/harmonized_tariff_information"],
+      "sections": [
+        {"heading": "What to include", "items": ["Product value, freight, insurance, duties, taxes, destination handling, storage, delivery, and service fees.", "Trade term, named place, importer responsibility, and broker status.", "Product classification context and any agency review risk."]},
+        {"heading": "Freight impact", "items": ["The cheapest freight quote may not produce the lowest landed cost.", "Destination charges, storage, re-delivery, and document delays can change the total cost picture.", "Landed cost needs commercial, customs, and freight information together."]},
+        {"heading": "Useful inquiry notes", "items": ["Share the supplier terms and destination expectation.", "Flag whether duty/tax estimates are already available.", "Separate urgent replacement cargo from planned replenishment cargo."]}
+      ]
+    },
+    {
+      "slug": "fda-vs-cpsc-import-review-guide",
+      "category": "Comparison page",
+      "title": "FDA vs CPSC import review guide",
+      "description": "A comparison page for importers deciding whether FDA, CPSC, or both may matter before moving consumer goods, devices, cosmetics, or regulated products.",
+      "source_urls": ["https://www.fda.gov/industry/import-program/importing-fda-regulated-products", "https://www.cpsc.gov/Imports"],
+      "sections": [
+        {"heading": "What to separate", "items": ["FDA context can matter for food, cosmetics, drugs, medical devices, tobacco, animal feed, and radiation-emitting products.", "CPSC context can matter for consumer products and hazardous substances offered for import.", "Some products may raise more than one agency question depending on intended use and product design."]},
+        {"heading": "Freight impact", "items": ["Agency questions affect document readiness, broker review, and release timing.", "Product descriptions should not hide intended use, labels, age grading, or device function.", "Mixed shipments should separate product categories before routing."]},
+        {"heading": "Useful inquiry notes", "items": ["State product category, intended user, intended use, and retail channel.", "Flag cosmetics, medical devices, children’s products, electronics, and samples.", "Share label, certificate, product code, or prior import context if available."]}
+      ]
+    }
+  ]
+}
