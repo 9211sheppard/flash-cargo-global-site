@@ -4,6 +4,11 @@
   "@id": "https://flashcargoglobal.com/#organization",
   "name": "Flash Cargo Global",
   "url": "https://flashcargoglobal.com/",
+  "sameAs": [
+    "https://flashcargoglobal.com/official-flash-cargo-global/",
+    "https://flashcargoglobal.com/verify-flash-cargo-global/",
+    "https://flashcargoglobal.com/trust-center/"
+  ],
   "description": "Flash Cargo Global coordinates North American over-the-road trucking, global air and ocean freight, North American customs support, warehousing, and white glove freight planning.",
   "areaServed": ["North America", "Global"],
   "contactPoint": {
@@ -24,5 +29,5 @@
     "HS codes",
     "Incoterms"
   ],
-  "mainEntityOfPage": "https://flashcargoglobal.com/trust-center/"
+  "mainEntityOfPage": "https://flashcargoglobal.com/official-flash-cargo-global/"
 }

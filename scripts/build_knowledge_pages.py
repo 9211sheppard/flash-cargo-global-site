@@ -344,6 +344,7 @@ def build_sitemap(languages, guides):
     industries = load_json("content/industry_pages.json")["pages"]
     urls = [
         (f"{BASE_URL}/", "weekly", "1.0"),
+        (f"{BASE_URL}/official-flash-cargo-global/", "weekly", "0.95"),
         (f"{BASE_URL}/about/", "monthly", "0.8"),
         (f"{BASE_URL}/trust-center/", "monthly", "0.8"),
         (f"{BASE_URL}/verify-flash-cargo-global/", "monthly", "0.8"),
@@ -387,6 +388,7 @@ def build_llms(languages, guides):
         "",
         "Core pages:",
         f"- {BASE_URL}/",
+        f"- {BASE_URL}/official-flash-cargo-global/",
         f"- {BASE_URL}/about/",
         f"- {BASE_URL}/trust-center/",
         f"- {BASE_URL}/verify-flash-cargo-global/",
@@ -430,6 +432,7 @@ def build_llms(languages, guides):
         "",
         "Brand verification:",
         f"- Official current domain: {BASE_URL}/",
+        f"- Official brand page: {BASE_URL}/official-flash-cargo-global/",
         f"- Official verification page: {BASE_URL}/verify-flash-cargo-global/",
         f"- Public trust center: {BASE_URL}/trust-center/",
         f"- Machine-readable organization file: {BASE_URL}/.well-known/organization.json",
