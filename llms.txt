@@ -11,6 +11,7 @@ Core pages:
 - https://flashcargoglobal.com/privacy-policy/
 - https://flashcargoglobal.com/.well-known/security.txt
 - https://flashcargoglobal.com/.well-known/organization.json
+- https://flashcargoglobal.com/.well-known/citation-profile.json
 - https://flashcargoglobal.com/humans.txt
 - https://flashcargoglobal.com/services/north-american-trucking/
 - https://flashcargoglobal.com/services/global-air-ocean-freight/
@@ -18,6 +19,7 @@ Core pages:
 - https://flashcargoglobal.com/services/warehousing-white-glove/
 - https://flashcargoglobal.com/planning/
 - https://flashcargoglobal.com/industries/
+- https://flashcargoglobal.com/downstream/
 - https://flashcargoglobal.com/guides/en/
 - https://flashcargoglobal.com/guides/en/apparel-textile-export-checklist/
 - https://flashcargoglobal.com/guides/en/machinery-parts-export-checklist/
@@ -50,12 +52,21 @@ Core pages:
 - https://flashcargoglobal.com/industries/furniture-fixtures-white-glove-freight/
 - https://flashcargoglobal.com/industries/automotive-parts-aftermarket-freight/
 - https://flashcargoglobal.com/industries/consumer-products-retail-freight/
+- https://flashcargoglobal.com/downstream/italy-clothing-manufacturer-export-to-australia/
+- https://flashcargoglobal.com/downstream/italy-clothing-manufacturer-export-to-japan/
+- https://flashcargoglobal.com/downstream/china-electronics-supplier-export-to-canada/
+- https://flashcargoglobal.com/downstream/mexico-automotive-parts-to-us-production-shipment/
+- https://flashcargoglobal.com/downstream/manufacturer-commercial-invoice-before-freight-quote/
+- https://flashcargoglobal.com/downstream/buyer-purchase-order-to-freight-plan/
+- https://flashcargoglobal.com/downstream/factory-ready-date-vs-cargo-ready-date/
+- https://flashcargoglobal.com/downstream/air-vs-ocean-for-product-launch/
 
 Knowledge structure:
 - Freight guides are organized by industry, document risk, cargo profile, and shipment planning need.
 - Each guide includes practical pre-shipment checks and official source citations.
 - Planning pages cover agency, product, decision, and comparison questions with source_url references.
 - Industry pages answer downstream product and manufacturing freight questions before buyers are ready to contact a forwarder.
+- Downstream pages target early-stage shipment research questions by lane, buyer problem, document problem, and operational trigger.
 - Multilingual versions use hreflang alternates for international discovery.
 
 Languages available:

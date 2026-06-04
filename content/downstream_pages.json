@@ -1,0 +1,118 @@
+{
+  "updated": "2026-06-04",
+  "hub": {
+    "title": "Downstream Freight Research Library",
+    "description": "Practical pages for manufacturers, buyers, importers, and operators researching shipment problems before they are ready to contact a freight forwarder."
+  },
+  "sources": [
+    {"name": "CBP - Basic Importing and Exporting", "url": "https://www.cbp.gov/trade/basic-import-export"},
+    {"name": "USITC - Harmonized Tariff Information", "url": "https://www.usitc.gov/harmonized_tariff_information"},
+    {"name": "International Trade Administration - Know Your Incoterms", "url": "https://www.trade.gov/know-your-incoterms"},
+    {"name": "European Commission - Access2Markets", "url": "https://trade.ec.europa.eu/access-to-markets/en/home"},
+    {"name": "Australian Border Force - Importing Goods", "url": "https://www.abf.gov.au/importing-exporting-and-manufacturing/importing-goods"},
+    {"name": "Japan Customs - Customs Answer", "url": "https://www.customs.go.jp/english/c-answer_e/c-answer_e.htm"},
+    {"name": "China Customs", "url": "http://english.customs.gov.cn/"},
+    {"name": "Government of Canada - Importing Commercial Goods", "url": "https://www.cbsa-asfc.gc.ca/import/guide-eng.html"},
+    {"name": "FDA - Importing FDA Regulated Products", "url": "https://www.fda.gov/industry/import-program/importing-fda-regulated-products"},
+    {"name": "CPSC - Import Resources", "url": "https://www.cpsc.gov/Imports"},
+    {"name": "PHMSA - Transporting Lithium Batteries", "url": "https://www.phmsa.dot.gov/lithiumbatteries"}
+  ],
+  "pages": [
+    {
+      "slug": "italy-clothing-manufacturer-export-to-australia",
+      "category": "Country lane",
+      "title": "Italy clothing manufacturer exporting to Australia checklist",
+      "description": "A practical checklist for an Italian clothing or textile manufacturer preparing apparel shipments to Australia before booking freight.",
+      "source_urls": ["https://trade.ec.europa.eu/access-to-markets/en/home", "https://www.abf.gov.au/importing-exporting-and-manufacturing/importing-goods", "https://www.trade.gov/know-your-incoterms"],
+      "sections": [
+        {"heading": "What the manufacturer should prepare first", "items": ["Commercial invoice with clear garment descriptions, buyer and seller details, currency, value, origin, and agreed Incoterms.", "Packing list with carton count, SKU or style references, dimensions, gross weight, net weight, and package marks.", "Fabric composition, labeling context, purchase order references, and delivery window before choosing air freight or ocean freight."]},
+        {"heading": "Questions to answer before a freight quote", "items": ["Is the shipment samples, bulk production, replenishment, returns, or retail launch cargo?", "Does the Australian buyer require delivery appointment, warehouse labeling, carton-level detail, or staged delivery?", "Should urgent cartons move by air while the balance moves by ocean?"]},
+        {"heading": "Why this matters", "items": ["The route is not the only risk; document clarity, buyer requirements, receiver readiness, and deadline pressure often shape the freight plan.", "A forwarder can plan cleaner options when the manufacturer already knows what is fixed and what still needs confirmation."]}
+      ]
+    },
+    {
+      "slug": "italy-clothing-manufacturer-export-to-japan",
+      "category": "Country lane",
+      "title": "Italy clothing manufacturer exporting to Japan checklist",
+      "description": "Freight and document planning notes for Italian apparel, textile, and fashion suppliers shipping goods to Japan.",
+      "source_urls": ["https://trade.ec.europa.eu/access-to-markets/en/home", "https://www.customs.go.jp/english/c-answer_e/c-answer_e.htm", "https://www.trade.gov/know-your-incoterms"],
+      "sections": [
+        {"heading": "Pre-shipment details", "items": ["Confirm buyer, seller, invoice value, origin, product description, fabric composition, carton count, and packing detail.", "Separate samples, showroom goods, replenishment inventory, e-commerce stock, and seasonal launch cargo.", "Ask the buyer whether labels, delivery appointment, warehouse routing, or import document preferences are required."]},
+        {"heading": "Freight planning questions", "items": ["Is speed more important than cost for the first shipment?", "Will part of the shipment move separately for launch timing?", "Does the receiver need inside delivery, inspection, or proof-of-condition photos?"]},
+        {"heading": "Avoidable problems", "items": ["Invoice descriptions too vague for customs or buyer review.", "Carton counts and packing list data that do not match the physical shipment.", "Receiver requirements discovered after pickup."]}
+      ]
+    },
+    {
+      "slug": "china-electronics-supplier-export-to-canada",
+      "category": "Country lane",
+      "title": "China electronics supplier exporting to Canada checklist",
+      "description": "A freight planning checklist for electronics suppliers shipping devices, components, samples, or battery-powered goods from China to Canada.",
+      "source_urls": ["http://english.customs.gov.cn/", "https://www.cbsa-asfc.gc.ca/import/guide-eng.html", "https://www.phmsa.dot.gov/lithiumbatteries"],
+      "sections": [
+        {"heading": "What to identify early", "items": ["Product function, model number, serial number, SKU, quantity, value, manufacturer, and receiver details.", "Whether the shipment contains lithium batteries, devices packed with batteries, standalone batteries, samples, returns, or repair units.", "Whether the goods are for sale, testing, warranty replacement, production use, or e-commerce replenishment."]},
+        {"heading": "Questions before routing", "items": ["Can the goods move by air, or does battery status affect carrier acceptance?", "Does the Canadian buyer have broker instructions, importer details, and delivery appointment needs ready?", "Is the shipment urgent because of launch timing, downtime, or customer delivery promises?"]},
+        {"heading": "What can delay handoff", "items": ["Generic descriptions such as electronics or parts.", "Battery configuration discovered after pickup.", "Receiver or broker information missing when the shipment reaches review."]}
+      ]
+    },
+    {
+      "slug": "mexico-automotive-parts-to-us-production-shipment",
+      "category": "Country lane",
+      "title": "Mexico automotive parts to U.S. production shipment checklist",
+      "description": "Freight planning for automotive parts moving from Mexico to the United States for production, aftermarket, repair, or urgent replacement needs.",
+      "source_urls": ["https://www.cbp.gov/trade/basic-import-export", "https://www.usitc.gov/harmonized_tariff_information", "https://www.trade.gov/know-your-incoterms"],
+      "sections": [
+        {"heading": "What to prepare", "items": ["Part numbers, material, use, quantity, value, origin, package count, dimensions, weights, and receiver instructions.", "Separate production parts, warranty returns, urgent spares, aftermarket replenishment, and samples.", "Confirm importer, broker, delivery appointment, dock hours, and whether timing affects production."]},
+        {"heading": "Truck planning questions", "items": ["Is the shipment full truckload, LTL, expedited, team service, or staged warehouse release?", "Does the receiver need appointment delivery, dock-specific instructions, or proof of condition?", "Is border documentation complete before dispatch?"]},
+        {"heading": "Risk points", "items": ["Vague description such as auto parts without enough part context.", "Urgent truck dispatched before broker and importer details are ready.", "Receiver cannot unload because appointment or dock access was not confirmed."]}
+      ]
+    },
+    {
+      "slug": "manufacturer-commercial-invoice-before-freight-quote",
+      "category": "Document problem",
+      "title": "What manufacturers should put on a commercial invoice before a freight quote",
+      "description": "A practical commercial invoice planning page for manufacturers preparing freight quotes, customs review, and buyer handoff.",
+      "source_urls": ["https://www.cbp.gov/trade/basic-import-export", "https://www.trade.gov/know-your-incoterms", "https://www.usitc.gov/harmonized_tariff_information"],
+      "sections": [
+        {"heading": "Core invoice details", "items": ["Buyer, seller, ship-to party, invoice number, date, currency, value, Incoterms, country of origin, and clear goods description.", "Product quantity, unit value, total value, HS or HTS context if known, and shipment purpose.", "References that connect the invoice to purchase orders, packing list, buyer records, and receiver expectations."]},
+        {"heading": "Why freight teams care", "items": ["Freight quotes become cleaner when the invoice matches the physical shipment.", "Vague descriptions can create customs and broker questions later.", "Incoterms and named place affect who owns cost, risk, destination charges, and delivery responsibility."]},
+        {"heading": "What not to assume", "items": ["A freight quote is not classification advice.", "A buyer deadline does not remove document requirements.", "Cargo ready in a warehouse is not ready for freight if the invoice is not ready."]}
+      ]
+    },
+    {
+      "slug": "buyer-purchase-order-to-freight-plan",
+      "category": "Buyer problem",
+      "title": "How buyers turn a purchase order into a freight plan",
+      "description": "A buyer-focused guide for turning purchase order details into shipment facts before asking for freight help.",
+      "source_urls": ["https://www.cbp.gov/trade/basic-import-export", "https://www.trade.gov/know-your-incoterms"],
+      "sections": [
+        {"heading": "What the purchase order does not always answer", "items": ["Exact package count, dimensions, gross weight, net weight, ready date, pickup address, delivery address, and receiver access.", "Whether the supplier is responsible for export handling, origin charges, documents, or delivery to a named place.", "Whether the goods need inspection, labeling, staging, consolidation, or split shipment planning."]},
+        {"heading": "Freight questions buyers should ask", "items": ["What is the latest acceptable arrival date and what happens if it is missed?", "Can the receiver accept the cargo exactly as packed?", "Is the shipment supporting production, resale, launch, warranty, repair, or replenishment?"]},
+        {"heading": "Why this helps", "items": ["A forwarder can compare air, ocean, truck, and staged delivery options when buyer risk is clear.", "The best route may change when customer promise, production need, or receiver readiness is known."]}
+      ]
+    },
+    {
+      "slug": "factory-ready-date-vs-cargo-ready-date",
+      "category": "Operational problem",
+      "title": "Factory ready date vs cargo ready date for freight planning",
+      "description": "A guide explaining why factory ready date and cargo ready date are not always the same in freight planning.",
+      "source_urls": ["https://www.cbp.gov/trade/basic-import-export", "https://www.trade.gov/know-your-incoterms"],
+      "sections": [
+        {"heading": "What can make cargo not ready", "items": ["Goods are produced but not packed, labeled, counted, weighed, or photographed.", "Commercial invoice and packing list are not aligned with the physical shipment.", "Buyer approval, inspection, export document, pickup appointment, or warehouse release is still pending."]},
+        {"heading": "Why the distinction matters", "items": ["Booking too early can create failed pickup, storage, rebooking, or rushed document correction.", "Booking too late can miss vessel, flight, truck, or buyer delivery windows.", "A real cargo ready date should include physical readiness, document readiness, and release readiness."]},
+        {"heading": "What to share", "items": ["Production finish date, packing finish date, document readiness, pickup access, and any approval still pending.", "Whether urgency is caused by buyer deadline, production need, or inventory gap."]}
+      ]
+    },
+    {
+      "slug": "air-vs-ocean-for-product-launch",
+      "category": "Decision problem",
+      "title": "Air vs ocean freight for a product launch",
+      "description": "How brands, buyers, and manufacturers compare air and ocean freight when a launch date or customer promise matters.",
+      "source_urls": ["https://www.trade.gov/know-your-incoterms", "https://www.cbp.gov/trade/basic-import-export"],
+      "sections": [
+        {"heading": "What to compare", "items": ["Launch date, product value, shipment size, buyer penalty, storage needs, and whether partial shipment can protect the deadline.", "Air freight may protect timing but raise cost; ocean freight may protect cost but increase schedule risk.", "A split shipment can move urgent cartons by air while inventory moves by ocean."]},
+        {"heading": "Questions before choosing", "items": ["What quantity is actually needed for launch?", "What quantity can arrive later without hurting the customer promise?", "Are documents, labels, receiver appointments, and import records ready for the faster option?"]},
+        {"heading": "Common mistake", "items": ["Choosing by freight cost alone instead of comparing the business cost of missing the launch.", "Treating the whole order as urgent when only part of it protects the launch."]}
+      ]
+    }
+  ]
+}

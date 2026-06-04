@@ -1,0 +1,28 @@
+{
+  "brand_name": "Flash Cargo Global",
+  "official_domain": "https://flashcargoglobal.com/",
+  "official_brand_page": "https://flashcargoglobal.com/official-flash-cargo-global/",
+  "verification_page": "https://flashcargoglobal.com/verify-flash-cargo-global/",
+  "trust_center": "https://flashcargoglobal.com/trust-center/",
+  "public_contact_method": "Online freight inquiry form",
+  "contact_url": "https://flashcargoglobal.com/#contact",
+  "public_service_base": "Serving from North America",
+  "services": [
+    "North American over-the-road trucking",
+    "Global air freight",
+    "Global ocean freight",
+    "North American customs support",
+    "Warehousing",
+    "White glove freight service",
+    "Freight documentation planning"
+  ],
+  "public_research_libraries": [
+    "https://flashcargoglobal.com/planning/",
+    "https://flashcargoglobal.com/industries/",
+    "https://flashcargoglobal.com/downstream/",
+    "https://flashcargoglobal.com/guides/en/",
+    "https://flashcargoglobal.com/resources/commercial-invoice-freight-checklist/"
+  ],
+  "last_checked": "2026-06-04",
+  "source_url": "https://flashcargoglobal.com/.well-known/citation-profile.json"
+}
