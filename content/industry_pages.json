@@ -1,0 +1,115 @@
+{
+  "updated": "2026-06-04",
+  "hub": {
+    "title": "Industry Freight Planning",
+    "description": "Practical freight planning pages for manufacturers, exporters, buyers, and operations teams researching how specific products move before they contact a forwarder."
+  },
+  "sources": [
+    {"name": "CBP - Basic Importing and Exporting", "url": "https://www.cbp.gov/trade/basic-import-export"},
+    {"name": "USITC - Harmonized Tariff Information", "url": "https://www.usitc.gov/harmonized_tariff_information"},
+    {"name": "FDA - Importing FDA Regulated Products", "url": "https://www.fda.gov/industry/import-program/importing-fda-regulated-products"},
+    {"name": "CPSC - Import Resources", "url": "https://www.cpsc.gov/Imports"},
+    {"name": "USDA APHIS - Plant and Plant Product Imports", "url": "https://www.aphis.usda.gov/plant-imports"},
+    {"name": "PHMSA - Transporting Lithium Batteries", "url": "https://www.phmsa.dot.gov/lithiumbatteries"},
+    {"name": "International Trade Administration - Know Your Incoterms", "url": "https://www.trade.gov/know-your-incoterms"},
+    {"name": "FCC - Importation of Radio Frequency Devices", "url": "https://www.ecfr.gov/current/title-47/chapter-I/subchapter-A/part-2/subpart-K/section-2.1204"}
+  ],
+  "pages": [
+    {
+      "slug": "apparel-textile-manufacturing-export-freight",
+      "industry": "Apparel and textiles",
+      "title": "Apparel and textile manufacturing export freight guide",
+      "description": "Freight planning for clothing manufacturers, textile exporters, brands, and buyers moving garments, fabric, samples, and seasonal inventory across borders.",
+      "source_urls": ["https://www.cbp.gov/trade/basic-import-export", "https://www.usitc.gov/harmonized_tariff_information", "https://www.trade.gov/know-your-incoterms"],
+      "sections": [
+        {"heading": "What apparel shippers should organize first", "items": ["Match purchase orders, commercial invoices, packing lists, carton counts, SKU mixes, sizes, and style numbers before pickup.", "Separate samples, bulk production, returns, warranty replacements, and retail launch cargo because each shipment may need different timing and value context.", "Confirm fabric composition, country of origin, labeling status, and buyer delivery window before choosing air, ocean, or split routing."]},
+        {"heading": "Useful route questions", "items": ["Is the shipment supporting a retail launch, replenishment, sample approval, e-commerce inventory, or buyer deadline?", "Can part of the order move by air while the balance moves by ocean?", "Does the receiver need carton-level detail, appointment delivery, warehouse staging, or relabeling before final handoff?"]},
+        {"heading": "What can delay the shipment", "items": ["Vague invoice descriptions such as clothing or fabric without enough product detail.", "Carton counts, weights, or SKU details that do not match the physical shipment.", "Buyer instructions discovered after the freight has already been booked."]}
+      ]
+    },
+    {
+      "slug": "machinery-industrial-parts-freight",
+      "industry": "Machinery and industrial parts",
+      "title": "Machinery and industrial parts freight planning guide",
+      "description": "Freight planning for manufacturers, repair teams, equipment suppliers, and buyers moving machinery, industrial parts, tools, spares, and production-critical cargo.",
+      "source_urls": ["https://www.cbp.gov/trade/basic-import-export", "https://www.usitc.gov/harmonized_tariff_information", "https://www.trade.gov/know-your-incoterms"],
+      "sections": [
+        {"heading": "What to confirm before quoting", "items": ["Record dimensions, gross weight, center of gravity, lifting points, crate strength, serial numbers, model numbers, and part numbers.", "Confirm whether the cargo needs forklift, crane, flatbed, liftgate, appointment delivery, inside delivery, or job-site coordination.", "Separate new equipment, repair returns, warranty parts, urgent spares, and production-line replacement cargo."]},
+        {"heading": "Freight planning risks", "items": ["The equipment is ready but cannot be loaded safely with the equipment requested.", "The invoice and packing list do not match serial numbers, crate count, or real cargo description.", "The receiver cannot unload because access, dock height, or appointment rules were not checked."]},
+        {"heading": "What helps the freight team", "items": ["Photos of the cargo, crates, labels, lifting points, and loading area.", "A clear note on whether downtime, installation timing, or production interruption is driving urgency.", "Receiver site details before dispatch, not after the carrier is already moving."]}
+      ]
+    },
+    {
+      "slug": "electronics-connected-devices-freight",
+      "industry": "Electronics and connected devices",
+      "title": "Electronics and connected devices freight checklist",
+      "description": "Freight planning for electronics manufacturers, importers, sample teams, warranty teams, and buyers moving devices, components, batteries, and connected equipment.",
+      "source_urls": ["https://www.ecfr.gov/current/title-47/chapter-I/subchapter-A/part-2/subpart-K/section-2.1204", "https://www.phmsa.dot.gov/lithiumbatteries", "https://www.cbp.gov/trade/basic-import-export"],
+      "sections": [
+        {"heading": "What to identify", "items": ["State whether the cargo includes batteries, wireless functionality, radio-frequency devices, prototypes, samples, returns, or repair units.", "Keep model numbers, serial numbers, SKU details, manufacturer details, product labels, and receiver inspection needs organized.", "Separate commercial sale units from testing units, warranty returns, replacement parts, and development samples."]},
+        {"heading": "Why electronics need early review", "items": ["Battery status can affect carrier acceptance, air eligibility, labels, packaging, and routing.", "Generic descriptions such as electronics or parts can create customs and receiver questions.", "High-value or fragile devices may need condition photos, staging, controlled handling, or white glove delivery."]},
+        {"heading": "What to share in an inquiry", "items": ["Battery configuration, product function, model number, shipment purpose, value range, packaging status, and destination timing.", "Whether the receiver needs appointment delivery, inspection, serial capture, or proof of condition.", "Whether the shipment is urgent because of launch timing, downtime, warranty replacement, or customer delivery."]}
+      ]
+    },
+    {
+      "slug": "cosmetics-personal-care-import-freight",
+      "industry": "Cosmetics and personal care",
+      "title": "Cosmetics and personal care import freight guide",
+      "description": "Freight planning for cosmetics, personal care products, beauty brands, samples, ingredients, promotional goods, and retail replenishment shipments.",
+      "source_urls": ["https://www.fda.gov/industry/import-program/importing-fda-regulated-products", "https://www.cbp.gov/trade/basic-import-export", "https://www.trade.gov/know-your-incoterms"],
+      "sections": [
+        {"heading": "What to clarify", "items": ["Identify whether the goods are finished cosmetics, ingredients, samples, promotional kits, returns, or retail replenishment inventory.", "Prepare product description, intended use, manufacturer, importer, label status, quantity, value, and packaging details.", "Confirm whether the cargo has temperature, leakage, breakage, expiration, or retail launch sensitivity."]},
+        {"heading": "Common freight issues", "items": ["Product identity or label context is unclear when the shipment reaches review.", "The brand deadline is fixed but the freight mode was chosen without enough document review.", "Fragile packaging, liquids, or mixed cartons need better handling instructions than a standard freight description."]},
+        {"heading": "Better preparation", "items": ["Separate samples from saleable product and returns from new product.", "Share product category and intended use before pickup.", "Confirm receiver requirements, warehouse staging needs, and whether appointment delivery matters."]}
+      ]
+    },
+    {
+      "slug": "agriculture-food-ingredient-freight",
+      "industry": "Agriculture and food ingredients",
+      "title": "Agriculture and food ingredient freight planning guide",
+      "description": "Freight planning for agricultural products, food ingredients, plant products, samples, and temperature-sensitive commodities moving across borders.",
+      "source_urls": ["https://www.aphis.usda.gov/plant-imports", "https://www.fda.gov/industry/import-program/importing-fda-regulated-products", "https://www.cbp.gov/trade/basic-import-export"],
+      "sections": [
+        {"heading": "What to identify", "items": ["Confirm whether the cargo is a plant product, food ingredient, animal-derived product, sample, finished food, or agricultural commodity.", "Prepare origin country, commodity name, processing status, packaging, temperature needs, shelf-life notes, and permit or certificate status.", "Separate commercial shipments from testing samples, replacement cargo, and seasonal replenishment."]},
+        {"heading": "Freight planning risks", "items": ["Permits, certificates, or inspection needs are discovered after cargo is already moving.", "Temperature or shelf-life requirements are not reflected in the route plan.", "The commercial invoice description is not specific enough for the broker, receiver, or agency review."]},
+        {"heading": "What helps prevent delay", "items": ["Share the exact commodity, processing state, packaging, and origin early.", "Confirm whether the receiver can accept the delivery date and handling method.", "Build route timing around review risk, shelf life, and receiver readiness."]}
+      ]
+    },
+    {
+      "slug": "furniture-fixtures-white-glove-freight",
+      "industry": "Furniture, fixtures, and interiors",
+      "title": "Furniture fixtures and white glove freight guide",
+      "description": "Freight planning for furniture, fixtures, interiors, retail displays, hospitality projects, staged deliveries, and receiver-sensitive white glove moves.",
+      "source_urls": ["https://www.cbp.gov/trade/basic-import-export", "https://www.trade.gov/know-your-incoterms"],
+      "sections": [
+        {"heading": "What to confirm", "items": ["List carton count, dimensions, weight, fragility, finish sensitivity, assembly status, and whether items can be stacked.", "Confirm delivery access, stairs, elevators, dock hours, appointment windows, unpacking, placement, debris removal, and proof-of-condition needs.", "Separate dock delivery from inside delivery, room-of-choice delivery, job-site delivery, and staged release."]},
+        {"heading": "Where shipments fail", "items": ["The freight arrives but the receiver cannot unload or access the building.", "Damage risk is not visible because packaging, stacking, and handling instructions were vague.", "The job-site schedule changes but storage or staged delivery was not planned."]},
+        {"heading": "Better preparation", "items": ["Share photos and site constraints early.", "Explain what a successful final delivery looks like, not only where the freight is going.", "Use warehouse staging when the project site is not ready for direct delivery."]}
+      ]
+    },
+    {
+      "slug": "automotive-parts-aftermarket-freight",
+      "industry": "Automotive parts and aftermarket",
+      "title": "Automotive parts and aftermarket freight planning guide",
+      "description": "Freight planning for automotive parts, aftermarket products, replacement parts, warranty returns, production spares, and urgent vehicle-related shipments.",
+      "source_urls": ["https://www.cbp.gov/trade/basic-import-export", "https://www.usitc.gov/harmonized_tariff_information", "https://www.phmsa.dot.gov/lithiumbatteries"],
+      "sections": [
+        {"heading": "What to organize", "items": ["Identify part numbers, model fitment, material, quantity, value, origin, packaging, and whether the shipment includes batteries, fluids, or regulated components.", "Separate retail replenishment, urgent repair, warranty returns, production spares, and samples.", "Confirm whether timing is driven by a vehicle-down situation, production need, customer promise, or normal inventory replenishment."]},
+        {"heading": "Freight risk points", "items": ["Vague descriptions such as auto parts do not give enough context for documents or routing.", "Urgent parts still need package dimensions, weights, value, and receiver readiness.", "Battery or fluid-related details can affect routing, carrier acceptance, and handling."]},
+        {"heading": "What to share", "items": ["Part number, product function, shipment purpose, package details, urgency reason, and receiver requirements.", "Whether the goods are new, used, returned, repaired, or warranty replacement.", "Whether the shipment needs air, truck, warehouse staging, or white glove handoff."]}
+      ]
+    },
+    {
+      "slug": "consumer-products-retail-freight",
+      "industry": "Consumer products and retail",
+      "title": "Consumer products and retail freight planning guide",
+      "description": "Freight planning for consumer goods, retail inventory, promotional kits, mixed cartons, launch shipments, replenishment, and buyer-driven delivery windows.",
+      "source_urls": ["https://www.cpsc.gov/Imports", "https://www.cbp.gov/trade/basic-import-export", "https://www.trade.gov/know-your-incoterms"],
+      "sections": [
+        {"heading": "What to prepare", "items": ["Separate product categories, SKUs, carton counts, labels, certificates where applicable, purchase orders, commercial invoices, and packing lists.", "Confirm whether cargo supports a launch, promotion, seasonal window, retail replenishment, marketplace inventory, or customer delivery promise.", "Identify whether any product category may need CPSC, FDA, FCC, battery, or other review context."]},
+        {"heading": "Where retail freight gets messy", "items": ["Mixed cartons and vague invoice descriptions make review and receiving harder.", "The buyer delivery window is known but not shared during quote planning.", "Warehouse routing, appointment rules, and labeling requirements are discovered too late."]},
+        {"heading": "Better inquiry details", "items": ["Share buyer requirements, delivery window, SKU mix, carton count, cargo value, and product category early.", "Flag regulated categories, children's products, electronics, cosmetics, food-related goods, and battery-powered products.", "Confirm whether warehouse staging, relabeling, inspection, or split delivery is needed."]}
+      ]
+    }
+  ]
+}

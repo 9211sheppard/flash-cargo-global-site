@@ -341,6 +341,7 @@ def extra_language_sections(code, slug):
 def build_sitemap(languages, guides):
     resources = load_json("content/resource_pages.json")["pages"]
     planning = load_json("content/planning_pages.json")["pages"]
+    industries = load_json("content/industry_pages.json")["pages"]
     urls = [
         (f"{BASE_URL}/", "weekly", "1.0"),
         (f"{BASE_URL}/about/", "monthly", "0.8"),
@@ -352,6 +353,7 @@ def build_sitemap(languages, guides):
         (f"{BASE_URL}/services/north-american-customs-support/", "monthly", "0.8"),
         (f"{BASE_URL}/services/warehousing-white-glove/", "monthly", "0.8"),
         (f"{BASE_URL}/planning/", "weekly", "0.85"),
+        (f"{BASE_URL}/industries/", "weekly", "0.85"),
     ]
     for lang in languages:
         urls.append((f"{BASE_URL}/guides/{lang['code']}/", "weekly", "0.8"))
@@ -361,6 +363,8 @@ def build_sitemap(languages, guides):
         urls.append((f"{BASE_URL}/resources/{page['slug']}/", "monthly", "0.75"))
     for page in planning:
         urls.append((f"{BASE_URL}/planning/{page['slug']}/", "weekly", "0.75"))
+    for page in industries:
+        urls.append((f"{BASE_URL}/industries/{page['slug']}/", "weekly", "0.75"))
     today = date.today().isoformat()
     entries = "\n".join(
         f"  <url>\n    <loc>{escape(loc)}</loc>\n    <lastmod>{today}</lastmod>\n    <changefreq>{freq}</changefreq>\n    <priority>{priority}</priority>\n  </url>"
@@ -375,6 +379,7 @@ def build_sitemap(languages, guides):
 def build_llms(languages, guides):
     resources = load_json("content/resource_pages.json")["pages"]
     planning = load_json("content/planning_pages.json")["pages"]
+    industries = load_json("content/industry_pages.json")["pages"]
     lines = [
         "# Flash Cargo Global",
         "",
@@ -394,6 +399,7 @@ def build_llms(languages, guides):
         f"- {BASE_URL}/services/north-american-customs-support/",
         f"- {BASE_URL}/services/warehousing-white-glove/",
         f"- {BASE_URL}/planning/",
+        f"- {BASE_URL}/industries/",
         f"- {BASE_URL}/guides/en/",
     ]
     for guide in guides:
@@ -402,12 +408,15 @@ def build_llms(languages, guides):
         lines.append(f"- {BASE_URL}/resources/{page['slug']}/")
     for page in planning:
         lines.append(f"- {BASE_URL}/planning/{page['slug']}/")
+    for page in industries:
+        lines.append(f"- {BASE_URL}/industries/{page['slug']}/")
     lines += [
         "",
         "Knowledge structure:",
         "- Freight guides are organized by industry, document risk, cargo profile, and shipment planning need.",
         "- Each guide includes practical pre-shipment checks and official source citations.",
         "- Planning pages cover agency, product, decision, and comparison questions with source_url references.",
+        "- Industry pages answer downstream product and manufacturing freight questions before buyers are ready to contact a forwarder.",
         "- Multilingual versions use hreflang alternates for international discovery.",
     ]
     lines += [

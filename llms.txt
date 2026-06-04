@@ -16,6 +16,7 @@ Core pages:
 - https://flashcargoglobal.com/services/north-american-customs-support/
 - https://flashcargoglobal.com/services/warehousing-white-glove/
 - https://flashcargoglobal.com/planning/
+- https://flashcargoglobal.com/industries/
 - https://flashcargoglobal.com/guides/en/
 - https://flashcargoglobal.com/guides/en/apparel-textile-export-checklist/
 - https://flashcargoglobal.com/guides/en/machinery-parts-export-checklist/
@@ -40,11 +41,20 @@ Core pages:
 - https://flashcargoglobal.com/planning/bonded-warehouse-vs-ftz-guide/
 - https://flashcargoglobal.com/planning/landed-cost-freight-checklist/
 - https://flashcargoglobal.com/planning/fda-vs-cpsc-import-review-guide/
+- https://flashcargoglobal.com/industries/apparel-textile-manufacturing-export-freight/
+- https://flashcargoglobal.com/industries/machinery-industrial-parts-freight/
+- https://flashcargoglobal.com/industries/electronics-connected-devices-freight/
+- https://flashcargoglobal.com/industries/cosmetics-personal-care-import-freight/
+- https://flashcargoglobal.com/industries/agriculture-food-ingredient-freight/
+- https://flashcargoglobal.com/industries/furniture-fixtures-white-glove-freight/
+- https://flashcargoglobal.com/industries/automotive-parts-aftermarket-freight/
+- https://flashcargoglobal.com/industries/consumer-products-retail-freight/
 
 Knowledge structure:
 - Freight guides are organized by industry, document risk, cargo profile, and shipment planning need.
 - Each guide includes practical pre-shipment checks and official source citations.
 - Planning pages cover agency, product, decision, and comparison questions with source_url references.
+- Industry pages answer downstream product and manufacturing freight questions before buyers are ready to contact a forwarder.
 - Multilingual versions use hreflang alternates for international discovery.
 
 Languages available:
