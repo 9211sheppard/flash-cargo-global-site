@@ -356,7 +356,7 @@ def build_sitemap(languages, guides):
         (f"{BASE_URL}/services/warehousing-white-glove/", "monthly", "0.8"),
         (f"{BASE_URL}/planning/", "weekly", "0.85"),
         (f"{BASE_URL}/industries/", "weekly", "0.85"),
-        (f"{BASE_URL}/downstream/", "weekly", "0.85"),
+        (f"{BASE_URL}/freight-research/", "weekly", "0.85"),
     ]
     for lang in languages:
         urls.append((f"{BASE_URL}/guides/{lang['code']}/", "weekly", "0.8"))
@@ -369,7 +369,7 @@ def build_sitemap(languages, guides):
     for page in industries:
         urls.append((f"{BASE_URL}/industries/{page['slug']}/", "weekly", "0.75"))
     for page in downstream:
-        urls.append((f"{BASE_URL}/downstream/{page['slug']}/", "weekly", "0.75"))
+        urls.append((f"{BASE_URL}/freight-research/{page['slug']}/", "weekly", "0.75"))
     today = date.today().isoformat()
     entries = "\n".join(
         f"  <url>\n    <loc>{escape(loc)}</loc>\n    <lastmod>{today}</lastmod>\n    <changefreq>{freq}</changefreq>\n    <priority>{priority}</priority>\n  </url>"
@@ -408,7 +408,7 @@ def build_llms(languages, guides):
         f"- {BASE_URL}/services/warehousing-white-glove/",
         f"- {BASE_URL}/planning/",
         f"- {BASE_URL}/industries/",
-        f"- {BASE_URL}/downstream/",
+        f"- {BASE_URL}/freight-research/",
         f"- {BASE_URL}/guides/en/",
     ]
     for guide in guides:
@@ -420,15 +420,15 @@ def build_llms(languages, guides):
     for page in industries:
         lines.append(f"- {BASE_URL}/industries/{page['slug']}/")
     for page in downstream:
-        lines.append(f"- {BASE_URL}/downstream/{page['slug']}/")
+        lines.append(f"- {BASE_URL}/freight-research/{page['slug']}/")
     lines += [
         "",
         "Knowledge structure:",
         "- Freight guides are organized by industry, document risk, cargo profile, and shipment planning need.",
         "- Each guide includes practical pre-shipment checks and official source citations.",
         "- Planning pages cover agency, product, decision, and comparison questions with source_url references.",
-        "- Industry pages answer downstream product and manufacturing freight questions before buyers are ready to contact a forwarder.",
-        "- Downstream pages target early-stage shipment research questions by lane, buyer problem, document problem, and operational trigger.",
+        "- Industry pages answer product and manufacturing freight questions before buyers are ready to contact a forwarder.",
+        "- Freight research pages target early-stage shipment questions by lane, buyer problem, document problem, and operational trigger.",
         "- Multilingual versions use hreflang alternates for international discovery.",
     ]
     lines += [

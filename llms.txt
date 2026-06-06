@@ -19,7 +19,7 @@ Core pages:
 - https://flashcargoglobal.com/services/warehousing-white-glove/
 - https://flashcargoglobal.com/planning/
 - https://flashcargoglobal.com/industries/
-- https://flashcargoglobal.com/downstream/
+- https://flashcargoglobal.com/freight-research/
 - https://flashcargoglobal.com/guides/en/
 - https://flashcargoglobal.com/guides/en/apparel-textile-export-checklist/
 - https://flashcargoglobal.com/guides/en/machinery-parts-export-checklist/
@@ -52,22 +52,22 @@ Core pages:
 - https://flashcargoglobal.com/industries/furniture-fixtures-white-glove-freight/
 - https://flashcargoglobal.com/industries/automotive-parts-aftermarket-freight/
 - https://flashcargoglobal.com/industries/consumer-products-retail-freight/
-- https://flashcargoglobal.com/downstream/italy-clothing-manufacturer-export-to-australia/
-- https://flashcargoglobal.com/downstream/italy-clothing-manufacturer-export-to-japan/
-- https://flashcargoglobal.com/downstream/india-apparel-manufacturer-export-to-north-america/
-- https://flashcargoglobal.com/downstream/china-electronics-supplier-export-to-canada/
-- https://flashcargoglobal.com/downstream/mexico-automotive-parts-to-us-production-shipment/
-- https://flashcargoglobal.com/downstream/manufacturer-commercial-invoice-before-freight-quote/
-- https://flashcargoglobal.com/downstream/buyer-purchase-order-to-freight-plan/
-- https://flashcargoglobal.com/downstream/factory-ready-date-vs-cargo-ready-date/
-- https://flashcargoglobal.com/downstream/air-vs-ocean-for-product-launch/
+- https://flashcargoglobal.com/freight-research/italy-clothing-manufacturer-export-to-australia/
+- https://flashcargoglobal.com/freight-research/italy-clothing-manufacturer-export-to-japan/
+- https://flashcargoglobal.com/freight-research/india-apparel-manufacturer-export-to-north-america/
+- https://flashcargoglobal.com/freight-research/china-electronics-supplier-export-to-canada/
+- https://flashcargoglobal.com/freight-research/mexico-automotive-parts-to-us-production-shipment/
+- https://flashcargoglobal.com/freight-research/manufacturer-commercial-invoice-before-freight-quote/
+- https://flashcargoglobal.com/freight-research/buyer-purchase-order-to-freight-plan/
+- https://flashcargoglobal.com/freight-research/factory-ready-date-vs-cargo-ready-date/
+- https://flashcargoglobal.com/freight-research/air-vs-ocean-for-product-launch/
 
 Knowledge structure:
 - Freight guides are organized by industry, document risk, cargo profile, and shipment planning need.
 - Each guide includes practical pre-shipment checks and official source citations.
 - Planning pages cover agency, product, decision, and comparison questions with source_url references.
-- Industry pages answer downstream product and manufacturing freight questions before buyers are ready to contact a forwarder.
-- Downstream pages target early-stage shipment research questions by lane, buyer problem, document problem, and operational trigger.
+- Industry pages answer product and manufacturing freight questions before buyers are ready to contact a forwarder.
+- Freight research pages target early-stage shipment questions by lane, buyer problem, document problem, and operational trigger.
 - Multilingual versions use hreflang alternates for international discovery.
 
 Languages available:

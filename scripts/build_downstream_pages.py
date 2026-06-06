@@ -77,7 +77,7 @@ def page_shell(title, description, canonical, body, schema_blocks):
         <a class="wordmark" href="/">FLASH CARGO GLOBAL</a>
         <div class="nav-menu">
           <a href="/official-flash-cargo-global/">Official</a>
-          <a href="/downstream/">Downstream</a>
+          <a href="/freight-research/">Research</a>
           <a href="/industries/">Industries</a>
           <a href="/planning/">Planning</a>
           <a href="/trust-center/">Trust</a>
@@ -88,7 +88,7 @@ def page_shell(title, description, canonical, body, schema_blocks):
 {body}
     <footer class="site-footer">
       <p>(c) 2026 Flash Cargo Global. All rights reserved.</p>
-      <a href="/downstream/">Downstream Library</a>
+      <a href="/freight-research/">Freight Research Library</a>
       <a href="/industries/">Industry Library</a>
       <a href="/planning/">Planning Library</a>
       <a href="/official-flash-cargo-global/">Official Website</a>
@@ -103,15 +103,15 @@ def build_hub(data):
     for page in data["pages"]:
         cards.append(
             f"""<article>
-            <h3><a href="/downstream/{escape(page['slug'])}/">{escape(page['title'])}</a></h3>
+            <h3><a href="/freight-research/{escape(page['slug'])}/">{escape(page['title'])}</a></h3>
             <p>{escape(page['description'])}</p>
           </article>"""
         )
-    canonical = BASE_URL + "/downstream/"
+    canonical = BASE_URL + "/freight-research/"
     body = f"""
     <main id="main">
       <section class="knowledge-hero section">
-        <p class="kicker">Downstream Marketing Library</p>
+        <p class="kicker">Freight Research Library</p>
         <h1>{escape(data['hub']['title'])}</h1>
         <p class="lead">{escape(data['hub']['description'])}</p>
       </section>
@@ -128,9 +128,9 @@ def build_hub(data):
         "description": data["hub"]["description"],
         "url": canonical,
         "publisher": organization(),
-        "hasPart": [{"@type": "Article", "name": page["title"], "url": f"{BASE_URL}/downstream/{page['slug']}/"} for page in data["pages"]],
+        "hasPart": [{"@type": "Article", "name": page["title"], "url": f"{BASE_URL}/freight-research/{page['slug']}/"} for page in data["pages"]],
     }
-    out = ROOT / "downstream" / "index.html"
+    out = ROOT / "freight-research" / "index.html"
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(page_shell(data["hub"]["title"], data["hub"]["description"], canonical, body, [schema]), encoding="utf-8")
 
@@ -138,7 +138,7 @@ def build_hub(data):
 def build_pages(data):
     source_names = {item["url"]: item["name"] for item in data["sources"]}
     for page in data["pages"]:
-        canonical = f"{BASE_URL}/downstream/{page['slug']}/"
+        canonical = f"{BASE_URL}/freight-research/{page['slug']}/"
         section_html = []
         for section in page["sections"]:
             items = "\n".join(f"<li>{escape(item)}</li>" for item in section["items"])
@@ -196,11 +196,11 @@ def build_pages(data):
             "@type": "BreadcrumbList",
             "itemListElement": [
                 {"@type": "ListItem", "position": 1, "name": "Home", "item": BASE_URL + "/"},
-                {"@type": "ListItem", "position": 2, "name": "Downstream", "item": BASE_URL + "/downstream/"},
+                {"@type": "ListItem", "position": 2, "name": "freight-research", "item": BASE_URL + "/freight-research/"},
                 {"@type": "ListItem", "position": 3, "name": page["title"], "item": canonical},
             ],
         }
-        out = ROOT / "downstream" / page["slug"] / "index.html"
+        out = ROOT / "freight-research" / page["slug"] / "index.html"
         out.parent.mkdir(parents=True, exist_ok=True)
         out.write_text(page_shell(page["title"], page["description"], canonical, body, [article, faq_schema, breadcrumb]), encoding="utf-8")
 
