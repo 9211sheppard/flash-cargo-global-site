@@ -524,6 +524,23 @@ textarea {
   text-transform: none;
 }
 
+html[lang="hi"],
+html[lang="hi"] body,
+html[lang="hi"] h1,
+html[lang="hi"] h2,
+html[lang="hi"] h3,
+html[lang="hi"] p,
+html[lang="hi"] li,
+html[lang="hi"] a {
+  font-family: "Nirmala UI", "Mangal", "Noto Sans Devanagari", Arial, sans-serif;
+}
+
+html[lang="hi"] .guide-article h1,
+html[lang="hi"] .knowledge-hero h1 {
+  font-weight: 800;
+  line-height: 1.15;
+}
+
 .knowledge-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
