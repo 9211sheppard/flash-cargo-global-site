@@ -147,7 +147,7 @@
       "source_urls": ["https://www.cbp.gov/trade/basic-import-export", "https://www.usitc.gov/harmonized_tariff_information"],
       "sections": [
         {"heading": "What to include", "items": ["Product value, freight, insurance, duties, taxes, destination handling, storage, delivery, and service fees.", "Trade term, named place, importer responsibility, and broker status.", "Product classification context and any agency review risk."]},
-        {"heading": "Freight impact", "items": ["The cheapest freight quote may not produce the lowest landed cost.", "Destination charges, storage, re-delivery, and document delays can change the total cost picture.", "Landed cost needs commercial, customs, and freight information together."]},
+        {"heading": "Freight impact", "items": ["The lowest freight quote may not produce the best landed cost outcome.", "Destination charges, storage, re-delivery, and document delays can change the total cost picture.", "Landed cost needs commercial, customs, and freight information together."]},
         {"heading": "Useful inquiry notes", "items": ["Share the supplier terms and destination expectation.", "Flag whether duty/tax estimates are already available.", "Separate urgent replacement cargo from planned replenishment cargo."]}
       ]
     },

@@ -40,7 +40,7 @@
       "summary": "Incoterms help define who is responsible for cost and risk at different points in the shipment. They do not replace the freight plan, but they shape it.",
       "sections": [
         {"heading": "What Incoterms clarify", "items": ["Who arranges pickup, main carriage, destination handling, and delivery.", "Where risk transfers between buyer and seller.", "Which side may need to coordinate customs, insurance, or local delivery."]},
-        {"heading": "What they do not solve", "items": ["They do not classify the goods.", "They do not replace broker instructions or destination regulations.", "They do not guarantee the cargo is packed or labeled correctly."]},
+        {"heading": "What they do not solve", "items": ["They do not classify the goods.", "They do not replace broker instructions or destination regulations.", "They do not confirm whether the cargo is packed or labeled correctly."]},
         {"heading": "Planning step", "items": ["Confirm Incoterms before quoting freight.", "Make sure buyer and seller understand the named place.", "Align the invoice, purchase order, and freight instructions before cargo moves."]}
       ]
     },
