@@ -70,6 +70,7 @@ def organization():
 
 def parse_batch(path):
     text = path.read_text(encoding="utf-8")
+    hindi_overrides = json.loads((ROOT / "content" / "research_batches" / "hindi_week_2026_06_14.json").read_text(encoding="utf-8"))
     blocks = re.split(r"(?m)^## Day (\d+): (.+)$", text)[1:]
     pages = []
     for index in range(0, len(blocks), 3):
@@ -88,6 +89,8 @@ def parse_batch(path):
             meta = re.search(r"(?m)^Meta: (.+)$", content).group(1).strip()
             draft = content.split("Draft:", 1)[1].strip()
             translations[code] = {"title": title, "meta": meta, "draft": draft}
+        if str(day) in hindi_overrides:
+            translations["hi"] = hindi_overrides[str(day)]
         pages.append({"day": day, "topic": topic, "slug": DAY_SLUGS[day], "sources": sources, "translations": translations})
     return pages
 
