@@ -149,7 +149,7 @@ def shell(lang, title, description, canonical, alternates, body, schemas):
     <meta name="twitter:description" content="{escape(meta_description)}">
     <meta name="twitter:image" content="{escape(OG_IMAGE)}">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' https://static.wixstatic.com data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; form-action https://flash-cargo-form.old-sun-35f9.workers.dev; base-uri 'self'">
-    <link rel="stylesheet" href="/styles.css?v=15">
+    <link rel="stylesheet" href="/styles.css?v=16">
 {schema_html}
   </head>
   <body>
