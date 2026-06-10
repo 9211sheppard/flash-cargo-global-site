@@ -519,7 +519,9 @@ textarea {
 .knowledge-hero h1,
 .guide-article h1 {
   max-width: 980px;
-  font-size: clamp(54px, 8vw, 104px);
+  font-size: clamp(42px, 5vw, 76px);
+  line-height: 1;
+  text-transform: none;
 }
 
 .knowledge-grid {
