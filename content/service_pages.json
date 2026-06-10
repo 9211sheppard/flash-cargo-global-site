@@ -37,19 +37,19 @@
           ]
         },
         {
-          "heading": "How Flash Cargo Global keeps the move cleaner",
+          "heading": "How Flash Cargo Global keeps the move disciplined",
           "items": [
             "We separate the commercial problem from the transportation mode: deadline risk, inventory risk, buyer expectation, document readiness, and handling constraints are reviewed before the lane is chosen.",
             "We ask for shipment facts early so quotes do not rely on vague cargo descriptions, missing package details, or assumptions about receiver readiness.",
             "We help teams compare air, ocean, and split-shipment options in plain operational terms: what gets protected, what gets delayed, and what needs to be confirmed before pickup.",
-            "We keep the inquiry form focused on freight facts rather than forcing public email or phone exposure, which supports cleaner intake and reduces spam risk."
+            "We keep the inquiry form focused on freight facts rather than publishing email or phone details, which supports structured intake and reduces spam risk."
           ]
         }
       ],
       "faqs": [
         {"q": "When should a business choose air freight?", "a": "Air freight is usually the better fit when time risk, production impact, product launch timing, sample approval, or customer commitment is more important than the lower cost of ocean freight."},
         {"q": "When is ocean freight better?", "a": "Ocean freight is usually better when cargo is larger, less urgent, easier to plan, or when cost control matters more than speed."},
-        {"q": "What details help produce a cleaner quote?", "a": "Origin, destination, cargo type, dimensions, weight, value, timing, Incoterms, document status, handling needs, and receiver requirements all help reduce guesswork."}
+        {"q": "What details help reduce quote assumptions?", "a": "Origin, destination, cargo type, dimensions, weight, value, timing, Incoterms, document status, handling needs, and receiver requirements all help reduce guesswork."}
       ]
     },
     {
@@ -87,7 +87,7 @@
           ]
         },
         {
-          "heading": "How Flash Cargo Global keeps the move cleaner",
+          "heading": "How Flash Cargo Global keeps the move disciplined",
           "items": [
             "We treat every North American truck move as a chain of pickup, carrier, route, border, receiver, and timing decisions rather than only a truck rate.",
             "We collect dock hours, loading method, equipment fit, appointment rules, and receiver constraints before dispatch so avoidable access problems are visible earlier.",
@@ -109,7 +109,7 @@
       "kicker": "Customs support",
       "serviceType": "Customs documentation support",
       "areaServed": "North America",
-      "lead": "Customs support starts before cargo moves: cleaner documents reduce confusion at the border, at the terminal, and with the receiver.",
+      "lead": "Customs support starts before cargo moves: accurate documents reduce confusion at the border, at the terminal, and with the receiver.",
       "overview": "Customs problems often begin with ordinary details: vague goods descriptions, mismatched package counts, unclear country of origin, missing broker information, or an invoice that does not reflect the physical shipment. Flash Cargo Global helps shippers think through the document set early so freight can be planned with fewer avoidable questions.",
       "sections": [
         {
@@ -137,7 +137,7 @@
           ]
         },
         {
-          "heading": "How Flash Cargo Global keeps the move cleaner",
+          "heading": "How Flash Cargo Global keeps the move disciplined",
           "items": [
             "We organize freight questions around the document set: invoice, packing list, buyer, seller, importer, broker, origin, value, and physical cargo description.",
             "We flag unclear terms before pickup, including vague goods descriptions, mismatched weights, missing origin details, and receiver instructions that could affect release.",
@@ -147,7 +147,7 @@
         }
       ],
       "faqs": [
-        {"q": "Does customs support replace a licensed customs broker?", "a": "No. It helps organize freight and document context so the broker, importer, and shipper have cleaner information to work with."},
+        {"q": "Does customs support replace a licensed customs broker?", "a": "No. It helps organize freight and document context so the broker, importer, and shipper have better information to work with."},
         {"q": "What causes customs delays?", "a": "Common causes include vague invoice descriptions, missing origin details, mismatched packing lists, unclear importer records, and product requirements discovered too late."},
         {"q": "When should documents be reviewed?", "a": "Before pickup. Reviewing documents after cargo is already moving makes small errors more expensive and harder to correct."}
       ]
@@ -187,7 +187,7 @@
           ]
         },
         {
-          "heading": "How Flash Cargo Global keeps the move cleaner",
+          "heading": "How Flash Cargo Global keeps the move disciplined",
           "items": [
             "We define what success looks like at the receiver side, not only whether the freight reached a dock.",
             "We collect access limits, placement requirements, appointment windows, packaging condition, photo needs, and staging rules before pickup.",

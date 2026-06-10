@@ -13,7 +13,7 @@
       "title": "Commercial invoice freight checklist",
       "description": "What shippers should confirm on a commercial invoice before booking international freight.",
       "kicker": "Documents",
-      "summary": "The commercial invoice is one of the first documents a forwarder, broker, carrier, and receiver will review. A cleaner invoice can reduce confusion before cargo leaves the origin.",
+      "summary": "The commercial invoice is one of the first documents a forwarder, broker, carrier, and receiver will review. A complete invoice can reduce confusion before cargo leaves the origin.",
       "sections": [
         {"heading": "What to confirm", "items": ["Buyer and seller names should match the transaction records.", "Goods descriptions should be specific enough for customs review.", "Currency, value, Incoterms, origin, and quantities should align with the purchase record."]},
         {"heading": "Why it matters", "items": ["Weak descriptions can slow clearance and create extra questions.", "Mismatch between invoice and packing list can delay handoff.", "Incorrect value or origin data can create compliance and receiver issues."]},

@@ -2,7 +2,7 @@
   "updated": "2026-06-04",
   "hub": {
     "title": "Freight Research Library",
-    "description": "Practical pages for manufacturers, buyers, importers, and operators researching shipment problems before they are ready to contact a freight forwarder."
+    "description": "Practical pages for manufacturers, buyers, importers, and operators researching shipment problems before they submit a freight inquiry."
   },
   "sources": [
     {"name": "CBP - Basic Importing and Exporting", "url": "https://www.cbp.gov/trade/basic-import-export"},
@@ -27,7 +27,7 @@
       "sections": [
         {"heading": "What the manufacturer should prepare first", "items": ["Commercial invoice with clear garment descriptions, buyer and seller details, currency, value, origin, and agreed Incoterms.", "Packing list with carton count, SKU or style references, dimensions, gross weight, net weight, and package marks.", "Fabric composition, labeling context, purchase order references, and delivery window before choosing air freight or ocean freight."]},
         {"heading": "Questions to answer before a freight quote", "items": ["Is the shipment samples, bulk production, replenishment, returns, or retail launch cargo?", "Does the Australian buyer require delivery appointment, warehouse labeling, carton-level detail, or staged delivery?", "Should urgent cartons move by air while the balance moves by ocean?"]},
-        {"heading": "Why this matters", "items": ["The route is not the only risk; document clarity, buyer requirements, receiver readiness, and deadline pressure often shape the freight plan.", "A forwarder can plan cleaner options when the manufacturer already knows what is fixed and what still needs confirmation."]}
+        {"heading": "Why this matters", "items": ["The route is not the only risk; document clarity, buyer requirements, receiver readiness, and deadline pressure often shape the freight plan.", "A forwarder can plan better options when the manufacturer already knows what is fixed and what still needs confirmation."]}
       ]
     },
     {
@@ -52,7 +52,7 @@
         {"heading": "Before the shipment is a freight quote", "items": ["Organize what is being shipped, who is buying it, where it needs to arrive, what deadline matters, how it is packed, and which documents match the physical goods.", "Treat samples, bulk production, replenishment, returns, and launch cargo differently because each shipment can need a different timing and value context.", "Confirm whether the buyer needs carton-level detail, warehouse labeling, routing guide compliance, appointment delivery, or staged handoff before choosing a lane."]},
         {"heading": "What the manufacturer should prepare", "items": ["Commercial invoice with buyer, seller, currency, value, country of origin, goods description, Incoterms, and invoice reference.", "Packing list with carton count, carton dimensions, gross weight, net weight, marks, SKU or style references, and package count.", "Product details such as garment type, fabric composition, size range, style number, purchase order reference, and buyer delivery window."]},
         {"heading": "Air, ocean, or split shipment", "items": ["Air freight can make sense when a buyer deadline, launch date, sample approval, or production promise is more important than cost.", "Ocean freight can make sense when inventory can move on a planned timeline and cost control matters more than speed.", "A split shipment can move a smaller urgent portion by air while the balance moves by ocean, based on what quantity protects the buyer promise."]},
-        {"heading": "North America is not one receiver", "items": ["North America can mean a U.S. importer, Canadian importer, Mexican destination, retail warehouse, third-party logistics warehouse, or direct business receiver.", "The delivery plan changes depending on importer details, broker status, receiver address, appointment rules, delivery window, and warehouse staging needs.", "A cleaner inquiry should include origin, destination, buyer and receiver context, cargo description, carton count, dimensions, weights, value range, Incoterms, ready date, buyer deadline, and document status."]},
+        {"heading": "North America is not one receiver", "items": ["North America can mean a U.S. importer, Canadian importer, Mexican destination, retail warehouse, third-party logistics warehouse, or direct business receiver.", "The delivery plan changes depending on importer details, broker status, receiver address, appointment rules, delivery window, and warehouse staging needs.", "A useful inquiry should include origin, destination, buyer and receiver context, cargo description, carton count, dimensions, weights, value range, Incoterms, ready date, buyer deadline, and document status."]},
         {"heading": "Common problems to avoid", "items": ["Invoice says clothing but does not describe the goods clearly enough.", "Packing list does not match carton count, weight, or package details.", "Buyer routing guide is discovered after pickup.", "Cargo is produced but not labeled, packed, weighed, or released.", "Deadline is urgent, but the shipment has not been split into urgent and non-urgent portions.", "Receiver needs an appointment, but delivery planning did not include appointment timing."]}
       ]
     },
@@ -88,7 +88,7 @@
       "source_urls": ["https://www.cbp.gov/trade/basic-import-export", "https://www.trade.gov/know-your-incoterms", "https://www.usitc.gov/harmonized_tariff_information"],
       "sections": [
         {"heading": "Core invoice details", "items": ["Buyer, seller, ship-to party, invoice number, date, currency, value, Incoterms, country of origin, and clear goods description.", "Product quantity, unit value, total value, HS or HTS context if known, and shipment purpose.", "References that connect the invoice to purchase orders, packing list, buyer records, and receiver expectations."]},
-        {"heading": "Why freight teams care", "items": ["Freight quotes become cleaner when the invoice matches the physical shipment.", "Vague descriptions can create customs and broker questions later.", "Incoterms and named place affect who owns cost, risk, destination charges, and delivery responsibility."]},
+        {"heading": "Why freight teams care", "items": ["Freight quotes become more reliable when the invoice matches the physical shipment.", "Vague descriptions can create customs and broker questions later.", "Incoterms and named place affect who owns cost, risk, destination charges, and delivery responsibility."]},
         {"heading": "What not to assume", "items": ["A freight quote is not classification advice.", "A buyer deadline does not remove document requirements.", "Cargo ready in a warehouse is not ready for freight if the invoice is not ready."]}
       ]
     },
@@ -101,7 +101,7 @@
       "sections": [
         {"heading": "What the purchase order does not always answer", "items": ["Exact package count, dimensions, gross weight, net weight, ready date, pickup address, delivery address, and receiver access.", "Whether the supplier is responsible for export handling, origin charges, documents, or delivery to a named place.", "Whether the goods need inspection, labeling, staging, consolidation, or split shipment planning."]},
         {"heading": "Freight questions buyers should ask", "items": ["What is the latest acceptable arrival date and what happens if it is missed?", "Can the receiver accept the cargo exactly as packed?", "Is the shipment supporting production, resale, launch, warranty, repair, or replenishment?"]},
-        {"heading": "Why this helps", "items": ["A forwarder can compare air, ocean, truck, and staged delivery options when buyer risk is clear.", "The best route may change when customer promise, production need, or receiver readiness is known."]}
+        {"heading": "Why this helps", "items": ["A forwarder can compare air, ocean, truck, and staged delivery options when buyer risk is clear.", "The right route may change when customer promise, production need, or receiver readiness is known."]}
       ]
     },
     {
