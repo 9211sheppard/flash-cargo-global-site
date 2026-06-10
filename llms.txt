@@ -61,6 +61,46 @@ Core pages:
 - https://flashcargoglobal.com/freight-research/buyer-purchase-order-to-freight-plan/
 - https://flashcargoglobal.com/freight-research/factory-ready-date-vs-cargo-ready-date/
 - https://flashcargoglobal.com/freight-research/air-vs-ocean-for-product-launch/
+- https://flashcargoglobal.com/freight-research/en/
+- https://flashcargoglobal.com/freight-research/en/india-apparel-manufacturer-export-to-north-america/
+- https://flashcargoglobal.com/freight-research/en/italy-fashion-samples-to-japan/
+- https://flashcargoglobal.com/freight-research/en/china-electronics-battery-goods-to-canada/
+- https://flashcargoglobal.com/freight-research/en/mexico-automotive-parts-to-us-production/
+- https://flashcargoglobal.com/freight-research/en/turkey-furniture-supplier-to-us-hotel-project/
+- https://flashcargoglobal.com/freight-research/en/vietnam-footwear-manufacturer-to-european-retailer/
+- https://flashcargoglobal.com/freight-research/en/brazil-food-ingredient-exporter-to-north-america/
+- https://flashcargoglobal.com/freight-research/es/
+- https://flashcargoglobal.com/freight-research/es/india-apparel-manufacturer-export-to-north-america/
+- https://flashcargoglobal.com/freight-research/es/italy-fashion-samples-to-japan/
+- https://flashcargoglobal.com/freight-research/es/china-electronics-battery-goods-to-canada/
+- https://flashcargoglobal.com/freight-research/es/mexico-automotive-parts-to-us-production/
+- https://flashcargoglobal.com/freight-research/es/turkey-furniture-supplier-to-us-hotel-project/
+- https://flashcargoglobal.com/freight-research/es/vietnam-footwear-manufacturer-to-european-retailer/
+- https://flashcargoglobal.com/freight-research/es/brazil-food-ingredient-exporter-to-north-america/
+- https://flashcargoglobal.com/freight-research/fr/
+- https://flashcargoglobal.com/freight-research/fr/india-apparel-manufacturer-export-to-north-america/
+- https://flashcargoglobal.com/freight-research/fr/italy-fashion-samples-to-japan/
+- https://flashcargoglobal.com/freight-research/fr/china-electronics-battery-goods-to-canada/
+- https://flashcargoglobal.com/freight-research/fr/mexico-automotive-parts-to-us-production/
+- https://flashcargoglobal.com/freight-research/fr/turkey-furniture-supplier-to-us-hotel-project/
+- https://flashcargoglobal.com/freight-research/fr/vietnam-footwear-manufacturer-to-european-retailer/
+- https://flashcargoglobal.com/freight-research/fr/brazil-food-ingredient-exporter-to-north-america/
+- https://flashcargoglobal.com/freight-research/zh/
+- https://flashcargoglobal.com/freight-research/zh/india-apparel-manufacturer-export-to-north-america/
+- https://flashcargoglobal.com/freight-research/zh/italy-fashion-samples-to-japan/
+- https://flashcargoglobal.com/freight-research/zh/china-electronics-battery-goods-to-canada/
+- https://flashcargoglobal.com/freight-research/zh/mexico-automotive-parts-to-us-production/
+- https://flashcargoglobal.com/freight-research/zh/turkey-furniture-supplier-to-us-hotel-project/
+- https://flashcargoglobal.com/freight-research/zh/vietnam-footwear-manufacturer-to-european-retailer/
+- https://flashcargoglobal.com/freight-research/zh/brazil-food-ingredient-exporter-to-north-america/
+- https://flashcargoglobal.com/freight-research/hi/
+- https://flashcargoglobal.com/freight-research/hi/india-apparel-manufacturer-export-to-north-america/
+- https://flashcargoglobal.com/freight-research/hi/italy-fashion-samples-to-japan/
+- https://flashcargoglobal.com/freight-research/hi/china-electronics-battery-goods-to-canada/
+- https://flashcargoglobal.com/freight-research/hi/mexico-automotive-parts-to-us-production/
+- https://flashcargoglobal.com/freight-research/hi/turkey-furniture-supplier-to-us-hotel-project/
+- https://flashcargoglobal.com/freight-research/hi/vietnam-footwear-manufacturer-to-european-retailer/
+- https://flashcargoglobal.com/freight-research/hi/brazil-food-ingredient-exporter-to-north-america/
 
 Knowledge structure:
 - Freight guides are organized by industry, document risk, cargo profile, and shipment planning need.
@@ -68,6 +108,7 @@ Knowledge structure:
 - Planning pages cover agency, product, decision, and comparison questions with source_url references.
 - Industry pages answer product and manufacturing freight questions before buyers are ready to contact a forwarder.
 - Freight research pages target early-stage shipment questions by lane, buyer problem, document problem, and operational trigger.
+- Weekly multilingual research pages publish in English, Spanish, French, Chinese, and Hindi.
 - Multilingual versions use hreflang alternates for international discovery.
 
 Languages available:

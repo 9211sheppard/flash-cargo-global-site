@@ -3,6 +3,9 @@ from datetime import date
 from html import escape
 from pathlib import Path
 
+from build_multilingual_research_pages import LANGUAGES as RESEARCH_LANGUAGES
+from build_multilingual_research_pages import parse_batch as parse_research_batch
+
 ROOT = Path(__file__).resolve().parents[1]
 BASE_URL = "https://flashcargoglobal.com"
 OG_IMAGE = "https://static.wixstatic.com/media/999aa1_84fcfff1f12e4c9299aaa06edbe07a8d~mv2.png/v1/fill/w_1200,h_630,al_c,q_85,enc_auto/999aa1_84fcfff1f12e4c9299aaa06edbe07a8d~mv2.png"
@@ -343,6 +346,7 @@ def build_sitemap(languages, guides):
     planning = load_json("content/planning_pages.json")["pages"]
     industries = load_json("content/industry_pages.json")["pages"]
     downstream = load_json("content/downstream_pages.json")["pages"]
+    research_pages = parse_research_batch(ROOT / "content" / "research_batches" / "week-2026-06-14.md")
     urls = [
         (f"{BASE_URL}/", "weekly", "1.0"),
         (f"{BASE_URL}/official-flash-cargo-global/", "weekly", "0.95"),
@@ -370,6 +374,10 @@ def build_sitemap(languages, guides):
         urls.append((f"{BASE_URL}/industries/{page['slug']}/", "weekly", "0.75"))
     for page in downstream:
         urls.append((f"{BASE_URL}/freight-research/{page['slug']}/", "weekly", "0.75"))
+    for lang in RESEARCH_LANGUAGES:
+        urls.append((f"{BASE_URL}/freight-research/{lang['code']}/", "weekly", "0.8"))
+        for page in research_pages:
+            urls.append((f"{BASE_URL}/freight-research/{lang['code']}/{page['slug']}/", "weekly", "0.72"))
     today = date.today().isoformat()
     entries = "\n".join(
         f"  <url>\n    <loc>{escape(loc)}</loc>\n    <lastmod>{today}</lastmod>\n    <changefreq>{freq}</changefreq>\n    <priority>{priority}</priority>\n  </url>"
@@ -386,6 +394,7 @@ def build_llms(languages, guides):
     planning = load_json("content/planning_pages.json")["pages"]
     industries = load_json("content/industry_pages.json")["pages"]
     downstream = load_json("content/downstream_pages.json")["pages"]
+    research_pages = parse_research_batch(ROOT / "content" / "research_batches" / "week-2026-06-14.md")
     lines = [
         "# Flash Cargo Global",
         "",
@@ -421,6 +430,10 @@ def build_llms(languages, guides):
         lines.append(f"- {BASE_URL}/industries/{page['slug']}/")
     for page in downstream:
         lines.append(f"- {BASE_URL}/freight-research/{page['slug']}/")
+    for lang in RESEARCH_LANGUAGES:
+        lines.append(f"- {BASE_URL}/freight-research/{lang['code']}/")
+        for page in research_pages:
+            lines.append(f"- {BASE_URL}/freight-research/{lang['code']}/{page['slug']}/")
     lines += [
         "",
         "Knowledge structure:",
@@ -429,6 +442,7 @@ def build_llms(languages, guides):
         "- Planning pages cover agency, product, decision, and comparison questions with source_url references.",
         "- Industry pages answer product and manufacturing freight questions before buyers are ready to contact a forwarder.",
         "- Freight research pages target early-stage shipment questions by lane, buyer problem, document problem, and operational trigger.",
+        "- Weekly multilingual research pages publish in English, Spanish, French, Chinese, and Hindi.",
         "- Multilingual versions use hreflang alternates for international discovery.",
     ]
     lines += [

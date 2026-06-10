@@ -107,6 +107,20 @@ def build_hub(data):
             <p>{escape(page['description'])}</p>
           </article>"""
         )
+    language_cards = [
+        ("English", "en"),
+        ("Español", "es"),
+        ("Français", "fr"),
+        ("中文", "zh"),
+        ("Hindi", "hi"),
+    ]
+    languages = "".join(
+        f"""<article>
+            <h3><a href="/freight-research/{code}/">{escape(name)} Freight Research</a></h3>
+            <p>Review the latest practical freight planning pages in {escape(name)}.</p>
+          </article>"""
+        for name, code in language_cards
+    )
     canonical = BASE_URL + "/freight-research/"
     body = f"""
     <main id="main">
@@ -114,6 +128,15 @@ def build_hub(data):
         <p class="kicker">Freight Research Library</p>
         <h1>{escape(data['hub']['title'])}</h1>
         <p class="lead">{escape(data['hub']['description'])}</p>
+      </section>
+      <section class="section knowledge-preview">
+        <div class="section-title">
+          <p class="kicker">Multilingual Research</p>
+          <h2>Freight planning pages in five languages.</h2>
+        </div>
+        <div class="wide-grid">
+          {languages}
+        </div>
       </section>
       <section class="section knowledge-preview">
         <div class="wide-grid">
