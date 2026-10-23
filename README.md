@@ -1,11 +1,5 @@
-# Flash Cargo Global
-
-Official site for Flash Cargo Global: https://flashcargoglobal.com/
-
-Flash Cargo Global coordinates North American over-the-road trucking, global air freight, global ocean freight, North American customs support, warehousing, and white glove freight service through an online freight inquiry process.
-
-Public contact: https://flashcargoglobal.com/#contact
-
-Service base: serving from North America.
-
-Public profile categories: freight forwarding service, logistics service, trucking service, shipping service, warehousing service.
+# Cargo Global
+Global product sourcing and delivery for buyers across the US, Canada and Mexico: https://flashcargoglobal.com/
+Build after any legacy content generator: `python scripts/build_cargo_global.py`
+Validate: `python scripts/validate_cargo_global.py`; local preview: `python -m http.server 5177 --bind 127.0.0.1`
+Contact reply method and photo upload remain pending owner review; no shared analytics tags are installed.

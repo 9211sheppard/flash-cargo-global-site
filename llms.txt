@@ -1,127 +1,20 @@
-# Flash Cargo Global
+# Cargo Global
 
-Flash Cargo Global sources through our global supplier network and publishes practical freight forwarding guidance for businesses researching international shipping, documentation, customs preparation, and route planning.
+Global product sourcing, supplier shortlists, quality checks and door-to-door delivery for buyers across the US, Canada and Mexico.
 
-Core pages:
-- https://flashcargoglobal.com/
-- https://flashcargoglobal.com/sourcing/
-- https://flashcargoglobal.com/official-flash-cargo-global/
-- https://flashcargoglobal.com/about/
-- https://flashcargoglobal.com/trust-center/
-- https://flashcargoglobal.com/verify-flash-cargo-global/
-- https://flashcargoglobal.com/privacy-policy/
-- https://flashcargoglobal.com/.well-known/security.txt
-- https://flashcargoglobal.com/.well-known/organization.json
-- https://flashcargoglobal.com/.well-known/citation-profile.json
-- https://flashcargoglobal.com/humans.txt
-- https://flashcargoglobal.com/services/north-american-trucking/
-- https://flashcargoglobal.com/services/global-air-ocean-freight/
-- https://flashcargoglobal.com/services/north-american-customs-support/
-- https://flashcargoglobal.com/services/warehousing-white-glove/
-- https://flashcargoglobal.com/planning/
-- https://flashcargoglobal.com/industries/
-- https://flashcargoglobal.com/freight-research/
-- https://flashcargoglobal.com/guides/en/
-- https://flashcargoglobal.com/guides/en/apparel-textile-export-checklist/
-- https://flashcargoglobal.com/guides/en/machinery-parts-export-checklist/
-- https://flashcargoglobal.com/guides/en/electronics-export-checklist/
-- https://flashcargoglobal.com/resources/commercial-invoice-freight-checklist/
-- https://flashcargoglobal.com/resources/packing-list-freight-checklist/
-- https://flashcargoglobal.com/resources/incoterms-freight-planning-guide/
-- https://flashcargoglobal.com/resources/hs-code-freight-planning-guide/
-- https://flashcargoglobal.com/resources/air-vs-ocean-freight-decision-guide/
-- https://flashcargoglobal.com/resources/cross-border-trucking-preparation-guide/
-- https://flashcargoglobal.com/resources/warehouse-staging-freight-guide/
-- https://flashcargoglobal.com/resources/white-glove-freight-planning-guide/
-- https://flashcargoglobal.com/planning/cbp-importer-of-record-freight-guide/
-- https://flashcargoglobal.com/planning/hts-hs-code-import-planning-guide/
-- https://flashcargoglobal.com/planning/fda-regulated-products-import-checklist/
-- https://flashcargoglobal.com/planning/medical-device-import-freight-checklist/
-- https://flashcargoglobal.com/planning/fcc-electronics-import-checklist/
-- https://flashcargoglobal.com/planning/cpsc-consumer-products-import-checklist/
-- https://flashcargoglobal.com/planning/usda-agriculture-import-checklist/
-- https://flashcargoglobal.com/planning/lithium-battery-freight-checklist/
-- https://flashcargoglobal.com/planning/ddp-vs-dap-freight-planning-guide/
-- https://flashcargoglobal.com/planning/bonded-warehouse-vs-ftz-guide/
-- https://flashcargoglobal.com/planning/landed-cost-freight-checklist/
-- https://flashcargoglobal.com/planning/fda-vs-cpsc-import-review-guide/
-- https://flashcargoglobal.com/industries/apparel-textile-manufacturing-export-freight/
-- https://flashcargoglobal.com/industries/machinery-industrial-parts-freight/
-- https://flashcargoglobal.com/industries/electronics-connected-devices-freight/
-- https://flashcargoglobal.com/industries/cosmetics-personal-care-import-freight/
-- https://flashcargoglobal.com/industries/agriculture-food-ingredient-freight/
-- https://flashcargoglobal.com/industries/furniture-fixtures-white-glove-freight/
-- https://flashcargoglobal.com/industries/automotive-parts-aftermarket-freight/
-- https://flashcargoglobal.com/industries/consumer-products-retail-freight/
-- https://flashcargoglobal.com/freight-research/italy-clothing-manufacturer-export-to-australia/
-- https://flashcargoglobal.com/freight-research/italy-clothing-manufacturer-export-to-japan/
-- https://flashcargoglobal.com/freight-research/india-apparel-manufacturer-export-to-north-america/
-- https://flashcargoglobal.com/freight-research/china-electronics-supplier-export-to-canada/
-- https://flashcargoglobal.com/freight-research/mexico-automotive-parts-to-us-production-shipment/
-- https://flashcargoglobal.com/freight-research/manufacturer-commercial-invoice-before-freight-quote/
-- https://flashcargoglobal.com/freight-research/buyer-purchase-order-to-freight-plan/
-- https://flashcargoglobal.com/freight-research/factory-ready-date-vs-cargo-ready-date/
-- https://flashcargoglobal.com/freight-research/air-vs-ocean-for-product-launch/
-- https://flashcargoglobal.com/freight-research/en/
-- https://flashcargoglobal.com/freight-research/en/india-apparel-manufacturer-export-to-north-america/
-- https://flashcargoglobal.com/freight-research/en/italy-fashion-samples-to-japan/
-- https://flashcargoglobal.com/freight-research/en/china-electronics-battery-goods-to-canada/
-- https://flashcargoglobal.com/freight-research/en/mexico-automotive-parts-to-us-production/
-- https://flashcargoglobal.com/freight-research/en/turkey-furniture-supplier-to-us-hotel-project/
-- https://flashcargoglobal.com/freight-research/en/vietnam-footwear-manufacturer-to-european-retailer/
-- https://flashcargoglobal.com/freight-research/en/brazil-food-ingredient-exporter-to-north-america/
-- https://flashcargoglobal.com/freight-research/es/
-- https://flashcargoglobal.com/freight-research/es/india-apparel-manufacturer-export-to-north-america/
-- https://flashcargoglobal.com/freight-research/es/italy-fashion-samples-to-japan/
-- https://flashcargoglobal.com/freight-research/es/china-electronics-battery-goods-to-canada/
-- https://flashcargoglobal.com/freight-research/es/mexico-automotive-parts-to-us-production/
-- https://flashcargoglobal.com/freight-research/es/turkey-furniture-supplier-to-us-hotel-project/
-- https://flashcargoglobal.com/freight-research/es/vietnam-footwear-manufacturer-to-european-retailer/
-- https://flashcargoglobal.com/freight-research/es/brazil-food-ingredient-exporter-to-north-america/
-- https://flashcargoglobal.com/freight-research/fr/
-- https://flashcargoglobal.com/freight-research/fr/india-apparel-manufacturer-export-to-north-america/
-- https://flashcargoglobal.com/freight-research/fr/italy-fashion-samples-to-japan/
-- https://flashcargoglobal.com/freight-research/fr/china-electronics-battery-goods-to-canada/
-- https://flashcargoglobal.com/freight-research/fr/mexico-automotive-parts-to-us-production/
-- https://flashcargoglobal.com/freight-research/fr/turkey-furniture-supplier-to-us-hotel-project/
-- https://flashcargoglobal.com/freight-research/fr/vietnam-footwear-manufacturer-to-european-retailer/
-- https://flashcargoglobal.com/freight-research/fr/brazil-food-ingredient-exporter-to-north-america/
-- https://flashcargoglobal.com/freight-research/zh/
-- https://flashcargoglobal.com/freight-research/zh/india-apparel-manufacturer-export-to-north-america/
-- https://flashcargoglobal.com/freight-research/zh/italy-fashion-samples-to-japan/
-- https://flashcargoglobal.com/freight-research/zh/china-electronics-battery-goods-to-canada/
-- https://flashcargoglobal.com/freight-research/zh/mexico-automotive-parts-to-us-production/
-- https://flashcargoglobal.com/freight-research/zh/turkey-furniture-supplier-to-us-hotel-project/
-- https://flashcargoglobal.com/freight-research/zh/vietnam-footwear-manufacturer-to-european-retailer/
-- https://flashcargoglobal.com/freight-research/zh/brazil-food-ingredient-exporter-to-north-america/
-- https://flashcargoglobal.com/freight-research/hi/
-- https://flashcargoglobal.com/freight-research/hi/india-apparel-manufacturer-export-to-north-america/
-- https://flashcargoglobal.com/freight-research/hi/italy-fashion-samples-to-japan/
-- https://flashcargoglobal.com/freight-research/hi/china-electronics-battery-goods-to-canada/
-- https://flashcargoglobal.com/freight-research/hi/mexico-automotive-parts-to-us-production/
-- https://flashcargoglobal.com/freight-research/hi/turkey-furniture-supplier-to-us-hotel-project/
-- https://flashcargoglobal.com/freight-research/hi/vietnam-footwear-manufacturer-to-european-retailer/
-- https://flashcargoglobal.com/freight-research/hi/brazil-food-ingredient-exporter-to-north-america/
+## Primary pages
+- [Sourcing](https://flashcargoglobal.com/sourcing/)
+- [Start a Request](https://flashcargoglobal.com/contact/)
+- [Supplier-country checklists](https://flashcargoglobal.com/freight-research/)
+- [About](https://flashcargoglobal.com/about/)
+- [Terms](https://flashcargoglobal.com/terms/)
+- [Privacy](https://flashcargoglobal.com/privacy-policy/)
 
-Knowledge structure:
-- Freight guides are organized by industry, document risk, cargo profile, and shipment planning need.
-- Each guide includes practical pre-shipment checks and official source citations.
-- Planning pages cover agency, product, decision, and comparison questions with source_url references.
-- Industry pages answer product and manufacturing freight questions before buyers are ready to contact a forwarder.
-- Freight research pages target early-stage shipment questions by lane, buyer problem, document problem, and operational trigger.
-- Weekly multilingual research pages publish in English, Spanish, French, Chinese, and Hindi.
-- Multilingual versions use hreflang alternates for international discovery.
+## Scope
+Serving buyers across the US, Canada and Mexico. Supplier options, quality checks, currency, inclusions, exclusions and delivery requirements are confirmed before purchase.
 
-Languages available:
-- English (en), Español (es), Français (fr), 中文 (zh)
+## Request status
+Current requests are saved for review. Automatic form-to-email delivery is not enabled.
 
-Contact:
-- Public contact method: online freight inquiry form
-- Public service base: serving from North America
-
-Brand verification:
-- Official current domain: https://flashcargoglobal.com/
-- Official brand page: https://flashcargoglobal.com/official-flash-cargo-global/
-- Official verification page: https://flashcargoglobal.com/verify-flash-cargo-global/
-- Public trust center: https://flashcargoglobal.com/trust-center/
-- Machine-readable organization file: https://flashcargoglobal.com/.well-known/organization.json
+Last checked: 2026-10-23
+Source: https://flashcargoglobal.com/

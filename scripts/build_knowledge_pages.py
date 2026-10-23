@@ -20,13 +20,7 @@ def json_ld(data):
 
 
 def seo_title(title):
-    title = title.replace("Machinery and industrial parts", "Machinery parts")
-    title = title.replace("maquinaria y piezas industriales", "maquinaria industrial")
-    title = title.replace("machines et pièces industrielles", "machines industrielles")
-    branded = f"{title} | Flash Cargo Global"
-    if len(branded) <= 60:
-        return branded
-    return title[:60].rstrip()
+    return f"Cargo Global | {title}"
 
 
 def seo_description(description, lang_code="en"):

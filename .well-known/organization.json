@@ -2,33 +2,28 @@
   "@context": "https://schema.org",
   "@type": "Organization",
   "@id": "https://flashcargoglobal.com/#organization",
-  "name": "Flash Cargo Global",
+  "name": "Cargo Global",
+  "legalName": "Flash Cargo Global",
   "url": "https://flashcargoglobal.com/",
-  "sameAs": [
-    "https://flashcargoglobal.com/official-flash-cargo-global/",
-    "https://flashcargoglobal.com/verify-flash-cargo-global/",
-    "https://flashcargoglobal.com/trust-center/"
+  "description": "Global product sourcing, supplier shortlists, quality checks and door-to-door delivery for buyers across the US, Canada and Mexico.",
+  "areaServed": [
+    "US",
+    "CA",
+    "MX"
   ],
-  "description": "Flash Cargo Global coordinates product sourcing through our global supplier network, North American over-the-road trucking, global air and ocean freight, North American customs support, warehousing, and white glove freight planning.",
-  "areaServed": ["North America", "Global"],
   "contactPoint": {
     "@type": "ContactPoint",
-    "contactType": "Freight inquiry",
-    "url": "https://flashcargoglobal.com/#contact",
-    "availableLanguage": ["English"]
+    "contactType": "Product sourcing request",
+    "url": "https://flashcargoglobal.com/contact/"
   },
   "knowsAbout": [
     "Product sourcing",
-    "Air freight",
-    "Ocean freight",
-    "North American trucking",
-    "Customs support",
-    "Warehousing",
-    "White glove freight service",
-    "Commercial invoices",
-    "Packing lists",
-    "HS codes",
-    "Incoterms"
+    "Supplier shortlisting",
+    "Product specifications",
+    "Samples",
+    "Pre-shipment inspection",
+    "Door-to-door delivery"
   ],
-  "mainEntityOfPage": "https://flashcargoglobal.com/official-flash-cargo-global/"
+  "last_checked": "2026-10-23T20:25:41.709426+00:00",
+  "source_url": "https://flashcargoglobal.com/.well-known/organization.json"
 }

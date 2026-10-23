@@ -13,7 +13,7 @@ LANGUAGES = [
     {"code": "es", "name": "Español", "html_lang": "es", "label": "Investigación de carga"},
     {"code": "fr", "name": "Français", "html_lang": "fr", "label": "Recherche fret"},
     {"code": "zh", "name": "中文", "html_lang": "zh-Hans", "label": "货运研究"},
-    {"code": "hi", "name": "Hindi", "html_lang": "hi", "label": "Freight Research Hindi"},
+    {"code": "hi", "name": "Hindi", "html_lang": "hi", "label": "वैश्विक खरीद और आपूर्तिकर्ता मार्गदर्शिकाएँ"},
 ]
 
 LANGUAGE_HEADINGS = {
@@ -40,8 +40,7 @@ def json_ld(data):
 
 
 def seo_title(title):
-    branded = f"{title} | Flash Cargo Global"
-    return branded if len(branded) <= 60 else title[:60].rstrip()
+    return f"Cargo Global | {title}"
 
 
 def seo_description(description):

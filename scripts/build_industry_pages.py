@@ -16,8 +16,7 @@ def json_ld(data):
 
 
 def seo_title(title):
-    branded = f"{title} | Flash Cargo Global"
-    return branded if len(branded) <= 60 else title[:60].rstrip()
+    return f"Cargo Global | {title}"
 
 
 def seo_description(description):
