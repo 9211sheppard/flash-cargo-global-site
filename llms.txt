@@ -1,9 +1,10 @@
 # Flash Cargo Global
 
-Flash Cargo Global publishes practical freight forwarding guidance for businesses researching international shipping, documentation, customs preparation, and route planning.
+Flash Cargo Global sources through our global supplier network and publishes practical freight forwarding guidance for businesses researching international shipping, documentation, customs preparation, and route planning.
 
 Core pages:
 - https://flashcargoglobal.com/
+- https://flashcargoglobal.com/sourcing/
 - https://flashcargoglobal.com/official-flash-cargo-global/
 - https://flashcargoglobal.com/about/
 - https://flashcargoglobal.com/trust-center/
