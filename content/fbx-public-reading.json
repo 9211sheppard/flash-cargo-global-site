@@ -1,0 +1,16 @@
+{
+  "source_url": "https://www.freightos.com/freight-resources/red-sea-container-traffic-set-for-full-return-in-q1-october-20-2026-update/",
+  "reading_date": "2026-10-20",
+  "publication_date": "2026-10-21",
+  "last_checked": "2026-10-24",
+  "reviewed": true,
+  "verification_method": "Dated manual review of Freightos's public primary page through web retrieval; all four amounts and both dates were checked directly.",
+  "terms_url": "https://www.freightos.com/freightos-data-terms-conditions/",
+  "reuse_basis": "Right of Use 2.5 permits reproduction of public parts with full credit and a link to Freightos Terminal. These are unmodified weekly readings, not derived averages or contract-linked prices.",
+  "readings": [
+    {"index_lane":"FBX01","40ft_usd":8126,"source_url":"https://www.freightos.com/freight-resources/red-sea-container-traffic-set-for-full-return-in-q1-october-20-2026-update/","last_checked":"2026-10-24"},
+    {"index_lane":"FBX03","40ft_usd":9700,"source_url":"https://www.freightos.com/freight-resources/red-sea-container-traffic-set-for-full-return-in-q1-october-20-2026-update/","last_checked":"2026-10-24"},
+    {"index_lane":"FBX11","40ft_usd":3442,"source_url":"https://www.freightos.com/freight-resources/red-sea-container-traffic-set-for-full-return-in-q1-october-20-2026-update/","last_checked":"2026-10-24"},
+    {"index_lane":"FBX13","40ft_usd":3927,"source_url":"https://www.freightos.com/freight-resources/red-sea-container-traffic-set-for-full-return-in-q1-october-20-2026-update/","last_checked":"2026-10-24"}
+  ]
+}

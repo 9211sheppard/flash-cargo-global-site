@@ -1,231 +1,122 @@
-"""Validate one rate file and render evidence-backed monthly ocean tables."""
+"""One attributed public FBX weekly reading or an approved written quote per lane."""
 
-import calendar
 import json
 from datetime import date, datetime
-from decimal import Decimal, ROUND_HALF_UP
+from decimal import Decimal
 from html import escape
 from pathlib import Path
 from urllib.parse import urlsplit
 from zoneinfo import ZoneInfo
 
-ROOT = Path(__file__).resolve().parents[1]
-CONFIG_PATH = ROOT / 'user_config.json'
-CONFIG = json.loads(CONFIG_PATH.read_text(encoding='utf-8')) if CONFIG_PATH.exists() else {}
-DATA_FILE = ROOT / CONFIG.get('ocean_rates_file', 'ocean-rates.json')
-SIZES = ('20ft', '40ft')
-INDEX_SOURCES = {'drewry_wci', 'freightos_fbx', 'sse_scfi'}
-NUMERIC_DESTINATIONS = {'los-angeles-long-beach', 'new-york-new-jersey', 'us-west-coast', 'us-east-coast', 'rotterdam', 'north-europe', 'genoa', 'mediterranean'}
-
+ROOT=Path(__file__).resolve().parents[1]
+CONFIG=json.loads((ROOT/'user_config.json').read_text(encoding='utf-8')) if (ROOT/'user_config.json').exists() else {}
+DATA_FILE=ROOT/CONFIG.get('ocean_rates_file','ocean-rates.json')
+SIZES=('20ft','40ft')
+TERMINAL='https://terminal.freightos.com/'
+FBX_REGIONS={
+    'FBX01':('china-east-asia','north-america-west-coast'),
+    'FBX03':('china-east-asia','north-america-east-coast'),
+    'FBX11':('china-east-asia','north-europe'),
+    'FBX13':('china-east-asia','mediterranean'),
+}
+FALLBACK_COPY={
+    'en':('Ocean rates for this lane: quote required. ','Start a sourcing request.'),
+    'es':('Tarifas marítimas para esta ruta: cotización necesaria. ','Inicie una solicitud de abastecimiento.'),
+    'fr':('Tarifs maritimes pour cette route : devis nécessaire. ','Faites une demande d’approvisionnement.'),
+    'zh':('本航线海运费：需要询价。','提交采购需求。'),
+    'hi':('इस मार्ग के समुद्री मालभाड़े के लिए मूल्य का अनुरोध आवश्यक है। ','खरीद का अनुरोध भेजें।'),
+}
 
 def owner_today():
-    return datetime.now(ZoneInfo(CONFIG.get('timezone', 'America/Toronto'))).date()
+    return datetime.now(ZoneInfo(CONFIG.get('timezone','America/Toronto'))).date()
 
+def amount(value):
+    number=Decimal(str(value))
+    if not number.is_finite() or number<=0:
+        raise ValueError('A rate must be a positive finite amount.')
+    return number
 
-def round_usd(value):
-    amount = Decimal(str(value))
-    if not amount.is_finite() or amount <= 0:
-        raise ValueError('A rate must be a positive finite USD amount.')
-    return int((amount / 50).quantize(Decimal('1'), rounding=ROUND_HALF_UP) * 50)
+def public_url(value,hosts):
+    parsed=urlsplit(value or '')
+    host=parsed.hostname or ''
+    return parsed.scheme=='https' and not parsed.username and any(host==allowed or host.endswith('.'+allowed) for allowed in hosts)
 
-
-def month_closed(month, today):
-    year, number = map(int, month.split('-'))
-    return date(year, number, calendar.monthrange(year, number)[1]) < today
-
-
-def publication_dates(month, weekday):
-    year, number = map(int, month.split('-'))
-    return [date(year, number, day).isoformat() for day in range(1, calendar.monthrange(year, number)[1] + 1) if date(year, number, day).weekday() == weekday]
-
-
-def monthly_average(observations, *, month, lane, size, source, expected_dates, today, as_of=None):
-    if as_of is not None:
-        cutoff = date.fromisoformat(as_of)
-        if cutoff > today or not as_of.startswith(month + '-') or any(day > as_of for day in expected_dates):
-            return None
-    elif not month_closed(month, today):
-        return None
-    if not expected_dates:
-        return None
-    selected = {}
-    for item in observations:
-        if item.get('lane') != lane or item.get('size') != size or item.get('source') != source or not item.get('reading_date', '').startswith(month + '-'):
-            continue
-        if item['reading_date'] in selected:
-            if selected[item['reading_date']]['usd'] != item['usd']:
-                raise ValueError('Conflicting weekly readings require review.')
-            continue
-        selected[item['reading_date']] = item
-    if set(selected) != set(expected_dates):
-        return None
-    return round_usd(sum(Decimal(str(row['usd'])) for row in selected.values()) / len(selected))
-
-
-def validate(data, today=None):
-    today = today or owner_today()
-    if data.get('schema_version') != 1:
-        raise ValueError('Unsupported ocean-rate data version.')
-    sources = data['sources']
-    lanes = data['lanes']
-    for key, source in sources.items():
-        if urlsplit(source['source_url']).scheme != 'https' or not source.get('name'):
-            raise ValueError(f'Invalid source: {key}')
-    for reading in data.get('observations', []):
-        source=sources.get(reading.get('source'),{})
-        if reading.get('source') not in INDEX_SOURCES or (reading.get('size') == '20ft' and reading.get('source') != 'sse_scfi'):
-            raise ValueError('20ft readings must come directly from SCFI; only the three approved indices are supported.')
-        if not source.get('publication_allowed') or reading.get('size') not in source.get('lane_sizes',{}).get(reading.get('lane'),[]):
-            raise ValueError('Restricted or unmatched observations cannot be published in the rate file.')
-        if not reading.get('source_url') or not reading.get('date_pulled'):
-            raise ValueError('Every weekly observation needs a source and capture date.')
-        round_usd(reading['usd'])
-    if data.get('dated_quotes'):
-        raise ValueError('Dated quotes are not an approved index source; 20ft figures must come directly from SCFI.')
-    seen = set()
+def validate(data,today=None):
+    today=today or owner_today()
+    if data.get('schema_version')!=2:
+        raise ValueError('Unsupported rate-file version.')
+    if data.get('policy',{}).get('monthly_averages_allowed') is not False:
+        raise ValueError('Monthly averages need a separate written Freightos approval review.')
+    if data.get('observations') or data.get('dated_quotes'):
+        raise ValueError('Publish one reviewed record, not an index history or private quote collection.')
+    seen=set()
     for row in data['rates']:
-        identity = (row['lane'], row['month'])
-        if identity in seen:
-            raise ValueError('Duplicate lane/month record.')
-        seen.add(identity)
-        if row['lane'] not in lanes or not row.get('source_url') or not row.get('date_pulled'):
-            raise ValueError('Missing rate provenance.')
-        date.fromisoformat(row['month'] + '-01')
-        period = row.get('period', 'monthly_average')
-        if period not in {'monthly_average', 'month_to_date'}:
-            raise ValueError('Unknown averaging period.')
-        as_of = row.get('as_of') if period == 'month_to_date' else None
-        if period == 'month_to_date' and (not as_of or not as_of.startswith(row['month'] + '-') or date.fromisoformat(as_of) > today):
-            raise ValueError('Month-to-date figures need a dated cutoff within the stated month.')
-        for size in SIZES:
-            value = row[size + '_usd']
-            if value is None:
-                continue
-            if period == 'monthly_average' and not month_closed(row['month'], today):
-                raise ValueError('An open month cannot have a completed monthly average.')
-            evidence = row.get('evidence', {}).get(size)
-            if not evidence:
-                raise ValueError('A numeric price needs size-specific evidence.')
-            source = sources.get(evidence.get('source'))
-            if not source or not source.get('publication_allowed') or size not in source['sizes'] or evidence.get('lane') != row['lane']:
-                raise ValueError('An index cannot be converted to another size or lane.')
-            lane = lanes[row['lane']]
-            if evidence['source'] not in INDEX_SOURCES or (size == '20ft' and evidence['source'] != 'sse_scfi'):
-                raise ValueError('20ft figures must come directly from SCFI; only the three approved indices are supported.')
-            if lane.get('origin_region') not in {'shanghai-ningbo', 'china-east-asia'} or lane.get('destination_region') not in NUMERIC_DESTINATIONS:
-                raise ValueError('Numeric rates are limited to reviewed China-to-US-coast, North Europe and Mediterranean lanes.')
-            mapping = source.get('lane_sizes', {}).get(lane.get('index_lane'))
-            if not mapping or size not in mapping or not lane.get('origin_region') or not lane.get('destination_region'):
-                raise ValueError('A numeric benchmark needs a reviewed port-region and index-lane match.')
-            if source.get('lane_regions',{}).get(lane['index_lane']) != [lane['origin_region'],lane['destination_region']]:
-                raise ValueError('The benchmark belongs to a different port region.')
-            if evidence.get('kind') != 'weekly_index_average':
-                raise ValueError('Quote publication needs a separately approved evidence path.')
-            expected = publication_dates(row['month'], source['publication_weekday'])
-            if as_of:
-                expected = [day for day in expected if day <= as_of]
-                if evidence.get('as_of') != as_of:
-                    raise ValueError('Month-to-date evidence must retain the displayed cutoff.')
-            if evidence.get('expected_reading_dates') != expected:
-                raise ValueError('The monthly series must account for every normal publication date.')
-            observations = evidence.get('observations', [])
-            for reading in observations:
-                if not reading.get('source_url') or not reading.get('date_pulled') or not reading.get('reading_date'):
-                    raise ValueError('A weekly reading is missing provenance.')
-                host = urlsplit(reading['source_url']).hostname or ''
-                if urlsplit(reading['source_url']).scheme!='https' or urlsplit(reading['source_url']).username or not any(host == allowed or host.endswith('.' + allowed) for allowed in source['hosts']):
-                    raise ValueError('Weekly data must come from its declared primary source.')
-            computed = monthly_average(observations, month=row['month'], lane=lane['index_lane'], size=size, source=evidence['source'], expected_dates=expected, today=today, as_of=as_of)
-            if computed is None or value != computed:
-                raise ValueError('Published amount does not match the complete rounded series for its stated period.')
-    for path, lane in data['page_lanes'].items():
-        if not path.startswith('/') or lane not in lanes:
-            raise ValueError('Invalid page/lane mapping.')
+        lane=data['lanes'].get(row.get('lane'))
+        if not lane or row['lane'] in seen:
+            raise ValueError('Unknown lane or duplicate reading for a lane.')
+        seen.add(row['lane'])
+        if not row.get('source_url') or not row.get('last_checked'):
+            raise ValueError('Every record needs a source URL and check date.')
+        values=[size for size in SIZES if row.get(size+'_usd') is not None]
+        if not values:
+            if row.get('kind')!='quote_required':
+                raise ValueError('Missing figures must be labelled quote required.')
+            continue
+        for size in values:
+            amount(row[size+'_usd'])
+        if row.get('currency')!='USD':
+            raise ValueError('Ocean-rate examples must identify USD.')
+        if row.get('kind')=='weekly_index_reading':
+            if row.get('source')!='freightos_fbx' or values!=['40ft'] or row.get('monthly_average'):
+                raise ValueError('Only one direct 40ft FBX weekly reading is permitted; no Drewry, SCFI, ratios or averages.')
+            expected=FBX_REGIONS.get(row.get('index_lane'))
+            if not expected or (lane.get('origin_region'),lane.get('destination_region'))!=expected or lane.get('index_lane')!=row['index_lane']:
+                raise ValueError('The FBX regional route does not match this guide.')
+            if not public_url(row['source_url'],['freightos.com']) or row.get('attribution_url')!=TERMINAL:
+                raise ValueError('FBX needs its primary reading source and a Freightos Terminal attribution link.')
+            if row.get('reported_40ft_usd')!=row['40ft_usd']:
+                raise ValueError('Quote the reported weekly value exactly; do not derive another number.')
+            published=date.fromisoformat(row['publication_date'])
+            reported=date.fromisoformat(row['reading_date'])
+            if reported>published or published>today:
+                raise ValueError('Reading and publication dates must be verified and not in the future.')
+        elif row.get('kind')=='written_quote':
+            if row.get('source')!='cargo_global_written_quote' or row.get('publication_approved') is not True or not row.get('quote_reference'):
+                raise ValueError('A written quote needs its reference and explicit publication approval.')
+            if not public_url(row['source_url'],['flashcargoglobal.com']) or date.fromisoformat(row['reading_date'])>today:
+                raise ValueError('A written quote needs a dated public evidence summary without customer information.')
+            if row.get('scope')!='port_to_port' or [row.get('origin_region'),row.get('destination_region')]!=[lane.get('origin_region'),lane.get('destination_region')] or not lane.get('origin_region') or not lane.get('destination_region'):
+                raise ValueError('A written quote must match the route and stated service scope.')
+        else:
+            raise ValueError('Unapproved price basis. Monthly averages, Drewry and SCFI figures are not published.')
+    for path,lane in data['page_lanes'].items():
+        if not path.startswith('/') or lane not in data['lanes']:
+            raise ValueError('Invalid guide-to-lane mapping.')
     return data
 
-
 def load(today=None):
-    return validate(json.loads(DATA_FILE.read_text(encoding='utf-8')), today)
+    return validate(json.loads(DATA_FILE.read_text(encoding='utf-8')),today)
 
+def display_amount(value):
+    if value is None:
+        return 'Quote required'
+    number=amount(value)
+    return 'US$'+(format(number,',.0f') if number==number.to_integral_value() else format(number,',.2f'))
 
-COPY = {
-    'en': ('Approx. ocean freight', 'Month', '20ft container (USD)', '40ft container (USD)', 'Quote required', 'Approximate port-to-port ocean freight, monthly average. Excludes origin and destination charges, duty, tax, insurance and delivery.', 'Want an exact landed cost? Start a sourcing request', 'Final quote required.', 'Sources checked', 'Last checked', 'A matching full-month series is not verified. Ports and service scope must be confirmed.', 'The month has not closed; a completed monthly average is not available.'),
-    'es': ('Flete marítimo aproximado', 'Mes', 'Contenedor de 20 pies (USD)', 'Contenedor de 40 pies (USD)', 'Cotización necesaria', 'Flete marítimo aproximado de puerto a puerto, promedio mensual. No incluye gastos de origen o destino, aranceles, impuestos, seguro ni entrega.', '¿Necesita el costo total exacto? Inicie una solicitud de abastecimiento', 'Se requiere cotización final.', 'Fuentes consultadas', 'Última consulta', 'No hay una serie mensual completa verificada para esta ruta. Deben confirmarse los puertos y el alcance.', 'El mes no ha terminado; todavía no hay un promedio mensual completo.'),
-    'fr': ('Fret maritime indicatif', 'Mois', 'Conteneur de 20 pieds (USD)', 'Conteneur de 40 pieds (USD)', 'Devis nécessaire', 'Fret maritime indicatif de port à port, moyenne mensuelle. Hors frais d’origine et de destination, droits, taxes, assurance et livraison.', 'Besoin du coût total exact ? Faites une demande d’approvisionnement', 'Devis final nécessaire.', 'Sources consultées', 'Dernière consultation', 'Aucune série mensuelle complète correspondant à cette route n’est vérifiée. Les ports et le périmètre doivent être confirmés.', 'Le mois n’est pas terminé ; une moyenne mensuelle complète n’est pas disponible.'),
-    'zh': ('海运费参考', '月份', '20英尺集装箱（美元）', '40英尺集装箱（美元）', '需要询价', '港到港海运费参考，按月平均。不含起运港和目的港费用、关税、税费、保险和送货费用。', '需要准确的到岸总成本？提交采购需求', '最终价格需要另行报价。', '已查阅来源', '最近查阅日期', '尚无经过核实且适用于本航线的完整月度数据。需要先确认港口和服务范围。', '本月尚未结束，暂不能提供完整月度平均值。'),
-    'hi': ('समुद्री मालभाड़े का अनुमान', 'महीना', '20 फुट का कंटेनर (USD)', '40 फुट का कंटेनर (USD)', 'मूल्य के लिए अनुरोध करें', 'बंदरगाह से बंदरगाह तक समुद्री मालभाड़े का अनुमान, मासिक औसत। इसमें मूल और गंतव्य स्थान के शुल्क, सीमा शुल्क, कर, बीमा और अंतिम डिलीवरी शामिल नहीं हैं।', 'सटीक कुल लागत चाहिए? खरीद का अनुरोध भेजें', 'अंतिम मूल्य के लिए अलग से अनुरोध आवश्यक है।', 'देखे गए स्रोत', 'अंतिम जाँच', 'इस मार्ग के लिए पूरे महीने के सत्यापित आँकड़े उपलब्ध नहीं हैं। बंदरगाह और सेवा का दायरा तय करना आवश्यक है।', 'महीना अभी समाप्त नहीं हुआ है; पूरे महीने का औसत उपलब्ध नहीं है।'),
-}
-
-MONTH_NAMES = {
-    'en': ('Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'),
-    'es': ('ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'),
-    'fr': ('janv.','févr.','mars','avr.','mai','juin','juil.','août','sept.','oct.','nov.','déc.'),
-    'hi': ('जनवरी','फ़रवरी','मार्च','अप्रैल','मई','जून','जुलाई','अगस्त','सितंबर','अक्टूबर','नवंबर','दिसंबर'),
-}
-
-FALLBACK_COPY = {
-    'en': ('Ocean rates for this lane: quote required. ', 'Start a sourcing request.'),
-    'es': ('Tarifas marítimas para esta ruta: cotización necesaria. ', 'Inicie una solicitud de abastecimiento.'),
-    'fr': ('Tarifs maritimes pour cette route : devis nécessaire. ', 'Faites une demande d’approvisionnement.'),
-    'zh': ('本航线海运费：需要询价。', '提交采购需求。'),
-    'hi': ('इस मार्ग के समुद्री मालभाड़े के लिए मूल्य का अनुरोध आवश्यक है। ', 'खरीद का अनुरोध भेजें।'),
-}
-MTD_LABEL = {'en':'month-to-date', 'es':'mes en curso', 'fr':'mois en cours', 'zh':'本月至今', 'hi':'महीने की शुरुआत से अब तक'}
-PERIOD_CAPTION = {
-    'en':'Approximate port-to-port ocean freight, weekly readings averaged for the stated period. Excludes origin and destination charges, duty, tax, insurance and delivery.',
-    'es':'Flete marítimo aproximado de puerto a puerto, promedio de las lecturas semanales del período indicado. No incluye gastos de origen o destino, aranceles, impuestos, seguro ni entrega.',
-    'fr':'Fret maritime indicatif de port à port, moyenne des relevés hebdomadaires de la période indiquée. Hors frais d’origine et de destination, droits, taxes, assurance et livraison.',
-    'zh':'港到港海运费参考，为所示期间每周数据的平均值。不含起运港和目的港费用、关税、税费、保险和送货费用。',
-    'hi':'बंदरगाह से बंदरगाह तक समुद्री मालभाड़े का अनुमान, बताई गई अवधि के साप्ताहिक आँकड़ों का औसत। इसमें मूल और गंतव्य स्थान के शुल्क, सीमा शुल्क, कर, बीमा और अंतिम डिलीवरी शामिल नहीं हैं।',
-}
-
-
-def month_label(month, language):
-    year, number = map(int, month.split('-'))
-    if language == 'zh':
-        return f'{year}年{number}月'
-    return MONTH_NAMES.get(language, MONTH_NAMES['en'])[number-1] + ' ' + str(year)
-
-
-def render_table(data, lane_id, language='en', today=None):
-    today = today or owner_today()
-    language = language.split('-')[0]
-    words = COPY.get(language, COPY['en'])
-    heading, header_month, twenty_label, forty_label, quote_required, caption, cta, final_quote, sources_checked, last_checked, closed_reason, open_reason = words
-    lane = data['lanes'][lane_id]
-    label = lane.get('labels', {}).get(language, lane['label'])
-    rows = sorted((row for row in data['rates'] if row['lane'] == lane_id), key=lambda row: row['month'])[-6:]
-    if not rows:
-        raise ValueError('Missing monthly rate rows.')
-    if all(row[size + '_usd'] is None for row in rows for size in SIZES):
-        text, request = FALLBACK_COPY.get(language, FALLBACK_COPY['en'])
-        return '<p class="ocean-rates" data-ocean-rates data-rate-lane="' + escape(lane_id, quote=True) + '">' + escape(text) + '<a class="text-link" href="/contact/#buyer-request">' + escape(request) + '</a></p>'
-    if any(row.get('period') == 'month_to_date' for row in rows):
-        caption = PERIOD_CAPTION.get(language, PERIOD_CAPTION['en'])
-    body, notes = [], []
-    for row in rows:
-        prices = [quote_required if row[size + '_usd'] is None else '≈ US$' + format(row[size + '_usd'], ',') for size in SIZES]
-        label = month_label(row['month'], language)
-        if row.get('period') == 'month_to_date':
-            label += ' (' + MTD_LABEL.get(language, MTD_LABEL['en']) + ')'
-        body.append('<tr><th scope="row"><time datetime="' + row['month'] + '">' + escape(label) + '</time></th>' + ''.join('<td>' + escape(price) + '</td>' for price in prices) + '</tr>')
-        source_links = []
-        numeric = any(row[size + '_usd'] is not None for size in SIZES)
-        if numeric:
-            for size in SIZES:
-                if row[size + '_usd'] is None:
-                    continue
-                evidence = row['evidence'][size]
-                source = data['sources'][evidence['source']]
-                source_links.append(escape(size) + ': <a href="' + escape(source['source_url'], quote=True) + '">' + escape(source['name']) + '</a>')
-        else:
-            for source_id in row['checked_sources']:
-                source = data['sources'][source_id]
-                source_links.append('<a href="' + escape(source['source_url'], quote=True) + '">' + escape(source['name']) + '</a>')
-        reason = closed_reason if month_closed(row['month'], today) else open_reason
-        if numeric:
-            reason = ''
-        if row.get('period') == 'month_to_date':
-            reason = MTD_LABEL.get(language, MTD_LABEL['en']) + ': ' + row['as_of'] + '.'
-        notes.append('<p class="rate-source-note" data-rate-month="' + row['month'] + '"><strong>' + row['month'] + ':</strong> ' + escape(reason) + ' ' + escape(sources_checked) + ': ' + ' · '.join(source_links) + '. ' + escape(last_checked) + ': <time datetime="' + escape(row['date_pulled'][:10], quote=True) + '">' + escape(row['date_pulled'][:10]) + '</time>.</p>')
-    return '<section class="ocean-rates" data-ocean-rates data-rate-lane="' + escape(lane_id, quote=True) + '"><h2>' + escape(heading) + '</h2><p class="rate-route">' + escape(label) + '</p><div class="table-scroll"><table><caption>' + escape(caption) + '</caption><thead><tr>' + ''.join('<th scope="col">' + escape(text) + '</th>' for text in (header_month, twenty_label, forty_label)) + '</tr></thead><tbody>' + ''.join(body) + '</tbody></table></div>' + ''.join(notes) + '<p class="small">' + escape(final_quote) + '</p><p><a class="text-link" href="/contact/#buyer-request">' + escape(cta) + '</a></p></section>'
+def render_table(data,lane_id,language='en',today=None):
+    language=language.split('-')[0]
+    row=next((entry for entry in data['rates'] if entry['lane']==lane_id),None)
+    if row is None:
+        raise ValueError('Missing rate record.')
+    if all(row.get(size+'_usd') is None for size in SIZES):
+        text,cta=FALLBACK_COPY.get(language,FALLBACK_COPY['en'])
+        return '<p class="ocean-rates" data-ocean-rates data-rate-lane="'+escape(lane_id,quote=True)+'">'+escape(text)+'<a class="text-link" href="/contact/#buyer-request">'+escape(cta)+'</a></p>'
+    if language!='en':
+        raise ValueError('Numeric readings need reviewed localized attribution before a translated guide can show them.')
+    lane=data['lanes'][lane_id]
+    weekly=row['kind']=='weekly_index_reading'
+    heading='One weekly ocean reading.' if weekly else 'A dated written quote.'
+    caption='Index context only, not a delivered quote. Origin and destination charges, duty, tax, insurance and final delivery are not established by this reading.' if weekly else 'One written port-to-port quote for the stated scope, not an index or a monthly average. Final quote required.'
+    label=('Weekly update dated ' if weekly else 'Written quote dated ')+row['reading_date']
+    note='<p>Source: <a href="'+TERMINAL+'">Freightos Baltic Index (FBX)</a>. <a href="'+escape(row['source_url'],quote=True)+'">Read the publisher’s update</a>. Published <time datetime="'+row['publication_date']+'">'+row['publication_date']+'</time>. This is one reported weekly reading, not a monthly average or a Cargo Global price.</p>' if weekly else '<p>Source: <a href="'+escape(row['source_url'],quote=True)+'">Cargo Global written quote '+escape(row['quote_reference'])+'</a>. The quoted scope and date apply; it is not a current-rate promise.</p>'
+    return '<section class="ocean-rates" data-ocean-rates data-rate-lane="'+escape(lane_id,quote=True)+'"><h2>'+heading+'</h2><p>'+escape(lane['label'])+'</p><div class="table-scroll"><table><caption>'+caption+'</caption><thead><tr><th scope="col">Reading</th><th scope="col">20ft container (USD)</th><th scope="col">40ft container (USD)</th></tr></thead><tbody><tr><th scope="row"><time datetime="'+row['reading_date']+'">'+escape(label)+'</time></th><td>'+display_amount(row.get('20ft_usd'))+'</td><td>'+display_amount(row.get('40ft_usd'))+'</td></tr></tbody></table></div>'+note+'<p class="small">Last checked: <time datetime="'+row['last_checked'][:10]+'">'+row['last_checked'][:10]+'</time>. Final quote required.</p><p><a class="text-link" href="/contact/#buyer-request">Start a sourcing request</a></p></section>'

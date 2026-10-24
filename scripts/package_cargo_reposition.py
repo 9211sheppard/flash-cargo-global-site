@@ -25,11 +25,12 @@ def main():
     selected.extend(ROOT / path for path in [
         'cargo-global.css', 'cargo-global.js', 'calculator.mjs', '_headers', '_redirects', 'README.md', 'sitemap.xml', 'robots.txt',
         'llms.txt', 'humans.txt', '.well-known/security.txt', '.well-known/organization.json', '.well-known/citation-profile.json',
-        'content/interim-inquiry-form.html', 'content/downstream_pages.json', 'scripts/build_cargo_global.py', 'scripts/validate_cargo_global.py',
+        'content/interim-inquiry-form.html', 'content/downstream_pages.json', 'content/fbx-public-reading.json', 'scripts/build_cargo_global.py', 'scripts/validate_cargo_global.py',
         'scripts/prepare_cargo_assets.py', 'scripts/package_cargo_reposition.py', 'scripts/test_sourcing_audit.py',
         'scripts/build_audience_rollout.py', 'scripts/audience_page_content.py', 'content/audience-settings.json',
         'scripts/calculator_page_content.py', 'scripts/capture_audience_baseline.py', 'content/audience-baseline.json',
         'scripts/test_audience_rollout.py',
+        'scripts/build_trust_rollout.py', 'scripts/trust_rollout_content.py', 'scripts/test_trust_rollout.py',
         'scripts/guide_experience.py', 'scripts/ocean_rates.py', 'scripts/refresh_ocean_rates.py',
         'scripts/check_guide_sources.py', 'scripts/test_guide_experience.py', 'scripts/test_ocean_rates.py',
         'ocean-rates.json',

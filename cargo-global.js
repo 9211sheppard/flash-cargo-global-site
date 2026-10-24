@@ -59,9 +59,8 @@
   if (['freight', 'delivery', 'delivery_only'].includes(requestParams.get('inquiry')) && document.querySelector('#delivery-request')) {
     location.hash = 'delivery-request';
   }
-  const supplierWidget = document.querySelector('[data-supplier-verification]');
-  if (supplierWidget) {
-    const form = supplierWidget.closest('form');
+  document.querySelectorAll('[data-request-verification], [data-supplier-verification]').forEach((widget) => {
+    const form = widget.closest('form');
     const button = form.querySelector('button[type="submit"]');
     const status = form.querySelector('[data-verification-status]');
     let verified = false;
@@ -75,17 +74,17 @@
     const render = () => {
       if (rendered || !window.turnstile) return;
       rendered = true;
-      window.turnstile.render(supplierWidget, {
-        sitekey: supplierWidget.dataset.sitekey,
-        action: 'supplier_application',
+      window.turnstile.render(widget, {
+        sitekey: widget.dataset.sitekey,
+        action: widget.dataset.action,
         size: 'flexible',
         theme: 'light',
-        callback: () => update('Security check complete. You can submit your application.', true),
+        callback: () => update('Security check complete. You can submit your request.', true),
         'expired-callback': () => update('The security check expired. Complete it again before submitting.'),
         'timeout-callback': () => update('The security check timed out. Complete it again before submitting.'),
         'error-callback': (code) => {
           const reference = /^\d{6}$/.test(String(code)) ? ' Reference: ' + code + '.' : '';
-          update('The security check could not complete. Try an updated browser or reload the page; your application has not been sent.' + reference);
+          update('The security check could not complete. Try an updated browser or reload the page; your request has not been sent.' + reference);
           return true;
         },
       });
@@ -101,5 +100,5 @@
         status.focus();
       }
     });
-  }
+  });
 })();

@@ -38,7 +38,8 @@ def check_new_page_review(current, soup, review):
     if review.get('review_status')!='verified' or review.get('content_sha256')!=content_fingerprint(soup) or not review.get('facts'):
         raise ValueError(f'Publication blocked: official evidence review missing for {current}')
     for fact in review['facts']:
-        if not fact.get('claim') or not fact.get('verified') or not official_source(fact.get('source_url','')) or not re.fullmatch(r'\d{4}-\d{2}-\d{2}',fact.get('checked_on','')):
+        owner_policy = current == '/how-payment-works/' and review.get('review_kind') == 'owner_confirmed_policy' and review.get('owner_confirmed') is True and fact.get('source_url') == BASE + current
+        if not fact.get('claim') or not fact.get('verified') or not (official_source(fact.get('source_url','')) or owner_policy) or not re.fullmatch(r'\d{4}-\d{2}-\d{2}',fact.get('checked_on','')):
             raise ValueError(f'Publication blocked: incomplete fact evidence for {current}')
 
 
@@ -230,6 +231,8 @@ def apply_experience():
                 meta['content'] = re.sub(r'freight inquiry', 'sourcing request', meta['content'], flags=re.I)
                 if current == '/freight-research/buyer-purchase-order-to-freight-plan/':
                     meta['content'] = BUYER_DESCRIPTION
+            if current == '/freight-research/buyer-purchase-order-to-freight-plan/' and soup.select_one('.lead'):
+                soup.select_one('.lead').string = BUYER_DESCRIPTION
         removed = clean_sources(soup)
         if current == '/':
             soup.title.string = HOME_TITLE
@@ -247,11 +250,14 @@ def apply_experience():
             previous.decompose()
         robots = soup.select_one('meta[name="robots"]')
         noindex = robots and 'noindex' in robots.get('content', '').lower()
-        if current in rate_data['page_lanes'] and not noindex:
+        if current in rate_data['page_lanes'] and not noindex and not soup.html.has_attr('data-retired-route'):
             table = BeautifulSoup(render_table(rate_data, rate_data['page_lanes'][current], soup.html.get('lang', 'en')), 'html.parser').select_one('[data-ocean-rates]')
             container = soup.select_one('article.guide-article, .audience-article .editorial') or soup.main
             if container is soup.main:
                 table['class'].append('section')
+            if current in {'/sourcing/','/delivery/','/landed-cost-calculator/'} and table.find('table') is None:
+                table.clear()
+                table.string = 'Ocean rates for your route: quote required.'
             faq = container.select_one('.faq-list')
             if faq:
                 target = faq.find_parent('section') or faq

@@ -35,7 +35,7 @@ def main():
         h1s = soup.find_all('h1')
         canonical = soup.find('link', rel='canonical')
         robots = soup.find('meta', attrs={'name': 'robots'})
-        is_indexed = robots and 'noindex' not in robots.get('content', '')
+        is_indexed = robots and 'noindex' not in robots.get('content', '') and canonical and canonical.get('href') == BASE + route
         if is_indexed:
             indexed.add(BASE + route)
         if not title.startswith('Cargo Global | '):

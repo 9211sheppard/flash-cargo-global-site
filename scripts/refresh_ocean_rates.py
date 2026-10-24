@@ -1,160 +1,96 @@
-"""Refresh verified monthly and explicitly dated month-to-date index series."""
+"""Refresh one reviewed public FBX weekly reading, never calculate index averages."""
 
 import argparse
 import csv
 import json
 import re
-from datetime import date, datetime, timezone
-from pathlib import Path
-
+from datetime import datetime, timezone
 import requests
 from bs4 import BeautifulSoup
+from ocean_rates import DATA_FILE, ROOT, FBX_REGIONS, TERMINAL, owner_today, validate
+from trust_rollout_content import LANES
 
-from ocean_rates import DATA_FILE, ROOT, SIZES, INDEX_SOURCES, NUMERIC_DESTINATIONS, monthly_average, owner_today, publication_dates, validate
+OUT=ROOT/'output/ocean-rates'
 
-OUT = ROOT / 'output' / 'ocean-rates'
+def verify_public_reading(record):
+    row={'source_url':record['source_url'],'status':'unavailable','http_status':'','detail':'','last_checked':datetime.now(timezone.utc).isoformat()}
+    patterns={
+        'FBX01':r'at\s+\$([\d,]+)/FEU\s+to the West Coast',
+        'FBX03':r'to\s+\$([\d,]+)/FEU\s+for the East Coast',
+        'FBX11':r'N\.\s*Europe[^$]{0,150}\$([\d,]+)/FEU',
+        'FBX13':r'Mediterranean[^$]{0,100}\$([\d,]+)/FEU',
+    }
+    try:
+        response=requests.get(record['source_url'],timeout=20)
+        row['http_status']=response.status_code
+        if response.status_code!=200:
+            row.update(status='blocked' if response.status_code in {401,403,429} else 'unavailable',detail='Skip this retrieval; no login or paid API.')
+            return False,row
+        text=BeautifulSoup(response.text,'html.parser').get_text(' ',strip=True)
+        for key in ('reading_date','publication_date'):
+            day=datetime.fromisoformat(record[key])
+            label=day.strftime('%B')+' '+str(day.day)+', '+str(day.year)
+            if label not in text:
+                raise ValueError('The configured report dates are not both present in the primary article.')
+        for reading in record['readings']:
+            match=re.search(patterns[reading['index_lane']],text)
+            if not match or int(match.group(1).replace(',',''))!=reading['40ft_usd']:
+                raise ValueError('A primary reading does not match the reviewed source record.')
+        row.update(status='verified',detail='Four unmodified public weekly readings and both report dates matched the primary article.')
+        return True,row
+    except (requests.RequestException,ValueError) as error:
+        row['detail']=str(error)[:240]
+        return False,row
 
-
-def fetch_sources(data):
-    rows, pages = [], {}
-    session = requests.Session()
-    session.headers['User-Agent'] = 'CargoGlobalPublicSourceReview/1.0 (+https://flashcargoglobal.com/contact/)'
-    for key, source in data['sources'].items():
-        for url in dict.fromkeys([source['source_url'], source.get('access_url', source['source_url'])]):
-            now = datetime.now(timezone.utc).isoformat()
-            try:
-                response = session.get(url, timeout=20)
-                status = 'available' if response.status_code == 200 else 'blocked' if response.status_code in {401, 403, 429} else 'unavailable'
-                rows.append({'source':key,'source_url':url,'status':status,'http_status':response.status_code,'detail':'Public page retrieval only; no login, credentials or paid API.','last_checked':now})
-                if response.status_code == 200:
-                    pages[(key, url)] = response.text
-            except requests.RequestException as exc:
-                rows.append({'source':key,'source_url':url,'status':'unavailable','http_status':'','detail':type(exc).__name__,'last_checked':now})
-    OUT.mkdir(parents=True, exist_ok=True)
-    for filename, selected in [('source-checks.csv', rows), ('source-errors.csv', [row for row in rows if row['status'] != 'available'])]:
-        with (OUT / filename).open('w', encoding='utf-8-sig', newline='') as handle:
-            writer = csv.DictWriter(handle, fieldnames=list(rows[0]))
-            writer.writeheader()
-            writer.writerows(selected)
-    return rows, pages
-
-
-def collect_drewry(html, url, checked):
-    text = BeautifulSoup(html, 'html.parser').get_text(' ', strip=True)
-    match = re.search(r'Our detailed assessment for \w+,\s*(\d{1,2} [A-Za-z]{3} \d{4})', text)
-    if not match:
-        return []
-    reading = datetime.strptime(match.group(1), '%d %b %Y').date()
-    if reading > owner_today():
-        return []
-    rows = []
-    for destination in ('Los Angeles', 'New York', 'Rotterdam', 'Genoa'):
-        pattern = r'Shanghai to ' + re.escape(destination) + r'[^$]{0,110}\$([\d,]+)\s+per\s+40ft\s+container'
-        values = re.findall(pattern, text)
-        if len(set(values)) != 1:
-            continue
-        rows.append({'lane':'shanghai-' + destination.lower().replace(' ', '-'),'size':'40ft','usd':int(values[0].replace(',', '')),'reading_date':reading.isoformat(),'source':'drewry_wci','source_url':url,'date_pulled':checked})
-    return rows
-
-
-def refresh(data, *, today, checked, pages):
-    observations = {(row['source'],row['lane'],row['size'],row['reading_date']):row for row in data['observations']}
-    drewry = data['sources']['drewry_wci']
-    content = pages.get(('drewry_wci', drewry['source_url']))
-    if content and drewry.get('publication_allowed'):
-        for row in collect_drewry(content, drewry['source_url'], checked):
-            identity = (row['source'],row['lane'],row['size'],row['reading_date'])
-            if identity not in observations or observations[identity]['usd'] == row['usd']:
-                observations[identity] = row
-    data['observations'] = sorted(observations.values(), key=lambda row:(row['reading_date'],row['lane'],row['size']))
-    months = set(data['initial_months']) | {today.strftime('%Y-%m')}
-    year, number = today.year, today.month - 1
-    if number == 0:
-        year, number = year - 1, 12
-    last_closed = f'{year:04d}-{number:02d}'
-    cursor = min(months)
-    while cursor <= last_closed:
-        months.add(cursor)
-        year, number = map(int,cursor.split('-'))
-        cursor = f'{year+1:04d}-01' if number == 12 else f'{year:04d}-{number+1:02d}'
-    months = sorted(months)[-data['retain_months']:]
-    previous = {(row['lane'],row['month']):row for row in data['rates']}
-    records = []
-    for lane_id, lane in data['lanes'].items():
-        for month in months:
-            row = previous.get((lane_id,month),{'lane':lane_id,'month':month,'20ft_usd':None,'40ft_usd':None,'source':'Quote required; no verified matching complete monthly series.','source_url':drewry['source_url'],'checked_sources':list(data['sources']),'date_pulled':checked,'evidence':{}})
-            as_of = today.isoformat() if month == today.strftime('%Y-%m') else None
-            row['period'] = 'month_to_date' if as_of else 'monthly_average'
-            row.pop('as_of', None)
-            if as_of:
-                row['as_of'] = as_of
-            row.update({'20ft_usd':None,'40ft_usd':None,'evidence':{},'date_pulled':checked,'source':'Quote required; no verified matching complete series for this period.','source_url':drewry['source_url']})
-            for size in SIZES:
-                if not lane.get('index_lane') or lane.get('origin_region') not in {'shanghai-ningbo', 'china-east-asia'} or lane.get('destination_region') not in NUMERIC_DESTINATIONS:
-                    continue
-                for source_id, source in data['sources'].items():
-                    if source_id not in INDEX_SOURCES or not source.get('publication_allowed') or (size == '20ft' and source_id != 'sse_scfi'):
-                        continue
-                    if size not in source.get('lane_sizes',{}).get(lane['index_lane'],[]):
-                        continue
-                    if source.get('lane_regions',{}).get(lane['index_lane']) != [lane['origin_region'],lane['destination_region']]:
-                        continue
-                    expected = publication_dates(month,source['publication_weekday'])
-                    if as_of:
-                        expected = [day for day in expected if day <= as_of]
-                    amount = monthly_average(data['observations'],month=month,lane=lane['index_lane'],size=size,source=source_id,expected_dates=expected,today=today,as_of=as_of)
-                    if amount is None:
-                        continue
-                    values = [value for value in data['observations'] if value['source']==source_id and value['lane']==lane['index_lane'] and value['size']==size and value['reading_date'] in expected]
-                    row[size+'_usd'] = amount
-                    row['source'] = source['name']
-                    row['source_url'] = source['source_url']
-                    row['date_pulled'] = checked
-                    row['evidence'][size] = {'kind':'weekly_index_average','source':source_id,'lane':lane_id,'expected_reading_dates':expected,'observations':values}
-                    if as_of:
-                        row['evidence'][size]['as_of'] = as_of
-                    break
-            records.append(row)
-    data['rates'] = records
-    mapping = {}
-    for path in (ROOT/'freight-research').rglob('index.html'):
-        soup = BeautifulSoup(path.read_text(encoding='utf-8'),'html.parser')
-        if not soup.select_one('article.guide-article'):
-            continue
-        slug = path.parent.name
-        for lane_id, lane in data['lanes'].items():
-            if slug in lane['guide_slugs']:
-                mapping['/'+path.relative_to(ROOT).as_posix()[:-10]] = lane_id
-    mapping.update({path:'shipment-specific' for path in data['cost_hubs']})
-    data['page_lanes'] = dict(sorted(mapping.items()))
-    data['last_checked'] = checked
-    return validate(data,today)
-
+def refresh(data,record,verified,checked):
+    from build_trust_rollout import retired_target
+    lanes=data['lanes']
+    mapping={path:lane for path,lane in data['page_lanes'].items() if not retired_target(path)}
+    previous={row['lane']:row for row in data.get('rates',[])} if data.get('schema_version')==2 else {}
+    configured={row['index_lane']:row for row in record['readings']}
+    for item in LANES:
+        origin,destination=FBX_REGIONS[item['fbx']]
+        lanes[item['lane_id']]={'label':'China/East Asia to '+item['destination'].removeprefix('the ')+'; '+item['fbx']+' regional coverage, not a destination-door quote','guide_slugs':[item['slug']],'origin_region':origin,'destination_region':destination,'index_lane':item['fbx']}
+        mapping['/freight-research/'+item['slug']+'/']=item['lane_id']
+    rates=[]
+    for lane_id,lane in lanes.items():
+        row={'lane':lane_id,'kind':'quote_required','20ft_usd':None,'40ft_usd':None,'source_url':'https://flashcargoglobal.com/contact/#buyer-request','last_checked':checked}
+        index=lane.get('index_lane')
+        if index in configured and verified:
+            reading=configured[index]
+            row.update(kind='weekly_index_reading',source='freightos_fbx',currency='USD',index_lane=index,reading_date=record['reading_date'],publication_date=record['publication_date'],attribution_url=TERMINAL,reported_40ft_usd=reading['40ft_usd'],source_url=reading['source_url'])
+            row['40ft_usd']=reading['40ft_usd']
+        elif index in configured and previous.get(lane_id,{}).get('kind')=='weekly_index_reading':
+            row=previous[lane_id]
+        rates.append(row)
+    output={'schema_version':2,'policy':{'monthly_averages_allowed':False,'drewry_scfi_figures_allowed':False,'mode':'One unmodified public FBX weekly reading with attribution, or an explicitly approved dated written quote.'},'sources':{'freightos_fbx':{'name':'Freightos Baltic Index (FBX)','source_url':TERMINAL,'public_update_url':record['source_url'],'terms_url':record['terms_url'],'reuse_basis':record['reuse_basis']}},'lanes':lanes,'cost_hubs':[path for path in data.get('cost_hubs',[]) if not retired_target(path)],'page_lanes':dict(sorted(mapping.items())),'rates':rates,'last_checked':checked}
+    return validate(output)
 
 def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--capture-only',action='store_true',help='Collect public evidence without rebuilding the website.')
-    args = parser.parse_args()
-    data = json.loads(DATA_FILE.read_text(encoding='utf-8'))
-    restricted = [row for row in data['observations'] if not data['sources'][row['source']].get('publication_allowed')]
-    if restricted:
-        OUT.mkdir(parents=True, exist_ok=True)
-        (OUT/'unpublished-research-observations.json').write_text(json.dumps(restricted,ensure_ascii=False,indent=2),encoding='utf-8')
-        data['observations'] = [row for row in data['observations'] if data['sources'][row['source']].get('publication_allowed')]
-    checks, pages = fetch_sources(data)
-    checked = datetime.now(timezone.utc).isoformat()
-    data = refresh(data,today=owner_today(),checked=checked,pages=pages)
+    parser=argparse.ArgumentParser()
+    parser.add_argument('--capture-only',action='store_true')
+    args=parser.parse_args()
+    data=json.loads(DATA_FILE.read_text(encoding='utf-8'))
+    record=json.loads((ROOT/'content/fbx-public-reading.json').read_text(encoding='utf-8'))
+    if not record.get('reviewed'):
+        raise SystemExit('Review the public primary reading and its reuse terms first.')
+    automated,check=verify_public_reading(record)
+    manual=record.get('reviewed') is True and record.get('last_checked')==owner_today().isoformat() and bool(record.get('verification_method'))
+    verified=automated or manual
+    OUT.mkdir(parents=True,exist_ok=True)
+    for name,rows in [('source-checks.csv',[check]),('source-errors.csv',[] if automated else [check])]:
+        with (OUT/name).open('w',encoding='utf-8-sig',newline='') as handle:
+            writer=csv.DictWriter(handle,fieldnames=list(check));writer.writeheader();writer.writerows(rows)
+    checked=datetime.now(timezone.utc).isoformat() if automated else record['last_checked']
+    data=refresh(data,record,verified,checked)
     DATA_FILE.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-    fields = ['lane','month','20ft_usd','40ft_usd','source','source_url','date_pulled']
-    with (OUT/'monthly-rates.csv').open('w',encoding='utf-8-sig',newline='') as handle:
-        writer=csv.DictWriter(handle,fieldnames=fields,extrasaction='ignore')
-        writer.writeheader()
-        writer.writerows(data['rates'])
+    fields=['lane','kind','reading_date','publication_date','20ft_usd','40ft_usd','source_url','last_checked']
+    with (OUT/'single-readings.csv').open('w',encoding='utf-8-sig',newline='') as handle:
+        writer=csv.DictWriter(handle,fieldnames=fields,extrasaction='ignore');writer.writeheader();writer.writerows(data['rates'])
     if not args.capture_only:
         from build_cargo_global import main as build
         build()
-    print(json.dumps({'rates':len(data['rates']),'mapped_pages':len(data['page_lanes']),'public_weekly_readings':len(data['observations']),'numeric_cells':sum(row[size+'_usd'] is not None for row in data['rates'] for size in SIZES),'source_errors':sum(row['status']!='available' for row in checks)}))
+    print(json.dumps({'automated_primary_check':automated,'dated_manual_primary_review':manual,'numeric_readings':sum(row['40ft_usd'] is not None for row in data['rates']),'mapped_pages':len(data['page_lanes'])}))
 
-
-if __name__ == '__main__':
+if __name__=='__main__':
     main()

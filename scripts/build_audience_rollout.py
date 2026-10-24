@@ -34,7 +34,7 @@ def header():
 
 
 def footer():
-    return '<footer class="site-footer"><div><a class="footer-brand" href="/">CARGO GLOBAL</a><p>Serving buyers across the US, Canada and Mexico</p></div><nav aria-label="Footer"><a href="/sourcing/">Source products</a><a href="/freight-research/">Guides</a><a href="/suppliers/">For suppliers</a><a href="/delivery/">Delivery</a><a href="/contact/">Contact</a><a href="/terms/">Terms</a><a href="/privacy-policy/">Privacy</a></nav><p class="legal">&copy; 2026 Flash Cargo Global. All rights reserved.</p></footer>'
+    return '<footer class="site-footer"><div><a class="footer-brand" href="/">CARGO GLOBAL</a><p>Serving buyers across the US, Canada and Mexico</p></div><nav aria-label="Footer"><a href="/sourcing/">Source products</a><a href="/freight-research/">Guides</a><a href="/suppliers/">For suppliers</a><a href="/delivery/">Delivery</a><a href="/contact/">Contact</a><a href="/how-payment-works/">How payment works</a><a href="/terms/">Terms</a><a href="/privacy-policy/">Privacy</a></nav><p>We only email from @flashcargoglobal.com and never request payment by gift card, crypto or a personal account.</p><p class="legal">&copy; 2026 Flash Cargo Global. All rights reserved.</p></footer>'
 
 
 def field(label, name, required=False, kind='text', options=None, wide=False, hint='', maxlength=300, minimum='0.001'):
@@ -58,7 +58,7 @@ def private_reply():
 
 
 def form_close(button, disabled=False):
-    return '<p class="field-note wide">We reply within one business day. A request is not an order or payment authorization. <a href="/privacy-policy/">Privacy</a></p><button class="button primary wide" type="submit"' + (' disabled' if disabled else '') + '>' + button + ' <span aria-hidden="true">&#8599;</span></button></form>'
+    return '<p class="field-note wide">We reply within one business day. A request is not an order or payment authorization. <a href="/how-payment-works/">How payment works</a> · <a href="/privacy-policy/">Privacy</a></p><button class="button primary wide" type="submit"' + (' disabled' if disabled else '') + '>' + button + ' <span aria-hidden="true">&#8599;</span></button></form>'
 
 
 def buyer_form():

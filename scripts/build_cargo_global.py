@@ -23,7 +23,7 @@ OUT.mkdir(parents=True, exist_ok=True)
 REGION = 'Serving buyers across the US, Canada and Mexico'
 DESCRIPTION = 'Global product sourcing, supplier shortlists, quality checks and door-to-door delivery for buyers across the US, Canada and Mexico.'
 FORM_ACTION = 'https://flash-cargo-form.old-sun-35f9.workers.dev/contact-request'
-POLICY = "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; form-action 'self' https://flash-cargo-form.old-sun-35f9.workers.dev; base-uri 'self'; object-src 'none'"
+POLICY = "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; connect-src 'self' https://challenges.cloudflare.com; form-action 'self' https://flash-cargo-form.old-sun-35f9.workers.dev; base-uri 'self'; object-src 'none'"
 ARTICLE_HEADINGS = {
     '/freight-research/air-vs-ocean-for-product-launch/': 'Delivery options for a product launch',
     '/freight-research/buyer-purchase-order-to-freight-plan/': 'Purchase order and supplier handoff checklist',
@@ -480,6 +480,8 @@ def main():
     records = reconcile_library()
     from build_audience_rollout import apply_rollout, split_sitemaps
     apply_rollout()
+    from build_trust_rollout import apply_trust_content
+    apply_trust_content()
     from guide_experience import apply_experience
     apply_experience()
     update_machine_files()

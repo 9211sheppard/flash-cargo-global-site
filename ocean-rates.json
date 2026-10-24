@@ -1,137 +1,17 @@
 {
-  "schema_version": 1,
-  "currency": "USD",
-  "rounding_usd": 50,
-  "initial_months": [
-    "2026-09",
-    "2026-10"
-  ],
-  "retain_months": 6,
+  "schema_version": 2,
+  "policy": {
+    "monthly_averages_allowed": false,
+    "drewry_scfi_figures_allowed": false,
+    "mode": "One unmodified public FBX weekly reading with attribution, or an explicitly approved dated written quote."
+  },
   "sources": {
-    "drewry_wci": {
-      "name": "Drewry World Container Index",
-      "source_url": "https://www.drewry.co.uk/supply-chain-advisors/supply-chain-expertise/world-container-index-assessed-by-drewry",
-      "hosts": [
-        "drewry.co.uk"
-      ],
-      "sizes": [
-        "40ft"
-      ],
-      "publication_weekday": 3,
-      "publication_allowed": false,
-      "publication_terms_url": "https://www.drewry.co.uk/terms",
-      "lane_sizes": {
-        "shanghai-los-angeles": [
-          "40ft"
-        ],
-        "shanghai-new-york": [
-          "40ft"
-        ],
-        "shanghai-rotterdam": [
-          "40ft"
-        ],
-        "shanghai-genoa": [
-          "40ft"
-        ]
-      },
-      "lane_regions": {
-        "shanghai-los-angeles": [
-          "shanghai-ningbo",
-          "los-angeles-long-beach"
-        ],
-        "shanghai-new-york": [
-          "shanghai-ningbo",
-          "new-york-new-jersey"
-        ],
-        "shanghai-rotterdam": [
-          "shanghai-ningbo",
-          "rotterdam"
-        ],
-        "shanghai-genoa": [
-          "shanghai-ningbo",
-          "genoa"
-        ]
-      },
-      "history_status": "A current public weekly commentary is not a verified complete historical monthly series."
-    },
     "freightos_fbx": {
-      "name": "Freightos Baltic Index",
-      "source_url": "https://www.freightos.com/enterprise/terminal/freightos-baltic-index-global-container-pricing-index/",
-      "access_url": "https://apidocs.freightos.com/reference/get_fbx-data",
-      "hosts": [
-        "freightos.com"
-      ],
-      "sizes": [
-        "40ft"
-      ],
-      "publication_weekday": 4,
-      "publication_allowed": false,
-      "publication_terms_url": "https://www.freightos.com/freightos-data-terms-conditions/",
-      "lane_sizes": {},
-      "lane_regions": {},
-      "history_status": "The documented history API requires an API key and secret. No credentialed or paid data is used."
-    },
-    "sse_scfi": {
-      "name": "Shanghai Containerized Freight Index",
-      "source_url": "https://en.sse.net.cn/indices/fqaen.jsp",
-      "access_url": "https://en.sse.net.cn/indices/fqaennew.jsp",
-      "hosts": [
-        "sse.net.cn"
-      ],
-      "sizes": [
-        "20ft",
-        "40ft"
-      ],
-      "publication_weekday": 4,
-      "publication_allowed": false,
-      "publication_terms_url": "https://en.sse.net.cn/indices/fqaennew.jsp",
-      "lane_sizes": {
-        "shanghai-us-west-coast": [
-          "40ft"
-        ],
-        "shanghai-us-east-coast": [
-          "40ft"
-        ],
-        "shanghai-europe": [
-          "20ft"
-        ],
-        "shanghai-mediterranean": [
-          "20ft"
-        ],
-        "shanghai-east-japan": [
-          "20ft"
-        ],
-        "shanghai-west-japan": [
-          "20ft"
-        ]
-      },
-      "lane_regions": {
-        "shanghai-us-west-coast": [
-          "shanghai-ningbo",
-          "us-west-coast"
-        ],
-        "shanghai-us-east-coast": [
-          "shanghai-ningbo",
-          "us-east-coast"
-        ],
-        "shanghai-europe": [
-          "shanghai-ningbo",
-          "north-europe"
-        ],
-        "shanghai-mediterranean": [
-          "shanghai-ningbo",
-          "mediterranean"
-        ],
-        "shanghai-east-japan": [
-          "shanghai-ningbo",
-          "east-japan"
-        ],
-        "shanghai-west-japan": [
-          "shanghai-ningbo",
-          "west-japan"
-        ]
-      },
-      "history_status": "Official documentation states historical index data requires subscription access. Lane units must be checked: most routes USD/TEU; US coasts USD/FEU."
+      "name": "Freightos Baltic Index (FBX)",
+      "source_url": "https://terminal.freightos.com/",
+      "public_update_url": "https://www.freightos.com/freight-resources/red-sea-container-traffic-set-for-full-return-in-q1-october-20-2026-update/",
+      "terms_url": "https://www.freightos.com/freightos-data-terms-conditions/",
+      "reuse_basis": "Right of Use 2.5 permits reproduction of public parts with full credit and a link to Freightos Terminal. These are unmodified weekly readings, not derived averages or contract-linked prices."
     }
   },
   "lanes": {
@@ -267,22 +147,57 @@
       "origin_region": null,
       "destination_region": null,
       "index_lane": null
+    },
+    "china-us-west-coast": {
+      "label": "China/East Asia to US West Coast; FBX01 regional coverage, not a destination-door quote",
+      "guide_slugs": [
+        "china-to-us-west-coast-sourcing-guide"
+      ],
+      "origin_region": "china-east-asia",
+      "destination_region": "north-america-west-coast",
+      "index_lane": "FBX01"
+    },
+    "china-us-east-coast": {
+      "label": "China/East Asia to US East Coast; FBX03 regional coverage, not a destination-door quote",
+      "guide_slugs": [
+        "china-to-us-east-coast-sourcing-guide"
+      ],
+      "origin_region": "china-east-asia",
+      "destination_region": "north-america-east-coast",
+      "index_lane": "FBX03"
+    },
+    "china-north-europe": {
+      "label": "China/East Asia to North Europe; FBX11 regional coverage, not a destination-door quote",
+      "guide_slugs": [
+        "china-to-north-europe-sourcing-guide"
+      ],
+      "origin_region": "china-east-asia",
+      "destination_region": "north-europe",
+      "index_lane": "FBX11"
+    },
+    "china-mediterranean": {
+      "label": "China/East Asia to Mediterranean; FBX13 regional coverage, not a destination-door quote",
+      "guide_slugs": [
+        "china-to-mediterranean-sourcing-guide"
+      ],
+      "origin_region": "china-east-asia",
+      "destination_region": "mediterranean",
+      "index_lane": "FBX13"
     }
   },
   "cost_hubs": [
     "/sourcing/",
     "/delivery/",
     "/landed-cost-calculator/",
-    "/planning/",
-    "/planning/landed-cost-freight-checklist/",
-    "/planning/ddp-vs-dap-freight-planning-guide/",
-    "/resources/air-vs-ocean-freight-decision-guide/",
-    "/resources/incoterms-freight-planning-guide/",
     "/freight-research/air-vs-ocean-for-product-launch/"
   ],
   "page_lanes": {
     "/delivery/": "shipment-specific",
     "/freight-research/air-vs-ocean-for-product-launch/": "shipment-specific",
+    "/freight-research/china-to-mediterranean-sourcing-guide/": "china-mediterranean",
+    "/freight-research/china-to-north-europe-sourcing-guide/": "china-north-europe",
+    "/freight-research/china-to-us-east-coast-sourcing-guide/": "china-us-east-coast",
+    "/freight-research/china-to-us-west-coast-sourcing-guide/": "china-us-west-coast",
     "/freight-research/en/brazil-food-ingredient-exporter-to-north-america/": "brazil-north-america",
     "/freight-research/en/china-electronics-battery-goods-to-canada/": "china-canada",
     "/freight-research/en/india-apparel-manufacturer-export-to-north-america/": "india-north-america",
@@ -320,312 +235,141 @@
     "/freight-research/zh/turkey-furniture-supplier-to-us-hotel-project/": "turkey-us",
     "/freight-research/zh/vietnam-footwear-manufacturer-to-european-retailer/": "vietnam-europe",
     "/landed-cost-calculator/": "shipment-specific",
-    "/planning/": "shipment-specific",
-    "/planning/ddp-vs-dap-freight-planning-guide/": "shipment-specific",
-    "/planning/landed-cost-freight-checklist/": "shipment-specific",
-    "/resources/air-vs-ocean-freight-decision-guide/": "shipment-specific",
-    "/resources/incoterms-freight-planning-guide/": "shipment-specific",
     "/sourcing/": "shipment-specific"
   },
-  "observations": [],
   "rates": [
     {
       "lane": "brazil-north-america",
-      "month": "2026-09",
+      "kind": "quote_required",
       "20ft_usd": null,
       "40ft_usd": null,
-      "source": "Quote required; no verified matching complete series for this period.",
-      "source_url": "https://www.drewry.co.uk/supply-chain-advisors/supply-chain-expertise/world-container-index-assessed-by-drewry",
-      "checked_sources": [
-        "drewry_wci",
-        "freightos_fbx",
-        "sse_scfi"
-      ],
-      "date_pulled": "2026-10-24T18:28:27.367399+00:00",
-      "evidence": {},
-      "period": "monthly_average"
-    },
-    {
-      "lane": "brazil-north-america",
-      "month": "2026-10",
-      "20ft_usd": null,
-      "40ft_usd": null,
-      "source": "Quote required; no verified matching complete series for this period.",
-      "source_url": "https://www.drewry.co.uk/supply-chain-advisors/supply-chain-expertise/world-container-index-assessed-by-drewry",
-      "checked_sources": [
-        "drewry_wci",
-        "freightos_fbx",
-        "sse_scfi"
-      ],
-      "date_pulled": "2026-10-24T18:28:27.367399+00:00",
-      "evidence": {},
-      "period": "month_to_date",
-      "as_of": "2026-10-24"
+      "source_url": "https://flashcargoglobal.com/contact/#buyer-request",
+      "last_checked": "2026-10-24"
     },
     {
       "lane": "china-canada",
-      "month": "2026-09",
+      "kind": "quote_required",
       "20ft_usd": null,
       "40ft_usd": null,
-      "source": "Quote required; no verified matching complete series for this period.",
-      "source_url": "https://www.drewry.co.uk/supply-chain-advisors/supply-chain-expertise/world-container-index-assessed-by-drewry",
-      "checked_sources": [
-        "drewry_wci",
-        "freightos_fbx",
-        "sse_scfi"
-      ],
-      "date_pulled": "2026-10-24T18:28:27.367399+00:00",
-      "evidence": {},
-      "period": "monthly_average"
-    },
-    {
-      "lane": "china-canada",
-      "month": "2026-10",
-      "20ft_usd": null,
-      "40ft_usd": null,
-      "source": "Quote required; no verified matching complete series for this period.",
-      "source_url": "https://www.drewry.co.uk/supply-chain-advisors/supply-chain-expertise/world-container-index-assessed-by-drewry",
-      "checked_sources": [
-        "drewry_wci",
-        "freightos_fbx",
-        "sse_scfi"
-      ],
-      "date_pulled": "2026-10-24T18:28:27.367399+00:00",
-      "evidence": {},
-      "period": "month_to_date",
-      "as_of": "2026-10-24"
+      "source_url": "https://flashcargoglobal.com/contact/#buyer-request",
+      "last_checked": "2026-10-24"
     },
     {
       "lane": "india-north-america",
-      "month": "2026-09",
+      "kind": "quote_required",
       "20ft_usd": null,
       "40ft_usd": null,
-      "source": "Quote required; no verified matching complete series for this period.",
-      "source_url": "https://www.drewry.co.uk/supply-chain-advisors/supply-chain-expertise/world-container-index-assessed-by-drewry",
-      "checked_sources": [
-        "drewry_wci",
-        "freightos_fbx",
-        "sse_scfi"
-      ],
-      "date_pulled": "2026-10-24T18:28:27.367399+00:00",
-      "evidence": {},
-      "period": "monthly_average"
-    },
-    {
-      "lane": "india-north-america",
-      "month": "2026-10",
-      "20ft_usd": null,
-      "40ft_usd": null,
-      "source": "Quote required; no verified matching complete series for this period.",
-      "source_url": "https://www.drewry.co.uk/supply-chain-advisors/supply-chain-expertise/world-container-index-assessed-by-drewry",
-      "checked_sources": [
-        "drewry_wci",
-        "freightos_fbx",
-        "sse_scfi"
-      ],
-      "date_pulled": "2026-10-24T18:28:27.367399+00:00",
-      "evidence": {},
-      "period": "month_to_date",
-      "as_of": "2026-10-24"
+      "source_url": "https://flashcargoglobal.com/contact/#buyer-request",
+      "last_checked": "2026-10-24"
     },
     {
       "lane": "italy-japan",
-      "month": "2026-09",
+      "kind": "quote_required",
       "20ft_usd": null,
       "40ft_usd": null,
-      "source": "Quote required; no verified matching complete series for this period.",
-      "source_url": "https://www.drewry.co.uk/supply-chain-advisors/supply-chain-expertise/world-container-index-assessed-by-drewry",
-      "checked_sources": [
-        "drewry_wci",
-        "freightos_fbx",
-        "sse_scfi"
-      ],
-      "date_pulled": "2026-10-24T18:28:27.367399+00:00",
-      "evidence": {},
-      "period": "monthly_average"
-    },
-    {
-      "lane": "italy-japan",
-      "month": "2026-10",
-      "20ft_usd": null,
-      "40ft_usd": null,
-      "source": "Quote required; no verified matching complete series for this period.",
-      "source_url": "https://www.drewry.co.uk/supply-chain-advisors/supply-chain-expertise/world-container-index-assessed-by-drewry",
-      "checked_sources": [
-        "drewry_wci",
-        "freightos_fbx",
-        "sse_scfi"
-      ],
-      "date_pulled": "2026-10-24T18:28:27.367399+00:00",
-      "evidence": {},
-      "period": "month_to_date",
-      "as_of": "2026-10-24"
+      "source_url": "https://flashcargoglobal.com/contact/#buyer-request",
+      "last_checked": "2026-10-24"
     },
     {
       "lane": "mexico-us",
-      "month": "2026-09",
+      "kind": "quote_required",
       "20ft_usd": null,
       "40ft_usd": null,
-      "source": "Quote required; no verified matching complete series for this period.",
-      "source_url": "https://www.drewry.co.uk/supply-chain-advisors/supply-chain-expertise/world-container-index-assessed-by-drewry",
-      "checked_sources": [
-        "drewry_wci",
-        "freightos_fbx",
-        "sse_scfi"
-      ],
-      "date_pulled": "2026-10-24T18:28:27.367399+00:00",
-      "evidence": {},
-      "period": "monthly_average"
-    },
-    {
-      "lane": "mexico-us",
-      "month": "2026-10",
-      "20ft_usd": null,
-      "40ft_usd": null,
-      "source": "Quote required; no verified matching complete series for this period.",
-      "source_url": "https://www.drewry.co.uk/supply-chain-advisors/supply-chain-expertise/world-container-index-assessed-by-drewry",
-      "checked_sources": [
-        "drewry_wci",
-        "freightos_fbx",
-        "sse_scfi"
-      ],
-      "date_pulled": "2026-10-24T18:28:27.367399+00:00",
-      "evidence": {},
-      "period": "month_to_date",
-      "as_of": "2026-10-24"
+      "source_url": "https://flashcargoglobal.com/contact/#buyer-request",
+      "last_checked": "2026-10-24"
     },
     {
       "lane": "turkey-us",
-      "month": "2026-09",
+      "kind": "quote_required",
       "20ft_usd": null,
       "40ft_usd": null,
-      "source": "Quote required; no verified matching complete series for this period.",
-      "source_url": "https://www.drewry.co.uk/supply-chain-advisors/supply-chain-expertise/world-container-index-assessed-by-drewry",
-      "checked_sources": [
-        "drewry_wci",
-        "freightos_fbx",
-        "sse_scfi"
-      ],
-      "date_pulled": "2026-10-24T18:28:27.367399+00:00",
-      "evidence": {},
-      "period": "monthly_average"
-    },
-    {
-      "lane": "turkey-us",
-      "month": "2026-10",
-      "20ft_usd": null,
-      "40ft_usd": null,
-      "source": "Quote required; no verified matching complete series for this period.",
-      "source_url": "https://www.drewry.co.uk/supply-chain-advisors/supply-chain-expertise/world-container-index-assessed-by-drewry",
-      "checked_sources": [
-        "drewry_wci",
-        "freightos_fbx",
-        "sse_scfi"
-      ],
-      "date_pulled": "2026-10-24T18:28:27.367399+00:00",
-      "evidence": {},
-      "period": "month_to_date",
-      "as_of": "2026-10-24"
+      "source_url": "https://flashcargoglobal.com/contact/#buyer-request",
+      "last_checked": "2026-10-24"
     },
     {
       "lane": "vietnam-europe",
-      "month": "2026-09",
+      "kind": "quote_required",
       "20ft_usd": null,
       "40ft_usd": null,
-      "source": "Quote required; no verified matching complete series for this period.",
-      "source_url": "https://www.drewry.co.uk/supply-chain-advisors/supply-chain-expertise/world-container-index-assessed-by-drewry",
-      "checked_sources": [
-        "drewry_wci",
-        "freightos_fbx",
-        "sse_scfi"
-      ],
-      "date_pulled": "2026-10-24T18:28:27.367399+00:00",
-      "evidence": {},
-      "period": "monthly_average"
-    },
-    {
-      "lane": "vietnam-europe",
-      "month": "2026-10",
-      "20ft_usd": null,
-      "40ft_usd": null,
-      "source": "Quote required; no verified matching complete series for this period.",
-      "source_url": "https://www.drewry.co.uk/supply-chain-advisors/supply-chain-expertise/world-container-index-assessed-by-drewry",
-      "checked_sources": [
-        "drewry_wci",
-        "freightos_fbx",
-        "sse_scfi"
-      ],
-      "date_pulled": "2026-10-24T18:28:27.367399+00:00",
-      "evidence": {},
-      "period": "month_to_date",
-      "as_of": "2026-10-24"
+      "source_url": "https://flashcargoglobal.com/contact/#buyer-request",
+      "last_checked": "2026-10-24"
     },
     {
       "lane": "italy-australia",
-      "month": "2026-09",
+      "kind": "quote_required",
       "20ft_usd": null,
       "40ft_usd": null,
-      "source": "Quote required; no verified matching complete series for this period.",
-      "source_url": "https://www.drewry.co.uk/supply-chain-advisors/supply-chain-expertise/world-container-index-assessed-by-drewry",
-      "checked_sources": [
-        "drewry_wci",
-        "freightos_fbx",
-        "sse_scfi"
-      ],
-      "date_pulled": "2026-10-24T18:28:27.367399+00:00",
-      "evidence": {},
-      "period": "monthly_average"
-    },
-    {
-      "lane": "italy-australia",
-      "month": "2026-10",
-      "20ft_usd": null,
-      "40ft_usd": null,
-      "source": "Quote required; no verified matching complete series for this period.",
-      "source_url": "https://www.drewry.co.uk/supply-chain-advisors/supply-chain-expertise/world-container-index-assessed-by-drewry",
-      "checked_sources": [
-        "drewry_wci",
-        "freightos_fbx",
-        "sse_scfi"
-      ],
-      "date_pulled": "2026-10-24T18:28:27.367399+00:00",
-      "evidence": {},
-      "period": "month_to_date",
-      "as_of": "2026-10-24"
+      "source_url": "https://flashcargoglobal.com/contact/#buyer-request",
+      "last_checked": "2026-10-24"
     },
     {
       "lane": "shipment-specific",
-      "month": "2026-09",
+      "kind": "quote_required",
       "20ft_usd": null,
       "40ft_usd": null,
-      "source": "Quote required; no verified matching complete series for this period.",
-      "source_url": "https://www.drewry.co.uk/supply-chain-advisors/supply-chain-expertise/world-container-index-assessed-by-drewry",
-      "checked_sources": [
-        "drewry_wci",
-        "freightos_fbx",
-        "sse_scfi"
-      ],
-      "date_pulled": "2026-10-24T18:28:27.367399+00:00",
-      "evidence": {},
-      "period": "monthly_average"
+      "source_url": "https://flashcargoglobal.com/contact/#buyer-request",
+      "last_checked": "2026-10-24"
     },
     {
-      "lane": "shipment-specific",
-      "month": "2026-10",
+      "lane": "china-us-west-coast",
+      "kind": "weekly_index_reading",
       "20ft_usd": null,
-      "40ft_usd": null,
-      "source": "Quote required; no verified matching complete series for this period.",
-      "source_url": "https://www.drewry.co.uk/supply-chain-advisors/supply-chain-expertise/world-container-index-assessed-by-drewry",
-      "checked_sources": [
-        "drewry_wci",
-        "freightos_fbx",
-        "sse_scfi"
-      ],
-      "date_pulled": "2026-10-24T18:28:27.367399+00:00",
-      "evidence": {},
-      "period": "month_to_date",
-      "as_of": "2026-10-24"
+      "40ft_usd": 8126,
+      "source_url": "https://www.freightos.com/freight-resources/red-sea-container-traffic-set-for-full-return-in-q1-october-20-2026-update/",
+      "last_checked": "2026-10-24",
+      "source": "freightos_fbx",
+      "currency": "USD",
+      "index_lane": "FBX01",
+      "reading_date": "2026-10-20",
+      "publication_date": "2026-10-21",
+      "attribution_url": "https://terminal.freightos.com/",
+      "reported_40ft_usd": 8126
+    },
+    {
+      "lane": "china-us-east-coast",
+      "kind": "weekly_index_reading",
+      "20ft_usd": null,
+      "40ft_usd": 9700,
+      "source_url": "https://www.freightos.com/freight-resources/red-sea-container-traffic-set-for-full-return-in-q1-october-20-2026-update/",
+      "last_checked": "2026-10-24",
+      "source": "freightos_fbx",
+      "currency": "USD",
+      "index_lane": "FBX03",
+      "reading_date": "2026-10-20",
+      "publication_date": "2026-10-21",
+      "attribution_url": "https://terminal.freightos.com/",
+      "reported_40ft_usd": 9700
+    },
+    {
+      "lane": "china-north-europe",
+      "kind": "weekly_index_reading",
+      "20ft_usd": null,
+      "40ft_usd": 3442,
+      "source_url": "https://www.freightos.com/freight-resources/red-sea-container-traffic-set-for-full-return-in-q1-october-20-2026-update/",
+      "last_checked": "2026-10-24",
+      "source": "freightos_fbx",
+      "currency": "USD",
+      "index_lane": "FBX11",
+      "reading_date": "2026-10-20",
+      "publication_date": "2026-10-21",
+      "attribution_url": "https://terminal.freightos.com/",
+      "reported_40ft_usd": 3442
+    },
+    {
+      "lane": "china-mediterranean",
+      "kind": "weekly_index_reading",
+      "20ft_usd": null,
+      "40ft_usd": 3927,
+      "source_url": "https://www.freightos.com/freight-resources/red-sea-container-traffic-set-for-full-return-in-q1-october-20-2026-update/",
+      "last_checked": "2026-10-24",
+      "source": "freightos_fbx",
+      "currency": "USD",
+      "index_lane": "FBX13",
+      "reading_date": "2026-10-20",
+      "publication_date": "2026-10-21",
+      "attribution_url": "https://terminal.freightos.com/",
+      "reported_40ft_usd": 3927
     }
   ],
-  "last_checked": "2026-10-24T18:28:27.367399+00:00"
+  "last_checked": "2026-10-24"
 }

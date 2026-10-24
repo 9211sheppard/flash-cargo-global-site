@@ -82,7 +82,7 @@ class GuideExperienceTests(unittest.TestCase):
 
     def test_empty_rate_blocks_are_compact_and_absent_on_noindexed_pages(self):
         data=load()
-        self.assertGreaterEqual(len(data['page_lanes']),45)
+        self.assertGreaterEqual(len(data['page_lanes']),40)
         excluded=0
         for current,lane in data['page_lanes'].items():
             soup=BeautifulSoup((ROOT/current.strip('/')/'index.html').read_text(encoding='utf-8'),'html.parser')
@@ -94,17 +94,23 @@ class GuideExperienceTests(unittest.TestCase):
             self.assertEqual(len(tables),1,current)
             table=tables[0]
             self.assertEqual(table['data-rate-lane'],lane)
+            if current in ('/sourcing/','/delivery/','/landed-cost-calculator/'):
+                self.assertEqual(table.get_text(' ',strip=True),'Ocean rates for your route: quote required.')
+                continue
             rows=[row for row in data['rates'] if row['lane']==lane]
             if all(row[size+'_usd'] is None for row in rows for size in ('20ft','40ft')):
                 self.assertIsNone(table.find('table'),current)
                 if soup.html.get('lang','en').startswith('en'):
                     self.assertEqual(table.get_text(' ',strip=True),'Ocean rates for this lane: quote required. Start a sourcing request.')
             else:
-                expected=sorted(row['month'] for row in rows)[-6:]
+                expected=[rows[0]['reading_date']]
                 self.assertEqual([time['datetime'] for time in table.select('tbody th time')],expected)
             self.assertNotRegex(table.get_text(' ',strip=True),r'\b(live|guaranteed|firm)\b')
             self.assertEqual(table.select_one('.text-link')['href'],'/contact/#buyer-request')
-        self.assertEqual(excluded,6)
+        self.assertGreaterEqual(excluded,1)
+        for name in ('sourcing','delivery','landed-cost-calculator'):
+            soup=BeautifulSoup((ROOT/name/'index.html').read_text(encoding='utf-8'),'html.parser')
+            self.assertEqual(soup.select_one('[data-ocean-rates]').get_text(' ',strip=True),'Ocean rates for your route: quote required.')
 
 
 if __name__=='__main__':

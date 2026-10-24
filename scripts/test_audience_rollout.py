@@ -13,6 +13,7 @@ from bs4 import BeautifulSoup
 ROOT = Path(__file__).resolve().parents[1]
 from audience_page_content import AUDIENCE_PAGES
 from build_audience_rollout import NAV, settings, supplier_cta
+from build_trust_rollout import retired_target
 
 
 def soup(path):
@@ -33,6 +34,9 @@ class AudienceTests(unittest.TestCase):
         self.assertEqual(len(baseline), 111)
         for row in baseline:
             self.assertTrue((ROOT / row['file']).exists())
+            if retired_target(row['path']):
+                self.assertTrue(soup(row['file']).html.has_attr('data-retired-route'))
+                continue
             expected = 'Cargo Global | Sourcing & Delivery to the US, Canada and Mexico' if row['path'] == '/' else row['title']
             self.assertEqual(soup(row['file']).title.get_text(' ', strip=True), expected)
 
@@ -121,7 +125,7 @@ class AudienceTests(unittest.TestCase):
                 path = route + '/index.html' if route else 'index.html'
                 self.assertNotIn('noindex', soup(path).select_one('meta[name="robots"]')['content'])
         self.assertEqual(len(urls), len(set(urls)))
-        self.assertEqual(len(urls), 79)
+        self.assertEqual(len(urls), 84)
         self.assertFalse(any('/buyers/' in url for url in urls))
 
     def test_unique_metadata_and_no_public_contact_values(self):
@@ -130,6 +134,8 @@ class AudienceTests(unittest.TestCase):
             if path.relative_to(ROOT).parts[0] in ('output', 'content'):
                 continue
             document = soup(path.relative_to(ROOT))
+            if document.html.has_attr('data-retired-route'):
+                continue
             titles.append(document.title.get_text(' ', strip=True))
             descriptions.append(document.select_one('meta[name="description"]')['content'])
             self.assertNotRegex(str(document), r'[\w.+-]+@[\w.-]+\.[a-z]{2,}')
