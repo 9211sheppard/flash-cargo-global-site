@@ -14,6 +14,23 @@ OUT = ROOT / 'output' / 'cargo-global-reposition'
 IMAGE = Path(r'C:\Users\Owner\.codex\generated_images\019daff3-8eec-7d81-b7a9-fa761d68e614\exec-e91ef447-a1fe-4cb7-a1ea-e2f9f0ca07bc.png')
 
 
+def responsive_images():
+    source = IMAGE if IMAGE.exists() else ASSETS / 'sourcing-assortment.webp'
+    image = Image.open(source).convert('RGB')
+    rows = []
+    for width in (480, 768):
+        size = (width, round(image.height * width / image.width))
+        target = ASSETS / f'sourcing-assortment-{width}.webp'
+        image.resize(size, Image.Resampling.LANCZOS).save(target, 'WEBP', quality=84, method=6)
+        rows.append({'asset': target.name, 'bytes': target.stat().st_size, 'source_url': source.as_uri(), 'last_checked': datetime.now(timezone.utc).isoformat()})
+    OUT.mkdir(parents=True, exist_ok=True)
+    with (OUT / 'responsive-asset-sources.csv').open('w', encoding='utf-8-sig', newline='') as handle:
+        writer = csv.DictWriter(handle, fieldnames=['asset', 'bytes', 'source_url', 'last_checked'])
+        writer.writeheader()
+        writer.writerows(rows)
+    return rows
+
+
 def main():
     ASSETS.mkdir(exist_ok=True)
     OUT.mkdir(parents=True, exist_ok=True)
@@ -22,6 +39,7 @@ def main():
     image = Image.open(IMAGE).convert('RGB')
     image.save(ASSETS / 'sourcing-assortment.webp', 'WEBP', quality=84, method=6)
     image.save(ASSETS / 'sourcing-assortment.jpg', 'JPEG', quality=84, optimize=True, progressive=True)
+    responsive_images()
     records.append({'asset': 'sourcing-assortment.webp', 'purpose': 'Illustrative product assortment, not a client project', 'source_url': IMAGE.as_uri(), 'last_checked': now})
     session = requests.Session()
     session.headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36'

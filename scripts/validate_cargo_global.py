@@ -49,7 +49,7 @@ def main():
         if not soup.select_one('.wordmark-flash') or not soup.select_one('.wordmark-main'):
             failures.append('wordmark')
         nav_labels = [a.get_text(' ', strip=True).replace('↗', '').strip() for a in soup.select('#primary-menu a')]
-        if nav_labels != ['How It Works', 'What We Source', 'Delivery', 'FAQ', 'Start a Request']:
+        if nav_labels != ['Source Products', 'Guides', 'For Suppliers', 'Delivery', 'Contact']:
             failures.append('navigation')
         visible = BeautifulSoup(str(soup), 'html.parser')
         for el in visible.select('script, style, .wordmark-flash, .legal'):
@@ -93,7 +93,13 @@ def main():
         if failures:
             errors.append(entry)
     sitemap = ET.parse(ROOT / 'sitemap.xml')
-    listed = {el.text for el in sitemap.findall('.//{*}loc')}
+    if sitemap.getroot().tag.endswith('sitemapindex'):
+        listed = set()
+        for node in sitemap.findall('.//{*}loc'):
+            section_path = ROOT / urlsplit(node.text).path.lstrip('/')
+            listed.update(el.text for el in ET.parse(section_path).findall('.//{*}loc'))
+    else:
+        listed = {el.text for el in sitemap.findall('.//{*}loc')}
     diff = sorted(listed.symmetric_difference(indexed))
     entry = {'check': 'sitemap_indexed_pages', 'path': '/sitemap.xml', 'status': 'fail' if diff else 'pass', 'detail': '; '.join(diff), 'source_url': BASE + '/sitemap.xml', 'last_checked': NOW}
     checks.append(entry)

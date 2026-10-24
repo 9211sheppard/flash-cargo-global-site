@@ -23,77 +23,40 @@
     });
   }
 
-  const form = document.querySelector('[data-inquiry-form]');
-  if (!form) return;
-  const sourceFields = form.querySelector('[data-sourcing-fields]');
-  const freightFields = form.querySelector('[data-freight-fields]');
-  const freightNeeds = form.querySelector('textarea[name="freight_needs"]');
-  const summary = form.querySelector('[data-sourcing-summary]');
-  const started = form.elements.namedItem('form_started_at');
-  const quantity = form.elements.namedItem('quantity');
-  const unit = form.elements.namedItem('quantity_unit');
-  const value = (name) => form.elements.namedItem(name)?.value.trim() || '';
-
-  const setInquiry = (type) => {
-    const sourcing = type !== 'freight';
-    const selected = sourcing ? 'sourcing' : 'freight';
-    form.querySelector(`[name="inquiry_type"][value="${selected}"]`).checked = true;
-    sourceFields.hidden = !sourcing;
-    sourceFields.disabled = !sourcing;
-    freightFields.hidden = sourcing;
-    freightNeeds.disabled = sourcing;
-    freightNeeds.required = !sourcing;
-    summary.disabled = !sourcing;
-  };
-  const updateUnit = () => {
-    const whole = ['pieces', 'cartons'].includes(unit.value);
-    quantity.min = whole ? '1' : '0.001';
-    quantity.step = whole ? '1' : 'any';
-  };
-  const buildSummary = () => {
-    const price = value('target_price');
-    const currency = value('target_price_currency');
-    const basis = value('price_basis') === 'total_order' ? 'total order' : `per unit (${unit.value})`;
-    return [
-      'Inquiry: Product sourcing',
-      `Product: ${value('product_name')}`,
-      `Quantity: ${value('quantity')} ${unit.value}`,
-      `Specs: ${value('product_specs')}`,
-      `Photo or spec reference: ${value('spec_link') || 'Not provided'}`,
-      `Target price: ${price ? `${currency} ${price} ${basis}` : `Not provided (${currency})`}`,
-      `Delivery city: ${value('delivery_city')}`,
-      `Province or state: ${value('delivery_region')}`,
-      `Country: ${value('delivery_country')}`,
-      `Postal code: ${value('delivery_postal_code') || 'Not provided'}`,
-    ].join('\n');
-  };
-
-  started.value = String(Date.now());
-  form.querySelectorAll('[name="inquiry_type"]').forEach((input) => input.addEventListener('change', () => setInquiry(input.value)));
-  unit.addEventListener('change', updateUnit);
-  document.querySelectorAll('[data-inquiry]').forEach((link) => link.addEventListener('click', () => setInquiry(link.dataset.inquiry)));
-  form.addEventListener('submit', () => {
-    if (value('inquiry_type') !== 'freight') summary.value = buildSummary();
-  });
-  form.addEventListener('formdata', (event) => {
-    if (form.querySelector('[name="inquiry_type"][value="sourcing"]').checked) event.formData.set('freight_needs', buildSummary());
-  });
-  form.addEventListener('reset', () => queueMicrotask(() => {
-    setInquiry('sourcing');
-    updateUnit();
-    started.value = String(Date.now());
-  }));
   const requestParams = new URLSearchParams(location.search);
-  const prefill = (name, text) => {
-    const field = form.elements.namedItem(name);
-    if (!field || field.value || !text) return;
-    const limit = field.maxLength > 0 ? field.maxLength : 160;
-    field.value = text.slice(0, limit);
-  };
-  prefill('product_name', requestParams.get('product'));
-  prefill('delivery_country', requestParams.get('destination'));
-  const requestedOrigin = requestParams.get('origin');
-  if (requestedOrigin) prefill('product_specs', `Preferred supplier country: ${requestedOrigin.slice(0, 100)}`);
-  setInquiry(requestParams.get('inquiry'));
-  updateUnit();
+  document.querySelectorAll('[data-request-form]').forEach((form) => {
+    const started = form.elements.namedItem('form_started_at');
+    const enhanced = form.elements.namedItem('javascript_enabled');
+    const stamp = () => {
+      started.value = String(Date.now());
+      enhanced.value = 'yes';
+    };
+    const prefill = (name, text) => {
+      const field = form.elements.namedItem(name);
+      if (field && !field.value && text) field.value = text.slice(0, field.maxLength > 0 ? field.maxLength : 160);
+    };
+    stamp();
+    if (form.dataset.audience === 'buyer_sourcing') {
+      prefill('product_name', requestParams.get('product'));
+      prefill('origin_preference', requestParams.get('origin'));
+      prefill('delivery_country', requestParams.get('destination'));
+    }
+    const quantity = form.elements.namedItem('quantity');
+    const unit = form.elements.namedItem('quantity_unit');
+    const updateUnit = () => {
+      if (!quantity || !unit) return;
+      const whole = ['pieces', 'cartons'].includes(unit.value);
+      quantity.min = whole ? '1' : '0.001';
+      quantity.step = whole ? '1' : 'any';
+    };
+    unit?.addEventListener('change', updateUnit);
+    updateUnit();
+    form.addEventListener('reset', () => queueMicrotask(() => {
+      stamp();
+      updateUnit();
+    }));
+  });
+  if (['freight', 'delivery', 'delivery_only'].includes(requestParams.get('inquiry')) && document.querySelector('#delivery-request')) {
+    location.hash = 'delivery-request';
+  }
 })();

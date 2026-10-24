@@ -1,17 +1,25 @@
 # Cargo Global
 
-Global product sourcing, supplier shortlists, quality checks and door-to-door delivery for buyers across the US, Canada and Mexico.
+Global product sourcing for buyers across the US, Canada and Mexico. Supplier participation is reviewed privately; delivery is the final step of a sourcing order.
 
-## Primary pages
-- [Sourcing](https://flashcargoglobal.com/sourcing/)
-- [Start a Request](https://flashcargoglobal.com/contact/)
-- [Product sourcing guides](https://flashcargoglobal.com/freight-research/)
-- [About](https://flashcargoglobal.com/about/)
-- [Terms](https://flashcargoglobal.com/terms/)
-- [Privacy](https://flashcargoglobal.com/privacy-policy/)
+## Buyers first
+- [Source products](https://flashcargoglobal.com/sourcing/): Product briefs, supplier vetting, samples, quality checks and purchase approval.
+- [Sourcing guides](https://flashcargoglobal.com/freight-research/): Product and supplier-country preparation in five languages.
+- [Buyer request](https://flashcargoglobal.com/contact/#buyer-request): Share product requirements and a private reply address.
 
-## Scope
-Serving buyers across the US, Canada and Mexico. Supplier options, quality checks, currency, inclusions, exclusions and delivery requirements are confirmed before purchase.
+- [Order-cost worksheet](https://flashcargoglobal.com/landed-cost-calculator/): Compare confirmed component amounts in one currency; unknown charges remain quote required.
+
+## Suppliers second
+- [For suppliers](https://flashcargoglobal.com/suppliers/): Private manufacturer applications, capability review and vetting before introductions.
+
+## Delivery third
+- [Delivery](https://flashcargoglobal.com/delivery/): Air, full or shared ocean containers, customs coordination and final delivery.
+- [Delivery-only request](https://flashcargoglobal.com/contact/#delivery-request): Goods already sourced; request the delivery step only.
+
+## Company information
+- [About](https://flashcargoglobal.com/about/): The Cargo Global sourcing approach.
+- [Privacy](https://flashcargoglobal.com/privacy-policy/): Private request handling and spam protection.
+- [Terms](https://flashcargoglobal.com/terms/): Enquiries, quotes and order approvals.
 
 Last checked: 2026-10-24
 Source: https://flashcargoglobal.com/

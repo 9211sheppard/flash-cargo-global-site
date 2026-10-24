@@ -17,20 +17,28 @@ def page(path):
     return BeautifulSoup((ROOT / path).read_text(encoding='utf-8'), 'html.parser')
 
 
+def sitemap_urls():
+    root = ET.parse(ROOT / 'sitemap.xml')
+    if root.getroot().tag.endswith('sitemapindex'):
+        urls = set()
+        for child in root.findall('.//{*}loc'):
+            urls.update(node.text for node in ET.parse(ROOT / child.text.rsplit('/', 1)[-1]).findall('.//{*}loc'))
+        return urls
+    return {node.text for node in root.findall('.//{*}loc')}
+
+
 class SourcingAuditTests(unittest.TestCase):
     def test_sourcing_is_the_raw_html_default(self):
         for path in ('index.html', 'contact/index.html'):
             soup = page(path)
-            form = soup.select_one('[data-inquiry-form]')
+            form = soup.select_one('[data-request-form][data-audience="buyer_sourcing"]')
             sourcing = form.select_one('[data-sourcing-fields]')
             self.assertNotIn('hidden', sourcing.attrs)
             self.assertNotIn('disabled', sourcing.attrs)
-            self.assertTrue(form.select_one('[value="sourcing"]').has_attr('checked'))
-            self.assertTrue(form.select_one('[data-freight-fields]').has_attr('hidden'))
-            freight = form.select_one('textarea[name="freight_needs"]')
-            self.assertTrue(freight.has_attr('disabled'))
-            self.assertFalse(freight.has_attr('required'))
-            self.assertFalse(form.select_one('[data-sourcing-summary]').has_attr('disabled'))
+            self.assertEqual(form.select_one('[name="request_type"]')['value'], 'buyer_sourcing')
+            self.assertIsNone(form.select_one('textarea[name="freight_needs"]'))
+            self.assertIsNone(form.select_one('[name="full_name"], [name="phone"]'))
+            self.assertEqual(form.select_one('[name="email"]')['type'], 'email')
             self.assertIn(FORM_HOST, form['action'])
             self.assertIsNotNone(form.select_one('[name="website"]'))
             self.assertIsNotNone(form.select_one('[name="form_started_at"]'))
@@ -38,7 +46,7 @@ class SourcingAuditTests(unittest.TestCase):
     def test_launch_freight_page_is_noindex_and_not_listed(self):
         path = 'freight-research/air-vs-ocean-for-product-launch/index.html'
         self.assertIn('noindex', page(path).select_one('meta[name="robots"]')['content'])
-        urls = {node.text for node in ET.parse(ROOT / 'sitemap.xml').findall('.//{*}loc')}
+        urls = sitemap_urls()
         self.assertNotIn('https://flashcargoglobal.com/freight-research/air-vs-ocean-for-product-launch/', urls)
 
     def test_country_hub_and_legacy_article_titles_are_distinct(self):
@@ -91,7 +99,7 @@ class SourcingAuditTests(unittest.TestCase):
         self.assertEqual((ROOT / '.well-known/security.txt').read_text().splitlines()[0], 'Contact: https://flashcargoglobal.com/contact/')
 
     def test_no_held_lane_guide_enters_sitemap(self):
-        urls = [node.text for node in ET.parse(ROOT / 'sitemap.xml').findall('.//{*}loc')]
+        urls = sitemap_urls()
         self.assertFalse(any('/buyers/' in url for url in urls))
 
 

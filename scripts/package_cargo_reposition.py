@@ -10,13 +10,23 @@ OUT = ROOT / 'output' / 'cargo-global-reposition'
 
 
 def main():
+    configuration = json.loads((ROOT / 'content' / 'audience-settings.json').read_text(encoding='utf-8'))
+    if not configuration.get('turnstile_sitekey'):
+        raise SystemExit('Release blocked: configure the real supplier Turnstile widget before packaging or deployment.')
+    if not configuration.get('notification_delivery_verified'):
+        raise SystemExit('Release blocked: verify real enquiry delivery to the approved inbox before packaging or deployment.')
     selected = [p for p in ROOT.rglob('*.html') if p.relative_to(ROOT).parts[0] not in ('output', 'content')]
     selected.extend((ROOT / 'assets').iterdir())
+    selected.extend(ROOT.glob('sitemap-*.xml'))
     selected.extend(ROOT / path for path in [
-        'cargo-global.css', 'cargo-global.js', '_headers', '_redirects', 'README.md', 'sitemap.xml', 'robots.txt',
+        'cargo-global.css', 'cargo-global.js', 'calculator.mjs', '_headers', '_redirects', 'README.md', 'sitemap.xml', 'robots.txt',
         'llms.txt', 'humans.txt', '.well-known/security.txt', '.well-known/organization.json', '.well-known/citation-profile.json',
         'content/interim-inquiry-form.html', 'scripts/build_cargo_global.py', 'scripts/validate_cargo_global.py',
         'scripts/prepare_cargo_assets.py', 'scripts/package_cargo_reposition.py', 'scripts/test_sourcing_audit.py',
+        'scripts/build_audience_rollout.py', 'scripts/audience_page_content.py', 'content/audience-settings.json',
+        'scripts/calculator_page_content.py', 'scripts/capture_audience_baseline.py', 'content/audience-baseline.json',
+        'scripts/test_audience_rollout.py',
+        'scripts/check_live_sourcing_audit.py',
         'scripts/build_service_pages.py', 'scripts/build_knowledge_pages.py', 'scripts/build_industry_pages.py',
         'scripts/build_downstream_pages.py', 'scripts/build_planning_pages.py', 'scripts/build_multilingual_research_pages.py',
     ])
@@ -31,7 +41,8 @@ def main():
         if 'output/' in rel or rel.startswith('.git'):
             raise ValueError('Unsafe release path')
         total += len(data)
-        entries.append({'path': rel, 'encoding': 'base64' if binary else 'utf-8', 'content': base64.b64encode(data).decode() if binary else data.decode(), 'sha256': hashlib.sha256(data).hexdigest(), 'bytes': len(data)})
+        git_header = f'blob {len(data)}\0'.encode('ascii')
+        entries.append({'path': rel, 'encoding': 'base64' if binary else 'utf-8', 'content': base64.b64encode(data).decode() if binary else data.decode(), 'sha256': hashlib.sha256(data).hexdigest(), 'git_sha1': hashlib.sha1(git_header + data).hexdigest(), 'bytes': len(data)})
     (OUT / 'release.json').write_text(json.dumps(entries, ensure_ascii=False), encoding='utf-8')
     print(json.dumps({'files': len(entries), 'bytes': total, 'binary_files': sum(e['encoding'] == 'base64' for e in entries)}))
 

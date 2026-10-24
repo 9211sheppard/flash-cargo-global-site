@@ -93,7 +93,7 @@ def fragment(text):
 
 def header():
     return '''<header class="site-header"><nav class="site-nav" aria-label="Primary">
-<a class="wordmark" href="/" aria-label="Cargo Global home"><span class="wordmark-flash">flash</span><span class="wordmark-main">CARGO GLOBAL</span></a>
+<a class="wordmark" href="/"><span class="wordmark-flash">flash</span> <span class="wordmark-main">CARGO GLOBAL</span></a>
 <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-menu" title="Open navigation"><span aria-hidden="true">&#9776;</span><span class="sr-only">Open navigation</span></button>
 <div class="nav-menu" id="primary-menu"><a href="/#how-it-works">How It Works</a><a href="/#what-we-source">What We Source</a><a href="/#delivery">Delivery</a><a href="/#faq">FAQ</a><a class="nav-request" href="/contact/?inquiry=sourcing">Start a Request <span aria-hidden="true">&#8599;</span></a></div>
 </nav></header>'''
@@ -124,55 +124,10 @@ def faq_markup():
 
 
 def interim_form():
-    path = ROOT / 'content' / 'interim-inquiry-form.html'
-    if path.exists():
-        soup = fragment(path.read_text(encoding='utf-8'))
-    else:
-        soup = BeautifulSoup((ROOT / 'index.html').read_text(encoding='utf-8-sig'), 'html.parser')
-        form = soup.select_one('[data-inquiry-form]')
-        if not form:
-            raise RuntimeError('No existing intake form found; refusing to replace it with an unconnected form.')
-        path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(str(form), encoding='utf-8')
-        soup = fragment(str(form))
-    form = soup.form
-    form['aria-describedby'] = 'request-service-note'
-    for el in list(form.find_all(['h3', 'p'], recursive=False)):
-        el.decompose()
-    form.select_one('[name="full_name"]').attrs.pop('placeholder', None)
-    form.select_one('.hidden-field')['aria-hidden'] = 'true'
-    choices = form.select_one('.inquiry-kind')
-    sourcing_label = choices.select_one('[value="sourcing"]').parent
-    freight_label = choices.select_one('[value="freight"]').parent
-    freight_label.insert_before(sourcing_label.extract())
-    for el in form.select('button[type="submit"]'):
-        el.string = 'Submit Request'
-    for el in form.select('[name="quantity_unit"] option'):
-        el.string = el.get_text().capitalize()
-    # Existing private reply fields are retained until the owner chooses their replacement.
-    form.select_one('[name="inquiry_type"][value="freight"]').attrs.pop('checked', None)
-    form.select_one('[name="inquiry_type"][value="sourcing"]')['checked'] = ''
-    sourcing = form.select_one('[data-sourcing-fields]')
-    sourcing.attrs.pop('hidden', None)
-    sourcing.attrs.pop('disabled', None)
-    form.select_one('[data-freight-fields]')['hidden'] = ''
-    freight = form.select_one('textarea[name="freight_needs"]')
-    freight['disabled'] = ''
-    freight.attrs.pop('required', None)
-    form.select_one('[data-sourcing-summary]').attrs.pop('disabled', None)
-    if not form.select_one('[name="target_price_currency"] option'):
-        existing = form.select_one('[name="target_price_currency"]')
-        existing.replace_with(fragment('<label>Currency<select name="target_price_currency"><option value="USD">USD</option><option value="CAD">CAD</option></select></label>'))
-        price = form.select_one('[name="target_price"]')
-        if price:
-            price.parent.contents[0].replace_with('Target price ')
-    if not form.select_one('[name="delivery_region"]'):
-        country = form.select_one('[name="delivery_country"]').parent
-        country.insert_before(fragment('<label>Province or state<input name="delivery_region" maxlength="100" autocomplete="address-level1" required></label>'))
-    form.select_one('[name="product_specs"]')['maxlength'] = '1400'
-    form.select_one('[name="spec_link"]')['maxlength'] = '500'
-    path.write_text(str(form), encoding='utf-8', newline='\n')
-    return str(form)
+    from build_audience_rollout import buyer_form
+    form = buyer_form()
+    write('content/interim-inquiry-form.html', form)
+    return form
 
 
 def build_primary_pages():
@@ -180,25 +135,25 @@ def build_primary_pages():
     request_section = f'''<section class="section request-section" id="contact"><div class="section-intro"><p class="kicker">Start a request</p><h2>What are you looking for?</h2><p>Share the product, quantity, specifications and delivery destination. We reply within one business day.</p><p class="service-note" id="request-service-note">Your request is saved for review by our team.</p></div>{existing_form}</section>'''
     steps = [
         ('Tell us what you need', 'Product, quantity, specifications, target price and where it needs to go.'),
-        ('We shortlist vetted suppliers', 'We compare relevant options from our supplier network. Shortlist timing is confirmed after review.'),
+        ('We curate your supplier shortlist', 'We review relevant suppliers from our global network against your brief. Timing is confirmed after review.'),
         ('We check samples and quality', 'Review factory and sample photos. Samples and independent inspection are arranged as agreed.'),
         ('We buy, ship and deliver', 'One itemized landed price, with delivery and the agreed inclusions set out before purchase.'),
     ]
     process = ''.join(f'<li><span class="step-number">0{i}</span><h3>{escape(t)}</h3><p>{escape(d)}</p></li>' for i, (t, d) in enumerate(steps, 1))
     categories = ''.join(f'<a class="category-tile" href="{u}"><span class="category-number">0{i}</span><div><h3>{escape(t)}</h3><p>{escape(d)}</p></div><span class="tile-arrow" aria-hidden="true">&#8599;</span></a>' for i, (t, d, u) in enumerate(CATEGORIES, 1))
     benefits = [
-        ('One point of contact', 'A single contact coordinates your order, from the first brief to final delivery.'),
+        ('Personal attention, one point of contact', 'A single contact coordinates your order, from the first brief to final delivery.'),
         ('A clear shortlist schedule', 'Supplier-shortlist timing is agreed after we review the product and specifications.'),
         ('See it before approving it', 'Review factory and sample photos before purchase approval. Inspection scope is agreed in advance.'),
         ('One price, including delivery', 'An itemized USD or CAD quote sets out product, delivery and the agreed inclusions and exclusions.'),
         ('Updates until delivery', 'Stay informed as supplier selection, production, inspection and delivery progress.'),
     ]
     benefits_html = ''.join(f'<li><h3>{escape(t)}</h3><p>{escape(d)}</p></li>' for t, d in benefits)
-    main = f'''<section class="sourcing-hero"><img class="hero-media" src="/assets/sourcing-assortment.webp" alt="Illustrative assortment of metal parts, packaging, fabric, electronics, rice and building materials" width="1536" height="1024" fetchpriority="high"><div class="hero-content"><p class="kicker">Global sourcing. North American delivery.</p><h1>Buy Anything.<br>From Anywhere.<br>Delivered to Your Door.</h1><p class="hero-subline">Tell us what you need. We find the right supplier, check the quality, buy it and ship it to you across the US, Canada and Mexico.</p><a class="button primary" href="#contact" data-inquiry="sourcing">Start a Sourcing Request <span aria-hidden="true">&#8599;</span></a></div><span class="image-caption">Illustrative product assortment</span></section>
+    main = f'''<section class="sourcing-hero"><img class="hero-media" src="/assets/sourcing-assortment.webp" alt="Illustrative assortment of metal parts, packaging, fabric, electronics, rice and building materials" width="1536" height="1024" fetchpriority="high"><div class="hero-content"><p class="kicker">Considered sourcing. Personal attention.</p><h1>Buy Anything.<br>From Anywhere.<br>Delivered to Your Door.</h1><p class="hero-subline">Tell us what you need. We curate a supplier shortlist around your requirements, coordinate quality checks, and manage the purchase and delivery to your door across the US, Canada and Mexico.</p><a class="button primary" href="#contact" data-inquiry="sourcing">Start a Sourcing Request <span aria-hidden="true">&#8599;</span></a></div><span class="image-caption">Illustrative product assortment</span></section>
 <div class="region-band"><span>{REGION}</span><span>Supplier selection &middot; Quality checks &middot; Door-to-door delivery</span></div>
 <section class="section" id="how-it-works"><div class="section-heading"><p class="kicker">How it works</p><h2>From your brief<br>to your door.</h2></div><ol class="process-grid">{process}</ol></section>
 <section class="section categories-section" id="what-we-source"><div class="section-heading"><p class="kicker">What we source</p><h2>The right product.<br>The right supplier.</h2><p>For your business, your project or your next order. Product availability and import requirements are confirmed before purchase.</p></div><div class="category-grid">{categories}</div></section>
-<section class="section buyers-section"><div class="section-intro"><p class="kicker">Why buyers use us</p><h2>A considered approach<br>to every order.</h2><p>Less chasing. Clear decisions. Careful coordination from supplier selection through delivery.</p></div><ul class="benefit-list">{benefits_html}</ul></section>
+<section class="section buyers-section"><div class="section-intro"><p class="kicker">Why buyers use us</p><h2>Carefully selected.<br>Personally coordinated.</h2><p>A curated supplier shortlist. Clear approvals. One point of contact from your first brief to final delivery.</p></div><ul class="benefit-list">{benefits_html}</ul></section>
 <section class="section delivery-section" id="delivery"><p class="kicker">Delivery handled</p><h2>Air, ocean and truck,<br>door to door,<br>with customs handled.</h2><p>Delivery is part of the sourcing plan. We coordinate the route, customs and handoffs for the destination agreed in your quote.</p><p class="small">One itemized landed price in USD or CAD. Inclusions, exclusions and delivery requirements agreed upfront.</p></section>
 <section class="section faq-section" id="faq"><div class="section-intro"><p class="kicker">FAQ</p><h2>Before you<br>place an order.</h2></div><div class="faq-list">{faq_markup()}</div></section>{request_section}'''
     faq_schema = {'@type': 'FAQPage', 'mainEntity': [{'@type': 'Question', 'name': q, 'acceptedAnswer': {'@type': 'Answer', 'text': a}} for q, a in FAQS]}
@@ -208,7 +163,7 @@ def build_primary_pages():
     sourcing = '''<section class="page-intro"><p class="kicker">Product sourcing</p><h1>A buying partner.<br>From brief to delivery.</h1><p>Tell us what you need. Cargo Global sources through our global supplier network, compares quotes, coordinates samples and quality checks, and delivers to your door.</p><a class="button primary" href="/contact/?inquiry=sourcing">Start a Sourcing Request <span aria-hidden="true">&#8599;</span></a></section>
 <section class="section editorial"><h2>Start with a clear product brief</h2><p>Send the product description, quantity and unit, materials, dimensions, reference photos or specifications, target price in USD or CAD, and delivery city, province or state and country. Tell us which details are essential and where alternatives are acceptable.</p><h2>Compare a relevant supplier shortlist</h2><p>We work through our established global supplier network and compare options against your brief. Supplier minimum quantities, sample availability, production lead times and the timing for a shortlist are confirmed after review.</p><h2>Review samples and quality requirements</h2><p>Samples can be arranged before purchase approval. We help agree acceptance criteria and facilitate a pre-shipment inspection by a local independent inspector where included in the order. Scope, fees and the information you will receive are agreed in advance.</p><h2>Approve an itemized landed-price quote</h2><p>Your quote identifies the currency and the agreed product, quality, customs and delivery costs, plus any exclusions. You approve the written quote and payment stages before an order is placed. A website request does not authorize a purchase or commit you to payment.</p><h2>We coordinate the purchase and delivery</h2><p>One point of contact coordinates the order and status updates through delivery across the US, Canada and Mexico. Delivery requirements, access, unloading, appointments and any special handling are checked as part of the plan.</p><h2 id="packaging">Packaging</h2><p>Share the material, pack dimensions, printing requirements, quantity and any contact or product-protection requirements. A sample and artwork approval can be included before production.</p><h2 id="building-materials">Building materials</h2><p>Share the material grade, dimensions, finish, quantity and project destination. Product standards, test documentation and delivery access need to be reviewed before a supplier is approved.</p><a class="text-link" href="/freight-research/">Explore sourcing guides <span aria-hidden="true">&#8599;</span></a></section>'''
     write('sourcing/index.html', document('Product Sourcing, From Brief to Delivery', '/sourcing/', sourcing))
-    about = '''<section class="page-intro"><p class="kicker">About Cargo Global</p><h1>Your brief.<br>Our coordination.</h1><p>Cargo Global brings supplier selection, quality checks, buying and delivery into one coordinated sourcing process.</p></section><section class="section editorial"><h2>Global suppliers. North American buyers.</h2><p>We work through an established supplier network worldwide for buyers across the US, Canada and Mexico. Each request starts with the product, quantity, specifications, budget and delivery requirements, not a transport booking.</p><h2>Clear decisions before a purchase</h2><p>We compare relevant suppliers and quotes, coordinate samples when required, and facilitate independent pre-shipment inspections where agreed. You review the specifications, acceptance criteria and an itemized landed-price quote before approving a purchase.</p><h2>One point of contact until delivery</h2><p>Air, ocean, truck and customs coordination support the order. The agreed plan sets out the currency, payment stages, inclusions, exclusions, quality checks and delivery requirements. We provide status updates as the order moves from supplier selection to delivery.</p><a class="button primary" href="/contact/">Start a Sourcing Request <span aria-hidden="true">&#8599;</span></a></section>'''
+    about = '''<section class="page-intro"><p class="kicker">About Cargo Global</p><h1>Your brief.<br>Our coordination.</h1><p>A considered sourcing service, shaped around your brief. We curate supplier options, coordinate quality checks, and bring buying and delivery together through one point of contact.</p></section><section class="section editorial"><h2>Global suppliers. North American buyers.</h2><p>We work through an established supplier network worldwide for buyers across the US, Canada and Mexico. Each request starts with the product, quantity, specifications, budget and delivery requirements, not a transport booking.</p><h2>Clear decisions before a purchase</h2><p>We compare relevant suppliers and quotes, coordinate samples when required, and facilitate independent pre-shipment inspections where agreed. You review the specifications, acceptance criteria and an itemized landed-price quote before approving a purchase.</p><h2>One point of contact until delivery</h2><p>Air, ocean, truck and customs coordination support the order. The agreed plan sets out the currency, payment stages, inclusions, exclusions, quality checks and delivery requirements. We provide status updates as the order moves from supplier selection to delivery.</p><a class="button primary" href="/contact/">Start a Sourcing Request <span aria-hidden="true">&#8599;</span></a></section>'''
     write('about/index.html', document('About Our Sourcing Approach', '/about/', about))
     thank_you = '''<section class="page-intro"><p class="kicker">Request received</p><h1>Thank you.<br>Your request is saved.</h1><p>Your details have been saved for review by our team.</p><a class="button primary" href="/">Back to Cargo Global</a></section>'''
     write('thank-you.html', document('Request Received', '/thank-you.html', thank_you, noindex=True))
@@ -523,12 +478,15 @@ def main():
     rebuild_hubs()
     # Rerun metadata after hub names and canonical merges are settled.
     records = reconcile_library()
+    from build_audience_rollout import apply_rollout, split_sitemaps
+    apply_rollout()
     update_machine_files()
+    split_sitemaps()
     with (OUT / 'page-changes.csv').open('w', encoding='utf-8-sig', newline='') as handle:
         writer = csv.DictWriter(handle, fieldnames=list(records[0]))
         writer.writeheader()
         writer.writerows(records)
-    print(json.dumps({'pages': len(records), 'noindex': sum('noindex' in r['indexing'] for r in records), 'merged_routes': len(MERGES), 'backup': str(OUT / 'before-reposition.zip')}))
+    print(json.dumps({'pages': len(pages()), 'merged_routes': len(MERGES), 'backup': str(OUT / 'before-reposition.zip')}))
 
 
 if __name__ == '__main__':

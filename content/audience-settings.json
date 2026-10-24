@@ -1,0 +1,12 @@
+{
+  "brand": "Cargo Global",
+  "turnstile_sitekey": "0x4AAAAAAFjw3EgSKFMIJvbj",
+  "private_reply_email_approved": true,
+  "new_content_batch_limit": 100,
+  "require_indexing_review_before_next_batch": true,
+  "search_console_deferred_by_owner": true,
+  "notification_delivery_verified": true,
+  "notification_verification_method": "Owner confirmed both labelled test alerts arrived in Inbox in this chat on 2026-10-24.",
+  "source_url": "https://flashcargoglobal.com/",
+  "last_checked": "2026-10-24T12:33:57Z"
+}
