@@ -83,6 +83,17 @@
     updateUnit();
     started.value = String(Date.now());
   }));
-  setInquiry(new URLSearchParams(location.search).get('inquiry'));
+  const requestParams = new URLSearchParams(location.search);
+  const prefill = (name, text) => {
+    const field = form.elements.namedItem(name);
+    if (!field || field.value || !text) return;
+    const limit = field.maxLength > 0 ? field.maxLength : 160;
+    field.value = text.slice(0, limit);
+  };
+  prefill('product_name', requestParams.get('product'));
+  prefill('delivery_country', requestParams.get('destination'));
+  const requestedOrigin = requestParams.get('origin');
+  if (requestedOrigin) prefill('product_specs', `Preferred supplier country: ${requestedOrigin.slice(0, 100)}`);
+  setInquiry(requestParams.get('inquiry'));
   updateUnit();
 })();
