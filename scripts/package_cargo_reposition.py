@@ -13,10 +13,10 @@ def main():
     selected = [p for p in ROOT.rglob('*.html') if p.relative_to(ROOT).parts[0] not in ('output', 'content')]
     selected.extend((ROOT / 'assets').iterdir())
     selected.extend(ROOT / path for path in [
-        'cargo-global.css', 'cargo-global.js', '_redirects', 'README.md', 'sitemap.xml', 'robots.txt',
-        'llms.txt', 'humans.txt', '.well-known/organization.json', '.well-known/citation-profile.json',
+        'cargo-global.css', 'cargo-global.js', '_headers', '_redirects', 'README.md', 'sitemap.xml', 'robots.txt',
+        'llms.txt', 'humans.txt', '.well-known/security.txt', '.well-known/organization.json', '.well-known/citation-profile.json',
         'content/interim-inquiry-form.html', 'scripts/build_cargo_global.py', 'scripts/validate_cargo_global.py',
-        'scripts/prepare_cargo_assets.py', 'scripts/package_cargo_reposition.py',
+        'scripts/prepare_cargo_assets.py', 'scripts/package_cargo_reposition.py', 'scripts/test_sourcing_audit.py',
         'scripts/build_service_pages.py', 'scripts/build_knowledge_pages.py', 'scripts/build_industry_pages.py',
         'scripts/build_downstream_pages.py', 'scripts/build_planning_pages.py', 'scripts/build_multilingual_research_pages.py',
     ])

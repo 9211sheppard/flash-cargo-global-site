@@ -23,7 +23,14 @@ OUT.mkdir(parents=True, exist_ok=True)
 REGION = 'Serving buyers across the US, Canada and Mexico'
 DESCRIPTION = 'Global product sourcing, supplier shortlists, quality checks and door-to-door delivery for buyers across the US, Canada and Mexico.'
 FORM_ACTION = 'https://flash-cargo-form.old-sun-35f9.workers.dev/contact-request'
-POLICY = "default-src 'self'; img-src 'self' https://static.wixstatic.com data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; form-action 'self' https://flash-cargo-form.old-sun-35f9.workers.dev https://flash-cargo-global.old-sun-35f9.workers.dev; base-uri 'self'; object-src 'none'"
+POLICY = "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; form-action 'self' https://flash-cargo-form.old-sun-35f9.workers.dev; base-uri 'self'; object-src 'none'"
+ARTICLE_HEADINGS = {
+    '/freight-research/air-vs-ocean-for-product-launch/': 'Delivery options for a product launch',
+    '/freight-research/buyer-purchase-order-to-freight-plan/': 'Purchase order and supplier handoff checklist',
+    '/freight-research/factory-ready-date-vs-cargo-ready-date/': 'Factory readiness and supplier dispatch checklist',
+    '/freight-research/italy-clothing-manufacturer-export-to-australia/': 'Apparel supplier checklist: Italy to Australia',
+    '/freight-research/manufacturer-commercial-invoice-before-freight-quote/': 'Commercial invoice checks for supplier orders',
+}
 MERGES = {
     '/freight-research/india-apparel-manufacturer-export-to-north-america/': '/freight-research/en/india-apparel-manufacturer-export-to-north-america/',
     '/freight-research/china-electronics-supplier-export-to-canada/': '/freight-research/en/china-electronics-battery-goods-to-canada/',
@@ -44,7 +51,7 @@ LOCALES = {
 }
 HUB_LABELS = {
     'guides': {'en': 'Product sourcing guides', 'es': 'Guías de productos y proveedores', 'fr': 'Guides de produits et fournisseurs', 'zh': '产品与供应商指南', 'hi': 'उत्पाद और आपूर्तिकर्ता मार्गदर्शिकाएँ'},
-    'freight-research': {'en': 'Supplier-country checklists', 'es': 'Listas de proveedores por país', 'fr': 'Listes de préparation par pays fournisseur', 'zh': '供应国采购清单', 'hi': 'देशवार खरीद और आपूर्तिकर्ता जाँच-सूचियाँ'},
+    'freight-research': {'en': 'English supplier-country checklists', 'es': 'Listas de proveedores por país', 'fr': 'Listes de préparation par pays fournisseur', 'zh': '供应国采购清单', 'hi': 'देशवार खरीद और आपूर्तिकर्ता जाँच-सूचियाँ'},
 }
 FAQS = [
     ('Is there a minimum order?', 'Minimum quantities depend on the product and supplier. Tell us the quantity you have in mind; we confirm supplier minimums, sample options and any tooling or setup costs before you decide.'),
@@ -145,6 +152,14 @@ def interim_form():
     # Existing private reply fields are retained until the owner chooses their replacement.
     form.select_one('[name="inquiry_type"][value="freight"]').attrs.pop('checked', None)
     form.select_one('[name="inquiry_type"][value="sourcing"]')['checked'] = ''
+    sourcing = form.select_one('[data-sourcing-fields]')
+    sourcing.attrs.pop('hidden', None)
+    sourcing.attrs.pop('disabled', None)
+    form.select_one('[data-freight-fields]')['hidden'] = ''
+    freight = form.select_one('textarea[name="freight_needs"]')
+    freight['disabled'] = ''
+    freight.attrs.pop('required', None)
+    form.select_one('[data-sourcing-summary]').attrs.pop('disabled', None)
     if not form.select_one('[name="target_price_currency"] option'):
         existing = form.select_one('[name="target_price_currency"]')
         existing.replace_with(fragment('<label>Currency<select name="target_price_currency"><option value="USD">USD</option><option value="CAD">CAD</option></select></label>'))
@@ -162,7 +177,7 @@ def interim_form():
 
 def build_primary_pages():
     existing_form = interim_form()
-    request_section = f'''<section class="section request-section" id="contact"><div class="section-intro"><p class="kicker">Start a request</p><h2>What are you looking for?</h2><p>Share the product, quantity, specifications and delivery destination. We reply within one business day.</p><p class="service-note" id="request-service-note">Online requests are stored for review. Automatic email receipts are not currently enabled.</p></div>{existing_form}</section>'''
+    request_section = f'''<section class="section request-section" id="contact"><div class="section-intro"><p class="kicker">Start a request</p><h2>What are you looking for?</h2><p>Share the product, quantity, specifications and delivery destination. We reply within one business day.</p><p class="service-note" id="request-service-note">Your request is saved for review by our team.</p></div>{existing_form}</section>'''
     steps = [
         ('Tell us what you need', 'Product, quantity, specifications, target price and where it needs to go.'),
         ('We shortlist vetted suppliers', 'We compare relevant options from our supplier network. Shortlist timing is confirmed after review.'),
@@ -195,7 +210,7 @@ def build_primary_pages():
     write('sourcing/index.html', document('Product Sourcing, From Brief to Delivery', '/sourcing/', sourcing))
     about = '''<section class="page-intro"><p class="kicker">About Cargo Global</p><h1>Your brief.<br>Our coordination.</h1><p>Cargo Global brings supplier selection, quality checks, buying and delivery into one coordinated sourcing process.</p></section><section class="section editorial"><h2>Global suppliers. North American buyers.</h2><p>We work through an established supplier network worldwide for buyers across the US, Canada and Mexico. Each request starts with the product, quantity, specifications, budget and delivery requirements, not a transport booking.</p><h2>Clear decisions before a purchase</h2><p>We compare relevant suppliers and quotes, coordinate samples when required, and facilitate independent pre-shipment inspections where agreed. You review the specifications, acceptance criteria and an itemized landed-price quote before approving a purchase.</p><h2>One point of contact until delivery</h2><p>Air, ocean, truck and customs coordination support the order. The agreed plan sets out the currency, payment stages, inclusions, exclusions, quality checks and delivery requirements. We provide status updates as the order moves from supplier selection to delivery.</p><a class="button primary" href="/contact/">Start a Sourcing Request <span aria-hidden="true">&#8599;</span></a></section>'''
     write('about/index.html', document('About Our Sourcing Approach', '/about/', about))
-    thank_you = '''<section class="page-intro"><p class="kicker">Request received</p><h1>Thank you.<br>Your request is saved.</h1><p>Your details have been saved for review. Automatic email receipts are not currently enabled.</p><a class="button primary" href="/">Back to Cargo Global</a></section>'''
+    thank_you = '''<section class="page-intro"><p class="kicker">Request received</p><h1>Thank you.<br>Your request is saved.</h1><p>Your details have been saved for review by our team.</p><a class="button primary" href="/">Back to Cargo Global</a></section>'''
     write('thank-you.html', document('Request Received', '/thank-you.html', thank_you, noindex=True))
     for path, name in [('trust-center/index.html', 'Company Information'), ('official-flash-cargo-global/index.html', 'Official Website'), ('verify-flash-cargo-global/index.html', 'Company Verification')]:
         body = f'<section class="page-intro"><p class="kicker">Cargo Global</p><h1>{name}</h1><p>{DESCRIPTION}</p></section><section class="section editorial"><h2>Our official website</h2><p>The official website is flashcargoglobal.com. Product sourcing, quality checks and delivery requirements are confirmed in a written quote before an order is approved.</p><h2>Start with your requirements</h2><p>{REGION}. Use our online request form to share what you need.</p><a class="button primary" href="/contact/">Start a Request</a></section>'
@@ -207,11 +222,11 @@ def build_legal_pages():
     privacy = f'''<article class="guide-article legal-copy"><p class="kicker">Privacy</p><h1>Privacy Policy</h1><p class="updated">Updated {DAY}</p><p>Cargo Global uses the information you choose to submit to review product sourcing and delivery requests, prepare quotes and coordinate approved orders.</p>
 <h2>Information submitted with a request</h2><p>A request may include product specifications, quantities, a target price and currency, reference links and a delivery location. The current intake form also asks for private contact details to allow follow-up. These details are not published as a business directory or displayed in public enquiry listings. Please do not submit payment-card details, passwords, identity documents, health information or confidential material that is not needed to review the request.</p>
 <h2>How request information is used</h2><p>Information is used to assess feasibility, clarify specifications, compare supplier options, prepare a quote and, where you approve an order, coordinate samples, inspections, purchase and delivery. A request is not permission to place an order or charge a payment.</p>
-<h2>Hosting and request handling</h2><p>The public website is hosted using GitHub Pages. The request handler runs on Cloudflare Workers and stores submitted enquiries in Cloudflare storage. These providers may process technical information such as an IP address, request time and browser information to operate and protect their services. Existing business mail is provided through Microsoft 365. Automatic form-to-email delivery is not currently enabled.</p>
+<h2>Hosting and request handling</h2><p>The public website is hosted using GitHub Pages. The request handler runs on Cloudflare Workers and stores submitted enquiries in Cloudflare storage for review. These providers may process technical information such as an IP address, request time and browser information to operate and protect their services. Existing business mail is provided through Microsoft 365.</p>
 <h2>Sharing for an approved request or order</h2><p>Product and delivery information may need to be shared with relevant suppliers, inspectors, carriers or customs service providers to assess or fulfil the request. Only information relevant to that work should be shared. Do not include third-party personal information or proprietary documents unless you are authorized to provide them.</p>
-<h2>Reference files and links</h2><p>A linked photograph or specification remains subject to the privacy and access settings of the service hosting it. Avoid links that publicly expose unrelated documents. File-upload handling is not enabled in the current intake form.</p>
-<h2>Cookies and analytics</h2><p>This release does not include a shared advertising pixel, a Google Analytics tag or a tag-manager container. Hosting and security providers may still process necessary technical data. External source links have their own privacy practices.</p>
-<h2>Retention and access</h2><p>Request information should be kept only while it is needed for review, an approved order, applicable recordkeeping or a legitimate security purpose. A fixed retention schedule has not yet been established for the request store. You may ask to access, correct or remove information you submitted through the online contact route, subject to applicable legal requirements and our ability to verify the request.</p>
+<h2>Reference files and links</h2><p>Provide photographs and specifications through reference links. A linked photograph or specification remains subject to the privacy and access settings of the service hosting it. Avoid links that publicly expose unrelated documents.</p>
+<h2>Cookies and analytics</h2><p>Hosting and security providers may process necessary technical data to operate and protect the website. External source links have their own privacy practices.</p>
+<h2>Retention and access</h2><p>Request information should be kept only while it is needed for review, an approved order, applicable recordkeeping or a legitimate security purpose. You may ask to access, correct or remove information you submitted through the online contact route, subject to applicable legal requirements and our ability to verify the request.</p>
 <h2>Cross-border processing and security</h2><p>Providers and approved order partners may process information outside your country. Access should be limited to people and providers who need it for the request or order. No internet service can promise absolute security. Do not send sensitive documents through the general request form.</p>
 <h2>Questions or changes</h2><p>Use the <a href="/contact/">online request page</a> for privacy enquiries. This page may be updated when our services or request-handling arrangements change. The date above identifies the current version.</p></article>'''
     terms = f'''<article class="guide-article legal-copy"><p class="kicker">Terms</p><h1>Website and Request Terms</h1><p class="updated">Updated {DAY}</p><p>These terms explain how Cargo Global’s website and request process work. The written quotation and order-specific agreement set the commercial terms for any purchase or delivery.</p>
@@ -230,7 +245,7 @@ def build_legal_pages():
 
 def is_excluded(path):
     value = route(path)
-    if value in MERGES or value in ['/thank-you.html', '/404.html']:
+    if value in MERGES or value in ['/thank-you.html', '/404.html', '/freight-research/air-vs-ocean-for-product-launch/']:
         return True
     return path.relative_to(ROOT).parts[0] in ('planning', 'resources', 'services', 'trust-center', 'official-flash-cargo-global', 'verify-flash-cargo-global')
 
@@ -245,6 +260,8 @@ def rebrand_json(data):
                 out[key] = 'Flash Cargo Global'
             elif key == 'areaServed':
                 out[key] = ['US', 'CA', 'MX']
+            elif key == 'contactType':
+                out[key] = 'Product sourcing request'
             elif key in ('logo', 'image') and isinstance(value, str) and 'wixstatic.com' in value:
                 out[key] = BASE + '/assets/sourcing-assortment.jpg'
             else:
@@ -324,7 +341,7 @@ def reconcile_library():
                 el.string = text.rstrip('.… ')
         lang = str(soup.html.get('lang', 'en')).split('-')[0]
         locale = LOCALES.get(lang, LOCALES['en'])
-        if len(path.relative_to(ROOT).parts) == 3 and path.relative_to(ROOT).parts[0] in ('guides', 'freight-research'):
+        if len(path.relative_to(ROOT).parts) == 3 and path.relative_to(ROOT).parts[0] in ('guides', 'freight-research') and path.relative_to(ROOT).parts[1] in LOCALES:
             if soup.h1:
                 soup.h1.string = HUB_LABELS[path.relative_to(ROOT).parts[0]].get(lang, locale[0])
             lead = soup.select_one('.knowledge-hero .lead')
@@ -333,6 +350,8 @@ def reconcile_library():
             kicker = soup.select_one('.knowledge-hero .kicker')
             if kicker:
                 kicker.string = locale[0]
+        if current_route in ARTICLE_HEADINGS and soup.h1:
+            soup.h1.string = ARTICLE_HEADINGS[current_route]
         if path.relative_to(ROOT).parts[0] == 'industries' and soup.h1:
             mapping = {
                 'Industry Freight Planning': 'Product sourcing by category',
@@ -399,8 +418,9 @@ def merge_duplicates():
             if extras:
                 target_article.append(fragment('<section data-merged-checks><h2>Additional supplier preparation checks</h2><ul>' + ''.join(f'<li>{escape(t)}</li>' for t in extras) + '</ul></section>'))
             new_file.write_text(str(target), encoding='utf-8', newline='\n')
-        body = f'<section class="page-intro"><p class="kicker">Sourcing guide</p><h1>This checklist has moved.</h1><p>The consolidated version includes supplier preparation and product checks.</p><a class="button primary" href="{new}">Open the full checklist</a></section>'
-        stub = BeautifulSoup(document('Supplier Checklist Moved', old, body, noindex=True), 'html.parser')
+        label = target.h1.get_text(' ', strip=True) if target.h1 else 'Supplier checklist'
+        body = f'<section class="page-intro"><p class="kicker">Sourcing guide</p><h1>{escape(label)}: moved</h1><p>The consolidated version includes supplier preparation and product checks.</p><a class="button primary" href="{new}">Open the full checklist</a></section>'
+        stub = BeautifulSoup(document(label + ': moved', old, body, noindex=True), 'html.parser')
         stub.find('link', rel='canonical')['href'] = BASE + new
         stub.head.append(fragment(f'<meta http-equiv="refresh" content="0;url={new}">'))
         write(old.strip('/') + '/index.html', str(stub))
@@ -411,7 +431,10 @@ def rebuild_hubs():
         path = ROOT / root_name / 'index.html'
         soup = BeautifulSoup(path.read_text(encoding='utf-8'), 'html.parser')
         if root_name == 'freight-research':
-            soup.h1.string = 'Supplier-country checklists'
+            soup.h1.string = 'Global product sourcing guides'
+            description = 'Compare supplier-country checklists, product specifications, samples and quality checks before approving a sourcing order and delivery.'
+            for meta in soup.select('meta[name="description"], meta[property="og:description"], meta[name="twitter:description"]'):
+                meta['content'] = description
             lead = soup.select_one('.lead')
             if lead:
                 lead.string = 'Practical sourcing preparation for buyers comparing suppliers, samples, specifications and delivery requirements. Choose a language or a supplier-country checklist.'
@@ -420,6 +443,35 @@ def rebuild_hubs():
                 hero.select_one('.kicker').string = 'Sourcing preparation'
             if hero and not soup.select_one('.language-links'):
                 hero.append(fragment('<nav class="language-links" aria-label="Guide languages">' + ''.join(f'<a href="/freight-research/{code}/" lang="{code}">{label}</a>' for code, label in [('en','English'),('es','Español'),('fr','Français'),('zh','中文'),('hi','हिन्दी')]) + '</nav>'))
+            for title in soup.select('.section-title h2'):
+                title.string = 'Supplier preparation in five languages.'
+            for kicker in soup.select('.section-title .kicker'):
+                kicker.string = 'Multilingual sourcing'
+            cards = {
+                '/freight-research/en/': ('English sourcing guides', 'Compare supplier requirements, samples and quality checks in English.'),
+                '/freight-research/es/': ('Guías de abastecimiento en español', 'Compare proveedores, muestras, especificaciones y controles de calidad.'),
+                '/freight-research/fr/': ('Guides d’approvisionnement en français', 'Comparez les fournisseurs, les échantillons et les contrôles de qualité.'),
+                '/freight-research/zh/': ('中文采购指南', '比较供应商、样品、产品规格与质量检查要求。'),
+                '/freight-research/hi/': ('हिन्दी खरीद मार्गदर्शिकाएँ', 'आपूर्तिकर्ताओं, नमूनों, उत्पाद की विशिष्टताओं और गुणवत्ता जाँच की तुलना करें।'),
+                '/freight-research/italy-clothing-manufacturer-export-to-australia/': ('Italian apparel supplier checklist: Australia', 'Review apparel specifications, supplier documents, labels and buyer requirements before approving an order.'),
+                '/freight-research/en/italy-fashion-samples-to-japan/': ('Italian fashion samples: supplier checklist for Japan', 'Align sample specifications, supplier documents, packaging and buyer approval.'),
+                '/freight-research/en/india-apparel-manufacturer-export-to-north-america/': ('Indian apparel supplier checklist for North America', 'Compare fabric, sizing, labels, samples and purchase-order details before buying.'),
+                '/freight-research/en/china-electronics-battery-goods-to-canada/': ('Chinese electronics supplier checklist for Canada', 'Review specifications, battery details, test records and supplier documentation before order approval.'),
+                '/freight-research/en/mexico-automotive-parts-to-us-production/': ('Mexican automotive parts supplier checklist', 'Confirm part specifications, production requirements, packaging and the buyer handoff.'),
+                '/freight-research/manufacturer-commercial-invoice-before-freight-quote/': ('Commercial invoice checks for supplier orders', 'Keep supplier, product, quantity, value and order references consistent across the purchase file.'),
+                '/freight-research/buyer-purchase-order-to-freight-plan/': ('Purchase order and supplier handoff checklist', 'Turn the approved product brief into clear supplier, packing and delivery instructions.'),
+                '/freight-research/factory-ready-date-vs-cargo-ready-date/': ('Factory readiness and supplier dispatch checklist', 'Check production, inspection, packing and release milestones before arranging delivery.'),
+            }
+            for card in list(soup.select('.wide-grid article')):
+                anchor = card.select_one('h3 a[href]')
+                if not anchor:
+                    continue
+                if anchor['href'] == '/freight-research/air-vs-ocean-for-product-launch/':
+                    card.decompose()
+                elif anchor['href'] in cards:
+                    anchor.string, summary = cards[anchor['href']]
+                    if card.p:
+                        card.p.string = summary
         path.write_text(str(soup), encoding='utf-8', newline='\n')
 
 
@@ -429,7 +481,8 @@ def update_machine_files():
     citation = {'brand_name': 'Cargo Global', 'legal_name': 'Flash Cargo Global', 'official_domain': BASE + '/', 'public_contact_method': 'Online request form', 'contact_url': BASE + '/contact/', 'public_service_area': REGION, 'services': ['Global product sourcing', 'Supplier shortlisting', 'Samples and pre-shipment inspection coordination', 'Purchase and door-to-door delivery coordination'], 'public_guides': [BASE + '/freight-research/', BASE + '/guides/en/'], 'last_checked': STAMP, 'source_url': BASE + '/.well-known/citation-profile.json'}
     write('.well-known/citation-profile.json', json.dumps(citation, ensure_ascii=False, indent=2))
     write('humans.txt', 'Cargo Global\nGlobal product sourcing and delivery.\n' + REGION + '\nContact: ' + BASE + '/contact/\nLast checked: ' + DAY + '\n')
-    write('llms.txt', '# Cargo Global\n\n' + DESCRIPTION + '\n\n## Primary pages\n- [Sourcing](' + BASE + '/sourcing/)\n- [Start a Request](' + BASE + '/contact/)\n- [Supplier-country checklists](' + BASE + '/freight-research/)\n- [About](' + BASE + '/about/)\n- [Terms](' + BASE + '/terms/)\n- [Privacy](' + BASE + '/privacy-policy/)\n\n## Scope\n' + REGION + '. Supplier options, quality checks, currency, inclusions, exclusions and delivery requirements are confirmed before purchase.\n\n## Request status\nCurrent requests are saved for review. Automatic form-to-email delivery is not enabled.\n\nLast checked: ' + DAY + '\nSource: ' + BASE + '/\n')
+    write('llms.txt', '# Cargo Global\n\n' + DESCRIPTION + '\n\n## Primary pages\n- [Sourcing](' + BASE + '/sourcing/)\n- [Start a Request](' + BASE + '/contact/)\n- [Product sourcing guides](' + BASE + '/freight-research/)\n- [About](' + BASE + '/about/)\n- [Terms](' + BASE + '/terms/)\n- [Privacy](' + BASE + '/privacy-policy/)\n\n## Scope\n' + REGION + '. Supplier options, quality checks, currency, inclusions, exclusions and delivery requirements are confirmed before purchase.\n\nLast checked: ' + DAY + '\nSource: ' + BASE + '/\n')
+    write('.well-known/security.txt', 'Contact: ' + BASE + '/contact/\nPreferred-Languages: en\nCanonical: ' + BASE + '/.well-known/security.txt\nExpires: 2027-05-15T00:00:00Z\n')
     write('robots.txt', 'User-agent: *\nAllow: /\n\nSitemap: ' + BASE + '/sitemap.xml\n')
     namespace = 'http://www.sitemaps.org/schemas/sitemap/0.9'
     ET.register_namespace('', namespace)
