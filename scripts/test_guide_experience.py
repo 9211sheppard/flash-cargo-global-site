@@ -61,7 +61,7 @@ class GuideExperienceTests(unittest.TestCase):
     def test_normal_citation_links_retain_a_checked_date(self):
         for path in documents():
             soup=BeautifulSoup(path.read_text(encoding='utf-8'),'html.parser')
-            for anchor in soup.select('main li a[href^="https://"]'):
+            for anchor in soup.select('main li a[href^="https://"], main li a[href^="http://"]'):
                 if 'flashcargoglobal.com' not in anchor['href']:
                     self.assertIsNotNone(anchor.find_parent('li').find('time'),f'{route(path)}: {anchor["href"]}')
 

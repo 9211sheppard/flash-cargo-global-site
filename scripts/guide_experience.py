@@ -133,7 +133,7 @@ def clean_sources(soup):
                 previous.decompose()
             parent.decompose()
             removed += 1
-    for anchor in soup.select('main li a[href^="https://"]'):
+    for anchor in soup.select('main li a[href^="https://"], main li a[href^="http://"]'):
         if 'flashcargoglobal.com' in anchor['href']:
             continue
         item = anchor.find_parent('li')

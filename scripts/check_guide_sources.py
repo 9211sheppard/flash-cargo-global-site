@@ -27,7 +27,7 @@ def check(url):
 def main():
     urls = set()
     for path in documents():
-        for anchor in load_page(path).select('main li a[href^="https://"]'):
+        for anchor in load_page(path).select('main li a[href^="https://"], main li a[href^="http://"]'):
             url=anchor['href']
             parsed=urlsplit(url)
             if parsed.hostname and parsed.hostname!='flashcargoglobal.com' and not parsed.username:
