@@ -76,7 +76,7 @@ BUYER = {
 }
 
 SUPPLIER = {
-    'audience': 'supplier', 'path': '/suppliers/', 'title': 'Sell to North American Buyers',
+    'audience': 'supplier', 'path': '/suppliers/', 'title': 'Sell to Buyers in the USA, Canada and Mexico',
     'h1': 'Sell to Buyers in the USA, Canada and Mexico.', 'kicker': 'For suppliers',
     'description': 'Apply privately as a manufacturer or supplier. Cargo Global reviews capability, samples and documents before introducing suitable North American buyers.',
     'quick_answer': 'Cargo Global reviews factories, manufacturers and private-label producers for relevant buyer requirements in the USA, Canada and Mexico. Present your products, capacity, minimum orders and supporting documents through the private application. Every supplier is reviewed before a buyer introduction; submitting information does not guarantee approval, introductions or orders.',

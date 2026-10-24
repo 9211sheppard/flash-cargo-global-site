@@ -19,7 +19,7 @@
       ],
       "publication_weekday": 3,
       "publication_allowed": false,
-      "publication_terms_url": "https://www.drewry.co.uk/maritime-research/maritime-research-related-content/standard-licence-terms",
+      "publication_terms_url": "https://www.drewry.co.uk/terms",
       "lane_sizes": {
         "shanghai-los-angeles": [
           "40ft"
@@ -34,7 +34,24 @@
           "40ft"
         ]
       },
-      "lane_regions": {"shanghai-los-angeles":["shanghai-ningbo","los-angeles-long-beach"],"shanghai-new-york":["shanghai-ningbo","new-york-new-jersey"],"shanghai-rotterdam":["shanghai-ningbo","rotterdam"],"shanghai-genoa":["shanghai-ningbo","genoa"]},
+      "lane_regions": {
+        "shanghai-los-angeles": [
+          "shanghai-ningbo",
+          "los-angeles-long-beach"
+        ],
+        "shanghai-new-york": [
+          "shanghai-ningbo",
+          "new-york-new-jersey"
+        ],
+        "shanghai-rotterdam": [
+          "shanghai-ningbo",
+          "rotterdam"
+        ],
+        "shanghai-genoa": [
+          "shanghai-ningbo",
+          "genoa"
+        ]
+      },
       "history_status": "A current public weekly commentary is not a verified complete historical monthly series."
     },
     "freightos_fbx": {
@@ -88,7 +105,32 @@
           "20ft"
         ]
       },
-      "lane_regions": {"shanghai-us-west-coast":["shanghai-ningbo","us-west-coast"],"shanghai-us-east-coast":["shanghai-ningbo","us-east-coast"],"shanghai-europe":["shanghai-ningbo","north-europe"],"shanghai-mediterranean":["shanghai-ningbo","mediterranean"],"shanghai-east-japan":["shanghai-ningbo","east-japan"],"shanghai-west-japan":["shanghai-ningbo","west-japan"]},
+      "lane_regions": {
+        "shanghai-us-west-coast": [
+          "shanghai-ningbo",
+          "us-west-coast"
+        ],
+        "shanghai-us-east-coast": [
+          "shanghai-ningbo",
+          "us-east-coast"
+        ],
+        "shanghai-europe": [
+          "shanghai-ningbo",
+          "north-europe"
+        ],
+        "shanghai-mediterranean": [
+          "shanghai-ningbo",
+          "mediterranean"
+        ],
+        "shanghai-east-japan": [
+          "shanghai-ningbo",
+          "east-japan"
+        ],
+        "shanghai-west-japan": [
+          "shanghai-ningbo",
+          "west-japan"
+        ]
+      },
       "history_status": "Official documentation states historical index data requires subscription access. Lane units must be checked: most routes USD/TEU; US coasts USD/FEU."
     }
   },
@@ -292,271 +334,298 @@
       "month": "2026-09",
       "20ft_usd": null,
       "40ft_usd": null,
-      "source": "Quote required; no verified matching complete monthly series.",
+      "source": "Quote required; no verified matching complete series for this period.",
       "source_url": "https://www.drewry.co.uk/supply-chain-advisors/supply-chain-expertise/world-container-index-assessed-by-drewry",
       "checked_sources": [
         "drewry_wci",
         "freightos_fbx",
         "sse_scfi"
       ],
-      "date_pulled": "2026-10-24T13:39:47.510124+00:00",
-      "evidence": {}
+      "date_pulled": "2026-10-24T18:28:27.367399+00:00",
+      "evidence": {},
+      "period": "monthly_average"
     },
     {
       "lane": "brazil-north-america",
       "month": "2026-10",
       "20ft_usd": null,
       "40ft_usd": null,
-      "source": "Quote required; no verified matching complete monthly series.",
+      "source": "Quote required; no verified matching complete series for this period.",
       "source_url": "https://www.drewry.co.uk/supply-chain-advisors/supply-chain-expertise/world-container-index-assessed-by-drewry",
       "checked_sources": [
         "drewry_wci",
         "freightos_fbx",
         "sse_scfi"
       ],
-      "date_pulled": "2026-10-24T13:39:47.510124+00:00",
-      "evidence": {}
+      "date_pulled": "2026-10-24T18:28:27.367399+00:00",
+      "evidence": {},
+      "period": "month_to_date",
+      "as_of": "2026-10-24"
     },
     {
       "lane": "china-canada",
       "month": "2026-09",
       "20ft_usd": null,
       "40ft_usd": null,
-      "source": "Quote required; no verified matching complete monthly series.",
+      "source": "Quote required; no verified matching complete series for this period.",
       "source_url": "https://www.drewry.co.uk/supply-chain-advisors/supply-chain-expertise/world-container-index-assessed-by-drewry",
       "checked_sources": [
         "drewry_wci",
         "freightos_fbx",
         "sse_scfi"
       ],
-      "date_pulled": "2026-10-24T13:39:47.510124+00:00",
-      "evidence": {}
+      "date_pulled": "2026-10-24T18:28:27.367399+00:00",
+      "evidence": {},
+      "period": "monthly_average"
     },
     {
       "lane": "china-canada",
       "month": "2026-10",
       "20ft_usd": null,
       "40ft_usd": null,
-      "source": "Quote required; no verified matching complete monthly series.",
+      "source": "Quote required; no verified matching complete series for this period.",
       "source_url": "https://www.drewry.co.uk/supply-chain-advisors/supply-chain-expertise/world-container-index-assessed-by-drewry",
       "checked_sources": [
         "drewry_wci",
         "freightos_fbx",
         "sse_scfi"
       ],
-      "date_pulled": "2026-10-24T13:39:47.510124+00:00",
-      "evidence": {}
+      "date_pulled": "2026-10-24T18:28:27.367399+00:00",
+      "evidence": {},
+      "period": "month_to_date",
+      "as_of": "2026-10-24"
     },
     {
       "lane": "india-north-america",
       "month": "2026-09",
       "20ft_usd": null,
       "40ft_usd": null,
-      "source": "Quote required; no verified matching complete monthly series.",
+      "source": "Quote required; no verified matching complete series for this period.",
       "source_url": "https://www.drewry.co.uk/supply-chain-advisors/supply-chain-expertise/world-container-index-assessed-by-drewry",
       "checked_sources": [
         "drewry_wci",
         "freightos_fbx",
         "sse_scfi"
       ],
-      "date_pulled": "2026-10-24T13:39:47.510124+00:00",
-      "evidence": {}
+      "date_pulled": "2026-10-24T18:28:27.367399+00:00",
+      "evidence": {},
+      "period": "monthly_average"
     },
     {
       "lane": "india-north-america",
       "month": "2026-10",
       "20ft_usd": null,
       "40ft_usd": null,
-      "source": "Quote required; no verified matching complete monthly series.",
+      "source": "Quote required; no verified matching complete series for this period.",
       "source_url": "https://www.drewry.co.uk/supply-chain-advisors/supply-chain-expertise/world-container-index-assessed-by-drewry",
       "checked_sources": [
         "drewry_wci",
         "freightos_fbx",
         "sse_scfi"
       ],
-      "date_pulled": "2026-10-24T13:39:47.510124+00:00",
-      "evidence": {}
+      "date_pulled": "2026-10-24T18:28:27.367399+00:00",
+      "evidence": {},
+      "period": "month_to_date",
+      "as_of": "2026-10-24"
     },
     {
       "lane": "italy-japan",
       "month": "2026-09",
       "20ft_usd": null,
       "40ft_usd": null,
-      "source": "Quote required; no verified matching complete monthly series.",
+      "source": "Quote required; no verified matching complete series for this period.",
       "source_url": "https://www.drewry.co.uk/supply-chain-advisors/supply-chain-expertise/world-container-index-assessed-by-drewry",
       "checked_sources": [
         "drewry_wci",
         "freightos_fbx",
         "sse_scfi"
       ],
-      "date_pulled": "2026-10-24T13:39:47.510124+00:00",
-      "evidence": {}
+      "date_pulled": "2026-10-24T18:28:27.367399+00:00",
+      "evidence": {},
+      "period": "monthly_average"
     },
     {
       "lane": "italy-japan",
       "month": "2026-10",
       "20ft_usd": null,
       "40ft_usd": null,
-      "source": "Quote required; no verified matching complete monthly series.",
+      "source": "Quote required; no verified matching complete series for this period.",
       "source_url": "https://www.drewry.co.uk/supply-chain-advisors/supply-chain-expertise/world-container-index-assessed-by-drewry",
       "checked_sources": [
         "drewry_wci",
         "freightos_fbx",
         "sse_scfi"
       ],
-      "date_pulled": "2026-10-24T13:39:47.510124+00:00",
-      "evidence": {}
+      "date_pulled": "2026-10-24T18:28:27.367399+00:00",
+      "evidence": {},
+      "period": "month_to_date",
+      "as_of": "2026-10-24"
     },
     {
       "lane": "mexico-us",
       "month": "2026-09",
       "20ft_usd": null,
       "40ft_usd": null,
-      "source": "Quote required; no verified matching complete monthly series.",
+      "source": "Quote required; no verified matching complete series for this period.",
       "source_url": "https://www.drewry.co.uk/supply-chain-advisors/supply-chain-expertise/world-container-index-assessed-by-drewry",
       "checked_sources": [
         "drewry_wci",
         "freightos_fbx",
         "sse_scfi"
       ],
-      "date_pulled": "2026-10-24T13:39:47.510124+00:00",
-      "evidence": {}
+      "date_pulled": "2026-10-24T18:28:27.367399+00:00",
+      "evidence": {},
+      "period": "monthly_average"
     },
     {
       "lane": "mexico-us",
       "month": "2026-10",
       "20ft_usd": null,
       "40ft_usd": null,
-      "source": "Quote required; no verified matching complete monthly series.",
+      "source": "Quote required; no verified matching complete series for this period.",
       "source_url": "https://www.drewry.co.uk/supply-chain-advisors/supply-chain-expertise/world-container-index-assessed-by-drewry",
       "checked_sources": [
         "drewry_wci",
         "freightos_fbx",
         "sse_scfi"
       ],
-      "date_pulled": "2026-10-24T13:39:47.510124+00:00",
-      "evidence": {}
+      "date_pulled": "2026-10-24T18:28:27.367399+00:00",
+      "evidence": {},
+      "period": "month_to_date",
+      "as_of": "2026-10-24"
     },
     {
       "lane": "turkey-us",
       "month": "2026-09",
       "20ft_usd": null,
       "40ft_usd": null,
-      "source": "Quote required; no verified matching complete monthly series.",
+      "source": "Quote required; no verified matching complete series for this period.",
       "source_url": "https://www.drewry.co.uk/supply-chain-advisors/supply-chain-expertise/world-container-index-assessed-by-drewry",
       "checked_sources": [
         "drewry_wci",
         "freightos_fbx",
         "sse_scfi"
       ],
-      "date_pulled": "2026-10-24T13:39:47.510124+00:00",
-      "evidence": {}
+      "date_pulled": "2026-10-24T18:28:27.367399+00:00",
+      "evidence": {},
+      "period": "monthly_average"
     },
     {
       "lane": "turkey-us",
       "month": "2026-10",
       "20ft_usd": null,
       "40ft_usd": null,
-      "source": "Quote required; no verified matching complete monthly series.",
+      "source": "Quote required; no verified matching complete series for this period.",
       "source_url": "https://www.drewry.co.uk/supply-chain-advisors/supply-chain-expertise/world-container-index-assessed-by-drewry",
       "checked_sources": [
         "drewry_wci",
         "freightos_fbx",
         "sse_scfi"
       ],
-      "date_pulled": "2026-10-24T13:39:47.510124+00:00",
-      "evidence": {}
+      "date_pulled": "2026-10-24T18:28:27.367399+00:00",
+      "evidence": {},
+      "period": "month_to_date",
+      "as_of": "2026-10-24"
     },
     {
       "lane": "vietnam-europe",
       "month": "2026-09",
       "20ft_usd": null,
       "40ft_usd": null,
-      "source": "Quote required; no verified matching complete monthly series.",
+      "source": "Quote required; no verified matching complete series for this period.",
       "source_url": "https://www.drewry.co.uk/supply-chain-advisors/supply-chain-expertise/world-container-index-assessed-by-drewry",
       "checked_sources": [
         "drewry_wci",
         "freightos_fbx",
         "sse_scfi"
       ],
-      "date_pulled": "2026-10-24T13:39:47.510124+00:00",
-      "evidence": {}
+      "date_pulled": "2026-10-24T18:28:27.367399+00:00",
+      "evidence": {},
+      "period": "monthly_average"
     },
     {
       "lane": "vietnam-europe",
       "month": "2026-10",
       "20ft_usd": null,
       "40ft_usd": null,
-      "source": "Quote required; no verified matching complete monthly series.",
+      "source": "Quote required; no verified matching complete series for this period.",
       "source_url": "https://www.drewry.co.uk/supply-chain-advisors/supply-chain-expertise/world-container-index-assessed-by-drewry",
       "checked_sources": [
         "drewry_wci",
         "freightos_fbx",
         "sse_scfi"
       ],
-      "date_pulled": "2026-10-24T13:39:47.510124+00:00",
-      "evidence": {}
+      "date_pulled": "2026-10-24T18:28:27.367399+00:00",
+      "evidence": {},
+      "period": "month_to_date",
+      "as_of": "2026-10-24"
     },
     {
       "lane": "italy-australia",
       "month": "2026-09",
       "20ft_usd": null,
       "40ft_usd": null,
-      "source": "Quote required; no verified matching complete monthly series.",
+      "source": "Quote required; no verified matching complete series for this period.",
       "source_url": "https://www.drewry.co.uk/supply-chain-advisors/supply-chain-expertise/world-container-index-assessed-by-drewry",
       "checked_sources": [
         "drewry_wci",
         "freightos_fbx",
         "sse_scfi"
       ],
-      "date_pulled": "2026-10-24T13:39:47.510124+00:00",
-      "evidence": {}
+      "date_pulled": "2026-10-24T18:28:27.367399+00:00",
+      "evidence": {},
+      "period": "monthly_average"
     },
     {
       "lane": "italy-australia",
       "month": "2026-10",
       "20ft_usd": null,
       "40ft_usd": null,
-      "source": "Quote required; no verified matching complete monthly series.",
+      "source": "Quote required; no verified matching complete series for this period.",
       "source_url": "https://www.drewry.co.uk/supply-chain-advisors/supply-chain-expertise/world-container-index-assessed-by-drewry",
       "checked_sources": [
         "drewry_wci",
         "freightos_fbx",
         "sse_scfi"
       ],
-      "date_pulled": "2026-10-24T13:39:47.510124+00:00",
-      "evidence": {}
+      "date_pulled": "2026-10-24T18:28:27.367399+00:00",
+      "evidence": {},
+      "period": "month_to_date",
+      "as_of": "2026-10-24"
     },
     {
       "lane": "shipment-specific",
       "month": "2026-09",
       "20ft_usd": null,
       "40ft_usd": null,
-      "source": "Quote required; no verified matching complete monthly series.",
+      "source": "Quote required; no verified matching complete series for this period.",
       "source_url": "https://www.drewry.co.uk/supply-chain-advisors/supply-chain-expertise/world-container-index-assessed-by-drewry",
       "checked_sources": [
         "drewry_wci",
         "freightos_fbx",
         "sse_scfi"
       ],
-      "date_pulled": "2026-10-24T13:39:47.510124+00:00",
-      "evidence": {}
+      "date_pulled": "2026-10-24T18:28:27.367399+00:00",
+      "evidence": {},
+      "period": "monthly_average"
     },
     {
       "lane": "shipment-specific",
       "month": "2026-10",
       "20ft_usd": null,
       "40ft_usd": null,
-      "source": "Quote required; no verified matching complete monthly series.",
+      "source": "Quote required; no verified matching complete series for this period.",
       "source_url": "https://www.drewry.co.uk/supply-chain-advisors/supply-chain-expertise/world-container-index-assessed-by-drewry",
       "checked_sources": [
         "drewry_wci",
         "freightos_fbx",
         "sse_scfi"
       ],
-      "date_pulled": "2026-10-24T13:39:47.510124+00:00",
-      "evidence": {}
+      "date_pulled": "2026-10-24T18:28:27.367399+00:00",
+      "evidence": {},
+      "period": "month_to_date",
+      "as_of": "2026-10-24"
     }
   ],
-  "last_checked": "2026-10-24T13:39:47.510124+00:00"
+  "last_checked": "2026-10-24T18:28:27.367399+00:00"
 }

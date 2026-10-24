@@ -25,7 +25,7 @@ def main():
     selected.extend(ROOT / path for path in [
         'cargo-global.css', 'cargo-global.js', 'calculator.mjs', '_headers', '_redirects', 'README.md', 'sitemap.xml', 'robots.txt',
         'llms.txt', 'humans.txt', '.well-known/security.txt', '.well-known/organization.json', '.well-known/citation-profile.json',
-        'content/interim-inquiry-form.html', 'scripts/build_cargo_global.py', 'scripts/validate_cargo_global.py',
+        'content/interim-inquiry-form.html', 'content/downstream_pages.json', 'scripts/build_cargo_global.py', 'scripts/validate_cargo_global.py',
         'scripts/prepare_cargo_assets.py', 'scripts/package_cargo_reposition.py', 'scripts/test_sourcing_audit.py',
         'scripts/build_audience_rollout.py', 'scripts/audience_page_content.py', 'content/audience-settings.json',
         'scripts/calculator_page_content.py', 'scripts/capture_audience_baseline.py', 'content/audience-baseline.json',

@@ -1,4 +1,4 @@
-"""Collect public weekly evidence; refresh only completed monthly series."""
+"""Refresh verified monthly and explicitly dated month-to-date index series."""
 
 import argparse
 import csv
@@ -10,7 +10,7 @@ from pathlib import Path
 import requests
 from bs4 import BeautifulSoup
 
-from ocean_rates import DATA_FILE, ROOT, SIZES, monthly_average, owner_today, publication_dates, round_usd, validate
+from ocean_rates import DATA_FILE, ROOT, SIZES, INDEX_SOURCES, NUMERIC_DESTINATIONS, monthly_average, owner_today, publication_dates, validate
 
 OUT = ROOT / 'output' / 'ocean-rates'
 
@@ -67,7 +67,7 @@ def refresh(data, *, today, checked, pages):
             if identity not in observations or observations[identity]['usd'] == row['usd']:
                 observations[identity] = row
     data['observations'] = sorted(observations.values(), key=lambda row:(row['reading_date'],row['lane'],row['size']))
-    months = set(data['initial_months'])
+    months = set(data['initial_months']) | {today.strftime('%Y-%m')}
     year, number = today.year, today.month - 1
     if number == 0:
         year, number = year - 1, 12
@@ -83,20 +83,26 @@ def refresh(data, *, today, checked, pages):
     for lane_id, lane in data['lanes'].items():
         for month in months:
             row = previous.get((lane_id,month),{'lane':lane_id,'month':month,'20ft_usd':None,'40ft_usd':None,'source':'Quote required; no verified matching complete monthly series.','source_url':drewry['source_url'],'checked_sources':list(data['sources']),'date_pulled':checked,'evidence':{}})
-            if all(row[size+'_usd'] is None for size in SIZES):
-                row['date_pulled'] = checked
+            as_of = today.isoformat() if month == today.strftime('%Y-%m') else None
+            row['period'] = 'month_to_date' if as_of else 'monthly_average'
+            row.pop('as_of', None)
+            if as_of:
+                row['as_of'] = as_of
+            row.update({'20ft_usd':None,'40ft_usd':None,'evidence':{},'date_pulled':checked,'source':'Quote required; no verified matching complete series for this period.','source_url':drewry['source_url']})
             for size in SIZES:
-                if not lane.get('index_lane') or not lane.get('origin_region') or not lane.get('destination_region'):
+                if not lane.get('index_lane') or lane.get('origin_region') not in {'shanghai-ningbo', 'china-east-asia'} or lane.get('destination_region') not in NUMERIC_DESTINATIONS:
                     continue
                 for source_id, source in data['sources'].items():
-                    if not source.get('publication_allowed'):
+                    if source_id not in INDEX_SOURCES or not source.get('publication_allowed') or (size == '20ft' and source_id != 'sse_scfi'):
                         continue
                     if size not in source.get('lane_sizes',{}).get(lane['index_lane'],[]):
                         continue
                     if source.get('lane_regions',{}).get(lane['index_lane']) != [lane['origin_region'],lane['destination_region']]:
                         continue
                     expected = publication_dates(month,source['publication_weekday'])
-                    amount = monthly_average(data['observations'],month=month,lane=lane['index_lane'],size=size,source=source_id,expected_dates=expected,today=today)
+                    if as_of:
+                        expected = [day for day in expected if day <= as_of]
+                    amount = monthly_average(data['observations'],month=month,lane=lane['index_lane'],size=size,source=source_id,expected_dates=expected,today=today,as_of=as_of)
                     if amount is None:
                         continue
                     values = [value for value in data['observations'] if value['source']==source_id and value['lane']==lane['index_lane'] and value['size']==size and value['reading_date'] in expected]
@@ -105,18 +111,9 @@ def refresh(data, *, today, checked, pages):
                     row['source_url'] = source['source_url']
                     row['date_pulled'] = checked
                     row['evidence'][size] = {'kind':'weekly_index_average','source':source_id,'lane':lane_id,'expected_reading_dates':expected,'observations':values}
+                    if as_of:
+                        row['evidence'][size]['as_of'] = as_of
                     break
-            if row['20ft_usd'] is None and month < today.strftime('%Y-%m') and lane.get('origin_region') and lane.get('destination_region'):
-                quotes = [quote for quote in data.get('dated_quotes', []) if quote.get('lane')==lane_id and quote.get('size')=='20ft' and quote.get('currency')=='USD' and quote.get('origin_region')==lane['origin_region'] and quote.get('destination_region')==lane['destination_region'] and quote.get('quote_date','').startswith(month+'-') and quote.get('publication_approved') and quote.get('scope')=='port_to_port' and data['sources'].get(quote.get('source'),{}).get('publication_allowed')]
-                if quotes:
-                    quote=max(quotes,key=lambda value:value['quote_date'])
-                    source=data['sources'][quote['source']]
-                    row['20ft_usd']=round_usd(quote['usd'])
-                    row['evidence']['20ft']={'kind':'dated_quote','lane':lane_id,'source':quote['source'],'size':'20ft','currency':'USD','origin_region':quote['origin_region'],'destination_region':quote['destination_region'],'quote_date':quote['quote_date'],'source_url':quote['source_url'],'quoted_amount_usd':quote['usd'],'publication_approved':True}
-                    row['source']=source['name']
-                    row['source_url']=quote['source_url']
-                    if quote['source'] not in row['checked_sources']:
-                        row['checked_sources'].append(quote['source'])
             records.append(row)
     data['rates'] = records
     mapping = {}

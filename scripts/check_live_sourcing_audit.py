@@ -48,7 +48,16 @@ def main():
             local_rates = local.select_one('[data-ocean-rates]')
             if local_rates:
                 actual_rates = soup.select_one('[data-ocean-rates]')
-                record('ocean_table', route, actual_rates is not None and actual_rates.get_text(' ',strip=True)==local_rates.get_text(' ',strip=True), 'Rate table matches the single validated monthly data file')
+                record('ocean_rate_block', route, actual_rates is not None and actual_rates.get_text(' ',strip=True)==local_rates.get_text(' ',strip=True) and len(actual_rates.select('table'))==len(local_rates.select('table')), 'Compact request line or numeric table matches the validated rate file')
+            if 'noindex' in local.select_one('meta[name="robots"]')['content']:
+                record('noindex_without_rates',route,soup.select_one('[data-ocean-rates]') is None,'No rate block on a noindexed page')
+            if route in {'/freight-research/factory-ready-date-vs-cargo-ready-date/','/freight-research/italy-clothing-manufacturer-export-to-australia/','/freight-research/manufacturer-commercial-invoice-before-freight-quote/'}:
+                expected_answers=[p.get_text(' ',strip=True) for p in local.select('.faq-list details p')]
+                actual_answers=[p.get_text(' ',strip=True) for p in soup.select('.faq-list details p')]
+                encoded=[q['acceptedAnswer']['text'] for script in soup.select('script[type="application/ld+json"]') for node in json.loads(script.string or script.get_text()).get('@graph',[json.loads(script.string or script.get_text())]) if node.get('@type')=='FAQPage' for q in node['mainEntity']]
+                record('sourcing_faq',route,actual_answers==expected_answers==encoded and any(text.endswith('before starting a sourcing request.') for text in actual_answers),'Visible answers and FAQ schema use the requested sourcing wording')
+            if route=='/freight-research/buyer-purchase-order-to-freight-plan/':
+                record('buyer_description',route,all(meta['content']==local.select_one('meta[name="description"]')['content'] and meta['content'].endswith('before starting a sourcing request.') for meta in soup.select('meta[name="description"],meta[property="og:description"],meta[name="twitter:description"]')),'Requested sourcing description in all description tags')
             kinds={'/sourcing/':'Service','/suppliers/':'Service','/delivery/':'Service','/contact/':'ContactPage','/landed-cost-calculator/':'WebApplication'}
             if route in kinds:
                 nodes=[]

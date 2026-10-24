@@ -175,7 +175,7 @@ def build_pages(data):
         faq = [
             {"q": "Why publish this before someone needs a forwarder?", "a": "Because manufacturers and buyers often research documents, buyer expectations, ready dates, and route problems before they know who to contact."},
             {"q": "Does this replace professional customs or legal advice?", "a": "No. It organizes freight planning questions and links to public source URLs so responsible parties can review the right facts earlier."},
-            {"q": "How should a shipper use this page?", "a": "Use it to prepare shipment facts, documents, timing, receiver constraints, cargo details, and unanswered questions before submitting an online freight inquiry."}
+            {"q": "How should a shipper use this page?", "a": "Use it to prepare shipment facts, documents, timing, receiver constraints, cargo details, and unanswered questions before starting a sourcing request."}
         ]
         faq_html = "\n".join(f"<details><summary>{escape(item['q'])}</summary><p>{escape(item['a'])}</p></details>" for item in faq)
         body = f"""

@@ -96,7 +96,7 @@
       "slug": "buyer-purchase-order-to-freight-plan",
       "category": "Buyer problem",
       "title": "How buyers turn a purchase order into a freight plan",
-      "description": "A buyer-focused guide for turning purchase order details into shipment facts before asking for freight help.",
+      "description": "Align purchase order details, supplier documents and delivery requirements before starting a sourcing request.",
       "source_urls": ["https://www.cbp.gov/trade/basic-import-export", "https://www.trade.gov/know-your-incoterms"],
       "sections": [
         {"heading": "What the purchase order does not always answer", "items": ["Exact package count, dimensions, gross weight, net weight, ready date, pickup address, delivery address, and receiver access.", "Whether the supplier is responsible for export handling, origin charges, documents, or delivery to a named place.", "Whether the goods need inspection, labeling, staging, consolidation, or split shipment planning."]},

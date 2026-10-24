@@ -15,6 +15,8 @@ OUT = ROOT / 'output' / 'guide-experience'
 BASE = 'https://flashcargoglobal.com'
 BUYER_REQUEST = '/contact/#buyer-request'
 HOME_TITLE = 'Cargo Global | Sourcing & Delivery to the US, Canada and Mexico'
+BUYER_DESCRIPTION = 'Align purchase order details, supplier documents and delivery requirements before starting a sourcing request.'
+REQUEST_FAQ_ROUTES = {'/freight-research/factory-ready-date-vs-cargo-ready-date/', '/freight-research/italy-clothing-manufacturer-export-to-australia/', '/freight-research/manufacturer-commercial-invoice-before-freight-quote/', '/freight-research/buyer-purchase-order-to-freight-plan/'}
 GUIDE_FAMILIES = {'guides', 'freight-research', 'planning', 'resources'}
 
 
@@ -206,6 +208,8 @@ def apply_experience():
             if text.parent.name in {'script', 'style'}:
                 continue
             replacement = re.sub(r'Freight Research(?: Library)?', 'Sourcing guides', str(text))
+            if current in REQUEST_FAQ_ROUTES:
+                replacement = re.sub(r'before submitting an online (?:freight inquiry|sourcing request)', 'before starting a sourcing request', replacement, flags=re.I)
             if current == '/freight-research/buyer-purchase-order-to-freight-plan/':
                 replacement = re.sub(r'freight inquiry', 'sourcing request', replacement, flags=re.I)
             if replacement != str(text):
@@ -216,13 +220,16 @@ def apply_experience():
                     for part in node.get('itemListElement', []):
                         if 'freight research' in part.get('name', '').lower():
                             part['name'] = 'Sourcing guides'
-                if current == '/freight-research/buyer-purchase-order-to-freight-plan/':
+                if current in REQUEST_FAQ_ROUTES:
                     for question in node.get('mainEntity', []) if node.get('@type') == 'FAQPage' else []:
-                        question['acceptedAnswer']['text'] = re.sub(r'freight inquiry', 'sourcing request', question['acceptedAnswer']['text'], flags=re.I)
+                        answer = re.sub(r'before submitting an online (?:freight inquiry|sourcing request)', 'before starting a sourcing request', question['acceptedAnswer']['text'], flags=re.I)
+                        question['acceptedAnswer']['text'] = re.sub(r'freight inquiry', 'sourcing request', answer, flags=re.I)
             script.string = json.dumps(data, ensure_ascii=False)
         if current in {'/freight-research/', '/freight-research/buyer-purchase-order-to-freight-plan/'}:
             for meta in soup.select('meta[name="description"], meta[property="og:description"], meta[name="twitter:description"]'):
                 meta['content'] = re.sub(r'freight inquiry', 'sourcing request', meta['content'], flags=re.I)
+                if current == '/freight-research/buyer-purchase-order-to-freight-plan/':
+                    meta['content'] = BUYER_DESCRIPTION
         removed = clean_sources(soup)
         if current == '/':
             soup.title.string = HOME_TITLE
@@ -238,7 +245,9 @@ def apply_experience():
         update_schemas(soup, current)
         for previous in soup.select('[data-ocean-rates]'):
             previous.decompose()
-        if current in rate_data['page_lanes']:
+        robots = soup.select_one('meta[name="robots"]')
+        noindex = robots and 'noindex' in robots.get('content', '').lower()
+        if current in rate_data['page_lanes'] and not noindex:
             table = BeautifulSoup(render_table(rate_data, rate_data['page_lanes'][current], soup.html.get('lang', 'en')), 'html.parser').select_one('[data-ocean-rates]')
             container = soup.select_one('article.guide-article, .audience-article .editorial') or soup.main
             if container is soup.main:
