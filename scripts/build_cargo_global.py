@@ -480,6 +480,8 @@ def main():
     records = reconcile_library()
     from build_audience_rollout import apply_rollout, split_sitemaps
     apply_rollout()
+    from guide_experience import apply_experience
+    apply_experience()
     update_machine_files()
     split_sitemaps()
     with (OUT / 'page-changes.csv').open('w', encoding='utf-8-sig', newline='') as handle:

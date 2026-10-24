@@ -10,6 +10,10 @@ OUT = ROOT / 'output' / 'cargo-global-reposition'
 
 
 def main():
+    from guide_experience import enforce_publication_gate
+    from ocean_rates import load as checked_rates
+    enforce_publication_gate()
+    checked_rates()
     configuration = json.loads((ROOT / 'content' / 'audience-settings.json').read_text(encoding='utf-8'))
     if not configuration.get('turnstile_sitekey'):
         raise SystemExit('Release blocked: configure the real supplier Turnstile widget before packaging or deployment.')
@@ -26,6 +30,9 @@ def main():
         'scripts/build_audience_rollout.py', 'scripts/audience_page_content.py', 'content/audience-settings.json',
         'scripts/calculator_page_content.py', 'scripts/capture_audience_baseline.py', 'content/audience-baseline.json',
         'scripts/test_audience_rollout.py',
+        'scripts/guide_experience.py', 'scripts/ocean_rates.py', 'scripts/refresh_ocean_rates.py',
+        'scripts/check_guide_sources.py', 'scripts/test_guide_experience.py', 'scripts/test_ocean_rates.py',
+        'ocean-rates.json',
         'scripts/check_live_sourcing_audit.py',
         'scripts/build_service_pages.py', 'scripts/build_knowledge_pages.py', 'scripts/build_industry_pages.py',
         'scripts/build_downstream_pages.py', 'scripts/build_planning_pages.py', 'scripts/build_multilingual_research_pages.py',

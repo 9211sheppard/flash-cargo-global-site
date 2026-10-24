@@ -145,7 +145,7 @@ SUPPLIER = {
 
 DELIVERY = {
     'audience': 'delivery', 'path': '/delivery/', 'title': 'Door-to-Door Delivery for Your Order',
-    'h1': 'Delivered to Your Door, Door to Door.', 'kicker': 'The final step',
+    'h1': 'Delivered to Your Door.', 'kicker': 'The final step',
     'description': 'Coordinate air, full or shared ocean containers, customs clearance and final delivery as the final step of a sourcing order to North America.',
     'quick_answer': 'Delivery is the final step of the sourcing plan: moving the approved goods by air, full or shared ocean containers and truck, with customs and final receiving arrangements coordinated. Cargo Global agrees the route, quote inclusions and handoffs for the actual order. If you already have the goods, choose Delivery only.',
     'cta': 'Request delivery', 'cta_url': '/contact/#delivery-request', 'sources': ['cbp', 'cbsa', 'cfia'],

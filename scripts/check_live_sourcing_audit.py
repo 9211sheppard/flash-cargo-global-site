@@ -41,6 +41,22 @@ def main():
             ok = ok and policy and OLD not in policy['content'] and 'static.wixstatic.com' not in policy['content']
             ok = ok and soup.select_one('meta[name="robots"]')['content'] == local.select_one('meta[name="robots"]')['content']
             record('page_release', route, bool(ok), f'HTTP {response.status_code}; title, H1, canonical, robots and policy compared with release')
+            visible = BeautifulSoup(str(soup.main), 'html.parser')
+            for script in visible.select('script,style'):
+                script.decompose()
+            record('guide_copy', route, 'Start a freight inquiry' not in visible.get_text() and 'source_url:' not in visible.get_text() and 'Freight Research' not in visible.get_text(), 'No obsolete guide CTA, research label or raw source lines in visible page text')
+            local_rates = local.select_one('[data-ocean-rates]')
+            if local_rates:
+                actual_rates = soup.select_one('[data-ocean-rates]')
+                record('ocean_table', route, actual_rates is not None and actual_rates.get_text(' ',strip=True)==local_rates.get_text(' ',strip=True), 'Rate table matches the single validated monthly data file')
+            kinds={'/sourcing/':'Service','/suppliers/':'Service','/delivery/':'Service','/contact/':'ContactPage','/landed-cost-calculator/':'WebApplication'}
+            if route in kinds:
+                nodes=[]
+                for script in soup.select('script[type="application/ld+json"]'):
+                    data=json.loads(script.string or script.get_text())
+                    nodes.extend(data.get('@graph',[data]))
+                types={node.get('@type') for node in nodes}
+                record('requested_schema', route, kinds[route] in types and (route=='/contact/' or 'FAQPage' in types), 'Requested page/service/application and visible FAQ schema are present')
             if route in ('/', '/contact/'):
                 form = soup.select_one('[data-request-form][data-audience="buyer_sourcing"]')
                 sourcing = form.select_one('[data-sourcing-fields]')

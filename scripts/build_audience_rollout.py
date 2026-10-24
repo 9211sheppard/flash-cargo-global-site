@@ -57,8 +57,8 @@ def private_reply():
     return field('Reply email (private)', 'email', True, 'email', wide=True, hint='Used to respond to this request. Not displayed publicly.', maxlength=254)
 
 
-def form_close(button):
-    return '<p class="field-note wide">We reply within one business day. A request is not an order or payment authorization. <a href="/privacy-policy/">Privacy</a></p><button class="button primary wide" type="submit">' + button + ' <span aria-hidden="true">&#8599;</span></button></form>'
+def form_close(button, disabled=False):
+    return '<p class="field-note wide">We reply within one business day. A request is not an order or payment authorization. <a href="/privacy-policy/">Privacy</a></p><button class="button primary wide" type="submit"' + (' disabled' if disabled else '') + '>' + button + ' <span aria-hidden="true">&#8599;</span></button></form>'
 
 
 def buyer_form():
@@ -97,9 +97,9 @@ def supplier_form():
     result += '<label class="check-label wide"><input type="checkbox" name="agree_vetting" value="yes" required><span>I agree to the review of my company and supporting documents before any buyer introduction.</span></label>'
     sitekey = settings().get('turnstile_sitekey')
     if sitekey:
-        result += f'<div class="cf-turnstile wide" data-sitekey="{escape(sitekey, quote=True)}" data-action="supplier_application" data-size="flexible" data-theme="light"></div>'
-    result += '<noscript><p class="field-note wide">Without browser scripting, you will review and confirm this application on the next page. It receives a separate manual verification before any introduction.</p></noscript>'
-    return result + form_close('Apply as a supplier')
+        result += f'<div class="cf-turnstile wide" data-supplier-verification data-sitekey="{escape(sitekey, quote=True)}" data-action="supplier_application" data-size="flexible" data-theme="light"></div><p class="field-note wide" data-verification-status role="status" aria-live="polite" tabindex="-1">Complete the security check before submitting.</p>'
+    result += '<noscript><p class="field-note wide">Supplier applications require browser scripting for the security check. Enable scripting and reload this page to apply. You can still read the application requirements.</p></noscript>'
+    return result + form_close('Apply as a supplier', disabled=True)
 
 
 def delivery_form():
@@ -189,7 +189,7 @@ def render_page(page, document, day):
     if page['path'] == '/landed-cost-calculator/':
         soup.head.append(soup.new_tag('script', type='module', src='/calculator.mjs'))
     if page['audience'] == 'supplier' and settings().get('turnstile_sitekey'):
-        script = soup.new_tag('script', src='https://challenges.cloudflare.com/turnstile/v0/api.js', attrs={'async': '', 'defer': ''})
+        script = soup.new_tag('script', src='https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit', attrs={'async': '', 'defer': ''})
         soup.head.append(script)
     return soup
 
@@ -247,9 +247,9 @@ def apply_rollout():
             policy = "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; connect-src 'self' https://challenges.cloudflare.com; form-action 'self' https://flash-cargo-form.old-sun-35f9.workers.dev; base-uri 'self'; object-src 'none'"
             meta['content'] = policy
         for script in soup.select('script[src*="cargo-global.js"]'):
-            script['src'] = '/cargo-global.js?v=2'
+            script['src'] = '/cargo-global.js?v=3'
         for css in soup.select('link[rel="stylesheet"]'):
-            css['href'] = '/cargo-global.css?v=2'
+            css['href'] = '/cargo-global.css?v=3'
         for note in list(soup.select('.service-note')):
             note.decompose()
         if not soup.select_one('noscript[data-navigation-fallback]'):
@@ -272,7 +272,7 @@ def apply_rollout():
         paragraph = first_heading.find_next_sibling('p')
         paragraph.string = 'Buyer and delivery requests include product requirements, quantities, budget, destination, timeline and a private reply email. Supplier applications include company capability, production country, minimum orders, capacity, documents, export markets, website and sample availability. Personal names and phone numbers are not requested. Submitted information is not published in a public supplier directory. Do not submit payment-card details, passwords, identity documents or unrelated confidential material.'
     article = soup.select_one('article')
-    article.append(BeautifulSoup('<h2>Supplier verification and spam protection</h2><p>Supplier forms use Cloudflare Turnstile where browser scripting is available. A verification token is checked by the request handler before a normal supplier submission is accepted. Applications submitted through the no-scripting review path are marked for separate manual verification before any introduction. A timer and a hidden spam-detection field also help protect request handling.</p><p>For the no-scripting review step, a short-lived verification record is kept for up to 30 minutes. It stores a digest of the form values and review timing rather than a public enquiry listing. Request information remains private and is used to review the enquiry and respond through the reply email.</p><h2>Private enquiry notifications</h2><p>Enquiry details can be sent to our internal Microsoft 365 mailbox so that we can review and respond to your request. Cloudflare processes the form and Microsoft processes the internal notification. Your reply address is used for the enquiry, not displayed publicly or added to a public supplier directory. If notification delivery needs another attempt, the saved request remains private while that attempt is made.</p>', 'html.parser'))
+    article.append(BeautifulSoup('<h2>Supplier verification and spam protection</h2><p>Supplier applications require Cloudflare Turnstile. The request handler checks the token, approved hostname and application action before accepting an application. Disabling browser scripting does not bypass this check. A timer and a hidden spam-detection field also help protect request handling.</p><p>Buyer and delivery requests can use a no-scripting review step. A short-lived verification record is kept for up to 30 minutes, storing a digest of the form values and review timing rather than a public enquiry listing. Request information remains private and is used to review the enquiry and respond through the reply email.</p><h2>Private enquiry notifications</h2><p>Enquiry details can be sent to our internal Microsoft 365 mailbox so that we can review and respond to your request. Cloudflare processes the form and Microsoft processes the internal notification. Your reply address is used for the enquiry, not displayed publicly or added to a public supplier directory. If notification delivery needs another attempt, the saved request remains private while that attempt is made.</p>', 'html.parser'))
     privacy.write_text(str(soup), encoding='utf-8', newline='\n')
     # Metadata for support pages must describe their own purpose, not repeat the homepage.
     descriptions = {

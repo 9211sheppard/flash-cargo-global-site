@@ -1,0 +1,562 @@
+{
+  "schema_version": 1,
+  "currency": "USD",
+  "rounding_usd": 50,
+  "initial_months": [
+    "2026-09",
+    "2026-10"
+  ],
+  "retain_months": 6,
+  "sources": {
+    "drewry_wci": {
+      "name": "Drewry World Container Index",
+      "source_url": "https://www.drewry.co.uk/supply-chain-advisors/supply-chain-expertise/world-container-index-assessed-by-drewry",
+      "hosts": [
+        "drewry.co.uk"
+      ],
+      "sizes": [
+        "40ft"
+      ],
+      "publication_weekday": 3,
+      "publication_allowed": false,
+      "publication_terms_url": "https://www.drewry.co.uk/maritime-research/maritime-research-related-content/standard-licence-terms",
+      "lane_sizes": {
+        "shanghai-los-angeles": [
+          "40ft"
+        ],
+        "shanghai-new-york": [
+          "40ft"
+        ],
+        "shanghai-rotterdam": [
+          "40ft"
+        ],
+        "shanghai-genoa": [
+          "40ft"
+        ]
+      },
+      "lane_regions": {"shanghai-los-angeles":["shanghai-ningbo","los-angeles-long-beach"],"shanghai-new-york":["shanghai-ningbo","new-york-new-jersey"],"shanghai-rotterdam":["shanghai-ningbo","rotterdam"],"shanghai-genoa":["shanghai-ningbo","genoa"]},
+      "history_status": "A current public weekly commentary is not a verified complete historical monthly series."
+    },
+    "freightos_fbx": {
+      "name": "Freightos Baltic Index",
+      "source_url": "https://www.freightos.com/enterprise/terminal/freightos-baltic-index-global-container-pricing-index/",
+      "access_url": "https://apidocs.freightos.com/reference/get_fbx-data",
+      "hosts": [
+        "freightos.com"
+      ],
+      "sizes": [
+        "40ft"
+      ],
+      "publication_weekday": 4,
+      "publication_allowed": false,
+      "publication_terms_url": "https://www.freightos.com/freightos-data-terms-conditions/",
+      "lane_sizes": {},
+      "lane_regions": {},
+      "history_status": "The documented history API requires an API key and secret. No credentialed or paid data is used."
+    },
+    "sse_scfi": {
+      "name": "Shanghai Containerized Freight Index",
+      "source_url": "https://en.sse.net.cn/indices/fqaen.jsp",
+      "access_url": "https://en.sse.net.cn/indices/fqaennew.jsp",
+      "hosts": [
+        "sse.net.cn"
+      ],
+      "sizes": [
+        "20ft",
+        "40ft"
+      ],
+      "publication_weekday": 4,
+      "publication_allowed": false,
+      "publication_terms_url": "https://en.sse.net.cn/indices/fqaennew.jsp",
+      "lane_sizes": {
+        "shanghai-us-west-coast": [
+          "40ft"
+        ],
+        "shanghai-us-east-coast": [
+          "40ft"
+        ],
+        "shanghai-europe": [
+          "20ft"
+        ],
+        "shanghai-mediterranean": [
+          "20ft"
+        ],
+        "shanghai-east-japan": [
+          "20ft"
+        ],
+        "shanghai-west-japan": [
+          "20ft"
+        ]
+      },
+      "lane_regions": {"shanghai-us-west-coast":["shanghai-ningbo","us-west-coast"],"shanghai-us-east-coast":["shanghai-ningbo","us-east-coast"],"shanghai-europe":["shanghai-ningbo","north-europe"],"shanghai-mediterranean":["shanghai-ningbo","mediterranean"],"shanghai-east-japan":["shanghai-ningbo","east-japan"],"shanghai-west-japan":["shanghai-ningbo","west-japan"]},
+      "history_status": "Official documentation states historical index data requires subscription access. Lane units must be checked: most routes USD/TEU; US coasts USD/FEU."
+    }
+  },
+  "lanes": {
+    "brazil-north-america": {
+      "label": "Brazil to North America; shipment ports to be confirmed",
+      "labels": {
+        "es": "Brasil a Norteamérica; puertos por confirmar",
+        "fr": "Brésil vers l’Amérique du Nord ; ports à confirmer",
+        "zh": "巴西至北美，港口待确认",
+        "hi": "ब्राज़ील से उत्तरी अमेरिका; बंदरगाह तय होने बाकी हैं"
+      },
+      "guide_slugs": [
+        "brazil-food-ingredient-exporter-to-north-america"
+      ],
+      "origin_region": null,
+      "destination_region": null,
+      "index_lane": null
+    },
+    "china-canada": {
+      "label": "China to Canada; shipment ports to be confirmed",
+      "labels": {
+        "es": "China a Canadá; puertos por confirmar",
+        "fr": "Chine vers le Canada ; ports à confirmer",
+        "zh": "中国至加拿大，港口待确认",
+        "hi": "चीन से कनाडा; बंदरगाह तय होने बाकी हैं"
+      },
+      "guide_slugs": [
+        "china-electronics-battery-goods-to-canada"
+      ],
+      "origin_region": null,
+      "destination_region": null,
+      "index_lane": null
+    },
+    "india-north-america": {
+      "label": "India to North America; shipment ports to be confirmed",
+      "labels": {
+        "es": "India a Norteamérica; puertos por confirmar",
+        "fr": "Inde vers l’Amérique du Nord ; ports à confirmer",
+        "zh": "印度至北美，港口待确认",
+        "hi": "भारत से उत्तरी अमेरिका; बंदरगाह तय होने बाकी हैं"
+      },
+      "guide_slugs": [
+        "india-apparel-manufacturer-export-to-north-america"
+      ],
+      "origin_region": null,
+      "destination_region": null,
+      "index_lane": null
+    },
+    "italy-japan": {
+      "label": "Italy to Japan; shipment ports and suitability of ocean service to be confirmed",
+      "labels": {
+        "es": "Italia a Japón; puertos y servicio marítimo por confirmar",
+        "fr": "Italie vers le Japon ; ports et pertinence du transport maritime à confirmer",
+        "zh": "意大利至日本，港口及海运适用性待确认",
+        "hi": "इटली से जापान; बंदरगाह और समुद्री सेवा की उपयुक्तता तय होना बाकी है"
+      },
+      "guide_slugs": [
+        "italy-fashion-samples-to-japan"
+      ],
+      "origin_region": null,
+      "destination_region": null,
+      "index_lane": null
+    },
+    "mexico-us": {
+      "label": "Mexico to the US; ocean service only if shipment ports and scope are agreed",
+      "labels": {
+        "es": "México a Estados Unidos; servicio marítimo sujeto a puertos y alcance acordados",
+        "fr": "Mexique vers les États-Unis ; transport maritime selon les ports et le périmètre convenus",
+        "zh": "墨西哥至美国，仅在港口和服务范围确定后评估海运",
+        "hi": "मेक्सिको से अमेरिका; बंदरगाह और सेवा का दायरा तय होने पर ही समुद्री विकल्प"
+      },
+      "guide_slugs": [
+        "mexico-automotive-parts-to-us-production"
+      ],
+      "origin_region": null,
+      "destination_region": null,
+      "index_lane": null
+    },
+    "turkey-us": {
+      "label": "Turkey to the US; shipment ports to be confirmed",
+      "labels": {
+        "es": "Turquía a Estados Unidos; puertos por confirmar",
+        "fr": "Turquie vers les États-Unis ; ports à confirmer",
+        "zh": "土耳其至美国，港口待确认",
+        "hi": "तुर्की से अमेरिका; बंदरगाह तय होने बाकी हैं"
+      },
+      "guide_slugs": [
+        "turkey-furniture-supplier-to-us-hotel-project"
+      ],
+      "origin_region": null,
+      "destination_region": null,
+      "index_lane": null
+    },
+    "vietnam-europe": {
+      "label": "Vietnam to Europe; shipment ports to be confirmed",
+      "labels": {
+        "es": "Vietnam a Europa; puertos por confirmar",
+        "fr": "Vietnam vers l’Europe ; ports à confirmer",
+        "zh": "越南至欧洲，港口待确认",
+        "hi": "वियतनाम से यूरोप; बंदरगाह तय होने बाकी हैं"
+      },
+      "guide_slugs": [
+        "vietnam-footwear-manufacturer-to-european-retailer"
+      ],
+      "origin_region": null,
+      "destination_region": null,
+      "index_lane": null
+    },
+    "italy-australia": {
+      "label": "Italy to Australia; shipment ports to be confirmed",
+      "labels": {
+        "es": "Italia a Australia; puertos por confirmar",
+        "fr": "Italie vers l’Australie ; ports à confirmer",
+        "zh": "意大利至澳大利亚，港口待确认",
+        "hi": "इटली से ऑस्ट्रेलिया; बंदरगाह तय होने बाकी हैं"
+      },
+      "guide_slugs": [
+        "italy-clothing-manufacturer-export-to-australia"
+      ],
+      "origin_region": null,
+      "destination_region": null,
+      "index_lane": null
+    },
+    "shipment-specific": {
+      "label": "Your agreed port-to-port route; a global composite is not a shipment quote",
+      "labels": {
+        "es": "Ruta portuaria acordada; un índice global no es una cotización de envío",
+        "fr": "Route portuaire convenue ; un indice mondial n’est pas un devis d’expédition",
+        "zh": "以约定的起运港和目的港为准；全球综合指数不是单票报价",
+        "hi": "आपके तय बंदरगाहों के बीच का मार्ग; वैश्विक सूचकांक आपके माल की कीमत नहीं है"
+      },
+      "guide_slugs": [],
+      "origin_region": null,
+      "destination_region": null,
+      "index_lane": null
+    }
+  },
+  "cost_hubs": [
+    "/sourcing/",
+    "/delivery/",
+    "/landed-cost-calculator/",
+    "/planning/",
+    "/planning/landed-cost-freight-checklist/",
+    "/planning/ddp-vs-dap-freight-planning-guide/",
+    "/resources/air-vs-ocean-freight-decision-guide/",
+    "/resources/incoterms-freight-planning-guide/",
+    "/freight-research/air-vs-ocean-for-product-launch/"
+  ],
+  "page_lanes": {
+    "/delivery/": "shipment-specific",
+    "/freight-research/air-vs-ocean-for-product-launch/": "shipment-specific",
+    "/freight-research/en/brazil-food-ingredient-exporter-to-north-america/": "brazil-north-america",
+    "/freight-research/en/china-electronics-battery-goods-to-canada/": "china-canada",
+    "/freight-research/en/india-apparel-manufacturer-export-to-north-america/": "india-north-america",
+    "/freight-research/en/italy-fashion-samples-to-japan/": "italy-japan",
+    "/freight-research/en/mexico-automotive-parts-to-us-production/": "mexico-us",
+    "/freight-research/en/turkey-furniture-supplier-to-us-hotel-project/": "turkey-us",
+    "/freight-research/en/vietnam-footwear-manufacturer-to-european-retailer/": "vietnam-europe",
+    "/freight-research/es/brazil-food-ingredient-exporter-to-north-america/": "brazil-north-america",
+    "/freight-research/es/china-electronics-battery-goods-to-canada/": "china-canada",
+    "/freight-research/es/india-apparel-manufacturer-export-to-north-america/": "india-north-america",
+    "/freight-research/es/italy-fashion-samples-to-japan/": "italy-japan",
+    "/freight-research/es/mexico-automotive-parts-to-us-production/": "mexico-us",
+    "/freight-research/es/turkey-furniture-supplier-to-us-hotel-project/": "turkey-us",
+    "/freight-research/es/vietnam-footwear-manufacturer-to-european-retailer/": "vietnam-europe",
+    "/freight-research/fr/brazil-food-ingredient-exporter-to-north-america/": "brazil-north-america",
+    "/freight-research/fr/china-electronics-battery-goods-to-canada/": "china-canada",
+    "/freight-research/fr/india-apparel-manufacturer-export-to-north-america/": "india-north-america",
+    "/freight-research/fr/italy-fashion-samples-to-japan/": "italy-japan",
+    "/freight-research/fr/mexico-automotive-parts-to-us-production/": "mexico-us",
+    "/freight-research/fr/turkey-furniture-supplier-to-us-hotel-project/": "turkey-us",
+    "/freight-research/fr/vietnam-footwear-manufacturer-to-european-retailer/": "vietnam-europe",
+    "/freight-research/hi/brazil-food-ingredient-exporter-to-north-america/": "brazil-north-america",
+    "/freight-research/hi/china-electronics-battery-goods-to-canada/": "china-canada",
+    "/freight-research/hi/india-apparel-manufacturer-export-to-north-america/": "india-north-america",
+    "/freight-research/hi/italy-fashion-samples-to-japan/": "italy-japan",
+    "/freight-research/hi/mexico-automotive-parts-to-us-production/": "mexico-us",
+    "/freight-research/hi/turkey-furniture-supplier-to-us-hotel-project/": "turkey-us",
+    "/freight-research/hi/vietnam-footwear-manufacturer-to-european-retailer/": "vietnam-europe",
+    "/freight-research/italy-clothing-manufacturer-export-to-australia/": "italy-australia",
+    "/freight-research/zh/brazil-food-ingredient-exporter-to-north-america/": "brazil-north-america",
+    "/freight-research/zh/china-electronics-battery-goods-to-canada/": "china-canada",
+    "/freight-research/zh/india-apparel-manufacturer-export-to-north-america/": "india-north-america",
+    "/freight-research/zh/italy-fashion-samples-to-japan/": "italy-japan",
+    "/freight-research/zh/mexico-automotive-parts-to-us-production/": "mexico-us",
+    "/freight-research/zh/turkey-furniture-supplier-to-us-hotel-project/": "turkey-us",
+    "/freight-research/zh/vietnam-footwear-manufacturer-to-european-retailer/": "vietnam-europe",
+    "/landed-cost-calculator/": "shipment-specific",
+    "/planning/": "shipment-specific",
+    "/planning/ddp-vs-dap-freight-planning-guide/": "shipment-specific",
+    "/planning/landed-cost-freight-checklist/": "shipment-specific",
+    "/resources/air-vs-ocean-freight-decision-guide/": "shipment-specific",
+    "/resources/incoterms-freight-planning-guide/": "shipment-specific",
+    "/sourcing/": "shipment-specific"
+  },
+  "observations": [],
+  "rates": [
+    {
+      "lane": "brazil-north-america",
+      "month": "2026-09",
+      "20ft_usd": null,
+      "40ft_usd": null,
+      "source": "Quote required; no verified matching complete monthly series.",
+      "source_url": "https://www.drewry.co.uk/supply-chain-advisors/supply-chain-expertise/world-container-index-assessed-by-drewry",
+      "checked_sources": [
+        "drewry_wci",
+        "freightos_fbx",
+        "sse_scfi"
+      ],
+      "date_pulled": "2026-10-24T13:39:47.510124+00:00",
+      "evidence": {}
+    },
+    {
+      "lane": "brazil-north-america",
+      "month": "2026-10",
+      "20ft_usd": null,
+      "40ft_usd": null,
+      "source": "Quote required; no verified matching complete monthly series.",
+      "source_url": "https://www.drewry.co.uk/supply-chain-advisors/supply-chain-expertise/world-container-index-assessed-by-drewry",
+      "checked_sources": [
+        "drewry_wci",
+        "freightos_fbx",
+        "sse_scfi"
+      ],
+      "date_pulled": "2026-10-24T13:39:47.510124+00:00",
+      "evidence": {}
+    },
+    {
+      "lane": "china-canada",
+      "month": "2026-09",
+      "20ft_usd": null,
+      "40ft_usd": null,
+      "source": "Quote required; no verified matching complete monthly series.",
+      "source_url": "https://www.drewry.co.uk/supply-chain-advisors/supply-chain-expertise/world-container-index-assessed-by-drewry",
+      "checked_sources": [
+        "drewry_wci",
+        "freightos_fbx",
+        "sse_scfi"
+      ],
+      "date_pulled": "2026-10-24T13:39:47.510124+00:00",
+      "evidence": {}
+    },
+    {
+      "lane": "china-canada",
+      "month": "2026-10",
+      "20ft_usd": null,
+      "40ft_usd": null,
+      "source": "Quote required; no verified matching complete monthly series.",
+      "source_url": "https://www.drewry.co.uk/supply-chain-advisors/supply-chain-expertise/world-container-index-assessed-by-drewry",
+      "checked_sources": [
+        "drewry_wci",
+        "freightos_fbx",
+        "sse_scfi"
+      ],
+      "date_pulled": "2026-10-24T13:39:47.510124+00:00",
+      "evidence": {}
+    },
+    {
+      "lane": "india-north-america",
+      "month": "2026-09",
+      "20ft_usd": null,
+      "40ft_usd": null,
+      "source": "Quote required; no verified matching complete monthly series.",
+      "source_url": "https://www.drewry.co.uk/supply-chain-advisors/supply-chain-expertise/world-container-index-assessed-by-drewry",
+      "checked_sources": [
+        "drewry_wci",
+        "freightos_fbx",
+        "sse_scfi"
+      ],
+      "date_pulled": "2026-10-24T13:39:47.510124+00:00",
+      "evidence": {}
+    },
+    {
+      "lane": "india-north-america",
+      "month": "2026-10",
+      "20ft_usd": null,
+      "40ft_usd": null,
+      "source": "Quote required; no verified matching complete monthly series.",
+      "source_url": "https://www.drewry.co.uk/supply-chain-advisors/supply-chain-expertise/world-container-index-assessed-by-drewry",
+      "checked_sources": [
+        "drewry_wci",
+        "freightos_fbx",
+        "sse_scfi"
+      ],
+      "date_pulled": "2026-10-24T13:39:47.510124+00:00",
+      "evidence": {}
+    },
+    {
+      "lane": "italy-japan",
+      "month": "2026-09",
+      "20ft_usd": null,
+      "40ft_usd": null,
+      "source": "Quote required; no verified matching complete monthly series.",
+      "source_url": "https://www.drewry.co.uk/supply-chain-advisors/supply-chain-expertise/world-container-index-assessed-by-drewry",
+      "checked_sources": [
+        "drewry_wci",
+        "freightos_fbx",
+        "sse_scfi"
+      ],
+      "date_pulled": "2026-10-24T13:39:47.510124+00:00",
+      "evidence": {}
+    },
+    {
+      "lane": "italy-japan",
+      "month": "2026-10",
+      "20ft_usd": null,
+      "40ft_usd": null,
+      "source": "Quote required; no verified matching complete monthly series.",
+      "source_url": "https://www.drewry.co.uk/supply-chain-advisors/supply-chain-expertise/world-container-index-assessed-by-drewry",
+      "checked_sources": [
+        "drewry_wci",
+        "freightos_fbx",
+        "sse_scfi"
+      ],
+      "date_pulled": "2026-10-24T13:39:47.510124+00:00",
+      "evidence": {}
+    },
+    {
+      "lane": "mexico-us",
+      "month": "2026-09",
+      "20ft_usd": null,
+      "40ft_usd": null,
+      "source": "Quote required; no verified matching complete monthly series.",
+      "source_url": "https://www.drewry.co.uk/supply-chain-advisors/supply-chain-expertise/world-container-index-assessed-by-drewry",
+      "checked_sources": [
+        "drewry_wci",
+        "freightos_fbx",
+        "sse_scfi"
+      ],
+      "date_pulled": "2026-10-24T13:39:47.510124+00:00",
+      "evidence": {}
+    },
+    {
+      "lane": "mexico-us",
+      "month": "2026-10",
+      "20ft_usd": null,
+      "40ft_usd": null,
+      "source": "Quote required; no verified matching complete monthly series.",
+      "source_url": "https://www.drewry.co.uk/supply-chain-advisors/supply-chain-expertise/world-container-index-assessed-by-drewry",
+      "checked_sources": [
+        "drewry_wci",
+        "freightos_fbx",
+        "sse_scfi"
+      ],
+      "date_pulled": "2026-10-24T13:39:47.510124+00:00",
+      "evidence": {}
+    },
+    {
+      "lane": "turkey-us",
+      "month": "2026-09",
+      "20ft_usd": null,
+      "40ft_usd": null,
+      "source": "Quote required; no verified matching complete monthly series.",
+      "source_url": "https://www.drewry.co.uk/supply-chain-advisors/supply-chain-expertise/world-container-index-assessed-by-drewry",
+      "checked_sources": [
+        "drewry_wci",
+        "freightos_fbx",
+        "sse_scfi"
+      ],
+      "date_pulled": "2026-10-24T13:39:47.510124+00:00",
+      "evidence": {}
+    },
+    {
+      "lane": "turkey-us",
+      "month": "2026-10",
+      "20ft_usd": null,
+      "40ft_usd": null,
+      "source": "Quote required; no verified matching complete monthly series.",
+      "source_url": "https://www.drewry.co.uk/supply-chain-advisors/supply-chain-expertise/world-container-index-assessed-by-drewry",
+      "checked_sources": [
+        "drewry_wci",
+        "freightos_fbx",
+        "sse_scfi"
+      ],
+      "date_pulled": "2026-10-24T13:39:47.510124+00:00",
+      "evidence": {}
+    },
+    {
+      "lane": "vietnam-europe",
+      "month": "2026-09",
+      "20ft_usd": null,
+      "40ft_usd": null,
+      "source": "Quote required; no verified matching complete monthly series.",
+      "source_url": "https://www.drewry.co.uk/supply-chain-advisors/supply-chain-expertise/world-container-index-assessed-by-drewry",
+      "checked_sources": [
+        "drewry_wci",
+        "freightos_fbx",
+        "sse_scfi"
+      ],
+      "date_pulled": "2026-10-24T13:39:47.510124+00:00",
+      "evidence": {}
+    },
+    {
+      "lane": "vietnam-europe",
+      "month": "2026-10",
+      "20ft_usd": null,
+      "40ft_usd": null,
+      "source": "Quote required; no verified matching complete monthly series.",
+      "source_url": "https://www.drewry.co.uk/supply-chain-advisors/supply-chain-expertise/world-container-index-assessed-by-drewry",
+      "checked_sources": [
+        "drewry_wci",
+        "freightos_fbx",
+        "sse_scfi"
+      ],
+      "date_pulled": "2026-10-24T13:39:47.510124+00:00",
+      "evidence": {}
+    },
+    {
+      "lane": "italy-australia",
+      "month": "2026-09",
+      "20ft_usd": null,
+      "40ft_usd": null,
+      "source": "Quote required; no verified matching complete monthly series.",
+      "source_url": "https://www.drewry.co.uk/supply-chain-advisors/supply-chain-expertise/world-container-index-assessed-by-drewry",
+      "checked_sources": [
+        "drewry_wci",
+        "freightos_fbx",
+        "sse_scfi"
+      ],
+      "date_pulled": "2026-10-24T13:39:47.510124+00:00",
+      "evidence": {}
+    },
+    {
+      "lane": "italy-australia",
+      "month": "2026-10",
+      "20ft_usd": null,
+      "40ft_usd": null,
+      "source": "Quote required; no verified matching complete monthly series.",
+      "source_url": "https://www.drewry.co.uk/supply-chain-advisors/supply-chain-expertise/world-container-index-assessed-by-drewry",
+      "checked_sources": [
+        "drewry_wci",
+        "freightos_fbx",
+        "sse_scfi"
+      ],
+      "date_pulled": "2026-10-24T13:39:47.510124+00:00",
+      "evidence": {}
+    },
+    {
+      "lane": "shipment-specific",
+      "month": "2026-09",
+      "20ft_usd": null,
+      "40ft_usd": null,
+      "source": "Quote required; no verified matching complete monthly series.",
+      "source_url": "https://www.drewry.co.uk/supply-chain-advisors/supply-chain-expertise/world-container-index-assessed-by-drewry",
+      "checked_sources": [
+        "drewry_wci",
+        "freightos_fbx",
+        "sse_scfi"
+      ],
+      "date_pulled": "2026-10-24T13:39:47.510124+00:00",
+      "evidence": {}
+    },
+    {
+      "lane": "shipment-specific",
+      "month": "2026-10",
+      "20ft_usd": null,
+      "40ft_usd": null,
+      "source": "Quote required; no verified matching complete monthly series.",
+      "source_url": "https://www.drewry.co.uk/supply-chain-advisors/supply-chain-expertise/world-container-index-assessed-by-drewry",
+      "checked_sources": [
+        "drewry_wci",
+        "freightos_fbx",
+        "sse_scfi"
+      ],
+      "date_pulled": "2026-10-24T13:39:47.510124+00:00",
+      "evidence": {}
+    }
+  ],
+  "last_checked": "2026-10-24T13:39:47.510124+00:00"
+}

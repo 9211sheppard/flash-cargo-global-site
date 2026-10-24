@@ -33,7 +33,8 @@ class AudienceTests(unittest.TestCase):
         self.assertEqual(len(baseline), 111)
         for row in baseline:
             self.assertTrue((ROOT / row['file']).exists())
-            self.assertEqual(soup(row['file']).title.get_text(' ', strip=True), row['title'])
+            expected = 'Cargo Global | Sourcing & Delivery to the US, Canada and Mexico' if row['path'] == '/' else row['title']
+            self.assertEqual(soup(row['file']).title.get_text(' ', strip=True), expected)
 
     def test_home_has_the_requested_three_paths_and_original_h1(self):
         home = soup('index.html')
