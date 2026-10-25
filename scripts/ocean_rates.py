@@ -7,6 +7,7 @@ from html import escape
 from pathlib import Path
 from urllib.parse import urlsplit
 from zoneinfo import ZoneInfo
+from trust_rollout_content import FBX_CONTEXT
 
 ROOT=Path(__file__).resolve().parents[1]
 CONFIG=json.loads((ROOT/'user_config.json').read_text(encoding='utf-8')) if (ROOT/'user_config.json').exists() else {}
@@ -77,9 +78,11 @@ def validate(data,today=None):
             if row.get('reported_40ft_usd')!=row['40ft_usd']:
                 raise ValueError('Quote the reported weekly value exactly; do not derive another number.')
             published=date.fromisoformat(row['publication_date'])
-            reported=date.fromisoformat(row['reading_date'])
+            reported=date.fromisoformat(row['report_date'])
+            if row.get('period_basis')!='week_before_report' or 'reading_date' in row:
+                raise ValueError('Identify the prior-week reading by report date; do not invent a week-ending date.')
             if reported>published or published>today:
-                raise ValueError('Reading and publication dates must be verified and not in the future.')
+                raise ValueError('Report and publication dates must be verified and not in the future.')
         elif row.get('kind')=='written_quote':
             if row.get('source')!='cargo_global_written_quote' or row.get('publication_approved') is not True or not row.get('quote_reference'):
                 raise ValueError('A written quote needs its reference and explicit publication approval.')
@@ -103,6 +106,11 @@ def display_amount(value):
     number=amount(value)
     return 'US$'+(format(number,',.0f') if number==number.to_integral_value() else format(number,',.2f'))
 
+def human_date(value):
+    day=date.fromisoformat(value)
+    months='Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec'.split()
+    return f'{day.day} {months[day.month-1]} {day.year}'
+
 def render_table(data,lane_id,language='en',today=None):
     language=language.split('-')[0]
     row=next((entry for entry in data['rates'] if entry['lane']==lane_id),None)
@@ -116,7 +124,15 @@ def render_table(data,lane_id,language='en',today=None):
     lane=data['lanes'][lane_id]
     weekly=row['kind']=='weekly_index_reading'
     heading='One weekly ocean reading.' if weekly else 'A dated written quote.'
-    caption='Index context only, not a delivered quote. Origin and destination charges, duty, tax, insurance and final delivery are not established by this reading.' if weekly else 'One written port-to-port quote for the stated scope, not an index or a monthly average. Final quote required.'
-    label=('Weekly update dated ' if weekly else 'Written quote dated ')+row['reading_date']
-    note='<p>Source: <a href="'+TERMINAL+'">Freightos Baltic Index (FBX)</a>. <a href="'+escape(row['source_url'],quote=True)+'">Read the publisher’s update</a>. Published <time datetime="'+row['publication_date']+'">'+row['publication_date']+'</time>. This is one reported weekly reading, not a monthly average or a Cargo Global price.</p>' if weekly else '<p>Source: <a href="'+escape(row['source_url'],quote=True)+'">Cargo Global written quote '+escape(row['quote_reference'])+'</a>. The quoted scope and date apply; it is not a current-rate promise.</p>'
-    return '<section class="ocean-rates" data-ocean-rates data-rate-lane="'+escape(lane_id,quote=True)+'"><h2>'+heading+'</h2><p>'+escape(lane['label'])+'</p><div class="table-scroll"><table><caption>'+caption+'</caption><thead><tr><th scope="col">Reading</th><th scope="col">20ft container (USD)</th><th scope="col">40ft container (USD)</th></tr></thead><tbody><tr><th scope="row"><time datetime="'+row['reading_date']+'">'+escape(label)+'</time></th><td>'+display_amount(row.get('20ft_usd'))+'</td><td>'+display_amount(row.get('40ft_usd'))+'</td></tr></tbody></table></div>'+note+'<p class="small">Last checked: <time datetime="'+row['last_checked'][:10]+'">'+row['last_checked'][:10]+'</time>. Final quote required.</p><p><a class="text-link" href="/contact/#buyer-request">Start a sourcing request</a></p></section>'
+    caption=FBX_CONTEXT if weekly else 'One written port-to-port quote for the stated scope, not an index or a monthly average. Final quote required.'
+    if weekly:
+        label='FBX weekly reading for the week before <time datetime="'+row['report_date']+'">'+human_date(row['report_date'])+'</time>, as reported by Freightos on <time datetime="'+row['publication_date']+'">'+human_date(row['publication_date'])+'</time>'
+        columns='<th scope="col">40ft container (USD)</th>'
+        values='<td>'+display_amount(row['40ft_usd'])+'</td>'
+        note='<p>Source: <a href="'+TERMINAL+'">Freightos Baltic Index (FBX)</a>. <a href="'+escape(row['source_url'],quote=True)+'">Read the publisher’s update</a>. One reported weekly reading, not a monthly average or a Cargo Global price.</p>'
+    else:
+        label='Written quote dated <time datetime="'+row['reading_date']+'">'+human_date(row['reading_date'])+'</time>'
+        columns='<th scope="col">20ft container (USD)</th><th scope="col">40ft container (USD)</th>'
+        values='<td>'+display_amount(row.get('20ft_usd'))+'</td><td>'+display_amount(row.get('40ft_usd'))+'</td>'
+        note='<p>Source: <a href="'+escape(row['source_url'],quote=True)+'">Cargo Global written quote '+escape(row['quote_reference'])+'</a>. The quoted scope and date apply; it is not a current-rate promise.</p>'
+    return '<section class="ocean-rates" data-ocean-rates data-rate-lane="'+escape(lane_id,quote=True)+'"><h2>'+heading+'</h2><p>'+escape(lane['label'])+'</p><div class="table-scroll"><table><caption>'+caption+'</caption><thead><tr><th scope="col">Reading</th>'+columns+'</tr></thead><tbody><tr><th scope="row">'+label+'</th>'+values+'</tr></tbody></table></div>'+note+'<p class="small">Last checked: <time datetime="'+row['last_checked'][:10]+'">'+row['last_checked'][:10]+'</time>. Final quote required.</p><p><a class="text-link" href="/contact/#buyer-request">Start a sourcing request</a></p></section>'

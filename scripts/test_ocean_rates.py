@@ -48,7 +48,7 @@ class OceanRateTests(unittest.TestCase):
             validate(data,today=date(2026,10,24))
 
     def test_primary_source_attribution_and_dates_are_required(self):
-        for changes in [{'source_url':'https://unrelated.example/rate'},{'attribution_url':'https://example.com/'},{'reading_date':'2026-11-01'},{'publication_date':'2026-11-01'}]:
+        for changes in [{'source_url':'https://unrelated.example/rate'},{'attribution_url':'https://example.com/'},{'report_date':'2026-11-01'},{'publication_date':'2026-11-01'},{'period_basis':'invented_week_end'},{'reading_date':'2026-10-20'}]:
             data=self.data()
             self.reading(data).update(changes)
             with self.assertRaises(ValueError):
@@ -68,7 +68,7 @@ class OceanRateTests(unittest.TestCase):
         data=self.data()
         row=self.reading(data)
         lane=data['lanes'][row['lane']]
-        row.update(kind='written_quote',source='cargo_global_written_quote',quote_reference='LOCAL_TEST_ONLY',publication_approved=True,source_url='https://flashcargoglobal.com/LOCAL_TEST_ONLY/',scope='port_to_port',origin_region=lane['origin_region'],destination_region=lane['destination_region'],**{'20ft_usd':1234})
+        row.update(kind='written_quote',source='cargo_global_written_quote',quote_reference='LOCAL_TEST_ONLY',publication_approved=True,source_url='https://flashcargoglobal.com/LOCAL_TEST_ONLY/',reading_date='2026-10-20',scope='port_to_port',origin_region=lane['origin_region'],destination_region=lane['destination_region'],**{'20ft_usd':1234})
         validate(data,today=date(2026,10,24))
         row['publication_approved']=False
         with self.assertRaises(ValueError):
@@ -86,9 +86,11 @@ class OceanRateTests(unittest.TestCase):
         self.assertIn('https://terminal.freightos.com/',html)
         self.assertIn('Freightos Baltic Index (FBX)',html)
         self.assertIn('not a monthly average',html)
-        self.assertIn('Published <time datetime="2026-10-21"',html)
-        self.assertIn('Weekly update dated 2026-10-20',html)
-        self.assertIn('Quote required',html)
+        self.assertIn('FBX weekly reading for the week before <time datetime="2026-10-20">20 Oct 2026</time>, as reported by Freightos on <time datetime="2026-10-21">21 Oct 2026</time>',html)
+        self.assertIn('Market context only. This index reading is not used to price, settle or compare your order.',html)
+        self.assertNotIn('20ft',html)
+        self.assertNotIn('benchmark',html.lower())
+        self.assertEqual(html.count('<td>'),1)
         with self.assertRaises(ValueError):
             render_table(data,row['lane'],'hi')
 

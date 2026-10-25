@@ -10,7 +10,7 @@ from zoneinfo import ZoneInfo
 from bs4 import BeautifulSoup
 
 from guide_experience import BASE, ROOT, content_fingerprint, documents, route
-from trust_rollout_content import ANTI_PHISHING, CAPABILITY_COPY, FBX_UPDATE, LANES, PAYMENT_RULES, PROCESS_LINE, RETIRED_EXACT, RETIRED_PREFIXES, TEMPLATES
+from trust_rollout_content import ANTI_PHISHING, CAPABILITY_COPY, FBX_CONTEXT, FBX_UPDATE, LANES, PAYMENT_RULES, PROCESS_LINE, RETIRED_EXACT, RETIRED_PREFIXES, TEMPLATES
 
 
 def retired_target(path):
@@ -34,9 +34,9 @@ def build_lane_guides(document):
         current = '/freight-research/' + lane['slug'] + '/'
         description = 'Supplier specifications, sample checks and quote scope for a China-to-' + lane['destination'].removeprefix('the ') + ' order, with dated primary index references.'
         checks = ''.join('<li>' + escape(text) + '</li>' for text in lane['buyer_checks'])
-        main = '<article class="guide-article"><p class="kicker">Sourcing guides</p><h1>' + escape(lane['title']) + '</h1><p class="lead">A considered buying brief comes before a transport price. Compare the supplier, approved product and delivery scope before relying on an index benchmark.</p>'
+        main = '<article class="guide-article"><p class="kicker">Sourcing guides</p><h1>' + escape(lane['title']) + '</h1><p class="lead">' + escape(FBX_CONTEXT) + '</p>'
         main += '<section><h2>Start with the buying decision</h2><p>Record the intended use, product specification, quantity and unit, material, finish, packaging and destination. Keep essential requirements separate from preferences. A supplier needs to know which details are fixed and which still need a sample or a documented answer.</p><p>Ask for a comparable quote rather than the lowest unexplained total. Identify what is included, what remains unconfirmed and how long the offer is valid. Do not turn an indicative ocean index into an itemized delivered price.</p></section>'
-        main += '<section><h2>The reading and its limits</h2><p>' + escape(lane['regional_fact']) + '</p><p>A regional index does not establish the price for every port, a different container size, a shared container or final delivery. Check the primary publisher’s port coverage before comparing a quote with the reading.</p><p>Only a single attributed public FBX weekly reading is reproduced here. It is not a monthly average and is not converted into a 20ft price. A genuine dated written quote can be shown only with publication approval; other amounts remain quote required.</p></section>'
+        main += '<section><h2>The reading and its limits</h2><p>' + escape(lane['regional_fact']) + '</p><p>A regional index does not establish the price for every port, a different container size, a shared container or final delivery. Read the publisher’s route definition to understand the regional coverage.</p><p>Only a single attributed public 40ft FBX weekly reading is reproduced here. It is general information, not an order price or a calculated average. A genuine dated written quote can be shown only with publication approval; other amounts remain quote required.</p></section>'
         main += '<section><h2>Confirm the actual handoff</h2><ul>' + checks + '</ul></section>'
         main += '<section><h2>Keep quality evidence with the order</h2><p>Identify the approved sample and specification revision. Confirm the checks needed before release and keep photographs, findings and unresolved issues together. Third-party inspection can be booked on request; its scope and charges must be agreed. An inspection is not a blanket product certification.</p><p>Record the invoice description, package count, dimensions, weight and receiving restrictions for the actual goods. Ask the responsible importer and qualified service providers to review product-specific obligations. No generic duty, tax or delivery promise is supplied here.</p></section>'
         main += '<section><h2>Use an itemized comparison</h2><p>Separate product cost, sample and inspection costs, origin work, transport, destination work, applicable duty and tax, and final delivery. Unknown amounts remain quote required. Keep all compared amounts in one stated currency and identify exclusions before a purchase decision.</p><p>Cargo Global serves buyers across the US, Canada and Mexico. This reference explains the named index lane; availability and any service outside that buyer focus require written confirmation.</p><a href="/sourcing/#sample-documents">Review the sample document formats</a></section>'
@@ -62,7 +62,7 @@ def build_payment_page(document):
     body+='<section><h2>Verify an unexpected request</h2><p>'+escape(ANTI_PHISHING)+'</p><p>If payment details change or a request does not match the agreed quote, stop and use the request form on this website to verify it. Do not send payment-card details, passwords or bank credentials through the enquiry form.</p><a class="text-link" href="/contact/#buyer-request">Ask us to verify the request</a></section><p><a href="/terms/">Read the order and website terms</a></p><p class="updated">Policy last checked: <time datetime="'+day+'">'+day+'</time></p></article>'
     soup=BeautifulSoup(document('How Payment Works',current,body),'html.parser')
     primary_navigation(soup)
-    description='Written itemized quotes, staged supplier payments, sample approval, pre-shipment inspection and clear refund or replacement terms before payment.'
+    description='Written itemized quotes, staged supplier payments, sample approval, agreed pre-shipment checks and clear refund or replacement terms before payment.'
     for meta in soup.select('meta[name="description"],meta[property="og:description"]'):
         meta['content']=description
     write('how-payment-works/index.html',str(soup))
@@ -105,7 +105,7 @@ def link_guides():
     soup=BeautifulSoup(path.read_text(encoding='utf-8'),'html.parser')
     for previous in soup.select('#index-route-guides'):
         previous.decompose()
-    block='<section class="section" id="index-route-guides"><h2>Buying briefs by index route.</h2><p>Match the supplier brief to a named route before comparing transport benchmarks. These guides do not promise a rate or delivery date.</p><ul>' + ''.join('<li><a href="/freight-research/'+lane['slug']+'/">'+escape(lane['title'])+'</a></li>' for lane in LANES) + '</ul></section>'
+    block='<section class="section" id="index-route-guides"><h2>Buying briefs by index route.</h2><p>'+escape(FBX_CONTEXT)+'</p><p>These guides do not promise a rate or delivery date.</p><ul>' + ''.join('<li><a href="/freight-research/'+lane['slug']+'/">'+escape(lane['title'])+'</a></li>' for lane in LANES) + '</ul></section>'
     soup.main.append(BeautifulSoup(block,'html.parser'))
     path.write_text(str(soup),encoding='utf-8')
 
@@ -122,6 +122,7 @@ def retire_legacy_pages(document):
         label='About Cargo Global' if target=='/about/' else 'Delivery' if target=='/delivery/' else 'Product sourcing'
         page=BeautifulSoup(document('Continue to '+label,current,'<section class="page-intro"><h1>Continue to '+escape(label)+'.</h1><p>This address now leads to the current Cargo Global page.</p><a class="button primary" href="'+target+'">Continue</a></section>'),'html.parser')
         page.html['data-retired-route']=''
+        page.select_one('meta[name="robots"]')['content']='noindex, follow'
         page.select_one('link[rel="canonical"]')['href']=BASE+target
         page.head.append(page.new_tag('meta',attrs={'http-equiv':'refresh','content':'0; url='+BASE+target}))
         for script in page.select('script[type="application/ld+json"]'):

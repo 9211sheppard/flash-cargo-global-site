@@ -27,11 +27,13 @@ def verify_public_reading(record):
             row.update(status='blocked' if response.status_code in {401,403,429} else 'unavailable',detail='Skip this retrieval; no login or paid API.')
             return False,row
         text=BeautifulSoup(response.text,'html.parser').get_text(' ',strip=True)
-        for key in ('reading_date','publication_date'):
+        for key in ('report_date','publication_date'):
             day=datetime.fromisoformat(record[key])
             label=day.strftime('%B')+' '+str(day.day)+', '+str(day.year)
             if label not in text:
                 raise ValueError('The configured report dates are not both present in the primary article.')
+        if record.get('period_basis')!='week_before_report' or 'last week' not in text.lower():
+            raise ValueError('The reading must be identified as the week before the dated report.')
         for reading in record['readings']:
             match=re.search(patterns[reading['index_lane']],text)
             if not match or int(match.group(1).replace(',',''))!=reading['40ft_usd']:
@@ -50,7 +52,7 @@ def refresh(data,record,verified,checked):
     configured={row['index_lane']:row for row in record['readings']}
     for item in LANES:
         origin,destination=FBX_REGIONS[item['fbx']]
-        lanes[item['lane_id']]={'label':'China/East Asia to '+item['destination'].removeprefix('the ')+'; '+item['fbx']+' regional coverage, not a destination-door quote','guide_slugs':[item['slug']],'origin_region':origin,'destination_region':destination,'index_lane':item['fbx']}
+        lanes[item['lane_id']]={'label':item['index_label'],'guide_slugs':[item['slug']],'origin_region':origin,'destination_region':destination,'index_lane':item['fbx']}
         mapping['/freight-research/'+item['slug']+'/']=item['lane_id']
     rates=[]
     for lane_id,lane in lanes.items():
@@ -58,12 +60,12 @@ def refresh(data,record,verified,checked):
         index=lane.get('index_lane')
         if index in configured and verified:
             reading=configured[index]
-            row.update(kind='weekly_index_reading',source='freightos_fbx',currency='USD',index_lane=index,reading_date=record['reading_date'],publication_date=record['publication_date'],attribution_url=TERMINAL,reported_40ft_usd=reading['40ft_usd'],source_url=reading['source_url'])
+            row.update(kind='weekly_index_reading',source='freightos_fbx',currency='USD',index_lane=index,report_date=record['report_date'],period_basis=record['period_basis'],publication_date=record['publication_date'],attribution_url=TERMINAL,reported_40ft_usd=reading['40ft_usd'],source_url=reading['source_url'])
             row['40ft_usd']=reading['40ft_usd']
         elif index in configured and previous.get(lane_id,{}).get('kind')=='weekly_index_reading':
             row=previous[lane_id]
         rates.append(row)
-    output={'schema_version':2,'policy':{'monthly_averages_allowed':False,'drewry_scfi_figures_allowed':False,'mode':'One unmodified public FBX weekly reading with attribution, or an explicitly approved dated written quote.'},'sources':{'freightos_fbx':{'name':'Freightos Baltic Index (FBX)','source_url':TERMINAL,'public_update_url':record['source_url'],'terms_url':record['terms_url'],'reuse_basis':record['reuse_basis']}},'lanes':lanes,'cost_hubs':[path for path in data.get('cost_hubs',[]) if not retired_target(path)],'page_lanes':dict(sorted(mapping.items())),'rates':rates,'last_checked':checked}
+    output={'schema_version':2,'policy':{'monthly_averages_allowed':False,'drewry_scfi_figures_allowed':False,'fbx_container_size':'40ft','fbx_use':'Market context only. This index reading is not used to price, settle or compare your order.','mode':'One unmodified public FBX weekly reading with attribution, or an explicitly approved dated written quote.'},'sources':{'freightos_fbx':{'name':'Freightos Baltic Index (FBX)','source_url':TERMINAL,'public_update_url':record['source_url'],'terms_url':record['terms_url'],'reuse_basis':record['reuse_basis']}},'lanes':lanes,'cost_hubs':[path for path in data.get('cost_hubs',[]) if not retired_target(path)],'page_lanes':dict(sorted(mapping.items())),'rates':rates,'last_checked':checked}
     return validate(output)
 
 def main():
@@ -84,7 +86,7 @@ def main():
     checked=datetime.now(timezone.utc).isoformat() if automated else record['last_checked']
     data=refresh(data,record,verified,checked)
     DATA_FILE.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-    fields=['lane','kind','reading_date','publication_date','20ft_usd','40ft_usd','source_url','last_checked']
+    fields=['lane','kind','report_date','period_basis','publication_date','reading_date','20ft_usd','40ft_usd','source_url','last_checked']
     with (OUT/'single-readings.csv').open('w',encoding='utf-8-sig',newline='') as handle:
         writer=csv.DictWriter(handle,fieldnames=fields,extrasaction='ignore');writer.writeheader();writer.writerows(data['rates'])
     if not args.capture_only:

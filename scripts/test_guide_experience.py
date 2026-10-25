@@ -103,7 +103,7 @@ class GuideExperienceTests(unittest.TestCase):
                 if soup.html.get('lang','en').startswith('en'):
                     self.assertEqual(table.get_text(' ',strip=True),'Ocean rates for this lane: quote required. Start a sourcing request.')
             else:
-                expected=[rows[0]['reading_date']]
+                expected=[rows[0]['report_date'],rows[0]['publication_date']]
                 self.assertEqual([time['datetime'] for time in table.select('tbody th time')],expected)
             self.assertNotRegex(table.get_text(' ',strip=True),r'\b(live|guaranteed|firm)\b')
             self.assertEqual(table.select_one('.text-link')['href'],'/contact/#buyer-request')

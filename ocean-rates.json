@@ -3,6 +3,8 @@
   "policy": {
     "monthly_averages_allowed": false,
     "drewry_scfi_figures_allowed": false,
+    "fbx_container_size": "40ft",
+    "fbx_use": "Market context only. This index reading is not used to price, settle or compare your order.",
     "mode": "One unmodified public FBX weekly reading with attribution, or an explicitly approved dated written quote."
   },
   "sources": {
@@ -149,7 +151,7 @@
       "index_lane": null
     },
     "china-us-west-coast": {
-      "label": "China/East Asia to US West Coast; FBX01 regional coverage, not a destination-door quote",
+      "label": "China/East Asia to North America West Coast",
       "guide_slugs": [
         "china-to-us-west-coast-sourcing-guide"
       ],
@@ -158,7 +160,7 @@
       "index_lane": "FBX01"
     },
     "china-us-east-coast": {
-      "label": "China/East Asia to US East Coast; FBX03 regional coverage, not a destination-door quote",
+      "label": "China/East Asia to North America East Coast",
       "guide_slugs": [
         "china-to-us-east-coast-sourcing-guide"
       ],
@@ -167,7 +169,7 @@
       "index_lane": "FBX03"
     },
     "china-north-europe": {
-      "label": "China/East Asia to North Europe; FBX11 regional coverage, not a destination-door quote",
+      "label": "China/East Asia to North Europe",
       "guide_slugs": [
         "china-to-north-europe-sourcing-guide"
       ],
@@ -176,7 +178,7 @@
       "index_lane": "FBX11"
     },
     "china-mediterranean": {
-      "label": "China/East Asia to Mediterranean; FBX13 regional coverage, not a destination-door quote",
+      "label": "China/East Asia to the Mediterranean",
       "guide_slugs": [
         "china-to-mediterranean-sourcing-guide"
       ],
@@ -320,7 +322,8 @@
       "source": "freightos_fbx",
       "currency": "USD",
       "index_lane": "FBX01",
-      "reading_date": "2026-10-20",
+      "report_date": "2026-10-20",
+      "period_basis": "week_before_report",
       "publication_date": "2026-10-21",
       "attribution_url": "https://terminal.freightos.com/",
       "reported_40ft_usd": 8126
@@ -335,7 +338,8 @@
       "source": "freightos_fbx",
       "currency": "USD",
       "index_lane": "FBX03",
-      "reading_date": "2026-10-20",
+      "report_date": "2026-10-20",
+      "period_basis": "week_before_report",
       "publication_date": "2026-10-21",
       "attribution_url": "https://terminal.freightos.com/",
       "reported_40ft_usd": 9700
@@ -350,7 +354,8 @@
       "source": "freightos_fbx",
       "currency": "USD",
       "index_lane": "FBX11",
-      "reading_date": "2026-10-20",
+      "report_date": "2026-10-20",
+      "period_basis": "week_before_report",
       "publication_date": "2026-10-21",
       "attribution_url": "https://terminal.freightos.com/",
       "reported_40ft_usd": 3442
@@ -365,7 +370,8 @@
       "source": "freightos_fbx",
       "currency": "USD",
       "index_lane": "FBX13",
-      "reading_date": "2026-10-20",
+      "report_date": "2026-10-20",
+      "period_basis": "week_before_report",
       "publication_date": "2026-10-21",
       "attribution_url": "https://terminal.freightos.com/",
       "reported_40ft_usd": 3927

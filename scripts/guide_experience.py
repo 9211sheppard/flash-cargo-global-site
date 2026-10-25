@@ -211,22 +211,26 @@ def apply_experience():
             replacement = re.sub(r'Freight Research(?: Library)?', 'Sourcing guides', str(text))
             if current in REQUEST_FAQ_ROUTES:
                 replacement = re.sub(r'before submitting an online (?:freight inquiry|sourcing request)', 'before starting a sourcing request', replacement, flags=re.I)
-            if current == '/freight-research/buyer-purchase-order-to-freight-plan/':
+            if current in {'/freight-research/buyer-purchase-order-to-freight-plan/', '/freight-research/air-vs-ocean-for-product-launch/'}:
                 replacement = re.sub(r'freight inquiry', 'sourcing request', replacement, flags=re.I)
             if replacement != str(text):
                 text.replace_with(replacement)
         for script, data, nodes in jsonld_nodes(soup):
             for node in nodes:
+                if current == '/freight-research/air-vs-ocean-for-product-launch/':
+                    for key,value in node.items():
+                        if isinstance(value,str):
+                            node[key]=re.sub(r'freight inquiry','sourcing request',value,flags=re.I)
                 if node.get('@type') == 'BreadcrumbList':
                     for part in node.get('itemListElement', []):
                         if 'freight research' in part.get('name', '').lower():
                             part['name'] = 'Sourcing guides'
-                if current in REQUEST_FAQ_ROUTES:
+                if current in REQUEST_FAQ_ROUTES | {'/freight-research/air-vs-ocean-for-product-launch/'}:
                     for question in node.get('mainEntity', []) if node.get('@type') == 'FAQPage' else []:
                         answer = re.sub(r'before submitting an online (?:freight inquiry|sourcing request)', 'before starting a sourcing request', question['acceptedAnswer']['text'], flags=re.I)
                         question['acceptedAnswer']['text'] = re.sub(r'freight inquiry', 'sourcing request', answer, flags=re.I)
             script.string = json.dumps(data, ensure_ascii=False)
-        if current in {'/freight-research/', '/freight-research/buyer-purchase-order-to-freight-plan/'}:
+        if current in {'/freight-research/', '/freight-research/buyer-purchase-order-to-freight-plan/', '/freight-research/air-vs-ocean-for-product-launch/'}:
             for meta in soup.select('meta[name="description"], meta[property="og:description"], meta[name="twitter:description"]'):
                 meta['content'] = re.sub(r'freight inquiry', 'sourcing request', meta['content'], flags=re.I)
                 if current == '/freight-research/buyer-purchase-order-to-freight-plan/':

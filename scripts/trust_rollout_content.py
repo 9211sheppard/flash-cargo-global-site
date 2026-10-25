@@ -2,12 +2,15 @@
 
 FBX_ROOT = 'https://www.freightos.com/enterprise/terminal/'
 FBX_UPDATE = 'https://www.freightos.com/freight-resources/red-sea-container-traffic-set-for-full-return-in-q1-october-20-2026-update/'
-PROCESS_LINE = 'Every order runs the same way: a written quote, staged payments, and inspection before shipment. You see each step before you pay for the next.'
+PROCESS_LINE = 'Every order runs the same way: a written quote, staged payments, and the agreed checks before shipment.'
+BANK_CHANGE_POLICY = 'We never change bank or payment details by email. Any change is confirmed through the request form before you pay.'
+FBX_CONTEXT = 'Market context only. This index reading is not used to price, settle or compare your order.'
 ANTI_PHISHING = 'We only email from @flashcargoglobal.com and never request payment by gift card, crypto or a personal account.'
 PAYMENT_RULES = [
     ('A written quote comes first', 'Nothing is paid before a written, itemized quote. The quote identifies the product, quantity, currency, delivery scope, inclusions, exclusions and the agreed payment stages.'),
-    ('Supplier payment is staged', 'Supplier payment is staged: a deposit, then the balance only after sample approval and the pre-shipment inspection. The approved sample, inspection scope and acceptance decision belong in the order record.'),
+    ('Supplier payment is staged', 'Supplier payment is staged: a deposit, then the balance only after sample approval and any agreed pre-shipment inspection. The approved sample, agreed checks and acceptance decision belong in the order record.'),
     ('Pay a business, not a person', 'Payments go only to a business account or a recognized processor’s invoice, never a personal account. The business payee and payment instructions must match the written order agreement.'),
+    ('Verify any change before paying', BANK_CHANGE_POLICY),
     ('No surprise fee requests', 'No surprise “release”, “customs” or “insurance” fees outside the written quote. Any proposed change must be itemized and agreed in writing before payment.'),
     ('Agree the remedy before payment', 'If goods fail inspection, the refund or replacement terms are written plainly. The order agreement identifies the remedy, responsibilities, applicable costs and timing before payment; no unspecified automatic refund, escrow or insurance protection is implied.'),
 ]
@@ -25,6 +28,7 @@ LANES = [
         'index_lane': 'FBX01',
         'destination_region': 'north-america-west-coast',
         'fbx': 'FBX01',
+        'index_label': 'China/East Asia to North America West Coast',
         'fbx_url': FBX_ROOT + 'fbx-01-china-to-north-america-west-coast/',
         'regional_fact': 'Freightos FBX01 measures 40ft container prices from China/East Asia to North America West Coast. It is a regional index, not a quote to a specific destination door.',
         'buyer_checks': [
@@ -42,6 +46,7 @@ LANES = [
         'index_lane': 'FBX03',
         'destination_region': 'north-america-east-coast',
         'fbx': 'FBX03',
+        'index_label': 'China/East Asia to North America East Coast',
         'fbx_url': FBX_ROOT + 'fbx-03-china-to-north-america-east-coast/',
         'regional_fact': 'Freightos FBX03 covers China/East Asia to North America East Coast in 40ft units, rather than one destination door.',
         'buyer_checks': [
@@ -59,6 +64,7 @@ LANES = [
         'index_lane': 'FBX11',
         'destination_region': 'north-europe',
         'fbx': 'FBX11',
+        'index_label': 'China/East Asia to North Europe',
         'fbx_url': FBX_ROOT + 'fbx-11-china-to-northern-europe/',
         'regional_fact': 'Freightos FBX11 covers China/East Asia to Northern Europe in 40ft units; its port list includes Rotterdam and other North European gateways.',
         'buyer_checks': [
@@ -76,10 +82,11 @@ LANES = [
         'index_lane': 'FBX13',
         'destination_region': 'mediterranean',
         'fbx': 'FBX13',
+        'index_label': 'China/East Asia to the Mediterranean',
         'fbx_url': FBX_ROOT + 'fbx-13-china-to-mediterranean/',
         'regional_fact': 'Freightos FBX13 covers China/East Asia to the Mediterranean in 40ft units, across multiple gateways and jurisdictions.',
         'buyer_checks': [
-            'Name the destination country and port. A Mediterranean benchmark does not make different national import procedures or inland delivery costs interchangeable.',
+            'Name the destination country and port. A regional index does not make different national import procedures or inland delivery costs interchangeable.',
             'Agree product descriptions, packaging, sample references and quality-check responsibilities before the supplier prepares the order for dispatch.',
             'Separate a port-to-port comparison from the buyer’s delivered requirement. Ask for the destination charges, importer responsibilities and final receiving scope in writing.',
         ],
